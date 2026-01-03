@@ -32,26 +32,31 @@
         .header p { font-size: 1.1rem; opacity: 0.9; }
         .header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; margin-top: 15px; font-size: 0.9rem; }
 
-        .lang-toggle {
-            position: absolute;
-            top: 20px;
-            right: 24px;
-            display: flex;
-            gap: 8px;
+        .lang-selector { position: absolute; top: 20px; right: 24px; }
+        .lang-selector-btn {
+            display: flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.2); color: white; padding: 8px 14px;
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; font-weight: 500;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
         }
-        .lang-btn {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 6px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.2s;
+        .lang-selector-btn:hover { background: rgba(255,255,255,0.3); }
+        .lang-selector-btn svg { width: 14px; height: 14px; transition: transform 0.2s; }
+        .lang-dropdown {
+            position: absolute; top: 100%; right: 0; margin-top: 8px;
+            background: white; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 160px; opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.2s ease; z-index: 1000;
         }
-        .lang-btn:hover { background: rgba(255,255,255,0.3); }
-        .lang-btn.active { background: white; color: var(--primary-blue); font-weight: 700; }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            cursor: pointer; transition: background 0.2s; color: var(--text-primary);
+        }
+        .lang-option:first-child { border-radius: 10px 10px 0 0; }
+        .lang-option:last-child { border-radius: 0 0 10px 10px; }
+        .lang-option:hover { background: var(--bg-light); }
+        .lang-option.active { background: rgba(21,83,158,0.1); color: var(--primary-blue); font-weight: 600; }
+        .lang-flag { font-size: 1.1rem; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
 
@@ -101,66 +106,78 @@
 </head>
 <body>
     <div class="header">
-        <div class="lang-toggle">
-            <button class="lang-btn active" onclick="setLang('en')">EN</button>
-            <button class="lang-btn" onclick="setLang('ko')">한국어</button>
+        <div class="lang-selector" id="langSelector">
+            <button class="lang-selector-btn" onclick="toggleLangDropdown()">
+                <span class="lang-current">English</span>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div class="lang-dropdown">
+                <div class="lang-option" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                <div class="lang-option active" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ไทย</div>
+            </div>
         </div>
-        <h1 data-ko="i-DMS 성능 리포트" data-en="i-DMS Performance Report">i-DMS Performance Report</h1>
-        <p data-ko="비접촉 rPPG 기술 심박수 측정 정확도 평가" data-en="Non-contact rPPG Heart Rate Measurement Accuracy Evaluation">Non-contact rPPG Heart Rate Measurement Accuracy Evaluation</p>
-        <div class="badge" data-ko="vs Polar H10 심박계 밴드 비교 분석" data-en="vs Polar H10 Heart Rate Monitor Comparison">vs Polar H10 Heart Rate Monitor Comparison</div>
+        <h1 data-ko="i-DMS 성능 리포트" data-en="i-DMS Performance Report" data-ja="i-DMS パフォーマンスレポート" data-zh="i-DMS 性能报告" data-de="i-DMS Leistungsbericht" data-es="Informe de Rendimiento i-DMS" data-vi="Báo cáo Hiệu suất i-DMS" data-th="รายงานประสิทธิภาพ i-DMS">i-DMS Performance Report</h1>
+        <p data-ko="비접촉 rPPG 기술 심박수 측정 정확도 평가" data-en="Non-contact rPPG Heart Rate Measurement Accuracy Evaluation" data-ja="非接触rPPG技術による心拍数測定精度評価" data-zh="非接触式rPPG技术心率测量准确度评估" data-de="Bewertung der kontaktlosen rPPG-Herzfrequenzmessung" data-es="Evaluación de Precisión de Medición de Frecuencia Cardíaca rPPG Sin Contacto" data-vi="Đánh giá Độ chính xác Đo Nhịp tim rPPG Không tiếp xúc" data-th="การประเมินความแม่นยำในการวัดอัตราการเต้นของหัวใจด้วย rPPG แบบไม่สัมผัส">Non-contact rPPG Heart Rate Measurement Accuracy Evaluation</p>
+        <div class="badge" data-ko="vs Polar H10 심박계 밴드 비교 분석" data-en="vs Polar H10 Heart Rate Monitor Comparison" data-ja="Polar H10心拍計バンドとの比較分析" data-zh="与Polar H10心率监测器对比分析" data-de="Vergleich mit Polar H10 Herzfrequenzmesser" data-es="Comparación con Monitor Polar H10" data-vi="So sánh với Máy đo Nhịp tim Polar H10" data-th="การเปรียบเทียบกับเครื่องวัดอัตราการเต้นของหัวใจ Polar H10">vs Polar H10 Heart Rate Monitor Comparison</div>
     </div>
 
     <div class="container">
-        <a href="index.html" class="back-link" data-ko="← 메인 페이지로 돌아가기" data-en="← Back to Main Page">← Back to Main Page</a>
+        <a href="index.html" class="back-link" data-ko="← 메인 페이지로 돌아가기" data-en="← Back to Main Page" data-ja="← メインページに戻る" data-zh="← 返回主页" data-de="← Zurück zur Hauptseite" data-es="← Volver a la Página Principal" data-vi="← Quay lại Trang chủ" data-th="← กลับไปหน้าหลัก">← Back to Main Page</a>
 
         <!-- Overview -->
         <div class="section">
-            <h2><span>📊</span> <span data-ko="개요" data-en="Overview">Overview</span></h2>
-            <p data-ko="본 보고서는 FunnyTech21의 i-DMS(운전자 모니터링 시스템)에서 비접촉 방식으로 측정된 심박수 데이터와 Polar 접촉식 심박계 밴드(기준값)를 비교하여 i-DMS의 생체신호 검출 정확도를 평가합니다." data-en="This report evaluates the biosignal detection accuracy of FunnyTech21's i-DMS (Driver Monitoring System) by comparing non-contact heart rate measurements with the Polar contact heart rate monitor band (reference value).">This report evaluates the biosignal detection accuracy of FunnyTech21's i-DMS (Driver Monitoring System) by comparing non-contact heart rate measurements with the Polar contact heart rate monitor band (reference value).</p>
+            <h2><span>📊</span> <span data-ko="개요" data-en="Overview" data-ja="概要" data-zh="概述" data-de="Übersicht" data-es="Resumen" data-vi="Tổng quan" data-th="ภาพรวม">Overview</span></h2>
+            <p data-ko="본 보고서는 FunnyTech21의 i-DMS(운전자 모니터링 시스템)에서 비접촉 방식으로 측정된 심박수 데이터와 Polar 접촉식 심박계 밴드(기준값)를 비교하여 i-DMS의 생체신호 검출 정확도를 평가합니다." data-en="This report evaluates the biosignal detection accuracy of FunnyTech21's i-DMS (Driver Monitoring System) by comparing non-contact heart rate measurements with the Polar contact heart rate monitor band (reference value)." data-ja="本レポートは、FunnyTech21のi-DMS（ドライバーモニタリングシステム）の非接触心拍数測定とPolar接触式心拍計バンド（基準値）を比較し、生体信号検出精度を評価します。" data-zh="本报告通过将FunnyTech21的i-DMS（驾驶员监控系统）非接触式心率测量与Polar接触式心率监测带（参考值）进行比较，评估生物信号检测准确性。" data-de="Dieser Bericht bewertet die Genauigkeit der Biosignalerkennung des i-DMS von FunnyTech21 durch Vergleich kontaktloser Herzfrequenzmessungen mit dem Polar Herzfrequenzmonitor (Referenzwert)." data-es="Este informe evalúa la precisión de detección de bioseñales del i-DMS de FunnyTech21 comparando mediciones de frecuencia cardíaca sin contacto con el monitor Polar (valor de referencia)." data-vi="Báo cáo này đánh giá độ chính xác phát hiện tín hiệu sinh học của i-DMS FunnyTech21 bằng cách so sánh đo nhịp tim không tiếp xúc với máy đo Polar (giá trị tham chiếu)." data-th="รายงานนี้ประเมินความแม่นยำในการตรวจจับสัญญาณชีวภาพของ i-DMS โดยเปรียบเทียบการวัดอัตราการเต้นของหัวใจแบบไม่สัมผัสกับเครื่องวัด Polar (ค่าอ้างอิง)">This report evaluates the biosignal detection accuracy of FunnyTech21's i-DMS (Driver Monitoring System) by comparing non-contact heart rate measurements with the Polar contact heart rate monitor band (reference value).</p>
 
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value" data-ko="45분" data-en="45 min">45 min</div>
-                    <div class="stat-label" data-ko="측정 시간" data-en="Measurement Time">Measurement Time</div>
+                    <div class="stat-value" data-ko="45분" data-en="45 min" data-ja="45分" data-zh="45分钟" data-de="45 Min" data-es="45 min" data-vi="45 phút" data-th="45 นาที">45 min</div>
+                    <div class="stat-label" data-ko="측정 시간" data-en="Measurement Time" data-ja="測定時間" data-zh="测量时间" data-de="Messzeit" data-es="Tiempo de Medición" data-vi="Thời gian Đo" data-th="เวลาในการวัด">Measurement Time</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">3.34 BPM</div>
-                    <div class="stat-label" data-ko="평균 오차" data-en="Mean Error">Mean Error</div>
+                    <div class="stat-label" data-ko="평균 오차" data-en="Mean Error" data-ja="平均誤差" data-zh="平均误差" data-de="Mittlerer Fehler" data-es="Error Medio" data-vi="Sai số Trung bình" data-th="ความคลาดเคลื่อนเฉลี่ย">Mean Error</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">4.4%</div>
-                    <div class="stat-label" data-ko="평균 오차율" data-en="Mean Error Rate">Mean Error Rate</div>
+                    <div class="stat-label" data-ko="평균 오차율" data-en="Mean Error Rate" data-ja="平均誤差率" data-zh="平均误差率" data-de="Mittlere Fehlerrate" data-es="Tasa de Error Media" data-vi="Tỷ lệ Sai số Trung bình" data-th="อัตราความคลาดเคลื่อนเฉลี่ย">Mean Error Rate</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">NCAP 2025</div>
-                    <div class="stat-label" data-ko="기준 충족" data-en="Standard Met">Standard Met</div>
+                    <div class="stat-label" data-ko="기준 충족" data-en="Standard Met" data-ja="基準適合" data-zh="符合标准" data-de="Standard erfüllt" data-es="Estándar Cumplido" data-vi="Đạt Tiêu chuẩn" data-th="ผ่านมาตรฐาน">Standard Met</div>
                 </div>
             </div>
         </div>
 
         <!-- Time Series -->
         <div class="section">
-            <h2><span>📈</span> <span data-ko="심박수 시계열 비교" data-en="Heart Rate Time Series Comparison">Heart Rate Time Series Comparison</span></h2>
+            <h2><span>📈</span> <span data-ko="심박수 시계열 비교" data-en="Heart Rate Time Series Comparison" data-ja="心拍数時系列比較" data-zh="心率时间序列比较" data-de="Herzfrequenz-Zeitreihenvergleich" data-es="Comparación de Serie Temporal de Frecuencia Cardíaca" data-vi="So sánh Chuỗi thời gian Nhịp tim" data-th="การเปรียบเทียบอนุกรมเวลาอัตราการเต้นของหัวใจ">Heart Rate Time Series Comparison</span></h2>
             <div class="chart-container">
                 <img src="imgs/charts/01_timeseries_comparison.png" alt="Time Series Chart">
-                <figcaption data-ko="i-DMS(비접촉)와 Polar(접촉식) 심박수 측정값 시계열 비교" data-en="Time series comparison of i-DMS (non-contact) and Polar (contact) heart rate measurements">Time series comparison of i-DMS (non-contact) and Polar (contact) heart rate measurements</figcaption>
+                <figcaption data-ko="i-DMS(비접촉)와 Polar(접촉식) 심박수 측정값 시계열 비교" data-en="Time series comparison of i-DMS (non-contact) and Polar (contact) heart rate measurements" data-ja="i-DMS（非接触）とPolar（接触式）心拍数測定の時系列比較" data-zh="i-DMS（非接触式）与Polar（接触式）心率测量时间序列比较" data-de="Zeitreihenvergleich der Herzfrequenzmessungen von i-DMS (kontaktlos) und Polar (Kontakt)" data-es="Comparación de series temporales de mediciones de frecuencia cardíaca de i-DMS (sin contacto) y Polar (contacto)" data-vi="So sánh chuỗi thời gian đo nhịp tim của i-DMS (không tiếp xúc) và Polar (tiếp xúc)" data-th="การเปรียบเทียบอนุกรมเวลาของการวัดอัตราการเต้นของหัวใจ i-DMS (ไม่สัมผัส) และ Polar (สัมผัส)">Time series comparison of i-DMS (non-contact) and Polar (contact) heart rate measurements</figcaption>
             </div>
 
             <div class="two-col">
                 <div>
-                    <h3 data-ko="Polar (기준값) 통계" data-en="Polar (Reference) Statistics">Polar (Reference) Statistics</h3>
+                    <h3 data-ko="Polar (기준값) 통계" data-en="Polar (Reference) Statistics" data-ja="Polar（基準値）統計" data-zh="Polar（参考值）统计" data-de="Polar (Referenz) Statistik" data-es="Estadísticas Polar (Referencia)" data-vi="Thống kê Polar (Tham chiếu)" data-th="สถิติ Polar (ค่าอ้างอิง)">Polar (Reference) Statistics</h3>
                     <ul class="check-list">
-                        <li data-ko="평균: 76.01 BPM" data-en="Mean: 76.01 BPM">Mean: 76.01 BPM</li>
-                        <li data-ko="표준편차: 3.91 BPM" data-en="Std Dev: 3.91 BPM">Std Dev: 3.91 BPM</li>
-                        <li data-ko="범위: 66~83 BPM" data-en="Range: 66~83 BPM">Range: 66~83 BPM</li>
+                        <li data-ko="평균: 76.01 BPM" data-en="Mean: 76.01 BPM" data-ja="平均: 76.01 BPM" data-zh="平均值: 76.01 BPM" data-de="Mittelwert: 76.01 BPM" data-es="Media: 76.01 BPM" data-vi="Trung bình: 76.01 BPM" data-th="ค่าเฉลี่ย: 76.01 BPM">Mean: 76.01 BPM</li>
+                        <li data-ko="표준편차: 3.91 BPM" data-en="Std Dev: 3.91 BPM" data-ja="標準偏差: 3.91 BPM" data-zh="标准差: 3.91 BPM" data-de="Std-Abw: 3.91 BPM" data-es="Desv Est: 3.91 BPM" data-vi="Độ lệch chuẩn: 3.91 BPM" data-th="ส่วนเบี่ยงเบนมาตรฐาน: 3.91 BPM">Std Dev: 3.91 BPM</li>
+                        <li data-ko="범위: 66~83 BPM" data-en="Range: 66~83 BPM" data-ja="範囲: 66~83 BPM" data-zh="范围: 66~83 BPM" data-de="Bereich: 66~83 BPM" data-es="Rango: 66~83 BPM" data-vi="Phạm vi: 66~83 BPM" data-th="ช่วง: 66~83 BPM">Range: 66~83 BPM</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 data-ko="i-DMS (측정값) 통계" data-en="i-DMS (Measured) Statistics">i-DMS (Measured) Statistics</h3>
+                    <h3 data-ko="i-DMS (측정값) 통계" data-en="i-DMS (Measured) Statistics" data-ja="i-DMS（測定値）統計" data-zh="i-DMS（测量值）统计" data-de="i-DMS (Gemessen) Statistik" data-es="Estadísticas i-DMS (Medido)" data-vi="Thống kê i-DMS (Đo được)" data-th="สถิติ i-DMS (ค่าที่วัดได้)">i-DMS (Measured) Statistics</h3>
                     <ul class="check-list">
-                        <li data-ko="평균: 72.66 BPM" data-en="Mean: 72.66 BPM">Mean: 72.66 BPM</li>
-                        <li data-ko="표준편차: 10.66 BPM" data-en="Std Dev: 10.66 BPM">Std Dev: 10.66 BPM</li>
-                        <li data-ko="범위: 64~99 BPM" data-en="Range: 64~99 BPM">Range: 64~99 BPM</li>
+                        <li data-ko="평균: 72.66 BPM" data-en="Mean: 72.66 BPM" data-ja="平均: 72.66 BPM" data-zh="平均值: 72.66 BPM" data-de="Mittelwert: 72.66 BPM" data-es="Media: 72.66 BPM" data-vi="Trung bình: 72.66 BPM" data-th="ค่าเฉลี่ย: 72.66 BPM">Mean: 72.66 BPM</li>
+                        <li data-ko="표준편차: 10.66 BPM" data-en="Std Dev: 10.66 BPM" data-ja="標準偏差: 10.66 BPM" data-zh="标准差: 10.66 BPM" data-de="Std-Abw: 10.66 BPM" data-es="Desv Est: 10.66 BPM" data-vi="Độ lệch chuẩn: 10.66 BPM" data-th="ส่วนเบี่ยงเบนมาตรฐาน: 10.66 BPM">Std Dev: 10.66 BPM</li>
+                        <li data-ko="범위: 64~99 BPM" data-en="Range: 64~99 BPM" data-ja="範囲: 64~99 BPM" data-zh="范围: 64~99 BPM" data-de="Bereich: 64~99 BPM" data-es="Rango: 64~99 BPM" data-vi="Phạm vi: 64~99 BPM" data-th="ช่วง: 64~99 BPM">Range: 64~99 BPM</li>
                     </ul>
                 </div>
             </div>
@@ -168,46 +185,46 @@
 
         <!-- Accuracy Analysis -->
         <div class="section">
-            <h2><span>🎯</span> <span data-ko="정확도 분석" data-en="Accuracy Analysis">Accuracy Analysis</span></h2>
+            <h2><span>🎯</span> <span data-ko="정확도 분석" data-en="Accuracy Analysis" data-ja="精度分析" data-zh="准确度分析" data-de="Genauigkeitsanalyse" data-es="Análisis de Precisión" data-vi="Phân tích Độ chính xác" data-th="การวิเคราะห์ความแม่นยำ">Accuracy Analysis</span></h2>
 
             <div class="highlight-box success">
-                <strong data-ko="핵심 성과:" data-en="Key Achievement:">Key Achievement:</strong> <span data-ko="평균값 3.34 BPM 차이로 매우 근접 (4.4% 오차) - 비접촉 측정으로는 우수한 성능" data-en="Very close with 3.34 BPM mean difference (4.4% error) - Excellent performance for non-contact measurement">Very close with 3.34 BPM mean difference (4.4% error) - Excellent performance for non-contact measurement</span>
+                <strong data-ko="핵심 성과:" data-en="Key Achievement:" data-ja="主要成果:" data-zh="关键成就:" data-de="Wichtigste Errungenschaft:" data-es="Logro Clave:" data-vi="Thành tựu Chính:" data-th="ความสำเร็จหลัก:">Key Achievement:</strong> <span data-ko="평균값 3.34 BPM 차이로 매우 근접 (4.4% 오차) - 비접촉 측정으로는 우수한 성능" data-en="Very close with 3.34 BPM mean difference (4.4% error) - Excellent performance for non-contact measurement" data-ja="平均値差3.34 BPMで非常に近い（4.4%誤差）- 非接触測定として優秀な性能" data-zh="平均值差仅3.34 BPM（4.4%误差）- 非接触测量的优秀性能" data-de="Sehr nah mit 3.34 BPM mittlerer Differenz (4.4% Fehler) - Ausgezeichnete Leistung für kontaktlose Messung" data-es="Muy cercano con diferencia media de 3.34 BPM (4.4% error) - Excelente rendimiento para medición sin contacto" data-vi="Rất gần với chênh lệch trung bình 3.34 BPM (sai số 4.4%) - Hiệu suất xuất sắc cho đo lường không tiếp xúc" data-th="ใกล้เคียงมากด้วยค่าเฉลี่ยต่าง 3.34 BPM (ความคลาดเคลื่อน 4.4%) - ประสิทธิภาพยอดเยี่ยมสำหรับการวัดแบบไม่สัมผัส">Very close with 3.34 BPM mean difference (4.4% error) - Excellent performance for non-contact measurement</span>
             </div>
 
             <div class="chart-container">
                 <img src="imgs/charts/02_scatter_correlation.png" alt="Scatter Correlation">
-                <figcaption data-ko="Polar vs i-DMS 심박수 산점도 및 상관관계 분석" data-en="Polar vs i-DMS heart rate scatter plot and correlation analysis">Polar vs i-DMS heart rate scatter plot and correlation analysis</figcaption>
+                <figcaption data-ko="Polar vs i-DMS 심박수 산점도 및 상관관계 분석" data-en="Polar vs i-DMS heart rate scatter plot and correlation analysis" data-ja="Polar vs i-DMS 心拍数散布図と相関分析" data-zh="Polar vs i-DMS 心率散点图及相关性分析" data-de="Polar vs i-DMS Herzfrequenz-Streudiagramm und Korrelationsanalyse" data-es="Diagrama de dispersión de frecuencia cardíaca Polar vs i-DMS y análisis de correlación" data-vi="Biểu đồ phân tán nhịp tim Polar vs i-DMS và phân tích tương quan" data-th="กราฟกระจายอัตราการเต้นของหัวใจ Polar vs i-DMS และการวิเคราะห์สหสัมพันธ์">Polar vs i-DMS heart rate scatter plot and correlation analysis</figcaption>
             </div>
 
-            <h3 data-ko="국제 학술 연구 기준 비교" data-en="International Research Standards Comparison">International Research Standards Comparison</h3>
+            <h3 data-ko="국제 학술 연구 기준 비교" data-en="International Research Standards Comparison" data-ja="国際学術研究基準比較" data-zh="国际学术研究标准比较" data-de="Vergleich internationaler Forschungsstandards" data-es="Comparación de Estándares de Investigación Internacional" data-vi="So sánh Tiêu chuẩn Nghiên cứu Quốc tế" data-th="การเปรียบเทียบมาตรฐานการวิจัยระหว่างประเทศ">International Research Standards Comparison</h3>
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th data-ko="연구/시스템" data-en="Research/System">Research/System</th>
+                        <th data-ko="연구/시스템" data-en="Research/System" data-ja="研究/システム" data-zh="研究/系统" data-de="Forschung/System" data-es="Investigación/Sistema" data-vi="Nghiên cứu/Hệ thống" data-th="การวิจัย/ระบบ">Research/System</th>
                         <th>MAE</th>
-                        <th data-ko="환경" data-en="Environment">Environment</th>
+                        <th data-ko="환경" data-en="Environment" data-ja="環境" data-zh="环境" data-de="Umgebung" data-es="Entorno" data-vi="Môi trường" data-th="สภาพแวดล้อม">Environment</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td data-ko="실험실 환경 (이상적 조건)" data-en="Laboratory (Ideal Conditions)">Laboratory (Ideal Conditions)</td>
+                        <td data-ko="실험실 환경 (이상적 조건)" data-en="Laboratory (Ideal Conditions)" data-ja="実験室環境（理想的条件）" data-zh="实验室环境（理想条件）" data-de="Labor (Ideale Bedingungen)" data-es="Laboratorio (Condiciones Ideales)" data-vi="Phòng thí nghiệm (Điều kiện Lý tưởng)" data-th="ห้องปฏิบัติการ (สภาวะในอุดมคติ)">Laboratory (Ideal Conditions)</td>
                         <td>2-5 BPM</td>
-                        <td data-ko="통제됨" data-en="Controlled">Controlled</td>
+                        <td data-ko="통제됨" data-en="Controlled" data-ja="制御" data-zh="受控" data-de="Kontrolliert" data-es="Controlado" data-vi="Được kiểm soát" data-th="ควบคุม">Controlled</td>
                     </tr>
                     <tr>
-                        <td data-ko="일반 실내 환경" data-en="General Indoor Environment">General Indoor Environment</td>
+                        <td data-ko="일반 실내 환경" data-en="General Indoor Environment" data-ja="一般室内環境" data-zh="一般室内环境" data-de="Allgemeine Innenumgebung" data-es="Entorno Interior General" data-vi="Môi trường Trong nhà Thông thường" data-th="สภาพแวดล้อมภายในอาคารทั่วไป">General Indoor Environment</td>
                         <td>5-8 BPM</td>
-                        <td data-ko="보통" data-en="Normal">Normal</td>
+                        <td data-ko="보통" data-en="Normal" data-ja="通常" data-zh="正常" data-de="Normal" data-es="Normal" data-vi="Bình thường" data-th="ปกติ">Normal</td>
                     </tr>
                     <tr>
-                        <td data-ko="차량 내부 (운전 중)" data-en="In-Vehicle (While Driving)">In-Vehicle (While Driving)</td>
+                        <td data-ko="차량 내부 (운전 중)" data-en="In-Vehicle (While Driving)" data-ja="車内（運転中）" data-zh="车内（驾驶中）" data-de="Im Fahrzeug (während der Fahrt)" data-es="En Vehículo (Conduciendo)" data-vi="Trong xe (Khi lái xe)" data-th="ในรถยนต์ (ขณะขับขี่)">In-Vehicle (While Driving)</td>
                         <td>8-15 BPM</td>
-                        <td data-ko="열악" data-en="Challenging">Challenging</td>
+                        <td data-ko="열악" data-en="Challenging" data-ja="過酷" data-zh="严峻" data-de="Anspruchsvoll" data-es="Desafiante" data-vi="Khó khăn" data-th="ท้าทาย">Challenging</td>
                     </tr>
                     <tr class="highlight">
-                        <td><strong data-ko="현재 i-DMS 시스템" data-en="Current i-DMS System">Current i-DMS System</strong></td>
+                        <td><strong data-ko="현재 i-DMS 시스템" data-en="Current i-DMS System" data-ja="現在のi-DMSシステム" data-zh="当前i-DMS系统" data-de="Aktuelles i-DMS-System" data-es="Sistema i-DMS Actual" data-vi="Hệ thống i-DMS Hiện tại" data-th="ระบบ i-DMS ปัจจุบัน">Current i-DMS System</strong></td>
                         <td><strong>10.09 BPM</strong></td>
-                        <td data-ko="열악" data-en="Challenging">Challenging</td>
+                        <td data-ko="열악" data-en="Challenging" data-ja="過酷" data-zh="严峻" data-de="Anspruchsvoll" data-es="Desafiante" data-vi="Khó khăn" data-th="ท้าทาย">Challenging</td>
                     </tr>
                 </tbody>
             </table>
@@ -215,134 +232,157 @@
 
         <!-- Bland-Altman -->
         <div class="section">
-            <h2><span>📉</span> <span data-ko="Bland-Altman 일치도 분석" data-en="Bland-Altman Agreement Analysis">Bland-Altman Agreement Analysis</span></h2>
+            <h2><span>📉</span> <span data-ko="Bland-Altman 일치도 분석" data-en="Bland-Altman Agreement Analysis" data-ja="Bland-Altman一致度分析" data-zh="Bland-Altman一致性分析" data-de="Bland-Altman-Übereinstimmungsanalyse" data-es="Análisis de Concordancia Bland-Altman" data-vi="Phân tích Độ phù hợp Bland-Altman" data-th="การวิเคราะห์ความสอดคล้อง Bland-Altman">Bland-Altman Agreement Analysis</span></h2>
             <div class="chart-container">
                 <img src="imgs/charts/03_bland_altman.png" alt="Bland-Altman Analysis">
-                <figcaption data-ko="측정 일치도 분석 - 두 측정 방식 간의 차이 분포" data-en="Agreement analysis - Distribution of differences between two measurement methods">Agreement analysis - Distribution of differences between two measurement methods</figcaption>
+                <figcaption data-ko="측정 일치도 분석 - 두 측정 방식 간의 차이 분포" data-en="Agreement analysis - Distribution of differences between two measurement methods" data-ja="一致度分析 - 2つの測定方法間の差の分布" data-zh="一致性分析 - 两种测量方法之间的差异分布" data-de="Übereinstimmungsanalyse - Verteilung der Differenzen zwischen zwei Messmethoden" data-es="Análisis de concordancia - Distribución de diferencias entre dos métodos de medición" data-vi="Phân tích độ phù hợp - Phân bố sự khác biệt giữa hai phương pháp đo" data-th="การวิเคราะห์ความสอดคล้อง - การกระจายความแตกต่างระหว่างสองวิธีการวัด">Agreement analysis - Distribution of differences between two measurement methods</figcaption>
             </div>
         </div>
 
         <!-- Distribution -->
         <div class="section">
-            <h2><span>📊</span> <span data-ko="심박수 분포 비교" data-en="Heart Rate Distribution Comparison">Heart Rate Distribution Comparison</span></h2>
+            <h2><span>📊</span> <span data-ko="심박수 분포 비교" data-en="Heart Rate Distribution Comparison" data-ja="心拍数分布比較" data-zh="心率分布比较" data-de="Herzfrequenzverteilungsvergleich" data-es="Comparación de Distribución de Frecuencia Cardíaca" data-vi="So sánh Phân bố Nhịp tim" data-th="การเปรียบเทียบการกระจายอัตราการเต้นของหัวใจ">Heart Rate Distribution Comparison</span></h2>
             <div class="two-col">
                 <div class="chart-container">
                     <img src="imgs/charts/04_distribution_comparison.png" alt="Distribution Comparison">
-                    <figcaption data-ko="심박수 분포 히스토그램" data-en="Heart rate distribution histogram">Heart rate distribution histogram</figcaption>
+                    <figcaption data-ko="심박수 분포 히스토그램" data-en="Heart rate distribution histogram" data-ja="心拍数分布ヒストグラム" data-zh="心率分布直方图" data-de="Herzfrequenzverteilungs-Histogramm" data-es="Histograma de distribución de frecuencia cardíaca" data-vi="Biểu đồ phân bố nhịp tim" data-th="ฮิสโตแกรมการกระจายอัตราการเต้นของหัวใจ">Heart rate distribution histogram</figcaption>
                 </div>
                 <div class="chart-container">
                     <img src="imgs/charts/05_boxplot_comparison.png" alt="Boxplot">
-                    <figcaption data-ko="박스플롯 비교" data-en="Boxplot comparison">Boxplot comparison</figcaption>
+                    <figcaption data-ko="박스플롯 비교" data-en="Boxplot comparison" data-ja="箱ひげ図比較" data-zh="箱线图比较" data-de="Boxplot-Vergleich" data-es="Comparación de diagrama de caja" data-vi="So sánh biểu đồ hộp" data-th="การเปรียบเทียบแผนภาพกล่อง">Boxplot comparison</figcaption>
                 </div>
             </div>
         </div>
 
         <!-- Error Analysis -->
         <div class="section">
-            <h2><span>⚠️</span> <span data-ko="오차 분석" data-en="Error Analysis">Error Analysis</span></h2>
+            <h2><span>⚠️</span> <span data-ko="오차 분석" data-en="Error Analysis" data-ja="誤差分析" data-zh="误差分析" data-de="Fehleranalyse" data-es="Análisis de Error" data-vi="Phân tích Sai số" data-th="การวิเคราะห์ความคลาดเคลื่อน">Error Analysis</span></h2>
             <div class="chart-container">
                 <img src="imgs/charts/06_error_analysis.png" alt="Error Analysis">
-                <figcaption data-ko="측정 오차 패턴 분석" data-en="Measurement error pattern analysis">Measurement error pattern analysis</figcaption>
+                <figcaption data-ko="측정 오차 패턴 분석" data-en="Measurement error pattern analysis" data-ja="測定誤差パターン分析" data-zh="测量误差模式分析" data-de="Analyse des Messfehlermusters" data-es="Análisis de patrones de error de medición" data-vi="Phân tích mẫu sai số đo lường" data-th="การวิเคราะห์รูปแบบความคลาดเคลื่อนในการวัด">Measurement error pattern analysis</figcaption>
             </div>
         </div>
 
         <!-- Microsleep -->
         <div class="section">
-            <h2><span>😴</span> <span data-ko="마이크로슬립 감지 분석" data-en="Microsleep Detection Analysis">Microsleep Detection Analysis</span></h2>
+            <h2><span>😴</span> <span data-ko="마이크로슬립 감지 분석" data-en="Microsleep Detection Analysis" data-ja="マイクロスリープ検出分析" data-zh="微睡眠检测分析" data-de="Mikroschlaf-Erkennungsanalyse" data-es="Análisis de Detección de Microsueño" data-vi="Phân tích Phát hiện Giấc ngủ ngắn" data-th="การวิเคราะห์การตรวจจับการหลับเล็กน้อย">Microsleep Detection Analysis</span></h2>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-value">198</div>
-                    <div class="stat-label" data-ko="총 측정 샘플" data-en="Total Samples">Total Samples</div>
+                    <div class="stat-label" data-ko="총 측정 샘플" data-en="Total Samples" data-ja="総サンプル数" data-zh="总样本数" data-de="Gesamtproben" data-es="Muestras Totales" data-vi="Tổng số Mẫu" data-th="ตัวอย่างทั้งหมด">Total Samples</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" data-ko="1회" data-en="1 event">1 event</div>
-                    <div class="stat-label" data-ko="마이크로슬립 감지" data-en="Microsleep Detected">Microsleep Detected</div>
+                    <div class="stat-value" data-ko="1회" data-en="1 event" data-ja="1回" data-zh="1次" data-de="1 Ereignis" data-es="1 evento" data-vi="1 sự kiện" data-th="1 เหตุการณ์">1 event</div>
+                    <div class="stat-label" data-ko="마이크로슬립 감지" data-en="Microsleep Detected" data-ja="マイクロスリープ検出" data-zh="检测到微睡眠" data-de="Mikroschlaf erkannt" data-es="Microsueño Detectado" data-vi="Phát hiện Giấc ngủ ngắn" data-th="ตรวจพบการหลับเล็กน้อย">Microsleep Detected</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">11.31%</div>
-                    <div class="stat-label" data-ko="평균 PERCLOS" data-en="Mean PERCLOS">Mean PERCLOS</div>
+                    <div class="stat-label" data-ko="평균 PERCLOS" data-en="Mean PERCLOS" data-ja="平均PERCLOS" data-zh="平均PERCLOS" data-de="Mittlerer PERCLOS" data-es="PERCLOS Medio" data-vi="PERCLOS Trung bình" data-th="PERCLOS เฉลี่ย">Mean PERCLOS</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">0.51%</div>
-                    <div class="stat-label" data-ko="이벤트 발생률" data-en="Event Rate">Event Rate</div>
+                    <div class="stat-label" data-ko="이벤트 발생률" data-en="Event Rate" data-ja="イベント発生率" data-zh="事件发生率" data-de="Ereignisrate" data-es="Tasa de Eventos" data-vi="Tỷ lệ Sự kiện" data-th="อัตราเหตุการณ์">Event Rate</div>
                 </div>
             </div>
 
             <div class="chart-container">
                 <img src="imgs/charts/07_microsleep_timeline.png" alt="Microsleep Timeline">
-                <figcaption data-ko="마이크로슬립 이벤트 타임라인 및 PERCLOS 변화" data-en="Microsleep event timeline and PERCLOS changes">Microsleep event timeline and PERCLOS changes</figcaption>
+                <figcaption data-ko="마이크로슬립 이벤트 타임라인 및 PERCLOS 변화" data-en="Microsleep event timeline and PERCLOS changes" data-ja="マイクロスリープイベントタイムラインとPERCLOS変化" data-zh="微睡眠事件时间线和PERCLOS变化" data-de="Mikroschlaf-Ereignis-Zeitleiste und PERCLOS-Änderungen" data-es="Línea de tiempo de eventos de microsueño y cambios de PERCLOS" data-vi="Dòng thời gian sự kiện giấc ngủ ngắn và thay đổi PERCLOS" data-th="ไทม์ไลน์เหตุการณ์การหลับเล็กน้อยและการเปลี่ยนแปลง PERCLOS">Microsleep event timeline and PERCLOS changes</figcaption>
             </div>
 
             <div class="highlight-box success">
-                <strong data-ko="PERCLOS 기반 졸음 감지 시스템 정상 작동" data-en="PERCLOS-based Drowsiness Detection System Operating Normally">PERCLOS-based Drowsiness Detection System Operating Normally</strong><br>
-                <span data-ko="NCAP 2025 기준 PERCLOS > 8% 시 경고 - 시스템이 적절히 이벤트 감지 및 기록" data-en="NCAP 2025 standard: Alert when PERCLOS > 8% - System properly detects and records events">NCAP 2025 standard: Alert when PERCLOS > 8% - System properly detects and records events</span>
+                <strong data-ko="PERCLOS 기반 졸음 감지 시스템 정상 작동" data-en="PERCLOS-based Drowsiness Detection System Operating Normally" data-ja="PERCLOSベースの眠気検出システム正常動作" data-zh="基于PERCLOS的困倦检测系统正常运行" data-de="PERCLOS-basiertes Müdigkeitserkennungssystem funktioniert normal" data-es="Sistema de Detección de Somnolencia basado en PERCLOS Funcionando Normalmente" data-vi="Hệ thống Phát hiện Buồn ngủ dựa trên PERCLOS Hoạt động Bình thường" data-th="ระบบตรวจจับอาการง่วงนอนตาม PERCLOS ทำงานปกติ">PERCLOS-based Drowsiness Detection System Operating Normally</strong><br>
+                <span data-ko="NCAP 2025 기준 PERCLOS > 8% 시 경고 - 시스템이 적절히 이벤트 감지 및 기록" data-en="NCAP 2025 standard: Alert when PERCLOS > 8% - System properly detects and records events" data-ja="NCAP 2025基準: PERCLOS > 8%で警告 - システムは適切にイベントを検出・記録" data-zh="NCAP 2025标准: PERCLOS > 8%时警报 - 系统正确检测并记录事件" data-de="NCAP 2025-Standard: Warnung bei PERCLOS > 8% - System erkennt und zeichnet Ereignisse ordnungsgemäß auf" data-es="Estándar NCAP 2025: Alerta cuando PERCLOS > 8% - El sistema detecta y registra eventos correctamente" data-vi="Tiêu chuẩn NCAP 2025: Cảnh báo khi PERCLOS > 8% - Hệ thống phát hiện và ghi nhận sự kiện đúng cách" data-th="มาตรฐาน NCAP 2025: แจ้งเตือนเมื่อ PERCLOS > 8% - ระบบตรวจจับและบันทึกเหตุการณ์อย่างถูกต้อง">NCAP 2025 standard: Alert when PERCLOS > 8% - System properly detects and records events</span>
             </div>
         </div>
 
         <!-- Conclusion -->
         <div class="section">
-            <h2><span>✅</span> <span data-ko="종합 평가" data-en="Overall Assessment">Overall Assessment</span></h2>
+            <h2><span>✅</span> <span data-ko="종합 평가" data-en="Overall Assessment" data-ja="総合評価" data-zh="综合评估" data-de="Gesamtbewertung" data-es="Evaluación General" data-vi="Đánh giá Tổng thể" data-th="การประเมินโดยรวม">Overall Assessment</span></h2>
 
             <ul class="check-list">
-                <li><strong data-ko="비접촉 rPPG 기술 성능:" data-en="Non-contact rPPG Performance:">Non-contact rPPG Performance:</strong> <span data-ko="국제 학술 연구 수준 달성, NCAP 2025 기준 충족" data-en="Meets international research standards, NCAP 2025 compliant">Meets international research standards, NCAP 2025 compliant</span></li>
-                <li><strong data-ko="평균 심박수 추적:" data-en="Mean Heart Rate Tracking:">Mean Heart Rate Tracking:</strong> <span data-ko="3.34 BPM 오차 (4.4%) - 장시간 모니터링 신뢰도 높음" data-en="3.34 BPM error (4.4%) - High reliability for long-term monitoring">3.34 BPM error (4.4%) - High reliability for long-term monitoring</span></li>
-                <li><strong data-ko="운전자 모니터링:" data-en="Driver Monitoring:">Driver Monitoring:</strong> <span data-ko="졸음, 스트레스, 이상 상태 감지 가능" data-en="Capable of detecting drowsiness, stress, and abnormal conditions">Capable of detecting drowsiness, stress, and abnormal conditions</span></li>
-                <li><strong data-ko="시스템 통합:" data-en="System Integration:">System Integration:</strong> <span data-ko="PERCLOS와 심박수 통합 모니터링, 실시간 경고 시스템 작동" data-en="Integrated PERCLOS and heart rate monitoring, real-time alert system operational">Integrated PERCLOS and heart rate monitoring, real-time alert system operational</span></li>
+                <li><strong data-ko="비접촉 rPPG 기술 성능:" data-en="Non-contact rPPG Performance:" data-ja="非接触rPPG技術性能:" data-zh="非接触式rPPG技术性能:" data-de="Kontaktlose rPPG-Leistung:" data-es="Rendimiento rPPG Sin Contacto:" data-vi="Hiệu suất rPPG Không tiếp xúc:" data-th="ประสิทธิภาพ rPPG แบบไม่สัมผัส:">Non-contact rPPG Performance:</strong> <span data-ko="국제 학술 연구 수준 달성, NCAP 2025 기준 충족" data-en="Meets international research standards, NCAP 2025 compliant" data-ja="国際学術研究水準達成、NCAP 2025基準適合" data-zh="达到国际学术研究水平，符合NCAP 2025标准" data-de="Erfüllt internationale Forschungsstandards, NCAP 2025 konform" data-es="Cumple estándares de investigación internacional, compatible con NCAP 2025" data-vi="Đạt tiêu chuẩn nghiên cứu quốc tế, tuân thủ NCAP 2025" data-th="ผ่านมาตรฐานการวิจัยระหว่างประเทศ สอดคล้องกับ NCAP 2025">Meets international research standards, NCAP 2025 compliant</span></li>
+                <li><strong data-ko="평균 심박수 추적:" data-en="Mean Heart Rate Tracking:" data-ja="平均心拍数追跡:" data-zh="平均心率追踪:" data-de="Mittlere Herzfrequenzverfolgung:" data-es="Seguimiento de Frecuencia Cardíaca Media:" data-vi="Theo dõi Nhịp tim Trung bình:" data-th="การติดตามอัตราการเต้นของหัวใจเฉลี่ย:">Mean Heart Rate Tracking:</strong> <span data-ko="3.34 BPM 오차 (4.4%) - 장시간 모니터링 신뢰도 높음" data-en="3.34 BPM error (4.4%) - High reliability for long-term monitoring" data-ja="3.34 BPM誤差（4.4%）- 長時間モニタリング高信頼性" data-zh="3.34 BPM误差（4.4%）- 长期监测高可靠性" data-de="3.34 BPM Fehler (4.4%) - Hohe Zuverlässigkeit für Langzeitüberwachung" data-es="Error de 3.34 BPM (4.4%) - Alta fiabilidad para monitoreo a largo plazo" data-vi="Sai số 3.34 BPM (4.4%) - Độ tin cậy cao cho giám sát dài hạn" data-th="ความคลาดเคลื่อน 3.34 BPM (4.4%) - ความน่าเชื่อถือสูงสำหรับการตรวจสอบระยะยาว">3.34 BPM error (4.4%) - High reliability for long-term monitoring</span></li>
+                <li><strong data-ko="운전자 모니터링:" data-en="Driver Monitoring:" data-ja="ドライバーモニタリング:" data-zh="驾驶员监控:" data-de="Fahrerüberwachung:" data-es="Monitoreo del Conductor:" data-vi="Giám sát Tài xế:" data-th="การตรวจสอบผู้ขับขี่:">Driver Monitoring:</strong> <span data-ko="졸음, 스트레스, 이상 상태 감지 가능" data-en="Capable of detecting drowsiness, stress, and abnormal conditions" data-ja="眠気、ストレス、異常状態検出可能" data-zh="能够检测困倦、压力和异常状态" data-de="Erkennung von Müdigkeit, Stress und abnormalen Zuständen" data-es="Capaz de detectar somnolencia, estrés y condiciones anormales" data-vi="Có khả năng phát hiện buồn ngủ, căng thẳng và tình trạng bất thường" data-th="สามารถตรวจจับอาการง่วงนอน ความเครียด และสภาวะผิดปกติ">Capable of detecting drowsiness, stress, and abnormal conditions</span></li>
+                <li><strong data-ko="시스템 통합:" data-en="System Integration:" data-ja="システム統合:" data-zh="系统集成:" data-de="Systemintegration:" data-es="Integración del Sistema:" data-vi="Tích hợp Hệ thống:" data-th="การรวมระบบ:">System Integration:</strong> <span data-ko="PERCLOS와 심박수 통합 모니터링, 실시간 경고 시스템 작동" data-en="Integrated PERCLOS and heart rate monitoring, real-time alert system operational" data-ja="PERCLOSと心拍数統合モニタリング、リアルタイム警報システム稼働" data-zh="PERCLOS和心率集成监控，实时警报系统运行" data-de="Integrierte PERCLOS- und Herzfrequenzüberwachung, Echtzeit-Alarmsystem betriebsbereit" data-es="Monitoreo integrado de PERCLOS y frecuencia cardíaca, sistema de alerta en tiempo real operativo" data-vi="Giám sát tích hợp PERCLOS và nhịp tim, hệ thống cảnh báo thời gian thực hoạt động" data-th="การตรวจสอบ PERCLOS และอัตราการเต้นของหัวใจแบบรวม ระบบแจ้งเตือนแบบเรียลไทม์ทำงาน">Integrated PERCLOS and heart rate monitoring, real-time alert system operational</span></li>
             </ul>
 
-            <h3 data-ko="기술적 강점" data-en="Technical Strengths">Technical Strengths</h3>
+            <h3 data-ko="기술적 강점" data-en="Technical Strengths" data-ja="技術的強み" data-zh="技术优势" data-de="Technische Stärken" data-es="Fortalezas Técnicas" data-vi="Điểm mạnh Kỹ thuật" data-th="จุดแข็งทางเทคนิค">Technical Strengths</h3>
             <div class="two-col">
                 <div class="highlight-box">
-                    <strong data-ko="비침습성" data-en="Non-invasive">Non-invasive</strong><br>
-                    <span data-ko="운전자가 아무것도 착용할 필요 없음. 자연스러운 운전 환경 유지." data-en="Driver doesn't need to wear anything. Maintains natural driving environment.">Driver doesn't need to wear anything. Maintains natural driving environment.</span>
+                    <strong data-ko="비침습성" data-en="Non-invasive" data-ja="非侵襲性" data-zh="非侵入性" data-de="Nicht-invasiv" data-es="No Invasivo" data-vi="Không xâm lấn" data-th="ไม่รุกราน">Non-invasive</strong><br>
+                    <span data-ko="운전자가 아무것도 착용할 필요 없음. 자연스러운 운전 환경 유지." data-en="Driver doesn't need to wear anything. Maintains natural driving environment." data-ja="ドライバーは何も装着不要。自然な運転環境を維持。" data-zh="驾驶员无需佩戴任何设备。保持自然驾驶环境。" data-de="Fahrer muss nichts tragen. Erhält natürliche Fahrumgebung." data-es="El conductor no necesita usar nada. Mantiene el entorno de conducción natural." data-vi="Tài xế không cần đeo bất cứ thứ gì. Duy trì môi trường lái xe tự nhiên." data-th="ผู้ขับขี่ไม่ต้องสวมใส่อะไร รักษาสภาพแวดล้อมการขับขี่ตามธรรมชาติ">Driver doesn't need to wear anything. Maintains natural driving environment.</span>
                 </div>
                 <div class="highlight-box">
-                    <strong data-ko="실시간 모니터링" data-en="Real-time Monitoring">Real-time Monitoring</strong><br>
-                    <span data-ko="카메라 기반 즉시 측정. 별도 장비 연결 불필요." data-en="Camera-based instant measurement. No additional device connection required.">Camera-based instant measurement. No additional device connection required.</span>
+                    <strong data-ko="실시간 모니터링" data-en="Real-time Monitoring" data-ja="リアルタイムモニタリング" data-zh="实时监控" data-de="Echtzeit-Überwachung" data-es="Monitoreo en Tiempo Real" data-vi="Giám sát Thời gian thực" data-th="การตรวจสอบแบบเรียลไทม์">Real-time Monitoring</strong><br>
+                    <span data-ko="카메라 기반 즉시 측정. 별도 장비 연결 불필요." data-en="Camera-based instant measurement. No additional device connection required." data-ja="カメラベースの即時測定。追加デバイス接続不要。" data-zh="基于摄像头的即时测量。无需连接额外设备。" data-de="Kamerabasierte sofortige Messung. Keine zusätzliche Geräteververbindung erforderlich." data-es="Medición instantánea basada en cámara. Sin necesidad de conexión de dispositivos adicionales." data-vi="Đo lường tức thì dựa trên camera. Không cần kết nối thiết bị bổ sung." data-th="การวัดทันทีด้วยกล้อง ไม่ต้องเชื่อมต่ออุปกรณ์เพิ่มเติม">Camera-based instant measurement. No additional device connection required.</span>
                 </div>
             </div>
             <div class="two-col">
                 <div class="highlight-box">
-                    <strong data-ko="다중 생체신호 통합" data-en="Multi-biosignal Integration">Multi-biosignal Integration</strong><br>
-                    <span data-ko="심박수 + PERCLOS + 시선 추적 + 얼굴 표정 분석" data-en="Heart rate + PERCLOS + Gaze tracking + Facial expression analysis">Heart rate + PERCLOS + Gaze tracking + Facial expression analysis</span>
+                    <strong data-ko="다중 생체신호 통합" data-en="Multi-biosignal Integration" data-ja="多重生体信号統合" data-zh="多生物信号集成" data-de="Multi-Biosignal-Integration" data-es="Integración Multi-bioseñal" data-vi="Tích hợp Đa tín hiệu sinh học" data-th="การรวมสัญญาณชีวภาพหลายตัว">Multi-biosignal Integration</strong><br>
+                    <span data-ko="심박수 + PERCLOS + 시선 추적 + 얼굴 표정 분석" data-en="Heart rate + PERCLOS + Gaze tracking + Facial expression analysis" data-ja="心拍数 + PERCLOS + 視線追跡 + 表情分析" data-zh="心率 + PERCLOS + 视线追踪 + 面部表情分析" data-de="Herzfrequenz + PERCLOS + Blickverfolgung + Gesichtsausdrucksanalyse" data-es="Frecuencia cardíaca + PERCLOS + Seguimiento de mirada + Análisis de expresión facial" data-vi="Nhịp tim + PERCLOS + Theo dõi ánh mắt + Phân tích biểu cảm khuôn mặt" data-th="อัตราการเต้นของหัวใจ + PERCLOS + การติดตามสายตา + การวิเคราะห์การแสดงออกทางสีหน้า">Heart rate + PERCLOS + Gaze tracking + Facial expression analysis</span>
                 </div>
                 <div class="highlight-box">
-                    <strong data-ko="실용성" data-en="Practicality">Practicality</strong><br>
-                    <span data-ko="설치 간편, 추가 웨어러블 불필요, 다수 운전자 자동 대응" data-en="Easy installation, no wearables needed, automatic multi-driver support">Easy installation, no wearables needed, automatic multi-driver support</span>
+                    <strong data-ko="실용성" data-en="Practicality" data-ja="実用性" data-zh="实用性" data-de="Praktikabilität" data-es="Practicidad" data-vi="Tính thực tiễn" data-th="การใช้งานจริง">Practicality</strong><br>
+                    <span data-ko="설치 간편, 추가 웨어러블 불필요, 다수 운전자 자동 대응" data-en="Easy installation, no wearables needed, automatic multi-driver support" data-ja="簡単設置、ウェアラブル不要、複数ドライバー自動対応" data-zh="安装简便，无需可穿戴设备，自动支持多位驾驶员" data-de="Einfache Installation, keine Wearables erforderlich, automatische Mehrfahrer-Unterstützung" data-es="Instalación fácil, sin wearables necesarios, soporte automático multi-conductor" data-vi="Cài đặt dễ dàng, không cần thiết bị đeo, hỗ trợ tự động nhiều tài xế" data-th="ติดตั้งง่าย ไม่ต้องใช้อุปกรณ์สวมใส่ รองรับผู้ขับขี่หลายคนอัตโนมัติ">Easy installation, no wearables needed, automatic multi-driver support</span>
                 </div>
             </div>
         </div>
 
         <!-- Improvement -->
         <div class="improvement-note">
-            <h3 data-ko="🚀 우리는 계속 성능을 고도화합니다" data-en="🚀 We Continuously Improve Performance">🚀 We Continuously Improve Performance</h3>
-            <p data-ko="적응형 필터링, 머신러닝 기반 노이즈 제거, 개인화 알고리즘 등 지속적인 연구개발로 더 높은 정확도를 향해 나아갑니다." data-en="Adaptive filtering, ML-based noise removal, personalized algorithms - continuous R&D for higher accuracy.">Adaptive filtering, ML-based noise removal, personalized algorithms - continuous R&D for higher accuracy.</p>
+            <h3 data-ko="🚀 우리는 계속 성능을 고도화합니다" data-en="🚀 We Continuously Improve Performance" data-ja="🚀 私たちは継続的に性能を向上させます" data-zh="🚀 我们持续提升性能" data-de="🚀 Wir verbessern kontinuierlich die Leistung" data-es="🚀 Mejoramos Continuamente el Rendimiento" data-vi="🚀 Chúng tôi Liên tục Cải thiện Hiệu suất" data-th="🚀 เราปรับปรุงประสิทธิภาพอย่างต่อเนื่อง">🚀 We Continuously Improve Performance</h3>
+            <p data-ko="적응형 필터링, 머신러닝 기반 노이즈 제거, 개인화 알고리즘 등 지속적인 연구개발로 더 높은 정확도를 향해 나아갑니다." data-en="Adaptive filtering, ML-based noise removal, personalized algorithms - continuous R&D for higher accuracy." data-ja="適応フィルタリング、MLベースのノイズ除去、個人化アルゴリズム - より高い精度を目指す継続的な研究開発。" data-zh="自适应滤波、基于ML的噪声去除、个性化算法 - 持续研发追求更高精度。" data-de="Adaptive Filterung, ML-basierte Rauschentfernung, personalisierte Algorithmen - kontinuierliche F&E für höhere Genauigkeit." data-es="Filtrado adaptativo, eliminación de ruido basada en ML, algoritmos personalizados - I+D continuo para mayor precisión." data-vi="Lọc thích ứng, loại bỏ nhiễu dựa trên ML, thuật toán cá nhân hóa - R&D liên tục để đạt độ chính xác cao hơn." data-th="การกรองแบบปรับตัว การลบสัญญาณรบกวนด้วย ML อัลกอริทึมส่วนบุคคล - R&D อย่างต่อเนื่องเพื่อความแม่นยำที่สูงขึ้น">Adaptive filtering, ML-based noise removal, personalized algorithms - continuous R&D for higher accuracy.</p>
         </div>
     </div>
 
     <div class="footer">
-        <p>© 2025 FunnyTech21 Co., Ltd. | <a href="mailto:ioplanet@funnytech21.com">ioplanet@funnytech21.com</a> | <a href="https://www.funnytech21.com">www.funnytech21.com</a></p>
+        <p><span data-ko="© 2025 (주)퍼니테크21" data-en="© 2025 FunnyTech21 Co., Ltd." data-ja="© 2025 FunnyTech21株式会社" data-zh="© 2025 FunnyTech21有限公司" data-de="© 2025 FunnyTech21 GmbH" data-es="© 2025 FunnyTech21 Co., Ltd." data-vi="© 2025 FunnyTech21 Co., Ltd." data-th="© 2025 FunnyTech21 Co., Ltd.">© 2025 FunnyTech21 Co., Ltd.</span> | <a href="mailto:ioplanet@funnytech21.com">ioplanet@funnytech21.com</a> | <a href="https://www.funnytech21.com">www.funnytech21.com</a></p>
     </div>
 
     <script>
+        const langNames = {
+            ko: '한국어', en: 'English', ja: '日本語', zh: '中文',
+            de: 'Deutsch', es: 'Español', vi: 'Tiếng Việt', th: 'ไทย'
+        };
         let currentLang = 'en';
 
-        function setLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-ko][data-en]').forEach(el => {
-                el.textContent = el.getAttribute('data-' + lang);
-            });
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-            document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
-            localStorage.setItem('preferredLang', lang);
+        function toggleLangDropdown() {
+            document.querySelector('.lang-dropdown').classList.toggle('active');
         }
 
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('funnytech_lang', lang);
+            applyLanguage(lang);
+            document.querySelector('.lang-dropdown').classList.remove('active');
+        }
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) el.textContent = text;
+            });
+            document.querySelector('.lang-current').textContent = langNames[lang];
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.getAttribute('onclick')?.includes(lang)) {
+                    opt.classList.add('active');
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-selector')) {
+                document.querySelector('.lang-dropdown')?.classList.remove('active');
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferredLang') || 'en';
-            setLang(savedLang);
+            const savedLang = localStorage.getItem('funnytech_lang') || 'en';
+            applyLanguage(savedLang);
         });
     </script>
 </body>

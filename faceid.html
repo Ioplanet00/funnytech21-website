@@ -372,50 +372,66 @@
         }
         .back-link:hover { text-decoration: underline; }
 
-        /* Language Toggle */
-        .lang-toggle {
-            position: absolute;
-            top: 20px;
-            right: 24px;
-            display: flex;
-            gap: 8px;
-            z-index: 10;
+        /* Language Selector */
+        .lang-selector { position: absolute; top: 20px; right: 24px; z-index: 10; }
+        .lang-selector-btn {
+            display: flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.1); color: var(--text-light); padding: 8px 14px;
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; font-weight: 500;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
         }
-        .lang-btn {
-            background: rgba(255,255,255,0.1);
-            color: var(--text-light);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 6px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.2s;
+        .lang-selector-btn:hover { background: rgba(255,255,255,0.2); }
+        .lang-selector-btn svg { width: 14px; height: 14px; transition: transform 0.2s; }
+        .lang-dropdown {
+            position: absolute; top: 100%; right: 0; margin-top: 8px;
+            background: white; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            min-width: 160px; opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.2s ease; z-index: 1000;
         }
-        .lang-btn:hover { background: rgba(255,255,255,0.2); }
-        .lang-btn.active { background: var(--electric-blue); color: white; font-weight: 700; border-color: var(--electric-blue); }
-        @media (max-width: 768px) { .lang-toggle { position: static; justify-content: center; margin-bottom: 20px; } }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            cursor: pointer; transition: background 0.2s; color: var(--bg-dark);
+        }
+        .lang-option:first-child { border-radius: 10px 10px 0 0; }
+        .lang-option:last-child { border-radius: 0 0 10px 10px; }
+        .lang-option:hover { background: var(--bg-light); }
+        .lang-option.active { background: rgba(21,83,158,0.1); color: var(--primary-blue); font-weight: 600; }
+        .lang-flag { font-size: 1.1rem; }
+        @media (max-width: 768px) { .lang-selector { position: static; display: flex; justify-content: center; margin-bottom: 20px; } }
     </style>
 </head>
 <body>
     <!-- Header -->
     <div class="header">
-        <div class="lang-toggle">
-            <button class="lang-btn active" onclick="setLang('en')">EN</button>
-            <button class="lang-btn" onclick="setLang('ko')">한국어</button>
+        <div class="lang-selector" id="langSelector">
+            <button class="lang-selector-btn" onclick="toggleLangDropdown()">
+                <span class="lang-current">English</span>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div class="lang-dropdown">
+                <div class="lang-option" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                <div class="lang-option active" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ไทย</div>
+            </div>
         </div>
         <div class="header-content">
-            <div class="badge" data-ko="FunnyTech21 대표 솔루션" data-en="FunnyTech21 Flagship Solution">FunnyTech21 Flagship Solution</div>
+            <div class="badge" data-ko="FunnyTech21 대표 솔루션" data-en="FunnyTech21 Flagship Solution" data-ja="FunnyTech21 フラッグシップソリューション" data-zh="FunnyTech21 旗舰解决方案" data-de="FunnyTech21 Flaggschiff-Lösung" data-es="Solución Insignia de FunnyTech21" data-vi="Giải pháp Hàng đầu FunnyTech21" data-th="โซลูชันเรือธงของ FunnyTech21">FunnyTech21 Flagship Solution</div>
             <h1><span>HumanSense AI</span> Platform</h1>
-            <p data-ko="고급 인체 분석 및 얼굴 인식 플랫폼 - 포괄적인 생체 인식 분석을 통한 실시간 다중 인물 추적" data-en="Advanced Human Analysis & Face Recognition Platform - Real-time multi-person tracking with comprehensive biometric analysis">Advanced Human Analysis & Face Recognition Platform - Real-time multi-person tracking with comprehensive biometric analysis</p>
+            <p data-ko="고급 인체 분석 및 얼굴 인식 플랫폼 - 포괄적인 생체 인식 분석을 통한 실시간 다중 인물 추적" data-en="Advanced Human Analysis & Face Recognition Platform - Real-time multi-person tracking with comprehensive biometric analysis" data-ja="高度な人体分析と顔認識プラットフォーム - 包括的な生体認証分析によるリアルタイム複数人物追跡" data-zh="高级人体分析与人脸识别平台 - 通过全面生物识别分析实现实时多人追踪" data-de="Fortschrittliche Human-Analyse & Gesichtserkennungsplattform - Echtzeit-Mehrpersonenverfolgung mit umfassender biometrischer Analyse" data-es="Plataforma Avanzada de Análisis Humano y Reconocimiento Facial - Seguimiento en tiempo real de múltiples personas con análisis biométrico integral" data-vi="Nền tảng Phân tích Con người & Nhận dạng Khuôn mặt Nâng cao - Theo dõi nhiều người trong thời gian thực với phân tích sinh trắc học toàn diện" data-th="แพลตฟอร์มวิเคราะห์มนุษย์และจดจำใบหน้าขั้นสูง - การติดตามหลายบุคคลแบบเรียลไทม์พร้อมการวิเคราะห์ไบโอเมตริกที่ครอบคลุม">Advanced Human Analysis & Face Recognition Platform - Real-time multi-person tracking with comprehensive biometric analysis</p>
             <div class="header-buttons">
                 <a href="Face-ID_AI_Perception_Architecture.pdf" target="_blank" class="btn-primary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
-                    <span data-ko="아키텍처 PDF 보기" data-en="View Architecture PDF">View Architecture PDF</span>
+                    <span data-ko="아키텍처 PDF 보기" data-en="View Architecture PDF" data-ja="アーキテクチャPDFを見る" data-zh="查看架构PDF" data-de="Architektur-PDF anzeigen" data-es="Ver PDF de Arquitectura" data-vi="Xem PDF Kiến trúc" data-th="ดู PDF สถาปัตยกรรม">View Architecture PDF</span>
                 </a>
                 <a href="index.html#contact" class="btn-secondary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <span data-ko="문의하기" data-en="Contact Us">Contact Us</span>
+                    <span data-ko="문의하기" data-en="Contact Us" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontaktieren Sie uns" data-es="Contáctenos" data-vi="Liên hệ" data-th="ติดต่อเรา">Contact Us</span>
                 </a>
             </div>
         </div>
@@ -426,19 +442,19 @@
         <div class="stats-grid">
             <div class="stat-item">
                 <div class="stat-value">50+</div>
-                <div class="stat-label" data-ko="동시 인물 분석" data-en="Simultaneous Person Analysis">Simultaneous Person Analysis</div>
+                <div class="stat-label" data-ko="동시 인물 분석" data-en="Simultaneous Person Analysis" data-ja="同時人物分析" data-zh="同时人物分析" data-de="Gleichzeitige Personenanalyse" data-es="Análisis Simultáneo de Personas" data-vi="Phân tích Người Đồng thời" data-th="การวิเคราะห์บุคคลพร้อมกัน">Simultaneous Person Analysis</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value">512D</div>
-                <div class="stat-label" data-ko="얼굴 임베딩 차원" data-en="Face Embedding Dimension">Face Embedding Dimension</div>
+                <div class="stat-label" data-ko="얼굴 임베딩 차원" data-en="Face Embedding Dimension" data-ja="顔埋め込み次元" data-zh="人脸嵌入维度" data-de="Gesichts-Embedding-Dimension" data-es="Dimensión de Embedding Facial" data-vi="Chiều Nhúng Khuôn mặt" data-th="มิติการฝังใบหน้า">Face Embedding Dimension</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value">11</div>
-                <div class="stat-label" data-ko="라이브니스 체크 레이어" data-en="Liveness Check Layers">Liveness Check Layers</div>
+                <div class="stat-label" data-ko="라이브니스 체크 레이어" data-en="Liveness Check Layers" data-ja="ライブネスチェックレイヤー" data-zh="活体检测层" data-de="Liveness-Check-Schichten" data-es="Capas de Verificación de Vivacidad" data-vi="Lớp Kiểm tra Tính sống" data-th="ชั้นตรวจสอบความมีชีวิต">Liveness Check Layers</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value">30+</div>
-                <div class="stat-label" data-ko="FPS 실시간 처리" data-en="FPS Real-time Processing">FPS Real-time Processing</div>
+                <div class="stat-label" data-ko="FPS 실시간 처리" data-en="FPS Real-time Processing" data-ja="FPSリアルタイム処理" data-zh="FPS实时处理" data-de="FPS Echtzeit-Verarbeitung" data-es="Procesamiento en Tiempo Real FPS" data-vi="Xử lý Thời gian thực FPS" data-th="การประมวลผลเรียลไทม์ FPS">FPS Real-time Processing</div>
             </div>
         </div>
     </div>
@@ -446,9 +462,9 @@
     <!-- Architecture -->
     <div class="container architecture-section">
         <div class="section-header">
-            <div class="section-tag" data-ko="시스템 아키텍처" data-en="System Architecture">System Architecture</div>
-            <h2 class="section-title" data-ko="HumanSense AI 처리 파이프라인" data-en="HumanSense AI Processing Pipeline">HumanSense AI Processing Pipeline</h2>
-            <p class="section-subtitle">End-to-end human analysis from multiple input sources to actionable insights</p>
+            <div class="section-tag" data-ko="시스템 아키텍처" data-en="System Architecture" data-ja="システムアーキテクチャ" data-zh="系统架构" data-de="Systemarchitektur" data-es="Arquitectura del Sistema" data-vi="Kiến trúc Hệ thống" data-th="สถาปัตยกรรมระบบ">System Architecture</div>
+            <h2 class="section-title" data-ko="HumanSense AI 처리 파이프라인" data-en="HumanSense AI Processing Pipeline" data-ja="HumanSense AI 処理パイプライン" data-zh="HumanSense AI 处理管道" data-de="HumanSense AI Verarbeitungs-Pipeline" data-es="Pipeline de Procesamiento HumanSense AI" data-vi="Quy trình Xử lý HumanSense AI" data-th="ไปป์ไลน์การประมวลผล HumanSense AI">HumanSense AI Processing Pipeline</h2>
+            <p class="section-subtitle" data-ko="다양한 입력 소스에서 실행 가능한 인사이트까지의 엔드투엔드 인체 분석" data-en="End-to-end human analysis from multiple input sources to actionable insights" data-ja="複数の入力ソースから実用的なインサイトまでのエンドツーエンド人体分析" data-zh="从多个输入源到可操作洞察的端到端人体分析" data-de="End-to-End-Menschenanalyse von mehreren Eingabequellen bis zu verwertbaren Erkenntnissen" data-es="Análisis humano de extremo a extremo desde múltiples fuentes de entrada hasta información procesable" data-vi="Phân tích con người từ đầu đến cuối từ nhiều nguồn đầu vào đến thông tin hữu ích" data-th="การวิเคราะห์มนุษย์แบบครบวงจรจากแหล่งข้อมูลหลายแหล่งไปจนถึงข้อมูลเชิงลึกที่นำไปปฏิบัติได้">End-to-end human analysis from multiple input sources to actionable insights</p>
         </div>
 
         <div class="arch-diagram">
@@ -560,9 +576,9 @@
     <!-- Usage Guide -->
     <div class="container usage-section">
         <div class="section-header">
-            <div class="section-tag" data-ko="사용 방법" data-en="How It Works">How It Works</div>
-            <h2 class="section-title" data-ko="솔루션 인터페이스" data-en="Solution Interface">Solution Interface</h2>
-            <p class="section-subtitle">Simple 3-step process: Register, Recognize, Manage</p>
+            <div class="section-tag" data-ko="사용 방법" data-en="How It Works" data-ja="使い方" data-zh="使用方法" data-de="So funktioniert es" data-es="Cómo Funciona" data-vi="Cách hoạt động" data-th="วิธีการทำงาน">How It Works</div>
+            <h2 class="section-title" data-ko="솔루션 인터페이스" data-en="Solution Interface" data-ja="ソリューションインターフェース" data-zh="解决方案界面" data-de="Lösungsschnittstelle" data-es="Interfaz de Solución" data-vi="Giao diện Giải pháp" data-th="อินเทอร์เฟซโซลูชัน">Solution Interface</h2>
+            <p class="section-subtitle" data-ko="간단한 3단계 프로세스: 등록, 인식, 관리" data-en="Simple 3-step process: Register, Recognize, Manage" data-ja="シンプルな3ステッププロセス：登録、認識、管理" data-zh="简单的三步流程：注册、识别、管理" data-de="Einfacher 3-Schritt-Prozess: Registrieren, Erkennen, Verwalten" data-es="Proceso simple de 3 pasos: Registrar, Reconocer, Gestionar" data-vi="Quy trình 3 bước đơn giản: Đăng ký, Nhận dạng, Quản lý" data-th="กระบวนการ 3 ขั้นตอนง่ายๆ: ลงทะเบียน รับรู้ จัดการ">Simple 3-step process: Register, Recognize, Manage</p>
         </div>
 
         <div class="usage-steps">
@@ -625,9 +641,9 @@
     <!-- Features -->
     <div class="container features-section">
         <div class="section-header">
-            <div class="section-tag" data-ko="핵심 기능" data-en="Core Capabilities">Core Capabilities</div>
-            <h2 class="section-title" data-ko="주요 기능" data-en="Key Features">Key Features</h2>
-            <p class="section-subtitle">Enterprise-grade face recognition with Liveness Challenge for deepfake prevention</p>
+            <div class="section-tag" data-ko="핵심 기능" data-en="Core Capabilities" data-ja="コア機能" data-zh="核心功能" data-de="Kernfunktionen" data-es="Capacidades Principales" data-vi="Khả năng Cốt lõi" data-th="ความสามารถหลัก">Core Capabilities</div>
+            <h2 class="section-title" data-ko="주요 기능" data-en="Key Features" data-ja="主要機能" data-zh="主要功能" data-de="Hauptfunktionen" data-es="Características Clave" data-vi="Tính năng Chính" data-th="คุณสมบัติหลัก">Key Features</h2>
+            <p class="section-subtitle" data-ko="딥페이크 방지를 위한 라이브니스 챌린지가 포함된 엔터프라이즈급 얼굴 인식" data-en="Enterprise-grade face recognition with Liveness Challenge for deepfake prevention" data-ja="ディープフェイク防止のためのライブネスチャレンジを備えたエンタープライズグレードの顔認識" data-zh="具有活体挑战功能的企业级人脸识别，用于防止深度伪造" data-de="Enterprise-Gesichtserkennung mit Liveness-Challenge zur Deepfake-Prävention" data-es="Reconocimiento facial de nivel empresarial con Desafío de Vivacidad para prevención de deepfake" data-vi="Nhận dạng khuôn mặt cấp doanh nghiệp với Thử thách Tính sống để ngăn chặn deepfake" data-th="การจดจำใบหน้าระดับองค์กรพร้อม Liveness Challenge เพื่อป้องกัน deepfake">Enterprise-grade face recognition with Liveness Challenge for deepfake prevention</p>
         </div>
 
         <div class="features-grid">
@@ -697,9 +713,9 @@
     <!-- Specifications -->
     <div class="container specs-section">
         <div class="section-header">
-            <div class="section-tag" data-ko="기술 사양" data-en="Technical Specs">Technical Specs</div>
-            <h2 class="section-title" data-ko="FunnyTech Face ID 시스템" data-en="FunnyTech Face ID System">FunnyTech Face ID System</h2>
-            <p class="section-subtitle">Technical Specification</p>
+            <div class="section-tag" data-ko="기술 사양" data-en="Technical Specs" data-ja="技術仕様" data-zh="技术规格" data-de="Technische Spezifikationen" data-es="Especificaciones Técnicas" data-vi="Thông số Kỹ thuật" data-th="ข้อมูลจำเพาะทางเทคนิค">Technical Specs</div>
+            <h2 class="section-title" data-ko="FunnyTech Face ID 시스템" data-en="FunnyTech Face ID System" data-ja="FunnyTech Face ID システム" data-zh="FunnyTech Face ID 系统" data-de="FunnyTech Face ID System" data-es="Sistema FunnyTech Face ID" data-vi="Hệ thống FunnyTech Face ID" data-th="ระบบ FunnyTech Face ID">FunnyTech Face ID System</h2>
+            <p class="section-subtitle" data-ko="기술 사양서" data-en="Technical Specification" data-ja="技術仕様書" data-zh="技术规格书" data-de="Technische Spezifikation" data-es="Especificación Técnica" data-vi="Thông số Kỹ thuật" data-th="ข้อกำหนดทางเทคนิค">Technical Specification</p>
         </div>
 
         <!-- Core Technology Stack -->
@@ -879,39 +895,62 @@
 
     <!-- CTA -->
     <div class="cta-section">
-        <h2 data-ko="HumanSense AI를 통합할 준비가 되셨나요?" data-en="Ready to Integrate HumanSense AI?">Ready to Integrate HumanSense AI?</h2>
-        <p data-ko="기술 검증(PoC) 및 기업 배포 옵션에 대해 문의하세요." data-en="Contact us for technical verification (PoC) and enterprise deployment options.">Contact us for technical verification (PoC) and enterprise deployment options.</p>
+        <h2 data-ko="HumanSense AI를 통합할 준비가 되셨나요?" data-en="Ready to Integrate HumanSense AI?" data-ja="HumanSense AIを統合する準備はできていますか？" data-zh="准备好整合HumanSense AI了吗？" data-de="Bereit, HumanSense AI zu integrieren?" data-es="¿Listo para Integrar HumanSense AI?" data-vi="Sẵn sàng Tích hợp HumanSense AI?" data-th="พร้อมที่จะรวม HumanSense AI แล้วหรือยัง?">Ready to Integrate HumanSense AI?</h2>
+        <p data-ko="기술 검증(PoC) 및 기업 배포 옵션에 대해 문의하세요." data-en="Contact us for technical verification (PoC) and enterprise deployment options." data-ja="技術検証（PoC）およびエンタープライズ展開オプションについてお問い合わせください。" data-zh="联系我们了解技术验证（PoC）和企业部署选项。" data-de="Kontaktieren Sie uns für technische Verifizierung (PoC) und Enterprise-Bereitstellungsoptionen." data-es="Contáctenos para verificación técnica (PoC) y opciones de implementación empresarial." data-vi="Liên hệ với chúng tôi để xác minh kỹ thuật (PoC) và các tùy chọn triển khai doanh nghiệp." data-th="ติดต่อเราสำหรับการตรวจสอบทางเทคนิค (PoC) และตัวเลือกการปรับใช้องค์กร">Contact us for technical verification (PoC) and enterprise deployment options.</p>
         <div class="cta-buttons">
-            <a href="index.html#contact" class="btn-white" data-ko="데모 요청" data-en="Request Demo">Request Demo</a>
-            <a href="Face-ID_AI_Perception_Architecture.pdf" target="_blank" class="btn-outline" data-ko="아키텍처 PDF 다운로드" data-en="Download Architecture PDF">Download Architecture PDF</a>
+            <a href="index.html#contact" class="btn-white" data-ko="데모 요청" data-en="Request Demo" data-ja="デモを依頼" data-zh="请求演示" data-de="Demo anfordern" data-es="Solicitar Demo" data-vi="Yêu cầu Demo" data-th="ขอสาธิต">Request Demo</a>
+            <a href="Face-ID_AI_Perception_Architecture.pdf" target="_blank" class="btn-outline" data-ko="아키텍처 PDF 다운로드" data-en="Download Architecture PDF" data-ja="アーキテクチャPDFをダウンロード" data-zh="下载架构PDF" data-de="Architektur-PDF herunterladen" data-es="Descargar PDF de Arquitectura" data-vi="Tải PDF Kiến trúc" data-th="ดาวน์โหลด PDF สถาปัตยกรรม">Download Architecture PDF</a>
         </div>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-        <a href="index.html" class="back-link" data-ko="← 메인 페이지로 돌아가기" data-en="← Back to Main Page">← Back to Main Page</a>
-        <p>&copy; 2025 FunnyTech21 Co., Ltd. | <a href="mailto:ioplanet@funnytech21.com">ioplanet@funnytech21.com</a> | <a href="https://www.funnytech21.com">www.funnytech21.com</a></p>
+        <a href="index.html" class="back-link" data-ko="← 메인 페이지로 돌아가기" data-en="← Back to Main Page" data-ja="← メインページに戻る" data-zh="← 返回主页" data-de="← Zurück zur Hauptseite" data-es="← Volver a la Página Principal" data-vi="← Quay lại Trang chủ" data-th="← กลับไปหน้าหลัก">← Back to Main Page</a>
+        <p><span data-ko="© 2025 (주)퍼니테크21" data-en="© 2025 FunnyTech21 Co., Ltd." data-ja="© 2025 FunnyTech21株式会社" data-zh="© 2025 FunnyTech21有限公司" data-de="© 2025 FunnyTech21 GmbH" data-es="© 2025 FunnyTech21 Co., Ltd." data-vi="© 2025 FunnyTech21 Co., Ltd." data-th="© 2025 FunnyTech21 Co., Ltd.">© 2025 FunnyTech21 Co., Ltd.</span> | <a href="mailto:ioplanet@funnytech21.com">ioplanet@funnytech21.com</a> | <a href="https://www.funnytech21.com">www.funnytech21.com</a></p>
     </div>
 
     <script>
+        const langNames = {
+            ko: '한국어', en: 'English', ja: '日本語', zh: '中文',
+            de: 'Deutsch', es: 'Español', vi: 'Tiếng Việt', th: 'ไทย'
+        };
         let currentLang = 'en';
 
-        function setLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-ko][data-en]').forEach(el => {
-                el.textContent = el.getAttribute('data-' + lang);
-            });
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-            document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
-            localStorage.setItem('preferredLang', lang);
+        function toggleLangDropdown() {
+            document.querySelector('.lang-dropdown').classList.toggle('active');
         }
 
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('funnytech_lang', lang);
+            applyLanguage(lang);
+            document.querySelector('.lang-dropdown').classList.remove('active');
+        }
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) el.textContent = text;
+            });
+            document.querySelector('.lang-current').textContent = langNames[lang];
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.getAttribute('onclick')?.includes(lang)) {
+                    opt.classList.add('active');
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-selector')) {
+                document.querySelector('.lang-dropdown')?.classList.remove('active');
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferredLang') || 'en';
-            setLang(savedLang);
+            const savedLang = localStorage.getItem('funnytech_lang') || 'en';
+            applyLanguage(savedLang);
         });
     </script>
 </body>
