@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About FunnyTech21 | Human Vital Intelligence Company</title>
+    <meta name="description" content="FunnyTech21 - AI로 사고 이전의 안전을 예측하는 Human Vital Intelligence Company. 비접촉 생체신호 분석 AI 전문 기업.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --deep-navy: #0a1628;
+            --electric-blue: #3B82F6;
+            --text-primary: #1a1a2e;
+            --text-secondary: #64748b;
+            --bg-light: #f8fafc;
+            --bg-section: #f1f5f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--deep-navy);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary-red); }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--electric-blue); }
+
+        /* Language Selector */
+        .lang-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background: linear-gradient(135deg, var(--electric-blue), #1d4ed8);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 160px;
+            z-index: 1001;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .lang-dropdown.show { display: block; }
+
+        .lang-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .lang-option:hover { background: #f1f5f9; }
+
+        .lang-flag { font-size: 1.2rem; }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 30px 80px;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #1e3a5f 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .hero .highlight {
+            color: var(--primary-red);
+            font-weight: 700;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-alt {
+            background: var(--bg-section);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--deep-navy);
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        /* Company Overview */
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .overview-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+        }
+
+        .vision-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .vision-item {
+            margin-bottom: 20px;
+        }
+
+        .vision-item:last-child { margin-bottom: 0; }
+
+        .vision-item h4 {
+            color: var(--electric-blue);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .vision-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--electric-blue), #1d4ed8);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .product-card.healthcare .product-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--deep-navy);
+        }
+
+        .product-card .subtitle {
+            color: var(--electric-blue);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .product-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--electric-blue);
+            font-weight: 700;
+        }
+
+        /* Technology Section */
+        .tech-highlight {
+            background: linear-gradient(135deg, var(--deep-navy), #1e3a5f);
+            color: white;
+            padding: 50px;
+            border-radius: 24px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .tech-highlight h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .tech-highlight p {
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .tech-card h4 {
+            color: var(--deep-navy);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .tech-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .tech-stat {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--electric-blue), var(--primary-red));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background: var(--electric-blue);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--electric-blue);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--electric-blue);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content h4 {
+            color: var(--deep-navy);
+            margin-bottom: 5px;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .partner-tag {
+            display: inline-block;
+            background: var(--bg-section);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--electric-blue);
+            margin-top: 8px;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            height: 160px;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .news-card h4 {
+            font-size: 1rem;
+            color: var(--deep-navy);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .news-source {
+            font-size: 0.85rem;
+            color: var(--electric-blue);
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--deep-navy), #1e3a5f);
+            padding: 80px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,34,34,0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--deep-navy);
+            color: white;
+            padding: 50px 30px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .footer-logo span { color: var(--primary-red); }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: white; }
+
+        .footer-copy {
+            width: 100%;
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+
+            .hero h1 { font-size: 2.2rem; }
+            .hero .tagline { font-size: 1.1rem; }
+
+            .overview-content,
+            .products-grid { grid-template-columns: 1fr; }
+
+            .tech-grid,
+            .news-grid { grid-template-columns: 1fr; }
+
+            .section { padding: 60px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.6rem; }
+            .cta-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Funny<span>Tech21</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Home" data-es="Inicio" data-vi="Trang chủ" data-th="หน้าแรก">홈</a></li>
+                <li><a href="index.html#products" data-ko="제품" data-en="Products" data-ja="製品" data-zh="产品" data-de="Produkte" data-es="Productos" data-vi="Sản phẩm" data-th="ผลิตภัณฑ์">제품</a></li>
+                <li><a href="index.html#technology" data-ko="기술" data-en="Technology" data-ja="技術" data-zh="技术" data-de="Technologie" data-es="Tecnología" data-vi="Công nghệ" data-th="เทคโนโลยี">기술</a></li>
+                <li><a href="about.html" style="color: var(--electric-blue); font-weight: 700;" data-ko="회사소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-vi="Giới thiệu" data-th="เกี่ยวกับเรา">회사소개</a></li>
+                <li><a href="index.html#contact" data-ko="문의" data-en="Contact" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontakt" data-es="Contacto" data-vi="Liên hệ" data-th="ติดต่อ">문의</a></li>
+                <li>
+                    <div class="lang-selector">
+                        <button class="lang-btn" onclick="toggleLangDropdown()">
+                            <span id="currentLangFlag">🇰🇷</span>
+                            <span id="currentLangName">한국어</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <div class="lang-option" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                            <div class="lang-option" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                            <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                            <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                            <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                            <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                            <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                            <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ภาษาไทย</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 data-ko="Human Vital Intelligence Company" data-en="Human Vital Intelligence Company" data-ja="Human Vital Intelligence Company" data-zh="Human Vital Intelligence Company" data-de="Human Vital Intelligence Company" data-es="Human Vital Intelligence Company" data-vi="Human Vital Intelligence Company" data-th="Human Vital Intelligence Company">Human Vital Intelligence Company</h1>
+        <p class="tagline" data-ko="AI로 사고 이전의 안전을 예측하는 비접촉 생체신호 분석 AI 전문 기업" data-en="Non-contact biometric AI company predicting safety before accidents with AI" data-ja="AIで事故前の安全を予測する非接触生体信号分析AI専門企業" data-zh="用AI预测事故前安全的非接触式生物信号分析AI专业公司" data-de="Kontaktloses biometrisches KI-Unternehmen, das Sicherheit vor Unfällen mit KI vorhersagt" data-es="Empresa de IA biométrica sin contacto que predice la seguridad antes de accidentes con IA" data-vi="Công ty AI sinh trắc học không tiếp xúc dự đoán an toàn trước tai nạn bằng AI" data-th="บริษัท AI ไบโอเมตริกซ์ไร้สัมผัสที่คาดการณ์ความปลอดภัยก่อนอุบัติเหตุด้วย AI">AI로 사고 이전의 안전을 예측하는 비접촉 생체신호 분석 AI 전문 기업</p>
+        <a href="Human_Vital_Intelligence_Defining_Safety.pdf" target="_blank" class="btn-primary" data-ko="기업소개서 다운로드" data-en="Download Company Profile" data-ja="会社案内ダウンロード" data-zh="下载公司简介" data-de="Firmenprofil herunterladen" data-es="Descargar Perfil de Empresa" data-vi="Tải Hồ sơ Công ty" data-th="ดาวน์โหลดโปรไฟล์บริษัท">기업소개서 다운로드</a>
+    </section>
+
+    <!-- Company Overview -->
+    <section class="section">
+        <h2 class="section-title" data-ko="기업 소개" data-en="Company Overview" data-ja="会社概要" data-zh="公司简介" data-de="Unternehmensübersicht" data-es="Descripción de la Empresa" data-vi="Giới thiệu Công ty" data-th="ภาพรวมบริษัท">기업 소개</h2>
+        <p class="section-subtitle" data-ko="단순한 영상 감시를 넘어, 사람의 생체 신호를 읽어내는 기술" data-en="Beyond simple video surveillance, technology that reads human vital signs" data-ja="単純な映像監視を超え、人の生体信号を読み取る技術" data-zh="超越简单的视频监控，读取人体生命信号的技术" data-de="Über einfache Videoüberwachung hinaus, Technologie die menschliche Vitalzeichen liest" data-es="Más allá de la simple vigilancia por video, tecnología que lee signos vitales humanos" data-vi="Vượt xa giám sát video đơn giản, công nghệ đọc dấu hiệu sinh tồn của con người" data-th="เหนือกว่าการเฝ้าระวังวิดีโอธรรมดา เทคโนโลยีที่อ่านสัญญาณชีพของมนุษย์">단순한 영상 감시를 넘어, 사람의 생체 신호를 읽어내는 기술</p>
+
+        <div class="overview-content">
+            <div class="overview-text">
+                <p data-ko="(주)퍼니테크21은 단일 카메라만으로 사람의 생체 신호(심박, 호흡, 스트레스 등)를 읽어내는 비접촉 생체신호 분석 AI 전문 기업입니다." data-en="FunnyTech21 is a non-contact biometric AI company that reads human vital signs (heart rate, respiration, stress) using only a single camera." data-ja="FunnyTech21は、単一のカメラだけで人の生体信号（心拍、呼吸、ストレスなど）を読み取る非接触生体信号分析AI専門企業です。" data-zh="FunnyTech21是一家仅使用单一摄像头就能读取人体生命信号（心率、呼吸、压力等）的非接触式生物信号分析AI专业公司。" data-de="FunnyTech21 ist ein kontaktloses biometrisches KI-Unternehmen, das menschliche Vitalzeichen (Herzfrequenz, Atmung, Stress) nur mit einer einzigen Kamera liest." data-es="FunnyTech21 es una empresa de IA biométrica sin contacto que lee signos vitales humanos (frecuencia cardíaca, respiración, estrés) usando solo una cámara." data-vi="FunnyTech21 là công ty AI sinh trắc học không tiếp xúc đọc các dấu hiệu sinh tồn của con người (nhịp tim, hô hấp, căng thẳng) chỉ bằng một camera." data-th="FunnyTech21 เป็นบริษัท AI ไบโอเมตริกซ์ไร้สัมผัสที่อ่านสัญญาณชีพของมนุษย์ (อัตราการเต้นหัวใจ, การหายใจ, ความเครียด) โดยใช้กล้องเพียงตัวเดียว">(주)퍼니테크21은 단일 카메라만으로 사람의 생체 신호(심박, 호흡, 스트레스 등)를 읽어내는 비접촉 생체신호 분석 AI 전문 기업입니다.</p>
+                <p data-ko="고가의 센서 없이 소프트웨어만으로 운전자의 상태를 가장 깊이 이해하고, 사고를 사전에 예방하는 것이 우리의 목표입니다." data-en="Our goal is to deeply understand driver status and prevent accidents using only software, without expensive sensors." data-ja="高価なセンサーなしでソフトウェアだけでドライバーの状態を最も深く理解し、事故を事前に予防することが私たちの目標です。" data-zh="我们的目标是仅通过软件深入了解驾驶员状态并预防事故，无需昂贵的传感器。" data-de="Unser Ziel ist es, den Fahrerzustand tief zu verstehen und Unfälle nur mit Software zu verhindern, ohne teure Sensoren." data-es="Nuestro objetivo es comprender profundamente el estado del conductor y prevenir accidentes usando solo software, sin sensores costosos." data-vi="Mục tiêu của chúng tôi là hiểu sâu tình trạng tài xế và ngăn ngừa tai nạn chỉ bằng phần mềm, không cần cảm biến đắt tiền." data-th="เป้าหมายของเราคือเข้าใจสถานะของผู้ขับขี่อย่างลึกซึ้งและป้องกันอุบัติเหตุโดยใช้ซอฟต์แวร์เพียงอย่างเดียว โดยไม่ต้องใช้เซ็นเซอร์ราคาแพง">고가의 센서 없이 소프트웨어만으로 운전자의 상태를 가장 깊이 이해하고, 사고를 사전에 예방하는 것이 우리의 목표입니다.</p>
+            </div>
+            <div class="vision-box">
+                <div class="vision-item">
+                    <h4 data-ko="비전" data-en="Vision" data-ja="ビジョン" data-zh="愿景" data-de="Vision" data-es="Visión" data-vi="Tầm nhìn" data-th="วิสัยทัศน์">비전</h4>
+                    <p data-ko="Hardware-Free 기술을 통해 고가의 센서 없이 소프트웨어만으로 운전자의 상태를 가장 깊이 이해하고, 사고를 사전에 예방합니다." data-en="Through Hardware-Free technology, we deeply understand driver status and prevent accidents using only software, without expensive sensors." data-ja="Hardware-Free技術により、高価なセンサーなしでソフトウェアだけでドライバーの状態を深く理解し、事故を事前に予防します。" data-zh="通过Hardware-Free技术，仅使用软件深入了解驾驶员状态并预防事故，无需昂贵的传感器。" data-de="Durch Hardware-Free Technologie verstehen wir den Fahrerzustand tiefgreifend und verhindern Unfälle nur mit Software, ohne teure Sensoren." data-es="A través de tecnología Hardware-Free, comprendemos profundamente el estado del conductor y prevenimos accidentes usando solo software, sin sensores costosos." data-vi="Thông qua công nghệ Hardware-Free, chúng tôi hiểu sâu tình trạng tài xế và ngăn ngừa tai nạn chỉ bằng phần mềm, không cần cảm biến đắt tiền." data-th="ผ่านเทคโนโลยี Hardware-Free เราเข้าใจสถานะผู้ขับขี่อย่างลึกซึ้งและป้องกันอุบัติเหตุโดยใช้ซอฟต์แวร์เพียงอย่างเดียว">Hardware-Free 기술을 통해 고가의 센서 없이 소프트웨어만으로 운전자의 상태를 가장 깊이 이해하고, 사고를 사전에 예방합니다.</p>
+                </div>
+                <div class="vision-item">
+                    <h4 data-ko="핵심 가치" data-en="Core Value" data-ja="コアバリュー" data-zh="核心价值" data-de="Kernwert" data-es="Valor Central" data-vi="Giá trị Cốt lõi" data-th="คุณค่าหลัก">핵심 가치</h4>
+                    <p data-ko="2026년 강화되는 유럽 안전 규제(Euro NCAP)에 대응하는 가장 효율적인 솔루션을 제공합니다." data-en="We provide the most efficient solution for the strengthened European safety regulations (Euro NCAP) in 2026." data-ja="2026年に強化される欧州安全規制（Euro NCAP）に対応する最も効率的なソリューションを提供します。" data-zh="我们为2026年加强的欧洲安全法规（Euro NCAP）提供最高效的解决方案。" data-de="Wir bieten die effizienteste Lösung für die verschärften europäischen Sicherheitsvorschriften (Euro NCAP) im Jahr 2026." data-es="Proporcionamos la solución más eficiente para las regulaciones de seguridad europeas reforzadas (Euro NCAP) en 2026." data-vi="Chúng tôi cung cấp giải pháp hiệu quả nhất cho các quy định an toàn châu Âu được tăng cường (Euro NCAP) vào năm 2026." data-th="เราให้บริการโซลูชันที่มีประสิทธิภาพที่สุดสำหรับข้อบังคับความปลอดภัยยุโรปที่เข้มงวดขึ้น (Euro NCAP) ในปี 2026">2026년 강화되는 유럽 안전 규제(Euro NCAP)에 대응하는 가장 효율적인 솔루션을 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section section-alt">
+        <h2 class="section-title" data-ko="제품 소개" data-en="Products" data-ja="製品紹介" data-zh="产品介绍" data-de="Produkte" data-es="Productos" data-vi="Sản phẩm" data-th="ผลิตภัณฑ์">제품 소개</h2>
+        <p class="section-subtitle" data-ko="모빌리티와 헬스케어를 위한 AI 솔루션" data-en="AI solutions for Mobility and Healthcare" data-ja="モビリティとヘルスケアのためのAIソリューション" data-zh="用于出行和医疗保健的AI解决方案" data-de="KI-Lösungen für Mobilität und Gesundheitswesen" data-es="Soluciones de IA para Movilidad y Salud" data-vi="Giải pháp AI cho Di động và Y tế" data-th="โซลูชัน AI สำหรับการเดินทางและการดูแลสุขภาพ">모빌리티와 헬스케어를 위한 AI 솔루션</p>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon">🚗</div>
+                <h3>i-DMS</h3>
+                <p class="subtitle" data-ko="Intelligent Driver Monitoring System" data-en="Intelligent Driver Monitoring System" data-ja="Intelligent Driver Monitoring System" data-zh="Intelligent Driver Monitoring System" data-de="Intelligent Driver Monitoring System" data-es="Intelligent Driver Monitoring System" data-vi="Intelligent Driver Monitoring System" data-th="Intelligent Driver Monitoring System">Intelligent Driver Monitoring System</p>
+                <p data-ko="글로벌 완성차(OEM) 및 상용차를 위한 차세대 운전자 모니터링 시스템" data-en="Next-generation driver monitoring system for global OEMs and commercial vehicles" data-ja="グローバルOEMおよび商用車向け次世代ドライバーモニタリングシステム" data-zh="面向全球OEM和商用车的下一代驾驶员监控系统" data-de="Fahrer-Monitoring-System der nächsten Generation für globale OEMs und Nutzfahrzeuge" data-es="Sistema de monitoreo de conductores de próxima generación para OEMs globales y vehículos comerciales" data-vi="Hệ thống giám sát tài xế thế hệ mới cho OEM toàn cầu và xe thương mại" data-th="ระบบติดตามผู้ขับขี่รุ่นถัดไปสำหรับ OEM ทั่วโลกและรถยนต์เชิงพาณิชย์">글로벌 완성차(OEM) 및 상용차를 위한 차세대 운전자 모니터링 시스템</p>
+                <ul class="feature-list">
+                    <li data-ko="운전자 손상(Impairment) 감지: 알코올, 약물, 급성 건강 이상" data-en="Impairment Detection: Alcohol, drugs, acute health issues" data-ja="運転者損傷検出：アルコール、薬物、急性健康異常" data-zh="损伤检测：酒精、药物、急性健康问题" data-de="Beeinträchtigungserkennung: Alkohol, Drogen, akute Gesundheitsprobleme" data-es="Detección de deterioro: Alcohol, drogas, problemas de salud agudos" data-vi="Phát hiện suy giảm: Rượu, ma túy, vấn đề sức khỏe cấp tính" data-th="การตรวจจับความบกพร่อง: แอลกอฮอล์ ยา ปัญหาสุขภาพเฉียบพลัน">운전자 손상(Impairment) 감지: 알코올, 약물, 급성 건강 이상</li>
+                    <li data-ko="과학적 졸음 감지: PERCLOS 및 마이크로슬립 즉시 포착" data-en="Scientific Drowsiness Detection: PERCLOS and microsleep instant detection" data-ja="科学的眠気検出：PERCLOSおよびマイクロスリープ即時検出" data-zh="科学困倦检测：PERCLOS和微睡眠即时检测" data-de="Wissenschaftliche Müdigkeitserkennung: PERCLOS und Mikroschlaf sofortige Erkennung" data-es="Detección científica de somnolencia: PERCLOS y microsueño detección instantánea" data-vi="Phát hiện buồn ngủ khoa học: Phát hiện tức thì PERCLOS và vi ngủ" data-th="การตรวจจับความง่วงแบบวิทยาศาสตร์: การตรวจจับ PERCLOS และการนอนหลับขนาดเล็กทันที">과학적 졸음 감지: PERCLOS 및 마이크로슬립 즉시 포착</li>
+                    <li data-ko="규제 대응: Euro NCAP 2026 및 EU GSR 필수 요건 충족" data-en="Regulatory Compliance: Meets Euro NCAP 2026 & EU GSR requirements" data-ja="規制対応：Euro NCAP 2026およびEU GSR必須要件を満たす" data-zh="法规合规：符合Euro NCAP 2026和EU GSR要求" data-de="Regulatorische Konformität: Erfüllt Euro NCAP 2026 & EU GSR Anforderungen" data-es="Cumplimiento Regulatorio: Cumple con Euro NCAP 2026 y requisitos EU GSR" data-vi="Tuân thủ Quy định: Đáp ứng yêu cầu Euro NCAP 2026 & EU GSR" data-th="การปฏิบัติตามกฎระเบียบ: เป็นไปตามข้อกำหนด Euro NCAP 2026 และ EU GSR">규제 대응: Euro NCAP 2026 및 EU GSR 필수 요건 충족</li>
+                </ul>
+            </div>
+
+            <div class="product-card healthcare">
+                <div class="product-icon">🏥</div>
+                <h3 data-ko="건강돋보기라이프+" data-en="Health Plus Life" data-ja="ヘルスプラスライフ" data-zh="健康放大镜Life+" data-de="Health Plus Life" data-es="Health Plus Life" data-vi="Health Plus Life" data-th="Health Plus Life">건강돋보기라이프+</h3>
+                <p class="subtitle" data-ko="비대면 환자 모니터링 플랫폼" data-en="Contactless Patient Monitoring Platform" data-ja="非対面患者モニタリングプラットフォーム" data-zh="非接触式患者监测平台" data-de="Kontaktlose Patientenüberwachungsplattform" data-es="Plataforma de Monitoreo de Pacientes sin Contacto" data-vi="Nền tảng Giám sát Bệnh nhân Không tiếp xúc" data-th="แพลตฟอร์มตรวจสอบผู้ป่วยแบบไร้สัมผัส">비대면 환자 모니터링 플랫폼</p>
+                <p data-ko="병원 및 요양시설을 위한 비대면 환자 모니터링 플랫폼" data-en="Contactless patient monitoring platform for hospitals and senior care facilities" data-ja="病院および介護施設向け非対面患者モニタリングプラットフォーム" data-zh="面向医院和养老设施的非接触式患者监测平台" data-de="Kontaktlose Patientenüberwachungsplattform für Krankenhäuser und Pflegeeinrichtungen" data-es="Plataforma de monitoreo de pacientes sin contacto para hospitales e instalaciones de atención" data-vi="Nền tảng giám sát bệnh nhân không tiếp xúc cho bệnh viện và cơ sở chăm sóc người cao tuổi" data-th="แพลตฟอร์มตรวจสอบผู้ป่วยแบบไร้สัมผัสสำหรับโรงพยาบาลและสถานดูแลผู้สูงอายุ">병원 및 요양시설을 위한 비대면 환자 모니터링 플랫폼</p>
+                <ul class="feature-list">
+                    <li data-ko="24시간 바이탈 사인 모니터링 (별도 장비 착용 불필요)" data-en="24/7 vital sign monitoring (no wearable devices needed)" data-ja="24時間バイタルサインモニタリング（装着機器不要）" data-zh="24小时生命体征监测（无需穿戴设备）" data-de="24/7 Vitalzeichenüberwachung (keine tragbaren Geräte erforderlich)" data-es="Monitoreo de signos vitales 24/7 (sin dispositivos portátiles)" data-vi="Giám sát dấu hiệu sinh tồn 24/7 (không cần thiết bị đeo)" data-th="การตรวจสอบสัญญาณชีพ 24/7 (ไม่ต้องใช้อุปกรณ์สวมใส่)">24시간 바이탈 사인 모니터링 (별도 장비 착용 불필요)</li>
+                    <li data-ko="낙상 및 이상 징후 자동 알림" data-en="Automatic fall detection and anomaly alerts" data-ja="転倒および異常徴候自動アラート" data-zh="跌倒和异常自动警报" data-de="Automatische Sturzerkennung und Anomalie-Warnungen" data-es="Detección automática de caídas y alertas de anomalías" data-vi="Phát hiện té ngã tự động và cảnh báo bất thường" data-th="การตรวจจับการล้มอัตโนมัติและการแจ้งเตือนความผิดปกติ">낙상 및 이상 징후 자동 알림</li>
+                    <li data-ko="카메라 기반 비접촉 측정 방식" data-en="Camera-based contactless measurement" data-ja="カメラベース非接触測定方式" data-zh="基于摄像头的非接触式测量" data-de="Kamerabasierte kontaktlose Messung" data-es="Medición sin contacto basada en cámara" data-vi="Đo lường không tiếp xúc dựa trên camera" data-th="การวัดแบบไร้สัมผัสด้วยกล้อง">카메라 기반 비접촉 측정 방식</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="section">
+        <h2 class="section-title" data-ko="핵심 기술력" data-en="Core Technology" data-ja="コア技術" data-zh="核心技术" data-de="Kerntechnologie" data-es="Tecnología Central" data-vi="Công nghệ Cốt lõi" data-th="เทคโนโลยีหลัก">핵심 기술력</h2>
+        <p class="section-subtitle" data-ko="고가의 센서를 대체하는 독보적인 소프트웨어 파워" data-en="Unique software power replacing expensive sensors" data-ja="高価なセンサーを代替する独自のソフトウェアパワー" data-zh="取代昂贵传感器的独特软件能力" data-de="Einzigartige Softwareleistung ersetzt teure Sensoren" data-es="Poder de software único que reemplaza sensores costosos" data-vi="Sức mạnh phần mềm độc đáo thay thế cảm biến đắt tiền" data-th="พลังซอฟต์แวร์ที่เป็นเอกลักษณ์ทดแทนเซ็นเซอร์ราคาแพง">고가의 센서를 대체하는 독보적인 소프트웨어 파워</p>
+
+        <div class="tech-highlight">
+            <h3 data-ko="Triple-Fusion 엔진 (특허 기술)" data-en="Triple-Fusion Engine (Patented)" data-ja="Triple-Fusion エンジン（特許技術）" data-zh="Triple-Fusion 引擎（专利技术）" data-de="Triple-Fusion Engine (Patentiert)" data-es="Motor Triple-Fusion (Patentado)" data-vi="Động cơ Triple-Fusion (Đã cấp bằng sáng chế)" data-th="เครื่องยนต์ Triple-Fusion (จดสิทธิบัตร)">Triple-Fusion 엔진 (특허 기술)</h3>
+            <p data-ko="행동(눈 깜빡임)만 분석하는 경쟁사와 달리, 혈류(rPPG) + 동공(Pupil) + 안구운동(HGN) 3가지 지표를 융합하여 술 냄새 없이도 음주 및 약물 상태를 정확히 탐지합니다." data-en="Unlike competitors who only analyze behavior (eye blinks), we fuse three indicators - blood flow (rPPG) + pupil + eye movement (HGN) - to accurately detect alcohol and drug impairment without breath testing." data-ja="行動（まばたき）のみを分析する競合他社とは異なり、血流（rPPG）+ 瞳孔 + 眼球運動（HGN）の3つの指標を融合し、呼気検査なしでアルコールや薬物状態を正確に検出します。" data-zh="与只分析行为（眨眼）的竞争对手不同，我们融合血流(rPPG)+瞳孔+眼球运动(HGN)三个指标，无需呼气测试即可准确检测酒精和药物状态。" data-de="Anders als Wettbewerber, die nur Verhalten (Blinzeln) analysieren, fusionieren wir drei Indikatoren - Blutfluss (rPPG) + Pupille + Augenbewegung (HGN) - um Alkohol- und Drogenbeeinträchtigung ohne Atemtest genau zu erkennen." data-es="A diferencia de competidores que solo analizan comportamiento (parpadeo), fusionamos tres indicadores - flujo sanguíneo (rPPG) + pupila + movimiento ocular (HGN) - para detectar con precisión el deterioro por alcohol y drogas sin prueba de aliento." data-vi="Không giống như đối thủ chỉ phân tích hành vi (chớp mắt), chúng tôi kết hợp ba chỉ số - lưu lượng máu (rPPG) + đồng tử + chuyển động mắt (HGN) - để phát hiện chính xác tình trạng say rượu và ma túy mà không cần xét nghiệm hơi thở." data-th="ต่างจากคู่แข่งที่วิเคราะห์เฉพาะพฤติกรรม (การกะพริบตา) เรารวมตัวชี้วัดสามตัว - การไหลเวียนเลือด (rPPG) + รูม่านตา + การเคลื่อนไหวของดวงตา (HGN) - เพื่อตรวจจับความบกพร่องจากแอลกอฮอล์และยาอย่างแม่นยำโดยไม่ต้องทดสอบลมหายใจ">행동(눈 깜빡임)만 분석하는 경쟁사와 달리, 혈류(rPPG) + 동공(Pupil) + 안구운동(HGN) 3가지 지표를 융합하여 술 냄새 없이도 음주 및 약물 상태를 정확히 탐지합니다.</p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-stat">95.6%</div>
+                <h4 data-ko="비접촉 rPPG 정확도" data-en="Non-contact rPPG Accuracy" data-ja="非接触rPPG精度" data-zh="非接触式rPPG准确度" data-de="Kontaktlose rPPG-Genauigkeit" data-es="Precisión rPPG sin Contacto" data-vi="Độ chính xác rPPG không tiếp xúc" data-th="ความแม่นยำ rPPG ไร้สัมผัส">비접촉 rPPG 정확도</h4>
+                <p data-ko="의료기기 대비 정확도 (오차 ±3.34 BPM)" data-en="Accuracy vs. medical devices (Error ±3.34 BPM)" data-ja="医療機器対比精度（誤差±3.34 BPM）" data-zh="与医疗设备相比的准确度（误差±3.34 BPM）" data-de="Genauigkeit vs. medizinische Geräte (Fehler ±3,34 BPM)" data-es="Precisión vs. dispositivos médicos (Error ±3.34 BPM)" data-vi="Độ chính xác so với thiết bị y tế (Sai số ±3.34 BPM)" data-th="ความแม่นยำเทียบกับอุปกรณ์ทางการแพทย์ (ความคลาดเคลื่อน ±3.34 BPM)">의료기기 대비 정확도 (오차 ±3.34 BPM)</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-stat">100%</div>
+                <h4 data-ko="GDPR 준수" data-en="GDPR Compliant" data-ja="GDPR準拠" data-zh="GDPR合规" data-de="GDPR-konform" data-es="Cumple GDPR" data-vi="Tuân thủ GDPR" data-th="เป็นไปตาม GDPR">GDPR 준수</h4>
+                <p data-ko="엣지 AI 처리로 데이터 즉시 삭제" data-en="Edge AI processing with instant data deletion" data-ja="エッジAI処理でデータ即時削除" data-zh="边缘AI处理，数据即时删除" data-de="Edge-KI-Verarbeitung mit sofortiger Datenlöschung" data-es="Procesamiento Edge AI con eliminación instantánea de datos" data-vi="Xử lý Edge AI với xóa dữ liệu tức thì" data-th="การประมวลผล Edge AI พร้อมการลบข้อมูลทันที">엣지 AI 처리로 데이터 즉시 삭제</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-stat">30fps</div>
+                <h4 data-ko="실시간 처리" data-en="Real-time Processing" data-ja="リアルタイム処理" data-zh="实时处理" data-de="Echtzeit-Verarbeitung" data-es="Procesamiento en Tiempo Real" data-vi="Xử lý Thời gian thực" data-th="การประมวลผลเรียลไทม์">실시간 처리</h4>
+                <p data-ko="저전력 NPU에서 실시간 분석" data-en="Real-time analysis on low-power NPU" data-ja="低電力NPUでリアルタイム分析" data-zh="在低功耗NPU上实时分析" data-de="Echtzeit-Analyse auf stromsparendem NPU" data-es="Análisis en tiempo real en NPU de bajo consumo" data-vi="Phân tích thời gian thực trên NPU công suất thấp" data-th="การวิเคราะห์เรียลไทม์บน NPU พลังงานต่ำ">저전력 NPU에서 실시간 분석</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section section-alt">
+        <h2 class="section-title" data-ko="주요 연혁" data-en="History & Milestones" data-ja="沿革" data-zh="发展历程" data-de="Geschichte & Meilensteine" data-es="Historia e Hitos" data-vi="Lịch sử & Cột mốc" data-th="ประวัติและเหตุการณ์สำคัญ">주요 연혁</h2>
+        <p class="section-subtitle" data-ko="설립 첫해부터 국내 유수의 대기업 및 의료기관과 기술 검증을 성공적으로 완료" data-en="Successfully completed technology validation with leading companies and medical institutions since founding" data-ja="設立初年度から国内有数の大企業および医療機関と技術検証を成功裏に完了" data-zh="自成立以来，成功与领先企业和医疗机构完成技术验证" data-de="Seit der Gründung erfolgreiche Technologievalidierung mit führenden Unternehmen und medizinischen Einrichtungen" data-es="Validación tecnológica exitosa con empresas líderes e instituciones médicas desde la fundación" data-vi="Hoàn thành xác nhận công nghệ thành công với các công ty và tổ chức y tế hàng đầu kể từ khi thành lập" data-th="ตรวจสอบเทคโนโลยีเรียบร้อยแล้วกับบริษัทชั้นนำและสถาบันการแพทย์ตั้งแต่ก่อตั้ง">설립 첫해부터 국내 유수의 대기업 및 의료기관과 기술 검증을 성공적으로 완료</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2025.01</div>
+                <div class="timeline-content">
+                    <h4 data-ko="(주)퍼니테크21 법인 설립" data-en="FunnyTech21 Co., Ltd. Established" data-ja="(株)FunnyTech21 法人設立" data-zh="FunnyTech21有限公司成立" data-de="FunnyTech21 GmbH gegründet" data-es="FunnyTech21 S.L. Establecida" data-vi="FunnyTech21 Co., Ltd. Thành lập" data-th="FunnyTech21 Co., Ltd. ก่อตั้ง">(주)퍼니테크21 법인 설립</h4>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025.07</div>
+                <div class="timeline-content">
+                    <h4 data-ko="세브란스병원 임상 연구 IRB 승인" data-en="Severance Hospital Clinical Research IRB Approval" data-ja="セブランス病院臨床研究IRB承認" data-zh="延世大学医院临床研究IRB批准" data-de="Severance Hospital Klinische Forschung IRB-Genehmigung" data-es="Aprobación IRB de Investigación Clínica del Hospital Severance" data-vi="Phê duyệt IRB Nghiên cứu Lâm sàng Bệnh viện Severance" data-th="การอนุมัติ IRB การวิจัยทางคลินิกโรงพยาบาล Severance">세브란스병원 임상 연구 IRB 승인</h4>
+                    <p data-ko="안면 영상 활용 비접촉 혈압 측정" data-en="Non-contact blood pressure measurement using facial video" data-ja="顔面映像活用非接触血圧測定" data-zh="利用面部视频的非接触式血压测量" data-de="Kontaktlose Blutdruckmessung mittels Gesichtsvideo" data-es="Medición de presión arterial sin contacto usando video facial" data-vi="Đo huyết áp không tiếp xúc sử dụng video khuôn mặt" data-th="การวัดความดันโลหิตแบบไร้สัมผัสโดยใช้วิดีโอใบหน้า">안면 영상 활용 비접촉 혈압 측정</p>
+                    <span class="partner-tag">Severance Hospital</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025.07</div>
+                <div class="timeline-content">
+                    <h4 data-ko="핵심 특허 등록" data-en="Core Patent Registration" data-ja="コア特許登録" data-zh="核心专利注册" data-de="Kernpatentregistrierung" data-es="Registro de Patente Principal" data-vi="Đăng ký Sáng chế Cốt lõi" data-th="การจดทะเบียนสิทธิบัตรหลัก">핵심 특허 등록</h4>
+                    <p data-ko="비접촉 자율신경계 분석 치매 스크리닝 등" data-en="Non-contact autonomic nervous system analysis for dementia screening, etc." data-ja="非接触自律神経系分析認知症スクリーニングなど" data-zh="非接触式自主神经系统分析痴呆筛查等" data-de="Kontaktlose autonome Nervensystemanalyse für Demenz-Screening usw." data-es="Análisis del sistema nervioso autónomo sin contacto para detección de demencia, etc." data-vi="Phân tích hệ thần kinh tự chủ không tiếp xúc để sàng lọc sa sút trí tuệ, v.v." data-th="การวิเคราะห์ระบบประสาทอัตโนมัติแบบไร้สัมผัสสำหรับการคัดกรองภาวะสมองเสื่อม ฯลฯ">비접촉 자율신경계 분석 치매 스크리닝 등</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025.08</div>
+                <div class="timeline-content">
+                    <h4 data-ko="엠씨넥스(MCNEX) 기술 검증(PoC) 완료" data-en="MCNEX Technology Validation (PoC) Completed" data-ja="MCNEX技術検証（PoC）完了" data-zh="MCNEX技术验证(PoC)完成" data-de="MCNEX Technologievalidierung (PoC) abgeschlossen" data-es="Validación Tecnológica MCNEX (PoC) Completada" data-vi="Xác nhận Công nghệ MCNEX (PoC) Hoàn thành" data-th="การตรวจสอบเทคโนโลยี MCNEX (PoC) เสร็จสมบูรณ์">엠씨넥스(MCNEX) 기술 검증(PoC) 완료</h4>
+                    <p data-ko="국내 1위 카메라 모듈사, 오차율 3.5% 달성" data-en="Korea's #1 camera module company, achieved 3.5% error rate" data-ja="韓国No.1カメラモジュール会社、誤差率3.5%達成" data-zh="韩国第一摄像头模块公司，达到3.5%误差率" data-de="Koreas führender Kameramodulhersteller, 3,5% Fehlerrate erreicht" data-es="Empresa #1 de módulos de cámara de Corea, logró 3.5% de tasa de error" data-vi="Công ty mô-đun camera số 1 Hàn Quốc, đạt tỷ lệ lỗi 3.5%" data-th="บริษัทโมดูลกล้องอันดับ 1 ของเกาหลี บรรลุอัตราความผิดพลาด 3.5%">국내 1위 카메라 모듈사, 오차율 3.5% 달성</p>
+                    <span class="partner-tag">MCNEX</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025.11</div>
+                <div class="timeline-content">
+                    <h4 data-ko="르노코리아(Renault Korea) NDA 체결" data-en="Renault Korea NDA Signed" data-ja="ルノーコリアNDA締結" data-zh="雷诺韩国NDA签署" data-de="Renault Korea NDA unterzeichnet" data-es="NDA de Renault Korea Firmado" data-vi="Ký NDA Renault Korea" data-th="ลงนาม NDA Renault Korea">르노코리아(Renault Korea) NDA 체결</h4>
+                    <p data-ko="상용차 PoC 및 Euro NCAP 대응" data-en="Commercial vehicle PoC and Euro NCAP compliance" data-ja="商用車PoCおよびEuro NCAP対応" data-zh="商用车PoC和Euro NCAP合规" data-de="Nutzfahrzeug-PoC und Euro NCAP-Konformität" data-es="PoC de vehículo comercial y cumplimiento Euro NCAP" data-vi="PoC xe thương mại và tuân thủ Euro NCAP" data-th="PoC รถยนต์เชิงพาณิชย์และการปฏิบัติตาม Euro NCAP">상용차 PoC 및 Euro NCAP 대응</p>
+                    <span class="partner-tag">Renault Korea</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025.12</div>
+                <div class="timeline-content">
+                    <h4 data-ko="제중노인병원 환자 모니터링 도입 확정" data-en="Jejung Elderly Hospital Patient Monitoring Adoption Confirmed" data-ja="済衆老人病院患者モニタリング導入確定" data-zh="济众老年医院患者监测系统采用确认" data-de="Jejung Seniorenkrankenhaus Patientenüberwachung Einführung bestätigt" data-es="Adopción de Monitoreo de Pacientes del Hospital Jejung para Ancianos Confirmada" data-vi="Xác nhận Áp dụng Giám sát Bệnh nhân Bệnh viện Người cao tuổi Jejung" data-th="ยืนยันการนำระบบติดตามผู้ป่วยโรงพยาบาลผู้สูงอายุ Jejung มาใช้">제중노인병원 환자 모니터링 도입 확정</h4>
+                    <p data-ko="270병상 환자 모니터링 시스템" data-en="270-bed patient monitoring system" data-ja="270病床患者モニタリングシステム" data-zh="270床位患者监测系统" data-de="270-Betten Patientenüberwachungssystem" data-es="Sistema de monitoreo de pacientes de 270 camas" data-vi="Hệ thống giám sát bệnh nhân 270 giường" data-th="ระบบติดตามผู้ป่วย 270 เตียง">270병상 환자 모니터링 시스템</p>
+                    <span class="partner-tag">Jejung Hospital</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section (Placeholder) -->
+    <section class="section">
+        <h2 class="section-title" data-ko="언론 보도" data-en="Press & Media" data-ja="メディア掲載" data-zh="媒体报道" data-de="Presse & Medien" data-es="Prensa y Medios" data-vi="Báo chí & Truyền thông" data-th="ข่าวและสื่อ">언론 보도</h2>
+        <p class="section-subtitle" data-ko="FunnyTech21의 최신 소식" data-en="Latest news about FunnyTech21" data-ja="FunnyTech21の最新ニュース" data-zh="FunnyTech21最新消息" data-de="Neueste Nachrichten über FunnyTech21" data-es="Últimas noticias sobre FunnyTech21" data-vi="Tin tức mới nhất về FunnyTech21" data-th="ข่าวล่าสุดเกี่ยวกับ FunnyTech21">FunnyTech21의 최신 소식</p>
+
+        <div class="news-grid" id="newsGrid">
+            <!-- News Card 1 -->
+            <a href="https://www.newsprime.co.kr/news/article/?no=715446" target="_blank" class="news-card" style="text-decoration: none;">
+                <div class="news-image">🚗</div>
+                <div class="news-content">
+                    <p class="news-date">2025.12.09</p>
+                    <h4>퍼니테크21, SDV 최적화 '인캐빈 모니터링' 실증</h4>
+                    <p class="news-source">뉴스프라임</p>
+                </div>
+            </a>
+
+            <!-- News Card 2 -->
+            <a href="https://www.mt.co.kr/industry/2025/01/07/2025010715410048658" target="_blank" class="news-card" style="text-decoration: none;">
+                <div class="news-image">💰</div>
+                <div class="news-content">
+                    <p class="news-date">2025.01.07</p>
+                    <h4>퍼니테크21, 포엠이엔지 투자 유치로 '車 헬스케어 시장' 공략</h4>
+                    <p class="news-source">머니투데이</p>
+                </div>
+            </a>
+
+            <!-- News Card 3 -->
+            <a href="https://v.daum.net/v/20250901173418520" target="_blank" class="news-card" style="text-decoration: none;">
+                <div class="news-image">🏥</div>
+                <div class="news-content">
+                    <p class="news-date">2025.09.01</p>
+                    <h4>퍼니테크21, 송악읍에 비접촉 건강관리 '건강돋보기라이프+' 제공</h4>
+                    <p class="news-source">다음뉴스</p>
+                </div>
+            </a>
+
+            <!-- News Card 4 -->
+            <a href="https://www.mt.co.kr/industry/2024/12/20/2024122017193895729" target="_blank" class="news-card" style="text-decoration: none;">
+                <div class="news-image">🏆</div>
+                <div class="news-content">
+                    <p class="news-date">2024.12.20</p>
+                    <h4>'생체 신호 기반 건강관리' 퍼니테크21, 헬스케어 분야 '기업대상'</h4>
+                    <p class="news-source">머니투데이</p>
+                </div>
+            </a>
+
+            <!-- News Card 5 -->
+            <a href="https://www.mediaic.co.kr/news/articleView.html?idxno=72745" target="_blank" class="news-card" style="text-decoration: none;">
+                <div class="news-image">🏙️</div>
+                <div class="news-content">
+                    <p class="news-date">2024.10.01</p>
+                    <h4>'IFEZ 스마트시티 시민참여 리빙랩 운영' 실증 사업 진행</h4>
+                    <p class="news-source">미디어IC</p>
+                </div>
+            </a>
+
+            <!-- News Card 6 -->
+            <a href="https://news.nate.com/view/20251002n18494" target="_blank" class="news-card" style="text-decoration: none;">
+                <div class="news-image">🚙</div>
+                <div class="news-content">
+                    <p class="news-date">2025.10.02</p>
+                    <h4>현대차, AI 기반 운전자 모니터링 시스템으로 안전성 강화</h4>
+                    <p class="news-source">네이트뉴스</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 data-ko="함께 더 안전한 미래를 만들어갑니다" data-en="Let's Build a Safer Future Together" data-ja="一緒により安全な未来を創ります" data-zh="让我们共同创造更安全的未来" data-de="Lassen Sie uns gemeinsam eine sicherere Zukunft bauen" data-es="Construyamos juntos un futuro más seguro" data-vi="Hãy cùng xây dựng một tương lai an toàn hơn" data-th="มาสร้างอนาคตที่ปลอดภัยกว่าด้วยกัน">함께 더 안전한 미래를 만들어갑니다</h2>
+        <p data-ko="기술 데모 및 협업 문의를 환영합니다" data-en="We welcome technical demos and partnership inquiries" data-ja="技術デモおよび協業のお問い合わせを歓迎します" data-zh="欢迎技术演示和合作咨询" data-de="Wir begrüßen technische Demos und Partnerschaftsanfragen" data-es="Damos la bienvenida a demostraciones técnicas y consultas de asociación" data-vi="Chúng tôi hoan nghênh demo kỹ thuật và yêu cầu hợp tác" data-th="เรายินดีต้อนรับการสาธิตเทคนิคและการสอบถามความร่วมมือ">기술 데모 및 협업 문의를 환영합니다</p>
+        <div class="cta-buttons">
+            <a href="index.html#contact" class="btn-primary" data-ko="문의하기" data-en="Contact Us" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontaktieren Sie uns" data-es="Contáctenos" data-vi="Liên hệ" data-th="ติดต่อเรา">문의하기</a>
+            <a href="Human_Vital_Intelligence_Defining_Safety.pdf" target="_blank" class="btn-secondary" data-ko="기업소개서 다운로드" data-en="Download Company Profile" data-ja="会社案内ダウンロード" data-zh="下载公司简介" data-de="Firmenprofil herunterladen" data-es="Descargar Perfil" data-vi="Tải Hồ sơ" data-th="ดาวน์โหลดโปรไฟล์">기업소개서 다운로드</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Funny<span>Tech21</span></div>
+            <div class="footer-links">
+                <a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Home" data-es="Inicio" data-vi="Trang chủ" data-th="หน้าแรก">홈</a>
+                <a href="index.html#products" data-ko="제품" data-en="Products" data-ja="製品" data-zh="产品" data-de="Produkte" data-es="Productos" data-vi="Sản phẩm" data-th="ผลิตภัณฑ์">제품</a>
+                <a href="index.html#contact" data-ko="문의" data-en="Contact" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontakt" data-es="Contacto" data-vi="Liên hệ" data-th="ติดต่อ">문의</a>
+            </div>
+            <div class="footer-copy" data-ko="© 2025 (주)퍼니테크21. All rights reserved." data-en="© 2025 FunnyTech21 Co., Ltd. All rights reserved." data-ja="© 2025 (株)FunnyTech21. All rights reserved." data-zh="© 2025 FunnyTech21有限公司. 保留所有权利." data-de="© 2025 FunnyTech21 GmbH. Alle Rechte vorbehalten." data-es="© 2025 FunnyTech21 S.L. Todos los derechos reservados." data-vi="© 2025 FunnyTech21 Co., Ltd. Bảo lưu mọi quyền." data-th="© 2025 FunnyTech21 Co., Ltd. สงวนลิขสิทธิ์">© 2025 (주)퍼니테크21. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Support
+        let currentLang = localStorage.getItem('funnytech_lang') || 'ko';
+
+        const langNames = {
+            ko: { flag: '🇰🇷', name: '한국어' },
+            en: { flag: '🇺🇸', name: 'English' },
+            ja: { flag: '🇯🇵', name: '日本語' },
+            zh: { flag: '🇨🇳', name: '中文' },
+            de: { flag: '🇩🇪', name: 'Deutsch' },
+            es: { flag: '🇪🇸', name: 'Español' },
+            vi: { flag: '🇻🇳', name: 'Tiếng Việt' },
+            th: { flag: '🇹🇭', name: 'ภาษาไทย' }
+        };
+
+        function toggleLangDropdown() {
+            document.getElementById('langDropdown').classList.toggle('show');
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('funnytech_lang', lang);
+            applyLanguage();
+            document.getElementById('langDropdown').classList.remove('show');
+        }
+
+        function applyLanguage() {
+            document.getElementById('currentLangFlag').textContent = langNames[currentLang].flag;
+            document.getElementById('currentLangName').textContent = langNames[currentLang].name;
+
+            document.querySelectorAll('[data-' + currentLang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + currentLang);
+                if (text) {
+                    if (el.tagName === 'INPUT') {
+                        el.placeholder = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.lang-selector')) {
+                document.getElementById('langDropdown').classList.remove('show');
+            }
+        });
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            // Mobile menu implementation
+        }
+
+        // Initialize
+        applyLanguage();
+    </script>
+</body>
+</html>
