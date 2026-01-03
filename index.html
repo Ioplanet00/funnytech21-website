@@ -1,0 +1,3559 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(주)퍼니테크21 | i-DMS 솔루션 - AI for Human Vital Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --primary-blue: #15539E;
+            --electric-blue: #3B82F6;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --bg-hover: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            --red-gradient: linear-gradient(135deg, #FF2222 0%, #FF6B6B 100%);
+            --blue-gradient: linear-gradient(135deg, #15539E 0%, #3B82F6 100%);
+            --mixed-gradient: linear-gradient(135deg, #FF2222 0%, #15539E 50%, #3B82F6 100%);
+            --section-padding: 80px 24px;
+            --container-width: 1280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: var(--container-width); margin: 0 auto; padding: 14px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 82px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-cta {
+            background: var(--blue-gradient); color: white; padding: 10px 22px;
+            border-radius: 8px; font-weight: 600; text-decoration: none;
+        }
+        .lang-toggle {
+            background: var(--bg-light); color: var(--text-primary); padding: 8px 16px;
+            border: 1px solid var(--border-light); border-radius: 6px; font-weight: 500;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+        }
+        .lang-toggle:hover { background: var(--bg-hover); border-color: var(--primary-blue); }
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+        section { padding: var(--section-padding); }
+        .container { max-width: var(--container-width); margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-tag {
+            display: inline-block; background: rgba(255,34,34,0.08); color: var(--primary-red);
+            padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 18px; border: 1px solid rgba(255,34,34,0.15);
+        }
+        .section-title { font-size: 2.25rem; font-weight: 700; margin-bottom: 14px; color: var(--text-primary); }
+        .section-subtitle { font-size: 1.05rem; color: var(--text-secondary); max-width: 650px; margin: 0 auto; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding-top: 100px; background: var(--bg-light);
+        }
+        .hero-container {
+            max-width: var(--container-width); margin: 0 auto; padding: 0 24px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,34,34,0.08); border: 1px solid rgba(255,34,34,0.2);
+            padding: 10px 18px; border-radius: 50px; font-size: 0.85rem; color: var(--primary-red); margin-bottom: 22px;
+        }
+        .hero-badge::before { content: ''; width: 7px; height: 7px; background: var(--primary-red); border-radius: 50%; animation: pulse 2s infinite; }
+        .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+        .hero h1 span { background: var(--mixed-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-description { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 28px; }
+        .hero-key-messages { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+        .hero-key-message {
+            display: flex; align-items: center; gap: 12px; padding: 12px 18px;
+            background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 10px;
+        }
+        .hero-key-message .icon {
+            width: 40px; height: 40px; background: var(--blue-gradient); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-key-message .icon svg { width: 20px; height: 20px; fill: white; }
+        .hero-key-message span { font-weight: 600; font-size: 0.9rem; }
+        .hero-cta { display: flex; gap: 14px; }
+        .btn-primary {
+            background: var(--blue-gradient); color: white; padding: 14px 28px;
+            border-radius: 8px; font-weight: 600; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-secondary {
+            background: var(--bg-white); color: var(--text-primary); padding: 14px 28px;
+            border-radius: 8px; font-weight: 600; text-decoration: none;
+            border: 1px solid var(--border-light);
+        }
+        .video-wrapper {
+            position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 16px;
+            overflow: hidden; background: var(--bg-white); box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-light);
+        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* Cards with Images */
+        .product-overview { background: var(--bg-white); }
+        .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .product-card {
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 16px; overflow: hidden; transition: all 0.3s ease;
+        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-color: var(--electric-blue); }
+        .product-card-img { width: 100%; height: 200px; object-fit: cover; }
+        .product-card-content { padding: 24px; }
+        .product-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+        .product-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+
+        /* Download Button */
+        .download-section { text-align: center; margin-top: 40px; }
+        .btn-download {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--red-gradient); color: white; padding: 16px 32px;
+            border-radius: 10px; font-weight: 700; text-decoration: none;
+            transition: all 0.3s ease; font-size: 1rem;
+        }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,34,34,0.3); }
+        .btn-download svg { width: 22px; height: 22px; fill: white; }
+
+        /* Tech Cards */
+        .technologies { background: var(--bg-light); }
+        .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .tech-card {
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 16px; overflow: hidden; transition: all 0.3s ease;
+        }
+        .tech-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-color: var(--primary-red); }
+        .tech-card-img { width: 100%; height: 180px; object-fit: cover; }
+        .tech-card-content { padding: 24px; }
+        .tech-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary); }
+        .tech-tagline { color: var(--primary-red); font-weight: 600; font-size: 0.85rem; margin-bottom: 12px; }
+        .tech-specs { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tech-spec-tag {
+            background: rgba(255,34,34,0.08); color: var(--primary-red); padding: 6px 12px;
+            border-radius: 6px; font-size: 0.75rem; font-weight: 600;
+        }
+
+        /* Performance Cards */
+        .performance { background: var(--bg-white); }
+        .performance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .performance-card {
+            background: var(--bg-light); border: 1px solid var(--border-light);
+            border-radius: 16px; overflow: hidden; text-align: center;
+        }
+        .performance-card-img { width: 100%; height: 180px; object-fit: cover; }
+        .performance-card-content { padding: 20px; }
+        .performance-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+        .performance-result {
+            display: inline-flex; align-items: center; gap: 8px; background: var(--blue-gradient);
+            color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;
+        }
+
+        /* App Cards */
+        .applications { background: var(--bg-light); }
+        .app-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+        .app-card {
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 16px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column;
+            border-radius: 16px; overflow: hidden; transition: all 0.3s ease;
+        }
+        .app-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-color: var(--primary-red); }
+        .app-card-img { width: 100%; height: 180px; object-fit: cover; }
+        .app-card-content { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+        .app-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+        .app-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .app-tag {
+            background: rgba(255,34,34,0.08); color: var(--primary-red); padding: 5px 12px;
+            border-radius: 6px; font-size: 0.75rem; font-weight: 600;
+        }
+        .healthcare-highlight {
+            margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-light);
+        }
+        .highlight-title { font-weight: 700; color: var(--primary-blue); margin-bottom: 8px; font-size: 0.95rem; }
+        .highlight-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
+        .highlight-link {
+            display: inline-block; color: var(--primary-blue); font-weight: 600; font-size: 0.85rem;
+            text-decoration: none; transition: color 0.2s;
+        }
+        .highlight-link:hover { color: var(--primary-red); }
+
+        /* Video Section */
+        .video-showcase { background: var(--bg-white); }
+        .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .video-card {
+            background: var(--bg-light); border: 1px solid var(--border-light);
+            border-radius: 14px; overflow: hidden;
+        }
+        .video-card-header { padding: 20px 24px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; }
+        .video-card-header .icon {
+            width: 44px; height: 44px; background: var(--blue-gradient); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .video-card-header .icon svg { width: 22px; height: 22px; fill: white; }
+        .video-card-header h3 { font-size: 1.1rem; font-weight: 700; }
+        .video-card-header p { font-size: 0.85rem; color: var(--text-muted); }
+        .video-card-content { position: relative; width: 100%; padding-bottom: 56.25%; }
+        .video-card-content iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* Contact with Form */
+        .contact { text-align: center; background: var(--bg-light); }
+        .contact-box {
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 16px; padding: 50px 40px; max-width: 800px; margin: 0 auto;
+        }
+        .lang-toggle {
+            display: flex; justify-content: flex-end; margin-bottom: 20px; gap: 8px;
+        }
+        .lang-btn {
+            padding: 8px 16px; border: 1px solid var(--border-light); border-radius: 6px;
+            background: var(--bg-white); color: var(--text-secondary); cursor: pointer;
+            font-weight: 600; font-size: 0.85rem; transition: all 0.3s ease;
+        }
+        .lang-btn.active { background: var(--blue-gradient); color: white; border-color: transparent; }
+        .contact-box::before {
+            content: ''; display: block; width: 60px; height: 4px;
+            background: var(--mixed-gradient); border-radius: 2px; margin: 0 auto 30px;
+        }
+        .contact h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 14px; }
+        .contact-form { margin-top: 30px; text-align: left; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary); }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 14px 18px; border: 1px solid var(--border-light);
+            border-radius: 10px; font-size: 1rem; font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--electric-blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .contact-btn {
+            display: inline-flex; align-items: center; gap: 8px; background: var(--mixed-gradient);
+            color: white; padding: 16px 36px; border-radius: 10px; font-weight: 700;
+            text-decoration: none; border: none; cursor: pointer; font-size: 1rem; width: 100%;
+            justify-content: center;
+        }
+        .contact-btn:hover { box-shadow: 0 10px 30px rgba(255,34,34,0.3); }
+        .contact-info-mini { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
+        .contact-info-mini span { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Contact Container */
+        .contact-container { max-width: 1100px; margin: 0 auto; }
+        .contact-header { text-align: center; margin-bottom: 30px; }
+        .contact-header h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 14px; }
+        .contact-header p { color: var(--text-secondary); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .contact-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; color: var(--text-primary); }
+        .meeting-scheduler { text-align: left; }
+
+        /* Calendar Styles */
+        .calendar-container { background: var(--bg-light); border-radius: 12px; padding: 20px; border: 1px solid var(--border-light); margin-bottom: 20px; }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .calendar-header #calendarMonth { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+        .cal-nav { width: 32px; height: 32px; border: 1px solid var(--border-light); background: var(--bg-white); border-radius: 6px; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .cal-nav:hover { background: var(--primary-blue); color: white; border-color: var(--primary-blue); }
+        .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px; }
+        .calendar-weekdays span { text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); padding: 8px 0; }
+        .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+        .calendar-day { text-align: center; padding: 10px 4px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; background: var(--bg-white); }
+        .calendar-day:hover:not(.disabled):not(.empty) { background: rgba(21, 83, 158, 0.1); }
+        .calendar-day.selected { background: var(--primary-blue); color: white; font-weight: 600; }
+        .calendar-day.today { border-color: var(--primary-red); font-weight: 600; }
+        .calendar-day.disabled { color: var(--text-muted); opacity: 0.4; cursor: not-allowed; }
+        .calendar-day.empty { background: transparent; cursor: default; }
+
+        /* Time Slots */
+        .time-slots { margin-bottom: 20px; }
+        .time-slots label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 12px; }
+        .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .time-slot { padding: 10px 12px; text-align: center; background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 8px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+        .time-slot:hover:not(.disabled) { border-color: var(--primary-blue); background: rgba(21, 83, 158, 0.05); }
+        .time-slot.selected { background: var(--primary-blue); color: white; border-color: var(--primary-blue); font-weight: 600; }
+        .time-slot.disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* Meeting Type */
+        .meeting-type { margin-bottom: 20px; }
+        .meeting-type label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 12px; }
+        .meeting-options { display: flex; gap: 10px; flex-wrap: wrap; }
+        .meeting-option { padding: 10px 18px; background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 8px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+        .meeting-option:hover { border-color: var(--primary-blue); }
+        .meeting-option.selected { background: var(--primary-blue); color: white; border-color: var(--primary-blue); }
+
+        /* Meeting Form */
+        .meeting-form { margin-bottom: 20px; }
+        .meeting-form .form-group { margin-bottom: 15px; }
+
+        /* Selected Meeting Info */
+        .selected-meeting { background: rgba(21, 83, 158, 0.08); border: 1px solid rgba(21, 83, 158, 0.2); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+        .selected-meeting p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 5px; }
+        .selected-meeting strong { color: var(--primary-blue); }
+
+        /* Submit Meeting Button */
+        .meeting-submit { margin-top: 0; }
+
+        /* Success Message */
+        .success-message { text-align: center; padding: 30px 20px; background: rgba(34, 197, 94, 0.1); border-radius: 12px; margin-top: 20px; }
+        .success-message span { font-size: 3rem; display: block; margin-bottom: 15px; }
+        .success-message p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        @media (max-width: 992px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .time-grid { grid-template-columns: repeat(2, 1fr); }
+            .meeting-options { flex-direction: column; }
+        }
+
+        /* Footer */
+        footer { background: var(--bg-white); border-top: 1px solid var(--border-light); padding: 40px 24px; }
+        .footer-container {
+            max-width: var(--container-width); margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-logo { display: flex; align-items: center; gap: 10px; }
+        .footer-logo img { height: 42px; width: auto; }
+        .footer-logo span { font-size: 1.15rem; font-weight: 700; }
+        .footer-links { display: flex; gap: 28px; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; }
+        .footer-copy { color: var(--text-muted); font-size: 0.8rem; }
+
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        .progress-bar {
+            height: 3px; background: var(--mixed-gradient); width: 0;
+            position: fixed; top: 0; left: 0; z-index: 1001;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .product-grid, .tech-grid, .performance-grid, .app-grid, .video-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-content { order: 2; }
+            .hero-video { order: 1; margin-bottom: 30px; }
+            .hero-key-messages { align-items: center; }
+            .hero-cta { justify-content: center; }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .nav-cta { display: none; }
+            .logo-img { height: 65px; }
+            .section-title { font-size: 1.9rem; }
+            .section-subtitle { font-size: 0.95rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-description { font-size: 1rem; }
+            .product-grid, .tech-grid, .performance-grid, .app-grid, .video-grid { grid-template-columns: 1fr; }
+            .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .contact-info { flex-direction: column; gap: 16px; }
+            .hero-cta { flex-direction: column; gap: 12px; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            section { padding: 60px 16px; }
+            .logo-img { height: 55px; }
+            .footer-logo img { height: 36px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.6rem; }
+            .section-title { font-size: 1.5rem; }
+            .nav-container { padding: 10px 16px; }
+            .logo-img { height: 48px; }
+            .hero-badge { font-size: 0.75rem; padding: 8px 14px; }
+            .hero-key-message { padding: 10px 14px; }
+            .hero-key-message span { font-size: 0.8rem; }
+            .product-card-content, .tech-card-content, .app-card-content { padding: 18px; }
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .mobile-menu.active { display: block; }
+        .mobile-menu-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-white);
+            padding: 80px 24px 24px;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+        }
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            list-style: none;
+        }
+        .mobile-menu-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo-container">
+                <img src="imgs/funnytech_logo_original.png" alt="퍼니테크21 로고" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#overview" data-ko="제품 소개" data-en="Products">제품 소개</a></li>
+                <li><a href="#technologies" data-ko="핵심 기술" data-en="Technology">핵심 기술</a></li>
+                <li><a href="#performance" data-ko="성능 데이터" data-en="Performance">성능 데이터</a></li>
+                <li><a href="#applications" data-ko="적용 분야" data-en="Applications">적용 분야</a></li>
+                <li><a href="#videos" data-ko="영상 소개" data-en="Videos">영상 소개</a></li>
+                <li><a href="#contact" data-ko="문의하기" data-en="Contact">문의하기</a></li>
+            </ul>
+            <div class="nav-right">
+                <button id="navLangToggle" class="lang-toggle" onclick="toggleLanguage()">한글 / EN</button>
+                <a href="#contact" class="nav-cta" data-ko="기술 문의" data-en="Contact Us">기술 문의</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="openMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" onclick="closeMobileMenu()">
+        <div class="mobile-menu-content" onclick="event.stopPropagation()">
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+            <ul class="mobile-menu-links">
+                <li><a href="#overview" onclick="closeMobileMenu()" data-ko="제품 소개" data-en="Products">제품 소개</a></li>
+                <li><a href="#technologies" onclick="closeMobileMenu()" data-ko="핵심 기술" data-en="Technology">핵심 기술</a></li>
+                <li><a href="#performance" onclick="closeMobileMenu()" data-ko="성능 데이터" data-en="Performance">성능 데이터</a></li>
+                <li><a href="#applications" onclick="closeMobileMenu()" data-ko="적용 분야" data-en="Applications">적용 분야</a></li>
+                <li><a href="#videos" onclick="closeMobileMenu()" data-ko="영상 소개" data-en="Videos">영상 소개</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()" data-ko="문의하기" data-en="Contact">문의하기</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge" data-ko="드라이버를 위한 안전 동반자" data-en="Safety Companion for Drivers">드라이버를 위한 안전 동반자</div>
+                <h1>AI for <span>Human Vital Intelligence</span></h1>
+                <p class="hero-description" data-ko="카메라는 더 이상 보는 것에 그치지 않습니다.<br>운전자의 생체 신호를 읽고, 사고 이전의 위험을 예측합니다." data-en="Cameras do more than just see.<br>They read driver vital signs and predict dangers before accidents occur.">
+                    카메라는 더 이상 보는 것에 그치지 않습니다.<br>
+                    운전자의 생체 신호를 읽고, 사고 이전의 위험을 예측합니다.
+                </p>
+                <div class="hero-key-messages">
+                    <div class="hero-key-message">
+                        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+                        <span data-ko="Hardware-Free: 단일 카메라로 구현" data-en="Hardware-Free: Single Camera Solution">Hardware-Free: 단일 카메라로 구현</span>
+                    </div>
+                    <div class="hero-key-message">
+                        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+                        <span>Euro NCAP 2026 Ready</span>
+                    </div>
+                    <div class="hero-key-message">
+                        <div class="icon"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg></div>
+                        <span>Privacy First: On-Device Edge AI</span>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn-primary" data-ko="기술 검증 요청 →" data-en="Request Demo →">기술 검증 요청 →</a>
+                    <a href="#overview" class="btn-secondary" data-ko="더 알아보기" data-en="Learn More">더 알아보기</a>
+                </div>
+            </div>
+            <div class="hero-video">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/EynNZ7-sVzg" title="i-DMS 소개" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Overview -->
+    <section class="product-overview" id="overview">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-ko="제품 소개" data-en="Products">제품 소개</span>
+                <h2 class="section-title">Impairment Detection</h2>
+                <p class="section-subtitle" data-ko="운전 능력 상실을 실시간으로 판별하는 차세대 안전 솔루션" data-en="Next-gen safety solution detecting driver impairment in real-time">운전 능력 상실을 실시간으로 판별하는 차세대 안전 솔루션</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="imgs/impairment_detection.png" alt="운전자 손상 감지" class="product-card-img">
+                    <div class="product-card-content">
+                        <h3 data-ko="운전자 손상 감지" data-en="Driver Impairment Detection">운전자 손상 감지</h3>
+                        <p data-ko="생체 신호 분석으로 음주 상태를 90% 이상 정확도로 판별" data-en="Detects alcohol impairment with 90%+ accuracy via vital sign analysis">생체 신호 분석으로 음주 상태를 90% 이상 정확도로 판별</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="imgs/drowsiness_analysis.png" alt="졸음 분석" class="product-card-img">
+                    <div class="product-card-content">
+                        <h3 data-ko="과학적 졸음 분석" data-en="Scientific Drowsiness Analysis">과학적 졸음 분석</h3>
+                        <p data-ko="PERCLOS와 마이크로슬립을 나노 초 단위로 분석" data-en="Analyzes PERCLOS and microsleep at nanosecond precision">PERCLOS와 마이크로슬립을 나노 초 단위로 분석</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="imgs/vital_monitoring.png" alt="바이탈 모니터링" class="product-card-img">
+                    <div class="product-card-content">
+                        <h3 data-ko="비접촉 바이탈 모니터링" data-en="Contactless Vital Monitoring">비접촉 바이탈 모니터링</h3>
+                        <p data-ko="심박수, 스트레스, 호흡수를 의료기기 수준으로 측정" data-en="Measures heart rate, stress, respiration at medical-grade accuracy">심박수, 스트레스, 호흡수를 의료기기 수준으로 측정</p>
+                    </div>
+                </div>
+            </div>
+            <div class="download-section">
+                <a href="i-DMS_Real-World_Performance.pdf" download class="btn-download">
+                    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <span data-ko="솔루션 브로셔 다운로드 (PDF)" data-en="Download Brochure (PDF)">솔루션 브로셔 다운로드 (PDF)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Technologies -->
+    <section class="technologies" id="technologies">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-ko="핵심 기술" data-en="Technology">핵심 기술</span>
+                <h2 class="section-title">Triple-Fusion Engine™</h2>
+                <p class="section-subtitle" data-ko="독자적인 융합 알고리즘으로 단순 피로와 음주/약물 상태를 명확히 구분" data-en="Proprietary fusion algorithm clearly distinguishes fatigue from impairment">독자적인 융합 알고리즘으로 단순 피로와 음주/약물 상태를 명확히 구분</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <img src="imgs/triple_fusion.png" alt="Triple-Fusion" class="tech-card-img">
+                    <div class="tech-card-content">
+                        <h3>Triple-Fusion Engine™</h3>
+                        <p class="tech-tagline" data-ko="세 가지 생체 신호를 융합" data-en="Fusion of three vital signals">세 가지 생체 신호를 융합</p>
+                        <div class="tech-specs">
+                            <span class="tech-spec-tag">rPPG</span>
+                            <span class="tech-spec-tag" data-ko="동공 분석" data-en="Pupillometry">동공 분석</span>
+                            <span class="tech-spec-tag" data-ko="안구 추적" data-en="Eye Tracking">안구 추적</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <img src="imgs/motion_rppg.png" alt="Motion-Compensated rPPG" class="tech-card-img">
+                    <div class="tech-card-content">
+                        <h3>Motion-Compensated rPPG</h3>
+                        <p class="tech-tagline" data-ko="흔들리는 차 안에서도 정확한 측정" data-en="Accurate even in moving vehicles">흔들리는 차 안에서도 정확한 측정</p>
+                        <div class="tech-specs">
+                            <span class="tech-spec-tag">±3.34 BPM</span>
+                            <span class="tech-spec-tag" data-ko="95.6% 일치율" data-en="95.6% Accuracy">95.6% 일치율</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <img src="imgs/edge_ai.png" alt="Edge AI" class="tech-card-img">
+                    <div class="tech-card-content">
+                        <h3>Edge AI & Optimization</h3>
+                        <p class="tech-tagline" data-ko="클라우드 없이 즉시 판단" data-en="Instant on-device processing">클라우드 없이 즉시 판단</p>
+                        <div class="tech-specs">
+                            <span class="tech-spec-tag" data-ko="0.1초 처리" data-en="0.1s Processing">0.1초 처리</span>
+                            <span class="tech-spec-tag" data-ko="GDPR 준수" data-en="GDPR Compliant">GDPR 준수</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance -->
+    <section class="performance" id="performance">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-ko="성능 데이터" data-en="Performance">성능 데이터</span>
+                <h2 class="section-title">Technical Performance</h2>
+                <p class="section-subtitle" data-ko="실차 테스트 및 의료기기 비교 검증을 통해 입증된 신뢰성" data-en="Reliability proven through real-world and medical-grade testing">실차 테스트 및 의료기기 비교 검증을 통해 입증된 신뢰성</p>
+            </div>
+            <div class="performance-grid">
+                <div class="performance-card">
+                    <img src="imgs/heartrate_chart.png" alt="심박수 측정" class="performance-card-img">
+                    <div class="performance-card-content">
+                        <h3 data-ko="심박수 측정 정확도" data-en="Heart Rate Accuracy">심박수 측정 정확도</h3>
+                        <span class="performance-result" data-ko="✓ 트렌드 일치도 95%+" data-en="✓ 95%+ Trend Match">✓ 트렌드 일치도 95%+</span>
+                    </div>
+                </div>
+                <div class="performance-card">
+                    <img src="imgs/microsleep_chart.png" alt="마이크로슬립 감지" class="performance-card-img">
+                    <div class="performance-card-content">
+                        <h3 data-ko="마이크로슬립 감지" data-en="Microsleep Detection">마이크로슬립 감지</h3>
+                        <span class="performance-result" data-ko="✓ 실시간 위험 감지" data-en="✓ Real-time Alert">✓ 실시간 위험 감지</span>
+                    </div>
+                </div>
+                <div class="performance-card">
+                    <img src="imgs/alcohol_chart.png" alt="알코올 감지" class="performance-card-img">
+                    <div class="performance-card-content">
+                        <h3 data-ko="알코올 감지 민감도" data-en="Alcohol Detection">알코올 감지 민감도</h3>
+                        <span class="performance-result" data-ko="✓ 21초 내 포착" data-en="✓ Detection in 21s">✓ 21초 내 포착</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications -->
+    <section class="applications" id="applications">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-ko="적용 분야" data-en="Applications">적용 분야</span>
+                <h2 class="section-title">Application Areas</h2>
+                <p class="section-subtitle" data-ko="자동차를 넘어 헬스케어, 보험 테크까지" data-en="Beyond automotive: Healthcare, InsurTech and more">자동차를 넘어 헬스케어, 보험 테크까지</p>
+            </div>
+            <div class="app-grid">
+                <div class="app-card">
+                    <img src="imgs/automotive_app.png" alt="Automotive" class="app-card-img">
+                    <div class="app-card-content">
+                        <h3>Automotive</h3>
+                        <div class="app-tags">
+                            <span class="app-tag" data-ko="승용차" data-en="Passenger">승용차</span>
+                            <span class="app-tag" data-ko="상용차" data-en="Commercial">상용차</span>
+                            <span class="app-tag" data-ko="트럭/버스" data-en="Trucks">트럭/버스</span>
+                            <span class="app-tag">Fleet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <img src="imgs/healthcare_app.png" alt="Healthcare" class="app-card-img">
+                    <div class="app-card-content">
+                        <h3>Digital Healthcare</h3>
+                        <div class="app-tags">
+                            <span class="app-tag" data-ko="병원 모니터링" data-en="Hospital">병원 모니터링</span>
+                            <span class="app-tag" data-ko="원격 의료" data-en="Telemedicine">원격 의료</span>
+                            <span class="app-tag" data-ko="돌봄 서비스" data-en="Eldercare">돌봄 서비스</span>
+                        </div>
+                        <div class="healthcare-highlight">
+                            <p class="highlight-title" data-ko="🔍 건강돋보기라이프+" data-en="🔍 Health Magnifier Life+">🔍 건강돋보기라이프+</p>
+                            <p class="highlight-desc" data-ko="카메라 기반 비접촉 생체신호 측정으로 심박수, 스트레스, 혈압 등을 일상에서 간편하게 모니터링하는 솔루션입니다." data-en="A solution for convenient daily monitoring of heart rate, stress, blood pressure using camera-based contactless vital sign measurement.">카메라 기반 비접촉 생체신호 측정으로 심박수, 스트레스, 혈압 등을 일상에서 간편하게 모니터링하는 솔루션입니다.</p>
+                            <a href="https://www.funnylabs.co.kr" target="_blank" class="highlight-link" data-ko="건강돋보기라이프+ 바로가기 →" data-en="Visit Health Magnifier Life+ →">건강돋보기라이프+ 바로가기 →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <img src="imgs/insurtech_app.png" alt="InsurTech" class="app-card-img">
+                    <div class="app-card-content">
+                        <h3>InsurTech</h3>
+                        <div class="app-tags">
+                            <span class="app-tag" data-ko="운전 점수" data-en="Driving Score">운전 점수</span>
+                            <span class="app-tag" data-ko="UBI 보험" data-en="UBI Insurance">UBI 보험</span>
+                            <span class="app-tag" data-ko="리스크 평가" data-en="Risk Assessment">리스크 평가</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos -->
+    <section class="video-showcase" id="videos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-ko="영상 소개" data-en="Videos">영상 소개</span>
+                <h2 class="section-title">Technology in Action</h2>
+                <p class="section-subtitle" data-ko="퍼니테크21의 기술력을 영상으로 확인하세요" data-en="See Funnytech21's technology in action">퍼니테크21의 기술력을 영상으로 확인하세요</p>
+            </div>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-card-header">
+                        <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                        <div><h3 data-ko="i-DMS 솔루션 소개" data-en="i-DMS Introduction">i-DMS 솔루션 소개</h3><p data-ko="운전자 감시 시스템 데모" data-en="Driver Monitoring Demo">운전자 감시 시스템 데모</p></div>
+                    </div>
+                    <div class="video-card-content">
+                        <iframe src="https://www.youtube.com/embed/Py0EE23Ls_g" title="i-DMS 솔루션" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-card-header">
+                        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                        <div><h3 data-ko="건강분석 솔루션" data-en="Health Analysis">건강분석 솔루션</h3><p data-ko="비접촉 바이탈 모니터링" data-en="Contactless Vital Monitoring">비접촉 바이탈 모니터링</p></div>
+                    </div>
+                    <div class="video-card-content">
+                        <iframe src="https://www.youtube.com/embed/VOH8M-Eh3WU" title="건강분석 솔루션" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact with Form -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-header">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+                    <button class="lang-btn" onclick="setLang('en')">English</button>
+                </div>
+                <h2 data-ko="우리와 가장 확실한 파트너가 되어 주십시오" data-en="Become Our Trusted Partner">우리와 가장 확실한 파트너가 되어 주십시오</h2>
+                <p data-ko="기술 검증(PoC) 및 솔루션 도입 문의" data-en="Technical Verification (PoC) & Solution Inquiries">기술 검증(PoC) 및 솔루션 도입 문의</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Email Inquiry Form -->
+                <div class="contact-box">
+                    <h3 data-ko="📧 이메일 문의" data-en="📧 Email Inquiry">📧 이메일 문의</h3>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-ko="이름" data-en="Name">이름</label>
+                                <input type="text" name="name" id="contactName" required placeholder="홍길동">
+                            </div>
+                            <div class="form-group">
+                                <label data-ko="회사명" data-en="Company">회사명</label>
+                                <input type="text" name="company" id="contactCompany" placeholder="(주)회사명">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-ko="이메일" data-en="Email">이메일</label>
+                            <input type="email" name="email" id="contactEmail" required placeholder="example@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label data-ko="문의 내용" data-en="Message">문의 내용</label>
+                            <textarea name="message" id="contactMessage" required placeholder="기술 검증, 협업 제안, 제품 문의 등 자유롭게 작성해주세요."></textarea>
+                        </div>
+                        <button type="submit" class="contact-btn" data-ko="문의 이메일 보내기 →" data-en="Send Inquiry →">문의 이메일 보내기 →</button>
+                    </form>
+                    <div id="emailSuccess" class="success-message" style="display:none;">
+                        <span>✅</span>
+                        <p data-ko="이메일 앱이 열렸습니다. 메일을 보내주세요!" data-en="Email app opened. Please send the email!">이메일 앱이 열렸습니다. 메일을 보내주세요!</p>
+                    </div>
+                </div>
+
+                <!-- Meeting Scheduler -->
+                <div class="contact-box meeting-scheduler">
+                    <h3 data-ko="📅 온라인 미팅 예약" data-en="📅 Schedule Online Meeting">📅 온라인 미팅 예약</h3>
+
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button class="cal-nav" onclick="prevMonth()">‹</button>
+                            <span id="calendarMonth">2025년 1월</span>
+                            <button class="cal-nav" onclick="nextMonth()">›</button>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <span data-ko="일" data-en="Sun">일</span>
+                            <span data-ko="월" data-en="Mon">월</span>
+                            <span data-ko="화" data-en="Tue">화</span>
+                            <span data-ko="수" data-en="Wed">수</span>
+                            <span data-ko="목" data-en="Thu">목</span>
+                            <span data-ko="금" data-en="Fri">금</span>
+                            <span data-ko="토" data-en="Sat">토</span>
+                        </div>
+                        <div class="calendar-days" id="calendarDays"></div>
+                    </div>
+
+                    <div class="time-slots" id="timeSlots" style="display:none;">
+                        <label data-ko="시간 선택" data-en="Select Time">시간 선택</label>
+                        <div class="time-grid">
+                            <button type="button" class="time-slot" data-time="09:00">09:00</button>
+                            <button type="button" class="time-slot" data-time="10:00">10:00</button>
+                            <button type="button" class="time-slot" data-time="11:00">11:00</button>
+                            <button type="button" class="time-slot" data-time="14:00">14:00</button>
+                            <button type="button" class="time-slot" data-time="15:00">15:00</button>
+                            <button type="button" class="time-slot" data-time="16:00">16:00</button>
+                        </div>
+                    </div>
+
+                    <div class="meeting-type" id="meetingType" style="display:none;">
+                        <label data-ko="미팅 방식" data-en="Meeting Type">미팅 방식</label>
+                        <div class="meeting-options">
+                            <button type="button" class="meeting-option" data-type="zoom" onclick="selectMeetingType('zoom')">
+                                <span>🎥</span> Zoom
+                            </button>
+                            <button type="button" class="meeting-option" data-type="google" onclick="selectMeetingType('google')">
+                                <span>📹</span> Google Meet
+                            </button>
+                            <button type="button" class="meeting-option" data-type="teams" onclick="selectMeetingType('teams')">
+                                <span>💼</span> MS Teams
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="meeting-form" id="meetingForm" style="display:none;">
+                        <div class="form-group">
+                            <label data-ko="이름" data-en="Your Name">이름</label>
+                            <input type="text" id="meetingName" placeholder="홍길동" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-ko="이메일" data-en="Your Email">이메일</label>
+                            <input type="email" id="meetingEmail" placeholder="example@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-ko="회사명" data-en="Company">회사명</label>
+                            <input type="text" id="meetingCompany" placeholder="(주)회사명">
+                        </div>
+                    </div>
+
+                    <div class="selected-meeting" id="selectedMeeting" style="display:none;">
+                        <p><strong data-ko="선택된 일정:" data-en="Selected Schedule:">선택된 일정:</strong></p>
+                        <p id="selectedDateTime"></p>
+                        <p id="selectedMeetingType"></p>
+                    </div>
+
+                    <button type="button" class="contact-btn meeting-submit" id="meetingSubmit" onclick="submitMeeting()" style="display:none;" data-ko="미팅 예약 요청 →" data-en="Request Meeting →">미팅 예약 요청 →</button>
+
+                    <div id="meetingSuccess" class="success-message" style="display:none;">
+                        <span>✅</span>
+                        <p data-ko="미팅 예약 요청이 전송되었습니다! 확인 후 연락드리겠습니다." data-en="Meeting request sent! We will contact you soon.">미팅 예약 요청이 전송되었습니다! 확인 후 연락드리겠습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-info-mini">
+                <span>📧 ioplanet@funnytech21.com</span>
+                <span data-ko="📍 인천광역시 중구 인하대병원 개방형실험실" data-en="📍 Inha University Hospital, Incheon, Korea">📍 인천광역시 중구 인하대병원 개방형실험실</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="imgs/funnytech_logo_original.png" alt="퍼니테크21">
+                <span>(주)퍼니테크21</span>
+            </div>
+            <div class="footer-links">
+                <a href="#overview" data-ko="제품 소개" data-en="Products">제품 소개</a>
+                <a href="#technologies" data-ko="핵심 기술" data-en="Technology">핵심 기술</a>
+                <a href="#performance" data-ko="성능 데이터" data-en="Performance">성능 데이터</a>
+                <a href="#contact" data-ko="문의하기" data-en="Contact">문의하기</a>
+            </div>
+            <div class="footer-copy">© 2025 (주)퍼니테크21. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Functions
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Language Toggle
+        let currentLang = 'ko';
+        function toggleLanguage() {
+            currentLang = currentLang === 'ko' ? 'en' : 'ko';
+            document.querySelectorAll('[data-ko][data-en]').forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = el.getAttribute('data-' + currentLang);
+                } else {
+                    el.innerHTML = el.getAttribute('data-' + currentLang);
+                }
+            });
+            document.getElementById('navLangToggle').textContent = currentLang === 'ko' ? '한글 / EN' : 'KO / English';
+            // Sync contact section buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(`.lang-btn[onclick="setLang('${currentLang}')"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const bar = document.getElementById('progressBar');
+            const scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)) * 100;
+            bar.style.width = scrolled + '%';
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Language toggle (contact section)
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+            
+            document.querySelectorAll('[data-ko][data-en]').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.innerHTML = text;
+                    }
+                }
+            });
+            // Sync nav button
+            document.getElementById('navLangToggle').textContent = currentLang === 'ko' ? '한글 / EN' : 'KO / English';
+        }
+
+        // Email form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const name = form.querySelector('#contactName').value;
+            const company = form.querySelector('#contactCompany').value;
+            const email = form.querySelector('#contactEmail').value;
+            const message = form.querySelector('#contactMessage').value;
+
+            const subject = encodeURIComponent(`[기술문의] ${company ? company + ' - ' : ''}${name}`);
+            const body = encodeURIComponent(`보내는 사람: ${name}\n회사: ${company || '개인'}\n이메일: ${email}\n\n문의 내용:\n${message}`);
+
+            window.location.href = `mailto:ioplanet@funnytech21.com?subject=${subject}&body=${body}`;
+
+            // Show success message
+            document.getElementById('emailSuccess').style.display = 'block';
+            form.reset();
+            setTimeout(() => {
+                document.getElementById('emailSuccess').style.display = 'none';
+            }, 5000);
+        });
+
+        // ========== Calendar & Meeting Scheduler ==========
+        let currentYear = new Date().getFullYear();
+        let currentMonth = new Date().getMonth();
+        let selectedDate = null;
+        let selectedTime = null;
+        let selectedMeetingTypeValue = null;
+
+        const monthNames = {
+            ko: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        };
+
+        function renderCalendar() {
+            const calendarDays = document.getElementById('calendarDays');
+            const calendarMonth = document.getElementById('calendarMonth');
+
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const startDay = firstDay.getDay();
+            const totalDays = lastDay.getDate();
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // Update month display
+            if (currentLang === 'ko') {
+                calendarMonth.textContent = `${currentYear}년 ${monthNames.ko[currentMonth]}`;
+            } else {
+                calendarMonth.textContent = `${monthNames.en[currentMonth]} ${currentYear}`;
+            }
+
+            // Clear and rebuild calendar
+            calendarDays.innerHTML = '';
+
+            // Empty cells for days before the first of the month
+            for (let i = 0; i < startDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day empty';
+                calendarDays.appendChild(emptyCell);
+            }
+
+            // Days of the month
+            for (let day = 1; day <= totalDays; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.textContent = day;
+
+                const cellDate = new Date(currentYear, currentMonth, day);
+                cellDate.setHours(0, 0, 0, 0);
+
+                // Mark today
+                if (cellDate.getTime() === today.getTime()) {
+                    dayCell.classList.add('today');
+                }
+
+                // Disable past dates and weekends
+                const dayOfWeek = cellDate.getDay();
+                if (cellDate < today || dayOfWeek === 0 || dayOfWeek === 6) {
+                    dayCell.classList.add('disabled');
+                } else {
+                    dayCell.addEventListener('click', () => selectDate(currentYear, currentMonth, day));
+                }
+
+                // Check if selected
+                if (selectedDate &&
+                    selectedDate.year === currentYear &&
+                    selectedDate.month === currentMonth &&
+                    selectedDate.day === day) {
+                    dayCell.classList.add('selected');
+                }
+
+                calendarDays.appendChild(dayCell);
+            }
+        }
+
+        function prevMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        }
+
+        function selectDate(year, month, day) {
+            selectedDate = { year, month, day };
+            renderCalendar();
+
+            // Show time slots
+            document.getElementById('timeSlots').style.display = 'block';
+            updateSelectedInfo();
+        }
+
+        // Time slot selection
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedTime = this.dataset.time;
+
+                // Show meeting type options
+                document.getElementById('meetingType').style.display = 'block';
+                updateSelectedInfo();
+            });
+        });
+
+        function selectMeetingType(type) {
+            document.querySelectorAll('.meeting-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`.meeting-option[data-type="${type}"]`).classList.add('selected');
+            selectedMeetingTypeValue = type;
+
+            // Show meeting form
+            document.getElementById('meetingForm').style.display = 'block';
+            updateSelectedInfo();
+
+            // Check if we can show submit button
+            checkShowSubmitButton();
+        }
+
+        function updateSelectedInfo() {
+            if (selectedDate && selectedTime) {
+                const dateStr = currentLang === 'ko'
+                    ? `${selectedDate.year}년 ${selectedDate.month + 1}월 ${selectedDate.day}일 ${selectedTime}`
+                    : `${monthNames.en[selectedDate.month]} ${selectedDate.day}, ${selectedDate.year} at ${selectedTime}`;
+
+                document.getElementById('selectedDateTime').textContent = dateStr;
+
+                if (selectedMeetingTypeValue) {
+                    const typeNames = {
+                        zoom: 'Zoom',
+                        google: 'Google Meet',
+                        teams: 'Microsoft Teams'
+                    };
+                    document.getElementById('selectedMeetingType').textContent = typeNames[selectedMeetingTypeValue];
+                    document.getElementById('selectedMeeting').style.display = 'block';
+                }
+            }
+        }
+
+        function checkShowSubmitButton() {
+            const name = document.getElementById('meetingName').value;
+            const email = document.getElementById('meetingEmail').value;
+
+            if (selectedDate && selectedTime && selectedMeetingTypeValue && name && email) {
+                document.getElementById('meetingSubmit').style.display = 'block';
+            }
+        }
+
+        // Add input listeners for meeting form
+        document.getElementById('meetingName')?.addEventListener('input', checkShowSubmitButton);
+        document.getElementById('meetingEmail')?.addEventListener('input', checkShowSubmitButton);
+
+        function submitMeeting() {
+            const name = document.getElementById('meetingName').value;
+            const email = document.getElementById('meetingEmail').value;
+            const company = document.getElementById('meetingCompany').value;
+
+            if (!name || !email) {
+                alert(currentLang === 'ko' ? '이름과 이메일을 입력해주세요.' : 'Please enter your name and email.');
+                return;
+            }
+
+            const dateStr = `${selectedDate.year}-${String(selectedDate.month + 1).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`;
+            const typeNames = { zoom: 'Zoom', google: 'Google Meet', teams: 'Microsoft Teams' };
+
+            const subject = encodeURIComponent(`[미팅예약] ${company ? company + ' - ' : ''}${name} (${dateStr} ${selectedTime})`);
+            const body = encodeURIComponent(
+                `미팅 예약 요청\n` +
+                `==================\n\n` +
+                `이름: ${name}\n` +
+                `이메일: ${email}\n` +
+                `회사: ${company || '개인'}\n\n` +
+                `희망 일시: ${dateStr} ${selectedTime}\n` +
+                `미팅 방식: ${typeNames[selectedMeetingTypeValue]}\n\n` +
+                `---\n` +
+                `이 요청은 i-DMS 웹사이트에서 자동 생성되었습니다.`
+            );
+
+            window.location.href = `mailto:ioplanet@funnytech21.com?subject=${subject}&body=${body}`;
+
+            // Show success message
+            document.getElementById('meetingSuccess').style.display = 'block';
+            document.getElementById('meetingSubmit').style.display = 'none';
+            document.getElementById('selectedMeeting').style.display = 'none';
+            document.getElementById('meetingForm').style.display = 'none';
+            document.getElementById('meetingType').style.display = 'none';
+            document.getElementById('timeSlots').style.display = 'none';
+
+            // Reset form
+            document.getElementById('meetingName').value = '';
+            document.getElementById('meetingEmail').value = '';
+            document.getElementById('meetingCompany').value = '';
+            selectedDate = null;
+            selectedTime = null;
+            selectedMeetingTypeValue = null;
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            document.querySelectorAll('.meeting-option').forEach(o => o.classList.remove('selected'));
+            renderCalendar();
+
+            setTimeout(() => {
+                document.getElementById('meetingSuccess').style.display = 'none';
+            }, 5000);
+        }
+
+        // Initialize calendar on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCalendar();
+        });
+    </script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+</body>
+</html>
