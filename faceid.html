@@ -195,7 +195,7 @@
         .usage-section { background: var(--bg-darker); }
         .usage-steps {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
         .usage-step {
@@ -241,8 +241,8 @@
             color: var(--text-muted);
             line-height: 1.5;
         }
-        @media (max-width: 1200px) { .usage-steps { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 768px) { .usage-steps { grid-template-columns: 1fr; } }
+        @media (max-width: 1024px) { .usage-steps { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .usage-steps { grid-template-columns: 1fr; } }
 
         /* Features Grid */
         .features-section { background: var(--bg-darker); }
@@ -545,7 +545,7 @@
                 <div class="usage-step-content">
                     <div class="usage-step-number">4</div>
                     <h4>Liveness Challenge</h4>
-                    <p>사용자에게 챌린지를 제시하여 딥페이크, 인쇄물, 동영상 공격을 방지합니다.</p>
+                    <p>Presents challenges to users to prevent deepfake, print, and video attacks.</p>
                 </div>
             </div>
 
