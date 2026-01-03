@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumanSense AI - Face ID Solution | FunnyTech21</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --primary-blue: #15539E;
+            --electric-blue: #3B82F6;
+            --bg-dark: #0F172A;
+            --bg-darker: #020617;
+            --bg-card: #1E293B;
+            --bg-light: #F8FAFC;
+            --text-white: #FFFFFF;
+            --text-light: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-dark: #334155;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --orange: #f97316;
+            --pink: #ec4899;
+            --purple: #8b5cf6;
+            --cyan: #06b6d4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', 'Noto Sans KR', sans-serif; background: var(--bg-dark); color: var(--text-white); line-height: 1.7; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            padding: 100px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(59,130,246,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(236,72,153,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .header-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        .header .badge {
+            display: inline-block;
+            background: rgba(59,130,246,0.2);
+            border: 1px solid rgba(59,130,246,0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--electric-blue);
+            margin-bottom: 20px;
+        }
+        .header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; }
+        .header h1 span {
+            background: linear-gradient(135deg, var(--electric-blue) 0%, var(--pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 30px; }
+        .header-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--electric-blue) 100%);
+            color: white; padding: 14px 28px; border-radius: 10px;
+            font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59,130,246,0.3); }
+        .btn-secondary {
+            background: transparent; color: var(--text-light); padding: 14px 28px;
+            border-radius: 10px; font-weight: 600; text-decoration: none;
+            border: 1px solid var(--border-dark); display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover { background: var(--bg-card); border-color: var(--electric-blue); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
+
+        /* Stats */
+        .stats-section { background: var(--bg-darker); padding: 60px 24px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--electric-blue); }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; }
+        @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        /* Architecture Section */
+        .architecture-section { background: var(--bg-dark); }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-tag {
+            display: inline-block; background: rgba(255,34,34,0.15); color: var(--primary-red);
+            padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 18px; border: 1px solid rgba(255,34,34,0.2);
+        }
+        .section-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 14px; }
+        .section-subtitle { font-size: 1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        /* Architecture Diagram */
+        .arch-diagram {
+            background: linear-gradient(135deg, #0c1929 0%, #162033 100%);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border-dark);
+            overflow-x: auto;
+        }
+        .arch-title { text-align: center; margin-bottom: 30px; }
+        .arch-title h3 { font-size: 1.5rem; color: var(--text-white); margin-bottom: 8px; }
+        .arch-title p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .arch-flow {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 20px;
+            min-width: 900px;
+        }
+        .arch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .arch-column-title {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .arch-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 16px 20px;
+            text-align: center;
+            min-width: 140px;
+        }
+        .arch-box.input { border-left: 3px solid var(--cyan); }
+        .arch-box.detection { border-left: 3px solid var(--green); }
+        .arch-box.tracking { border-left: 3px solid var(--yellow); }
+        .arch-box.analysis { border-left: 3px solid var(--orange); }
+        .arch-box.behavior { border-left: 3px solid var(--purple); }
+        .arch-box.output { border-left: 3px solid var(--pink); }
+        .arch-box-icon { font-size: 1.5rem; margin-bottom: 8px; }
+        .arch-box-title { font-size: 0.85rem; font-weight: 600; color: var(--text-white); }
+        .arch-box-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+
+        .arch-arrow {
+            display: flex;
+            align-items: center;
+            color: var(--border-dark);
+            font-size: 1.5rem;
+            padding: 0 8px;
+        }
+
+        .arch-processing {
+            background: rgba(59,130,246,0.1);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .arch-processing-title {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--electric-blue);
+            margin-bottom: 16px;
+        }
+        .arch-modules {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .arch-module {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid var(--border-dark);
+        }
+        .arch-module-icon { font-size: 1.3rem; margin-bottom: 6px; }
+        .arch-module-title { font-size: 0.8rem; font-weight: 600; color: var(--text-white); }
+        .arch-module-sub { font-size: 0.65rem; color: var(--text-muted); }
+
+        /* Features Grid */
+        .features-section { background: var(--bg-darker); }
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: var(--electric-blue);
+        }
+        .feature-icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px; font-size: 1.5rem;
+        }
+        .feature-icon.blue { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--electric-blue) 100%); }
+        .feature-icon.green { background: linear-gradient(135deg, #16a34a 0%, var(--green) 100%); }
+        .feature-icon.yellow { background: linear-gradient(135deg, #d97706 0%, var(--yellow) 100%); }
+        .feature-icon.pink { background: linear-gradient(135deg, #db2777 0%, var(--pink) 100%); }
+        .feature-icon.purple { background: linear-gradient(135deg, #7c3aed 0%, var(--purple) 100%); }
+        .feature-icon.cyan { background: linear-gradient(135deg, #0891b2 0%, var(--cyan) 100%); }
+        .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; color: var(--text-white); }
+        .feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+        .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .feature-tag {
+            background: rgba(59,130,246,0.15);
+            color: var(--electric-blue);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        @media (max-width: 1024px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } }
+
+        /* Specs Table */
+        .specs-section { background: var(--bg-dark); }
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .specs-table th, .specs-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .specs-table th {
+            background: var(--bg-darker);
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .specs-table td { color: var(--text-muted); font-size: 0.9rem; }
+        .specs-table tr:last-child td { border-bottom: none; }
+        .specs-table .highlight { color: var(--electric-blue); font-weight: 600; }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--electric-blue) 100%);
+            text-align: center;
+            padding: 80px 24px;
+        }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 16px; }
+        .cta-section p { color: rgba(255,255,255,0.9); margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-white {
+            background: white; color: var(--primary-blue); padding: 14px 28px;
+            border-radius: 10px; font-weight: 600; text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .btn-outline {
+            background: transparent; color: white; padding: 14px 28px;
+            border-radius: 10px; font-weight: 600; text-decoration: none;
+            border: 2px solid rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-darker);
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border-dark);
+        }
+        .footer a { color: var(--electric-blue); text-decoration: none; }
+        .footer p { color: var(--text-muted); font-size: 0.9rem; }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--electric-blue); text-decoration: none;
+            font-weight: 600; margin-bottom: 20px;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="badge">FunnyTech21 Flagship Solution</div>
+            <h1><span>HumanSense AI</span> Platform</h1>
+            <p>Advanced Human Analysis & Face Recognition Platform - Real-time multi-person tracking with comprehensive biometric analysis</p>
+            <div class="header-buttons">
+                <a href="Face-ID_AI_Perception_Architecture.pdf" target="_blank" class="btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+                    View Architecture PDF
+                </a>
+                <a href="index.html#contact" class="btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">50+</div>
+                <div class="stat-label">Simultaneous Person Analysis</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">512D</div>
+                <div class="stat-label">Face Embedding Dimension</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">11</div>
+                <div class="stat-label">Liveness Check Layers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">30+</div>
+                <div class="stat-label">FPS Real-time Processing</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Architecture -->
+    <div class="container architecture-section">
+        <div class="section-header">
+            <div class="section-tag">System Architecture</div>
+            <h2 class="section-title">HumanSense AI Processing Pipeline</h2>
+            <p class="section-subtitle">End-to-end human analysis from multiple input sources to actionable insights</p>
+        </div>
+
+        <div class="arch-diagram">
+            <div class="arch-title">
+                <h3>Real-time Analysis Flow</h3>
+                <p>Multi-source input processing with parallel analysis modules</p>
+            </div>
+            <div class="arch-flow">
+                <!-- Input Sources -->
+                <div class="arch-column">
+                    <div class="arch-column-title">Input Sources</div>
+                    <div class="arch-box input">
+                        <div class="arch-box-icon">📷</div>
+                        <div class="arch-box-title">Webcam</div>
+                    </div>
+                    <div class="arch-box input">
+                        <div class="arch-box-icon">📹</div>
+                        <div class="arch-box-title">IP Camera</div>
+                    </div>
+                    <div class="arch-box input">
+                        <div class="arch-box-icon">🔗</div>
+                        <div class="arch-box-title">RTSP Stream</div>
+                    </div>
+                    <div class="arch-box input">
+                        <div class="arch-box-icon">🎬</div>
+                        <div class="arch-box-title">Video File</div>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">→</div>
+
+                <!-- Detection & Tracking -->
+                <div class="arch-column">
+                    <div class="arch-column-title">Detection</div>
+                    <div class="arch-box detection">
+                        <div class="arch-box-icon">🏃</div>
+                        <div class="arch-box-title">Person Detection</div>
+                        <div class="arch-box-sub">17 Keypoints</div>
+                    </div>
+                    <div class="arch-box tracking" style="margin-top: 20px;">
+                        <div class="arch-box-icon">👥</div>
+                        <div class="arch-box-title">Multi-Person Tracking</div>
+                        <div class="arch-box-sub">ID Assignment</div>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">→</div>
+
+                <!-- Processing Pipeline -->
+                <div class="arch-processing">
+                    <div class="arch-processing-title">Parallel Analysis Modules</div>
+                    <div class="arch-modules">
+                        <div class="arch-module">
+                            <div class="arch-module-icon">🧍</div>
+                            <div class="arch-module-title">Pose Analysis</div>
+                        </div>
+                        <div class="arch-module">
+                            <div class="arch-module-icon">👤</div>
+                            <div class="arch-module-title">Face Recognition</div>
+                            <div class="arch-module-sub">& Liveness</div>
+                        </div>
+                        <div class="arch-module">
+                            <div class="arch-module-icon">😊</div>
+                            <div class="arch-module-title">Emotion Detection</div>
+                        </div>
+                        <div class="arch-module">
+                            <div class="arch-module-icon">📊</div>
+                            <div class="arch-module-title">Age/Gender</div>
+                            <div class="arch-module-sub">Estimation</div>
+                        </div>
+                        <div class="arch-module">
+                            <div class="arch-module-icon">✅</div>
+                            <div class="arch-module-title">Skin/Liveness</div>
+                            <div class="arch-module-sub">Analysis</div>
+                        </div>
+                        <div class="arch-module">
+                            <div class="arch-module-icon">📈</div>
+                            <div class="arch-module-title">Behavior</div>
+                            <div class="arch-module-sub">Analysis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">→</div>
+
+                <!-- Output -->
+                <div class="arch-column">
+                    <div class="arch-column-title">Output Layer</div>
+                    <div class="arch-box output">
+                        <div class="arch-box-icon">🔌</div>
+                        <div class="arch-box-title">REST API</div>
+                        <div class="arch-box-sub">FastAPI</div>
+                    </div>
+                    <div class="arch-box output">
+                        <div class="arch-box-icon">⚡</div>
+                        <div class="arch-box-title">WebSocket</div>
+                        <div class="arch-box-sub">Real-time Stream</div>
+                    </div>
+                    <div class="arch-box output">
+                        <div class="arch-box-icon">💾</div>
+                        <div class="arch-box-title">Database</div>
+                        <div class="arch-box-sub">SQLite</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="container features-section">
+        <div class="section-header">
+            <div class="section-tag">Core Capabilities</div>
+            <h2 class="section-title">Key Features</h2>
+            <p class="section-subtitle">Enterprise-grade face recognition with advanced anti-spoofing technology</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon blue">👤</div>
+                <h3>High-Precision Face Recognition</h3>
+                <p>512-dimensional embedding vectors with cosine similarity matching. Supports unlimited face registration with multi-condition profiles.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">512D Embedding</span>
+                    <span class="feature-tag">106 Landmarks</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon green">🛡️</div>
+                <h3>11-Layer Anti-Spoofing</h3>
+                <p>Multi-layered liveness detection combining texture analysis, frequency analysis, motion detection, and deep learning verification.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Deep Learning</span>
+                    <span class="feature-tag">LBP + DCT</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon yellow">😊</div>
+                <h3>Emotion Recognition</h3>
+                <p>Real-time detection of 7 emotions (Happy, Sad, Angry, Surprised, Fearful, Disgusted, Neutral) with attention-based neural networks.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">7 Emotions</span>
+                    <span class="feature-tag">Attention Model</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon pink">📊</div>
+                <h3>Age & Gender Estimation</h3>
+                <p>Accurate demographic analysis with age group classification (child to senior) and gender prediction using multi-model ensemble.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">6 Age Groups</span>
+                    <span class="feature-tag">SSR-Net</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon purple">🏃</div>
+                <h3>Pose & Behavior Analysis</h3>
+                <p>17-keypoint pose estimation with behavior pattern recognition. Detects pacing, fidgeting, and unusual postures for anxiety scoring.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">17 Keypoints</span>
+                    <span class="feature-tag">Anxiety Score</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon cyan">⚡</div>
+                <h3>Edge-Optimized Performance</h3>
+                <p>Optimized for NVIDIA Jetson platforms with CUDA acceleration. Achieves 30+ FPS with full analysis pipeline on embedded devices.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Jetson Ready</span>
+                    <span class="feature-tag">30+ FPS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specifications -->
+    <div class="container specs-section">
+        <div class="section-header">
+            <div class="section-tag">Technical Specs</div>
+            <h2 class="section-title">Performance Specifications</h2>
+        </div>
+
+        <table class="specs-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Specification</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Face Detection</td>
+                    <td class="highlight">RetinaFace Engine</td>
+                    <td>106-point landmark detection</td>
+                </tr>
+                <tr>
+                    <td>Face Recognition</td>
+                    <td class="highlight">512D ArcFace Embedding</td>
+                    <td>Cosine similarity threshold: 0.4</td>
+                </tr>
+                <tr>
+                    <td>Anti-Spoofing</td>
+                    <td class="highlight">11-Layer Verification</td>
+                    <td>Deep learning ensemble (MiniFASNet V1/V2)</td>
+                </tr>
+                <tr>
+                    <td>Person Detection</td>
+                    <td class="highlight">YOLOv8-Pose</td>
+                    <td>17 COCO keypoints, ~26M parameters</td>
+                </tr>
+                <tr>
+                    <td>Multi-Person Tracking</td>
+                    <td class="highlight">DeepSORT/IoU</td>
+                    <td>Up to 50 simultaneous persons</td>
+                </tr>
+                <tr>
+                    <td>Processing Speed</td>
+                    <td class="highlight">30+ FPS</td>
+                    <td>Full pipeline on Jetson AGX Orin</td>
+                </tr>
+                <tr>
+                    <td>API Interface</td>
+                    <td class="highlight">REST + WebSocket</td>
+                    <td>FastAPI with real-time streaming</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <h2>Ready to Integrate HumanSense AI?</h2>
+        <p>Contact us for technical verification (PoC) and enterprise deployment options.</p>
+        <div class="cta-buttons">
+            <a href="index.html#contact" class="btn-white">Request Demo</a>
+            <a href="Face-ID_AI_Perception_Architecture.pdf" target="_blank" class="btn-outline">Download Architecture PDF</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="index.html" class="back-link">← Back to Main Page</a>
+        <p>&copy; 2025 FunnyTech21 Co., Ltd. | <a href="mailto:ioplanet@funnytech21.com">ioplanet@funnytech21.com</a> | <a href="https://www.funnytech21.com">www.funnytech21.com</a></p>
+    </div>
+</body>
+</html>
