@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i-DMS 성능 리포트 | (주)퍼니테크21</title>
+    <title>i-DMS Performance Report | FunnyTech21</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -26,11 +26,32 @@
 
         .header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--electric-blue) 100%);
-            color: white; padding: 60px 24px; text-align: center;
+            color: white; padding: 60px 24px; text-align: center; position: relative;
         }
         .header h1 { font-size: 2.5rem; margin-bottom: 10px; }
         .header p { font-size: 1.1rem; opacity: 0.9; }
         .header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; margin-top: 15px; font-size: 0.9rem; }
+
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            display: flex;
+            gap: 8px;
+        }
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.3); }
+        .lang-btn.active { background: white; color: var(--primary-blue); font-weight: 700; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
 
@@ -65,7 +86,7 @@
         .comparison-table .highlight { background: rgba(21,83,158,0.1); font-weight: 600; }
 
         .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } .lang-toggle { position: static; justify-content: center; margin-bottom: 20px; } .header { padding-top: 20px; } }
 
         .improvement-note {
             background: linear-gradient(135deg, var(--primary-red) 0%, #FF6B6B 100%);
@@ -80,223 +101,249 @@
 </head>
 <body>
     <div class="header">
-        <h1>i-DMS 성능 리포트</h1>
-        <p>비접촉 rPPG 기술 심박수 측정 정확도 평가</p>
-        <div class="badge">vs Polar H10 심박계 밴드 비교 분석</div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" onclick="setLang('ko')">한국어</button>
+        </div>
+        <h1 data-ko="i-DMS 성능 리포트" data-en="i-DMS Performance Report">i-DMS Performance Report</h1>
+        <p data-ko="비접촉 rPPG 기술 심박수 측정 정확도 평가" data-en="Non-contact rPPG Heart Rate Measurement Accuracy Evaluation">Non-contact rPPG Heart Rate Measurement Accuracy Evaluation</p>
+        <div class="badge" data-ko="vs Polar H10 심박계 밴드 비교 분석" data-en="vs Polar H10 Heart Rate Monitor Comparison">vs Polar H10 Heart Rate Monitor Comparison</div>
     </div>
 
     <div class="container">
-        <a href="index.html" class="back-link">← 메인 페이지로 돌아가기</a>
+        <a href="index.html" class="back-link" data-ko="← 메인 페이지로 돌아가기" data-en="← Back to Main Page">← Back to Main Page</a>
 
-        <!-- 개요 -->
+        <!-- Overview -->
         <div class="section">
-            <h2>📊 개요</h2>
-            <p>본 보고서는 FunnyTech21의 i-DMS(운전자 모니터링 시스템)에서 <strong>비접촉 방식</strong>으로 측정된 심박수 데이터와 Polar 접촉식 심박계 밴드(기준값)를 비교하여 i-DMS의 생체신호 검출 정확도를 평가합니다.</p>
+            <h2><span>📊</span> <span data-ko="개요" data-en="Overview">Overview</span></h2>
+            <p data-ko="본 보고서는 FunnyTech21의 i-DMS(운전자 모니터링 시스템)에서 비접촉 방식으로 측정된 심박수 데이터와 Polar 접촉식 심박계 밴드(기준값)를 비교하여 i-DMS의 생체신호 검출 정확도를 평가합니다." data-en="This report evaluates the biosignal detection accuracy of FunnyTech21's i-DMS (Driver Monitoring System) by comparing non-contact heart rate measurements with the Polar contact heart rate monitor band (reference value).">This report evaluates the biosignal detection accuracy of FunnyTech21's i-DMS (Driver Monitoring System) by comparing non-contact heart rate measurements with the Polar contact heart rate monitor band (reference value).</p>
 
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value">45분</div>
-                    <div class="stat-label">측정 시간</div>
+                    <div class="stat-value" data-ko="45분" data-en="45 min">45 min</div>
+                    <div class="stat-label" data-ko="측정 시간" data-en="Measurement Time">Measurement Time</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">3.34 BPM</div>
-                    <div class="stat-label">평균 오차</div>
+                    <div class="stat-label" data-ko="평균 오차" data-en="Mean Error">Mean Error</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">4.4%</div>
-                    <div class="stat-label">평균 오차율</div>
+                    <div class="stat-label" data-ko="평균 오차율" data-en="Mean Error Rate">Mean Error Rate</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">NCAP 2025</div>
-                    <div class="stat-label">기준 충족</div>
+                    <div class="stat-label" data-ko="기준 충족" data-en="Standard Met">Standard Met</div>
                 </div>
             </div>
         </div>
 
-        <!-- 시계열 비교 -->
+        <!-- Time Series -->
         <div class="section">
-            <h2>📈 심박수 시계열 비교</h2>
+            <h2><span>📈</span> <span data-ko="심박수 시계열 비교" data-en="Heart Rate Time Series Comparison">Heart Rate Time Series Comparison</span></h2>
             <div class="chart-container">
-                <img src="imgs/charts/01_timeseries_comparison.png" alt="시계열 비교 차트">
-                <figcaption>i-DMS(비접촉)와 Polar(접촉식) 심박수 측정값 시계열 비교</figcaption>
+                <img src="imgs/charts/01_timeseries_comparison.png" alt="Time Series Chart">
+                <figcaption data-ko="i-DMS(비접촉)와 Polar(접촉식) 심박수 측정값 시계열 비교" data-en="Time series comparison of i-DMS (non-contact) and Polar (contact) heart rate measurements">Time series comparison of i-DMS (non-contact) and Polar (contact) heart rate measurements</figcaption>
             </div>
 
             <div class="two-col">
                 <div>
-                    <h3>Polar (기준값) 통계</h3>
+                    <h3 data-ko="Polar (기준값) 통계" data-en="Polar (Reference) Statistics">Polar (Reference) Statistics</h3>
                     <ul class="check-list">
-                        <li>평균: 76.01 BPM</li>
-                        <li>표준편차: 3.91 BPM</li>
-                        <li>범위: 66~83 BPM</li>
+                        <li data-ko="평균: 76.01 BPM" data-en="Mean: 76.01 BPM">Mean: 76.01 BPM</li>
+                        <li data-ko="표준편차: 3.91 BPM" data-en="Std Dev: 3.91 BPM">Std Dev: 3.91 BPM</li>
+                        <li data-ko="범위: 66~83 BPM" data-en="Range: 66~83 BPM">Range: 66~83 BPM</li>
                     </ul>
                 </div>
                 <div>
-                    <h3>i-DMS (측정값) 통계</h3>
+                    <h3 data-ko="i-DMS (측정값) 통계" data-en="i-DMS (Measured) Statistics">i-DMS (Measured) Statistics</h3>
                     <ul class="check-list">
-                        <li>평균: 72.66 BPM</li>
-                        <li>표준편차: 10.66 BPM</li>
-                        <li>범위: 64~99 BPM</li>
+                        <li data-ko="평균: 72.66 BPM" data-en="Mean: 72.66 BPM">Mean: 72.66 BPM</li>
+                        <li data-ko="표준편차: 10.66 BPM" data-en="Std Dev: 10.66 BPM">Std Dev: 10.66 BPM</li>
+                        <li data-ko="범위: 64~99 BPM" data-en="Range: 64~99 BPM">Range: 64~99 BPM</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- 정확도 분석 -->
+        <!-- Accuracy Analysis -->
         <div class="section">
-            <h2>🎯 정확도 분석</h2>
+            <h2><span>🎯</span> <span data-ko="정확도 분석" data-en="Accuracy Analysis">Accuracy Analysis</span></h2>
 
             <div class="highlight-box success">
-                <strong>핵심 성과:</strong> 평균값 3.34 BPM 차이로 매우 근접 (4.4% 오차) - 비접촉 측정으로는 우수한 성능
+                <strong data-ko="핵심 성과:" data-en="Key Achievement:">Key Achievement:</strong> <span data-ko="평균값 3.34 BPM 차이로 매우 근접 (4.4% 오차) - 비접촉 측정으로는 우수한 성능" data-en="Very close with 3.34 BPM mean difference (4.4% error) - Excellent performance for non-contact measurement">Very close with 3.34 BPM mean difference (4.4% error) - Excellent performance for non-contact measurement</span>
             </div>
 
             <div class="chart-container">
-                <img src="imgs/charts/02_scatter_correlation.png" alt="산점도 상관관계">
-                <figcaption>Polar vs i-DMS 심박수 산점도 및 상관관계 분석</figcaption>
+                <img src="imgs/charts/02_scatter_correlation.png" alt="Scatter Correlation">
+                <figcaption data-ko="Polar vs i-DMS 심박수 산점도 및 상관관계 분석" data-en="Polar vs i-DMS heart rate scatter plot and correlation analysis">Polar vs i-DMS heart rate scatter plot and correlation analysis</figcaption>
             </div>
 
-            <h3>국제 학술 연구 기준 비교</h3>
+            <h3 data-ko="국제 학술 연구 기준 비교" data-en="International Research Standards Comparison">International Research Standards Comparison</h3>
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th>연구/시스템</th>
+                        <th data-ko="연구/시스템" data-en="Research/System">Research/System</th>
                         <th>MAE</th>
-                        <th>환경</th>
+                        <th data-ko="환경" data-en="Environment">Environment</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>실험실 환경 (이상적 조건)</td>
+                        <td data-ko="실험실 환경 (이상적 조건)" data-en="Laboratory (Ideal Conditions)">Laboratory (Ideal Conditions)</td>
                         <td>2-5 BPM</td>
-                        <td>통제됨</td>
+                        <td data-ko="통제됨" data-en="Controlled">Controlled</td>
                     </tr>
                     <tr>
-                        <td>일반 실내 환경</td>
+                        <td data-ko="일반 실내 환경" data-en="General Indoor Environment">General Indoor Environment</td>
                         <td>5-8 BPM</td>
-                        <td>보통</td>
+                        <td data-ko="보통" data-en="Normal">Normal</td>
                     </tr>
                     <tr>
-                        <td>차량 내부 (운전 중)</td>
+                        <td data-ko="차량 내부 (운전 중)" data-en="In-Vehicle (While Driving)">In-Vehicle (While Driving)</td>
                         <td>8-15 BPM</td>
-                        <td>열악</td>
+                        <td data-ko="열악" data-en="Challenging">Challenging</td>
                     </tr>
                     <tr class="highlight">
-                        <td><strong>현재 i-DMS 시스템</strong></td>
+                        <td><strong data-ko="현재 i-DMS 시스템" data-en="Current i-DMS System">Current i-DMS System</strong></td>
                         <td><strong>10.09 BPM</strong></td>
-                        <td>열악</td>
+                        <td data-ko="열악" data-en="Challenging">Challenging</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Bland-Altman 분석 -->
+        <!-- Bland-Altman -->
         <div class="section">
-            <h2>📉 Bland-Altman 일치도 분석</h2>
+            <h2><span>📉</span> <span data-ko="Bland-Altman 일치도 분석" data-en="Bland-Altman Agreement Analysis">Bland-Altman Agreement Analysis</span></h2>
             <div class="chart-container">
-                <img src="imgs/charts/03_bland_altman.png" alt="Bland-Altman 분석">
-                <figcaption>측정 일치도 분석 - 두 측정 방식 간의 차이 분포</figcaption>
+                <img src="imgs/charts/03_bland_altman.png" alt="Bland-Altman Analysis">
+                <figcaption data-ko="측정 일치도 분석 - 두 측정 방식 간의 차이 분포" data-en="Agreement analysis - Distribution of differences between two measurement methods">Agreement analysis - Distribution of differences between two measurement methods</figcaption>
             </div>
         </div>
 
-        <!-- 분포 비교 -->
+        <!-- Distribution -->
         <div class="section">
-            <h2>📊 심박수 분포 비교</h2>
+            <h2><span>📊</span> <span data-ko="심박수 분포 비교" data-en="Heart Rate Distribution Comparison">Heart Rate Distribution Comparison</span></h2>
             <div class="two-col">
                 <div class="chart-container">
-                    <img src="imgs/charts/04_distribution_comparison.png" alt="분포 비교">
-                    <figcaption>심박수 분포 히스토그램</figcaption>
+                    <img src="imgs/charts/04_distribution_comparison.png" alt="Distribution Comparison">
+                    <figcaption data-ko="심박수 분포 히스토그램" data-en="Heart rate distribution histogram">Heart rate distribution histogram</figcaption>
                 </div>
                 <div class="chart-container">
-                    <img src="imgs/charts/05_boxplot_comparison.png" alt="박스플롯">
-                    <figcaption>박스플롯 비교</figcaption>
+                    <img src="imgs/charts/05_boxplot_comparison.png" alt="Boxplot">
+                    <figcaption data-ko="박스플롯 비교" data-en="Boxplot comparison">Boxplot comparison</figcaption>
                 </div>
             </div>
         </div>
 
-        <!-- 오차 분석 -->
+        <!-- Error Analysis -->
         <div class="section">
-            <h2>⚠️ 오차 분석</h2>
+            <h2><span>⚠️</span> <span data-ko="오차 분석" data-en="Error Analysis">Error Analysis</span></h2>
             <div class="chart-container">
-                <img src="imgs/charts/06_error_analysis.png" alt="오차 분석">
-                <figcaption>측정 오차 패턴 분석</figcaption>
+                <img src="imgs/charts/06_error_analysis.png" alt="Error Analysis">
+                <figcaption data-ko="측정 오차 패턴 분석" data-en="Measurement error pattern analysis">Measurement error pattern analysis</figcaption>
             </div>
         </div>
 
-        <!-- 마이크로슬립 감지 -->
+        <!-- Microsleep -->
         <div class="section">
-            <h2>😴 마이크로슬립 감지 분석</h2>
+            <h2><span>😴</span> <span data-ko="마이크로슬립 감지 분석" data-en="Microsleep Detection Analysis">Microsleep Detection Analysis</span></h2>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-value">198</div>
-                    <div class="stat-label">총 측정 샘플</div>
+                    <div class="stat-label" data-ko="총 측정 샘플" data-en="Total Samples">Total Samples</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">1회</div>
-                    <div class="stat-label">마이크로슬립 감지</div>
+                    <div class="stat-value" data-ko="1회" data-en="1 event">1 event</div>
+                    <div class="stat-label" data-ko="마이크로슬립 감지" data-en="Microsleep Detected">Microsleep Detected</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">11.31%</div>
-                    <div class="stat-label">평균 PERCLOS</div>
+                    <div class="stat-label" data-ko="평균 PERCLOS" data-en="Mean PERCLOS">Mean PERCLOS</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">0.51%</div>
-                    <div class="stat-label">이벤트 발생률</div>
+                    <div class="stat-label" data-ko="이벤트 발생률" data-en="Event Rate">Event Rate</div>
                 </div>
             </div>
 
             <div class="chart-container">
-                <img src="imgs/charts/07_microsleep_timeline.png" alt="마이크로슬립 타임라인">
-                <figcaption>마이크로슬립 이벤트 타임라인 및 PERCLOS 변화</figcaption>
+                <img src="imgs/charts/07_microsleep_timeline.png" alt="Microsleep Timeline">
+                <figcaption data-ko="마이크로슬립 이벤트 타임라인 및 PERCLOS 변화" data-en="Microsleep event timeline and PERCLOS changes">Microsleep event timeline and PERCLOS changes</figcaption>
             </div>
 
             <div class="highlight-box success">
-                <strong>PERCLOS 기반 졸음 감지 시스템 정상 작동</strong><br>
-                NCAP 2025 기준 PERCLOS > 8% 시 경고 - 시스템이 적절히 이벤트 감지 및 기록
+                <strong data-ko="PERCLOS 기반 졸음 감지 시스템 정상 작동" data-en="PERCLOS-based Drowsiness Detection System Operating Normally">PERCLOS-based Drowsiness Detection System Operating Normally</strong><br>
+                <span data-ko="NCAP 2025 기준 PERCLOS > 8% 시 경고 - 시스템이 적절히 이벤트 감지 및 기록" data-en="NCAP 2025 standard: Alert when PERCLOS > 8% - System properly detects and records events">NCAP 2025 standard: Alert when PERCLOS > 8% - System properly detects and records events</span>
             </div>
         </div>
 
-        <!-- 결론 -->
+        <!-- Conclusion -->
         <div class="section">
-            <h2>✅ 종합 평가</h2>
+            <h2><span>✅</span> <span data-ko="종합 평가" data-en="Overall Assessment">Overall Assessment</span></h2>
 
             <ul class="check-list">
-                <li><strong>비접촉 rPPG 기술 성능:</strong> 국제 학술 연구 수준 달성, NCAP 2025 기준 충족</li>
-                <li><strong>평균 심박수 추적:</strong> 3.34 BPM 오차 (4.4%) - 장시간 모니터링 신뢰도 높음</li>
-                <li><strong>운전자 모니터링:</strong> 졸음, 스트레스, 이상 상태 감지 가능</li>
-                <li><strong>시스템 통합:</strong> PERCLOS와 심박수 통합 모니터링, 실시간 경고 시스템 작동</li>
+                <li><strong data-ko="비접촉 rPPG 기술 성능:" data-en="Non-contact rPPG Performance:">Non-contact rPPG Performance:</strong> <span data-ko="국제 학술 연구 수준 달성, NCAP 2025 기준 충족" data-en="Meets international research standards, NCAP 2025 compliant">Meets international research standards, NCAP 2025 compliant</span></li>
+                <li><strong data-ko="평균 심박수 추적:" data-en="Mean Heart Rate Tracking:">Mean Heart Rate Tracking:</strong> <span data-ko="3.34 BPM 오차 (4.4%) - 장시간 모니터링 신뢰도 높음" data-en="3.34 BPM error (4.4%) - High reliability for long-term monitoring">3.34 BPM error (4.4%) - High reliability for long-term monitoring</span></li>
+                <li><strong data-ko="운전자 모니터링:" data-en="Driver Monitoring:">Driver Monitoring:</strong> <span data-ko="졸음, 스트레스, 이상 상태 감지 가능" data-en="Capable of detecting drowsiness, stress, and abnormal conditions">Capable of detecting drowsiness, stress, and abnormal conditions</span></li>
+                <li><strong data-ko="시스템 통합:" data-en="System Integration:">System Integration:</strong> <span data-ko="PERCLOS와 심박수 통합 모니터링, 실시간 경고 시스템 작동" data-en="Integrated PERCLOS and heart rate monitoring, real-time alert system operational">Integrated PERCLOS and heart rate monitoring, real-time alert system operational</span></li>
             </ul>
 
-            <h3>기술적 강점</h3>
+            <h3 data-ko="기술적 강점" data-en="Technical Strengths">Technical Strengths</h3>
             <div class="two-col">
                 <div class="highlight-box">
-                    <strong>비침습성</strong><br>
-                    운전자가 아무것도 착용할 필요 없음. 자연스러운 운전 환경 유지.
+                    <strong data-ko="비침습성" data-en="Non-invasive">Non-invasive</strong><br>
+                    <span data-ko="운전자가 아무것도 착용할 필요 없음. 자연스러운 운전 환경 유지." data-en="Driver doesn't need to wear anything. Maintains natural driving environment.">Driver doesn't need to wear anything. Maintains natural driving environment.</span>
                 </div>
                 <div class="highlight-box">
-                    <strong>실시간 모니터링</strong><br>
-                    카메라 기반 즉시 측정. 별도 장비 연결 불필요.
+                    <strong data-ko="실시간 모니터링" data-en="Real-time Monitoring">Real-time Monitoring</strong><br>
+                    <span data-ko="카메라 기반 즉시 측정. 별도 장비 연결 불필요." data-en="Camera-based instant measurement. No additional device connection required.">Camera-based instant measurement. No additional device connection required.</span>
                 </div>
             </div>
             <div class="two-col">
                 <div class="highlight-box">
-                    <strong>다중 생체신호 통합</strong><br>
-                    심박수 + PERCLOS + 시선 추적 + 얼굴 표정 분석
+                    <strong data-ko="다중 생체신호 통합" data-en="Multi-biosignal Integration">Multi-biosignal Integration</strong><br>
+                    <span data-ko="심박수 + PERCLOS + 시선 추적 + 얼굴 표정 분석" data-en="Heart rate + PERCLOS + Gaze tracking + Facial expression analysis">Heart rate + PERCLOS + Gaze tracking + Facial expression analysis</span>
                 </div>
                 <div class="highlight-box">
-                    <strong>실용성</strong><br>
-                    설치 간편, 추가 웨어러블 불필요, 다수 운전자 자동 대응
+                    <strong data-ko="실용성" data-en="Practicality">Practicality</strong><br>
+                    <span data-ko="설치 간편, 추가 웨어러블 불필요, 다수 운전자 자동 대응" data-en="Easy installation, no wearables needed, automatic multi-driver support">Easy installation, no wearables needed, automatic multi-driver support</span>
                 </div>
             </div>
         </div>
 
-        <!-- 지속적 개선 -->
+        <!-- Improvement -->
         <div class="improvement-note">
-            <h3>🚀 우리는 계속 성능을 고도화합니다</h3>
-            <p>적응형 필터링, 머신러닝 기반 노이즈 제거, 개인화 알고리즘 등<br>지속적인 연구개발로 더 높은 정확도를 향해 나아갑니다.</p>
+            <h3 data-ko="🚀 우리는 계속 성능을 고도화합니다" data-en="🚀 We Continuously Improve Performance">🚀 We Continuously Improve Performance</h3>
+            <p data-ko="적응형 필터링, 머신러닝 기반 노이즈 제거, 개인화 알고리즘 등 지속적인 연구개발로 더 높은 정확도를 향해 나아갑니다." data-en="Adaptive filtering, ML-based noise removal, personalized algorithms - continuous R&D for higher accuracy.">Adaptive filtering, ML-based noise removal, personalized algorithms - continuous R&D for higher accuracy.</p>
         </div>
     </div>
 
     <div class="footer">
-        <p>© 2025 (주)퍼니테크21 | <a href="mailto:ioplanet@funnytech21.com">ioplanet@funnytech21.com</a> | <a href="https://www.funnytech21.com">www.funnytech21.com</a></p>
+        <p>© 2025 FunnyTech21 Co., Ltd. | <a href="mailto:ioplanet@funnytech21.com">ioplanet@funnytech21.com</a> | <a href="https://www.funnytech21.com">www.funnytech21.com</a></p>
     </div>
+
+    <script>
+        let currentLang = 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-ko][data-en]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+            document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'en';
+            setLang(savedLang);
+        });
+    </script>
 </body>
 </html>
