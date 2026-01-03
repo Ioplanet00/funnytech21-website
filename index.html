@@ -205,6 +205,89 @@
             font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
         }
         .lang-toggle:hover { background: var(--bg-hover); border-color: var(--primary-blue); }
+
+        /* Language Selector Dropdown */
+        .lang-selector { position: relative; }
+        .lang-selector-btn {
+            display: flex; align-items: center; gap: 6px;
+            background: var(--bg-light); color: var(--text-primary); padding: 8px 14px;
+            border: 1px solid var(--border-light); border-radius: 6px; font-weight: 500;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+        }
+        .lang-selector-btn:hover { background: var(--bg-hover); border-color: var(--primary-blue); }
+        .lang-selector-btn svg { width: 14px; height: 14px; transition: transform 0.2s; }
+        .lang-dropdown {
+            position: absolute; top: 100%; right: 0; margin-top: 8px;
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 160px; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.2s; z-index: 1000;
+        }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            cursor: pointer; transition: background 0.2s; font-size: 0.9rem;
+        }
+        .lang-option:first-child { border-radius: 10px 10px 0 0; }
+        .lang-option:last-child { border-radius: 0 0 10px 10px; }
+        .lang-option:hover { background: var(--bg-light); }
+        .lang-option.active { background: rgba(21, 83, 158, 0.1); color: var(--primary-blue); font-weight: 600; }
+        .lang-flag { font-size: 1.2rem; }
+
+        /* Demo Section */
+        .demo-section { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); }
+        .demo-container { max-width: var(--container-width); margin: 0 auto; }
+        .demo-header { text-align: center; margin-bottom: 50px; }
+        .demo-header .section-tag { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2); }
+        .demo-header h2 { color: white; font-size: 2.25rem; font-weight: 700; margin-bottom: 14px; }
+        .demo-header p { color: rgba(255,255,255,0.7); font-size: 1.05rem; }
+        .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .demo-platforms { display: flex; flex-direction: column; gap: 16px; }
+        .platform-card {
+            display: flex; align-items: center; gap: 16px; padding: 20px 24px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; transition: all 0.3s;
+        }
+        .platform-card:hover { background: rgba(255,255,255,0.1); transform: translateX(10px); }
+        .platform-icon {
+            width: 50px; height: 50px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+        .platform-icon.linux { background: linear-gradient(135deg, #FCC624 0%, #E5A00D 100%); }
+        .platform-icon.windows { background: linear-gradient(135deg, #00A4EF 0%, #0078D4 100%); }
+        .platform-icon.mac { background: linear-gradient(135deg, #555555 0%, #333333 100%); }
+        .platform-icon.jetson { background: linear-gradient(135deg, #76B900 0%, #5A8F00 100%); }
+        .platform-info h4 { color: white; font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+        .platform-info p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+        .demo-features {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px; padding: 32px;
+        }
+        .demo-features h3 { color: white; font-size: 1.3rem; font-weight: 700; margin-bottom: 24px; }
+        .feature-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 30px; }
+        .feature-item { display: flex; align-items: flex-start; gap: 12px; }
+        .feature-check {
+            width: 24px; height: 24px; background: var(--primary-red); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .feature-check svg { width: 14px; height: 14px; fill: white; }
+        .feature-item span { color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.5; }
+        .demo-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn-demo-primary {
+            background: var(--red-gradient); color: white; padding: 14px 28px;
+            border-radius: 8px; font-weight: 600; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
+        }
+        .btn-demo-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,34,34,0.4); }
+        .btn-demo-secondary {
+            background: rgba(255,255,255,0.1); color: white; padding: 14px 28px;
+            border-radius: 8px; font-weight: 600; text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.2); display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
+        }
+        .btn-demo-secondary:hover { background: rgba(255,255,255,0.2); }
+        @media (max-width: 992px) { .demo-grid { grid-template-columns: 1fr; } }
+
         .nav-right { display: flex; align-items: center; gap: 12px; }
         .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
 
@@ -839,7 +922,22 @@
                 <li><a href="#contact" data-ko="문의하기" data-en="Contact">문의하기</a></li>
             </ul>
             <div class="nav-right">
-                <button id="navLangToggle" class="lang-toggle" onclick="toggleLanguage()">한글 / EN</button>
+                <div class="lang-selector" id="langSelector">
+                    <button class="lang-selector-btn" onclick="toggleLangDropdown()">
+                        <span class="lang-current">English</span>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-option" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                        <div class="lang-option active" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                        <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                        <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                        <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                        <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                        <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                        <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ไทย</div>
+                    </div>
+                </div>
                 <a href="#contact" class="nav-cta" data-ko="기술 문의" data-en="Contact Us">기술 문의</a>
             </div>
             <button class="mobile-menu-btn" onclick="openMobileMenu()">☰</button>
@@ -1261,12 +1359,33 @@
     <section class="contact" id="contact">
         <div class="contact-container">
             <div class="contact-header">
-                <div class="lang-toggle">
-                    <button class="lang-btn" onclick="setLang('ko')">한국어</button>
-                    <button class="lang-btn active" onclick="setLang('en')">English</button>
+                <h2 data-ko="우리와 가장 확실한 파트너가 되어 주십시오" data-en="Become Our Trusted Partner" data-ja="信頼できるパートナーになってください" data-zh="成为我们值得信赖的合作伙伴" data-de="Werden Sie unser vertrauenswürdiger Partner" data-es="Conviértase en Nuestro Socio de Confianza" data-vi="Trở thành Đối tác Tin cậy" data-th="เป็นพันธมิตรที่เชื่อถือได้ของเรา">우리와 가장 확실한 파트너가 되어 주십시오</h2>
+                <p data-ko="기술 검증(PoC) 및 솔루션 도입 문의" data-en="Technical Verification (PoC) & Solution Inquiries" data-ja="技術検証（PoC）およびソリューション導入のお問い合わせ" data-zh="技术验证（PoC）和解决方案咨询" data-de="Technische Verifizierung (PoC) & Lösungsanfragen" data-es="Verificación Técnica (PoC) y Consultas" data-vi="Xác minh Kỹ thuật (PoC) & Yêu cầu Giải pháp" data-th="การตรวจสอบทางเทคนิค (PoC)">기술 검증(PoC) 및 솔루션 도입 문의</p>
+
+                <!-- Trial Solution Info Box -->
+                <div class="trial-info-box" style="margin-top: 30px; padding: 24px 32px; background: linear-gradient(135deg, rgba(21,83,158,0.1) 0%, rgba(59,130,246,0.1) 100%); border: 2px solid var(--primary-blue); border-radius: 16px; display: inline-block;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <span style="font-size: 2rem;">🖥️</span>
+                        <div>
+                            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin: 0;" data-ko="데모 & PoC 시험판 솔루션 제공" data-en="Demo & PoC Trial Solution Available" data-ja="デモ＆PoC試用版ソリューション提供" data-zh="提供演示和PoC试用解决方案" data-de="Demo & PoC Testlösung verfügbar" data-es="Solución de Prueba Demo & PoC Disponible" data-vi="Giải pháp Dùng thử Demo & PoC" data-th="โซลูชันทดลองใช้ Demo & PoC">데모 & PoC 시험판 솔루션 제공</h3>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+                        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: white; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <span style="font-size: 1.2rem;">🐧</span> Linux
+                        </span>
+                        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: white; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <span style="font-size: 1.2rem;">🪟</span> Windows
+                        </span>
+                        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: white; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <span style="font-size: 1.2rem;">🍎</span> macOS
+                        </span>
+                        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: white; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                            <span style="font-size: 1.2rem;">🟢</span> NVIDIA Jetson
+                        </span>
+                    </div>
+                    <p style="margin-top: 16px; font-size: 0.9rem; color: var(--text-secondary);" data-ko="모든 플랫폼에서 테스트 가능한 시험판 솔루션을 제공합니다" data-en="Trial solutions available for testing on all platforms" data-ja="全プラットフォームでテスト可能な試用版ソリューションを提供" data-zh="提供可在所有平台上测试的试用解决方案" data-de="Testlösungen für alle Plattformen verfügbar" data-es="Soluciones de prueba disponibles para todas las plataformas" data-vi="Giải pháp dùng thử có sẵn cho tất cả nền tảng" data-th="โซลูชันทดลองใช้สำหรับทุกแพลตฟอร์ม">모든 플랫폼에서 테스트 가능한 시험판 솔루션을 제공합니다</p>
                 </div>
-                <h2 data-ko="우리와 가장 확실한 파트너가 되어 주십시오" data-en="Become Our Trusted Partner">우리와 가장 확실한 파트너가 되어 주십시오</h2>
-                <p data-ko="기술 검증(PoC) 및 솔루션 도입 문의" data-en="Technical Verification (PoC) & Solution Inquiries">기술 검증(PoC) 및 솔루션 도입 문의</p>
             </div>
 
             <div class="contact-grid">
@@ -1413,22 +1532,67 @@
             document.body.style.overflow = '';
         }
 
-        // Language Toggle
-        let currentLang = 'en';
-        function toggleLanguage() {
-            currentLang = currentLang === 'ko' ? 'en' : 'ko';
-            document.querySelectorAll('[data-ko][data-en]').forEach(el => {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = el.getAttribute('data-' + currentLang);
-                } else {
-                    el.innerHTML = el.getAttribute('data-' + currentLang);
+        // Multi-Language Support (8 languages)
+        const LANG_NAMES = {
+            ko: '한국어', en: 'English', ja: '日本語', zh: '中文',
+            de: 'Deutsch', es: 'Español', vi: 'Tiếng Việt', th: 'ไทย'
+        };
+        let currentLang = localStorage.getItem('funnytech_lang') || 'en';
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            applyLanguage(currentLang);
+            renderCalendar();
+        });
+
+        // Toggle language dropdown
+        function toggleLangDropdown() {
+            const dropdown = document.querySelector('.lang-dropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.lang-selector')) {
+                const dropdown = document.querySelector('.lang-dropdown');
+                if (dropdown) dropdown.classList.remove('active');
+            }
+        });
+
+        // Change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('funnytech_lang', lang);
+            applyLanguage(lang);
+            // Close dropdown
+            document.querySelector('.lang-dropdown').classList.remove('active');
+        }
+
+        // Apply language to all elements
+        function applyLanguage(lang) {
+            // Update all elements with data-[lang] attributes
+            document.querySelectorAll('[data-ko], [data-en], [data-ja], [data-zh], [data-de], [data-es], [data-vi], [data-th]').forEach(el => {
+                const text = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.innerHTML = text;
+                    }
                 }
             });
-            document.getElementById('navLangToggle').textContent = currentLang === 'ko' ? '한글 / EN' : 'KO / English';
-            // Sync contact section buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            const activeBtn = document.querySelector(`.lang-btn[onclick="setLang('${currentLang}')"]`);
-            if (activeBtn) activeBtn.classList.add('active');
+
+            // Update language selector button text
+            const langCurrent = document.querySelector('.lang-current');
+            if (langCurrent) langCurrent.textContent = LANG_NAMES[lang];
+
+            // Update dropdown active state
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+            const activeOpt = document.querySelector(`.lang-option[onclick="changeLanguage('${lang}')"]`);
+            if (activeOpt) activeOpt.classList.add('active');
+
+            // Update calendar if exists
+            if (typeof renderCalendar === 'function') renderCalendar();
         }
 
         // Progress bar
@@ -1446,24 +1610,9 @@
             });
         });
 
-        // Language toggle (contact section)
+        // Legacy setLang function for compatibility
         function setLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-            
-            document.querySelectorAll('[data-ko][data-en]').forEach(el => {
-                const text = el.getAttribute(`data-${lang}`);
-                if (text) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        el.placeholder = text;
-                    } else {
-                        el.innerHTML = text;
-                    }
-                }
-            });
-            // Sync nav button
-            document.getElementById('navLangToggle').textContent = currentLang === 'ko' ? '한글 / EN' : 'KO / English';
+            changeLanguage(lang);
         }
 
         // Email API URL
@@ -1517,7 +1666,13 @@
 
         const monthNames = {
             ko: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            ja: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            zh: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+            es: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            vi: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            th: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
         };
 
         function renderCalendar() {
@@ -1533,10 +1688,11 @@
             today.setHours(0, 0, 0, 0);
 
             // Update month display
-            if (currentLang === 'ko') {
-                calendarMonth.textContent = `${currentYear}년 ${monthNames.ko[currentMonth]}`;
+            const monthList = monthNames[currentLang] || monthNames.en;
+            if (currentLang === 'ko' || currentLang === 'ja' || currentLang === 'zh') {
+                calendarMonth.textContent = `${currentYear}년 ${monthList[currentMonth]}`;
             } else {
-                calendarMonth.textContent = `${monthNames.en[currentMonth]} ${currentYear}`;
+                calendarMonth.textContent = `${monthList[currentMonth]} ${currentYear}`;
             }
 
             // Clear and rebuild calendar
