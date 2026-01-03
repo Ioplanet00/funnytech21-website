@@ -115,6 +115,9 @@
         }
         .hero-key-message .icon svg { width: 20px; height: 20px; fill: white; }
         .hero-key-message span { font-weight: 600; font-size: 0.9rem; }
+        .hero-key-message .ncap-logo { background: white; padding: 6px; width: 60px; height: 40px; }
+        .hero-key-message .ncap-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .ncap-badge { border-color: var(--primary-blue); background: linear-gradient(135deg, rgba(21,83,158,0.05) 0%, rgba(59,130,246,0.05) 100%); }
         .hero-cta { display: flex; gap: 14px; }
         .btn-primary {
             background: var(--blue-gradient); color: white; padding: 14px 28px;
@@ -740,9 +743,9 @@
                         <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
                         <span data-ko="Hardware-Free: 단일 카메라로 구현" data-en="Hardware-Free: Single Camera Solution">Hardware-Free: 단일 카메라로 구현</span>
                     </div>
-                    <div class="hero-key-message">
-                        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
-                        <span>Euro NCAP 2026 Ready</span>
+                    <div class="hero-key-message ncap-badge">
+                        <div class="icon ncap-logo"><img src="imgs/euroncap_logo.svg" alt="Euro NCAP Logo"></div>
+                        <span data-ko="Euro NCAP 2026 대응" data-en="Euro NCAP 2026 Ready">Euro NCAP 2026 Ready</span>
                     </div>
                     <div class="hero-key-message">
                         <div class="icon"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg></div>
