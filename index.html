@@ -52,12 +52,13 @@
         .nav-links a:hover { color: var(--primary-blue); }
         .nav-links a.nav-highlight {
             font-weight: 700;
-            color: var(--primary-blue);
-            animation: navBlink 1.5s ease-in-out infinite;
+            color: var(--primary-red);
+            animation: navBlink 1s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255,34,34,0.5);
         }
         @keyframes navBlink {
-            0%, 100% { opacity: 1; color: var(--primary-blue); }
-            50% { opacity: 0.6; color: var(--electric-blue); }
+            0%, 100% { color: var(--primary-red); text-shadow: 0 0 10px rgba(255,34,34,0.5); }
+            50% { color: var(--electric-blue); text-shadow: 0 0 15px rgba(59,130,246,0.7); }
         }
         .nav-cta {
             background: var(--blue-gradient); color: white; padding: 10px 22px;
