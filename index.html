@@ -596,37 +596,17 @@
             border-radius: 16px;
             padding: 28px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .module-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--primary-blue);
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
         .module-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.1);
             border-color: var(--primary-blue);
         }
-        .module-card:hover::before { opacity: 1; }
-        .module-card.vital::before { background: #22c55e; }
         .module-card.vital:hover { border-color: #22c55e; }
-        .module-card.drowsy::before { background: #f59e0b; }
         .module-card.drowsy:hover { border-color: #f59e0b; }
-        .module-card.impair::before { background: #ef4444; }
         .module-card.impair:hover { border-color: #ef4444; }
-        .module-card.distract::before { background: #8b5cf6; }
         .module-card.distract:hover { border-color: #8b5cf6; }
-        .module-card.edge::before { background: #06b6d4; }
         .module-card.edge:hover { border-color: #06b6d4; }
-        .module-card.face::before { background: #ec4899; }
         .module-card.face:hover { border-color: #ec4899; }
 
         .module-icon {
@@ -960,14 +940,14 @@
                 <div class="arch-diagram">
                     <div class="arch-diagram-header">
                         <h3 data-ko="i-DMS 데이터 처리 흐름" data-en="i-DMS Data Processing Flow">i-DMS 데이터 처리 흐름</h3>
-                        <p data-ko="RGB 카메라 입력부터 실시간 분석까지" data-en="From RGB Camera Input to Real-time Analysis">RGB 카메라 입력부터 실시간 분석까지</p>
+                        <p data-ko="RGB, IR 카메라 입력부터 실시간 분석까지" data-en="From RGB, IR Camera Input to Real-time Analysis">RGB, IR 카메라 입력부터 실시간 분석까지</p>
                     </div>
                     <div class="arch-flow">
                         <div class="arch-input-block">
                             <div class="arch-camera-icon">
                                 <svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg>
                             </div>
-                            <span class="arch-input-label">RGB Camera</span>
+                            <span class="arch-input-label">RGB, IR Camera</span>
                         </div>
 
                         <div class="arch-arrow">→</div>
