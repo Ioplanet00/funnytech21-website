@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1112,8 +1112,8 @@
         <div class="contact-container">
             <div class="contact-header">
                 <div class="lang-toggle">
-                    <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
-                    <button class="lang-btn" onclick="setLang('en')">English</button>
+                    <button class="lang-btn" onclick="setLang('ko')">한국어</button>
+                    <button class="lang-btn active" onclick="setLang('en')">English</button>
                 </div>
                 <h2 data-ko="우리와 가장 확실한 파트너가 되어 주십시오" data-en="Become Our Trusted Partner">우리와 가장 확실한 파트너가 되어 주십시오</h2>
                 <p data-ko="기술 검증(PoC) 및 솔루션 도입 문의" data-en="Technical Verification (PoC) & Solution Inquiries">기술 검증(PoC) 및 솔루션 도입 문의</p>
@@ -1264,7 +1264,7 @@
         }
 
         // Language Toggle
-        let currentLang = 'ko';
+        let currentLang = 'en';
         function toggleLanguage() {
             currentLang = currentLang === 'ko' ? 'en' : 'ko';
             document.querySelectorAll('[data-ko][data-en]').forEach(el => {
@@ -1585,9 +1585,10 @@
             }
         }
 
-        // Initialize calendar on page load
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             renderCalendar();
+            setLang('en'); // Default to English
         });
     </script>
 
