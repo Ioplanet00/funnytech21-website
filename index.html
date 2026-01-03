@@ -449,6 +449,247 @@
             cursor: pointer;
             color: var(--text-primary);
         }
+
+        /* Architecture Section */
+        .architecture { background: var(--bg-white); }
+        .arch-wrapper { display: flex; flex-direction: column; gap: 60px; }
+
+        /* Central Architecture Diagram */
+        .arch-diagram {
+            position: relative;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border-radius: 24px;
+            padding: 50px 40px;
+            overflow: hidden;
+        }
+        .arch-diagram::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255,34,34,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(59,130,246,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .arch-diagram-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        .arch-diagram-header h3 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .arch-diagram-header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+        }
+
+        /* Flow Diagram */
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .arch-input-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .arch-camera-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #475569 0%, #334155 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        .arch-camera-icon svg { width: 40px; height: 40px; fill: white; }
+        .arch-input-label {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .arch-arrow {
+            display: flex;
+            align-items: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 2rem;
+        }
+
+        .arch-engine {
+            background: linear-gradient(135deg, var(--primary-red) 0%, #FF6B6B 100%);
+            border-radius: 20px;
+            padding: 30px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(255,34,34,0.3);
+            position: relative;
+        }
+        .arch-engine::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+            z-index: -1;
+        }
+        .arch-engine h4 {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .arch-engine p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.85rem;
+        }
+
+        .arch-outputs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .arch-output-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .arch-output-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .arch-output-dot.vital { background: #22c55e; }
+        .arch-output-dot.drowsy { background: #f59e0b; }
+        .arch-output-dot.impair { background: #ef4444; }
+        .arch-output-dot.distract { background: #8b5cf6; }
+        .arch-output-item span {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Module Cards Grid */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .module-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-blue);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            border-color: var(--primary-blue);
+        }
+        .module-card:hover::before { opacity: 1; }
+        .module-card.vital::before { background: #22c55e; }
+        .module-card.vital:hover { border-color: #22c55e; }
+        .module-card.drowsy::before { background: #f59e0b; }
+        .module-card.drowsy:hover { border-color: #f59e0b; }
+        .module-card.impair::before { background: #ef4444; }
+        .module-card.impair:hover { border-color: #ef4444; }
+        .module-card.distract::before { background: #8b5cf6; }
+        .module-card.distract:hover { border-color: #8b5cf6; }
+        .module-card.edge::before { background: #06b6d4; }
+        .module-card.edge:hover { border-color: #06b6d4; }
+        .module-card.face::before { background: #ec4899; }
+        .module-card.face:hover { border-color: #ec4899; }
+
+        .module-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+        .module-icon svg { width: 28px; height: 28px; fill: white; }
+        .module-icon.vital { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .module-icon.drowsy { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .module-icon.impair { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .module-icon.distract { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+        .module-icon.edge { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
+        .module-icon.face { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+
+        .module-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        .module-card .module-subtitle {
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .module-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .module-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .module-tag {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 1024px) {
+            .module-grid { grid-template-columns: repeat(2, 1fr); }
+            .arch-flow { gap: 15px; }
+        }
+        @media (max-width: 768px) {
+            .module-grid { grid-template-columns: 1fr; }
+            .arch-diagram { padding: 30px 20px; }
+            .arch-flow { flex-direction: column; }
+            .arch-arrow { transform: rotate(90deg); }
+            .arch-outputs { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+        }
     </style>
 </head>
 <body>
@@ -464,6 +705,7 @@
                 <li><a href="#technologies" data-ko="핵심 기술" data-en="Technology">핵심 기술</a></li>
                 <li><a href="#performance" data-ko="성능 데이터" data-en="Performance">성능 데이터</a></li>
                 <li><a href="#applications" data-ko="적용 분야" data-en="Applications">적용 분야</a></li>
+                <li><a href="#architecture" data-ko="시스템 구조" data-en="Architecture">시스템 구조</a></li>
                 <li><a href="#videos" data-ko="영상 소개" data-en="Videos">영상 소개</a></li>
                 <li><a href="#contact" data-ko="문의하기" data-en="Contact">문의하기</a></li>
             </ul>
@@ -484,6 +726,7 @@
                 <li><a href="#technologies" onclick="closeMobileMenu()" data-ko="핵심 기술" data-en="Technology">핵심 기술</a></li>
                 <li><a href="#performance" onclick="closeMobileMenu()" data-ko="성능 데이터" data-en="Performance">성능 데이터</a></li>
                 <li><a href="#applications" onclick="closeMobileMenu()" data-ko="적용 분야" data-en="Applications">적용 분야</a></li>
+                <li><a href="#architecture" onclick="closeMobileMenu()" data-ko="시스템 구조" data-en="Architecture">시스템 구조</a></li>
                 <li><a href="#videos" onclick="closeMobileMenu()" data-ko="영상 소개" data-en="Videos">영상 소개</a></li>
                 <li><a href="#contact" onclick="closeMobileMenu()" data-ko="문의하기" data-en="Contact">문의하기</a></li>
             </ul>
@@ -696,6 +939,156 @@
                             <span class="app-tag" data-ko="운전 점수" data-en="Driving Score">운전 점수</span>
                             <span class="app-tag" data-ko="UBI 보험" data-en="UBI Insurance">UBI 보험</span>
                             <span class="app-tag" data-ko="리스크 평가" data-en="Risk Assessment">리스크 평가</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Architecture -->
+    <section class="architecture" id="architecture">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-ko="시스템 구조" data-en="Architecture">시스템 구조</span>
+                <h2 class="section-title">Core Module Architecture</h2>
+                <p class="section-subtitle" data-ko="6개 핵심 모듈이 통합된 고도화된 운전자 모니터링 시스템" data-en="Advanced Driver Monitoring System with 6 Integrated Core Modules">6개 핵심 모듈이 통합된 고도화된 운전자 모니터링 시스템</p>
+            </div>
+
+            <div class="arch-wrapper">
+                <!-- Architecture Flow Diagram -->
+                <div class="arch-diagram">
+                    <div class="arch-diagram-header">
+                        <h3 data-ko="i-DMS 데이터 처리 흐름" data-en="i-DMS Data Processing Flow">i-DMS 데이터 처리 흐름</h3>
+                        <p data-ko="RGB 카메라 입력부터 실시간 분석까지" data-en="From RGB Camera Input to Real-time Analysis">RGB 카메라 입력부터 실시간 분석까지</p>
+                    </div>
+                    <div class="arch-flow">
+                        <div class="arch-input-block">
+                            <div class="arch-camera-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/></svg>
+                            </div>
+                            <span class="arch-input-label">RGB Camera</span>
+                        </div>
+
+                        <div class="arch-arrow">→</div>
+
+                        <div class="arch-engine">
+                            <h4>Triple-Fusion Engine™</h4>
+                            <p data-ko="rPPG + CV + Edge AI 통합 처리" data-en="rPPG + CV + Edge AI Integration">rPPG + CV + Edge AI 통합 처리</p>
+                        </div>
+
+                        <div class="arch-arrow">→</div>
+
+                        <div class="arch-outputs">
+                            <div class="arch-output-item">
+                                <span class="arch-output-dot vital"></span>
+                                <span data-ko="생체신호 분석" data-en="Vital Signs">생체신호 분석</span>
+                            </div>
+                            <div class="arch-output-item">
+                                <span class="arch-output-dot drowsy"></span>
+                                <span data-ko="졸음 감지" data-en="Drowsiness">졸음 감지</span>
+                            </div>
+                            <div class="arch-output-item">
+                                <span class="arch-output-dot impair"></span>
+                                <span data-ko="손상 판정" data-en="Impairment">손상 판정</span>
+                            </div>
+                            <div class="arch-output-item">
+                                <span class="arch-output-dot distract"></span>
+                                <span data-ko="주의산만 감지" data-en="Distraction">주의산만 감지</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module Cards -->
+                <div class="module-grid">
+                    <!-- Vital Sensing Module -->
+                    <div class="module-card vital">
+                        <div class="module-icon vital">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </div>
+                        <h4 data-ko="생체신호 측정 모듈" data-en="Vital Sensing Module">생체신호 측정 모듈</h4>
+                        <div class="module-subtitle">Motion-Compensated CHROM</div>
+                        <p data-ko="RGB 카메라만으로 맥파(BVP)를 추출하고 심박수, 혈압을 비접촉 방식으로 정밀 측정합니다. CLAHE 조명 보정으로 터널 등 급격한 환경 변화에도 안정적입니다." data-en="Extracts BVP from RGB camera for contactless heart rate and blood pressure measurement. CLAHE illumination correction ensures stability in tunnels and varying lighting.">RGB 카메라만으로 맥파(BVP)를 추출하고 심박수, 혈압을 비접촉 방식으로 정밀 측정합니다. CLAHE 조명 보정으로 터널 등 급격한 환경 변화에도 안정적입니다.</p>
+                        <div class="module-tags">
+                            <span class="module-tag">FFT</span>
+                            <span class="module-tag">Butterworth Filter</span>
+                            <span class="module-tag">PTT Algorithm</span>
+                        </div>
+                    </div>
+
+                    <!-- Drowsiness Detection Module -->
+                    <div class="module-card drowsy">
+                        <div class="module-icon drowsy">
+                            <svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.58 2 11c0 2.05.96 3.91 2.5 5.29V20l3.5-2c1.24.41 2.59.63 4 .63 5.5 0 10-3.58 10-8s-4.5-8-10-8zm0 14c-1.23 0-2.39-.18-3.46-.5L6.5 18l.04-2.67C5.02 14.19 4 12.68 4 11c0-3.31 3.58-6 8-6s8 2.69 8 6-3.58 6-8 6z"/><circle cx="9" cy="11" r="1.5"/><circle cx="15" cy="11" r="1.5"/></svg>
+                        </div>
+                        <h4 data-ko="졸음 및 미세수면 감지" data-en="Drowsiness Detection Module">졸음 및 미세수면 감지</h4>
+                        <div class="module-subtitle">PERCLOS + Dynamic EAR</div>
+                        <p data-ko="눈 개폐 비율(PERCLOS)을 60초 슬라이딩 윈도우로 계산하고, 개인별 캘리브레이션 기반 동적 임계값으로 졸음 4~5단계를 정확히 판정합니다." data-en="Calculates PERCLOS with 60-second sliding window and determines 4-5 drowsiness levels using personalized dynamic thresholds through calibration.">눈 개폐 비율(PERCLOS)을 60초 슬라이딩 윈도우로 계산하고, 개인별 캘리브레이션 기반 동적 임계값으로 졸음 4~5단계를 정확히 판정합니다.</p>
+                        <div class="module-tags">
+                            <span class="module-tag">EAR 0.20~0.30</span>
+                            <span class="module-tag">Microsleep 1.0s</span>
+                            <span class="module-tag">6-Landmark</span>
+                        </div>
+                    </div>
+
+                    <!-- Impairment Detection Module -->
+                    <div class="module-card impair">
+                        <div class="module-icon impair">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <h4 data-ko="운전자 손상/음주 감지" data-en="Impairment Detection Module">운전자 손상/음주 감지</h4>
+                        <div class="module-subtitle">Triple-Fusion Analysis</div>
+                        <p data-ko="동공 떨림(Hippus), 안구진탕(Nystagmus), 혈류 서지를 융합 분석하여 알코올/약물 손상 상태를 90% 이상 정확도로 판별합니다." data-en="Fusion analysis of Hippus, Nystagmus, and Blood Surge detects alcohol/drug impairment with over 90% accuracy.">동공 떨림(Hippus), 안구진탕(Nystagmus), 혈류 서지를 융합 분석하여 알코올/약물 손상 상태를 90% 이상 정확도로 판별합니다.</p>
+                        <div class="module-tags">
+                            <span class="module-tag">0.3~0.5Hz Hippus</span>
+                            <span class="module-tag">Jitter Score</span>
+                            <span class="module-tag">rPPG Amplitude</span>
+                        </div>
+                    </div>
+
+                    <!-- Distraction Detection Module -->
+                    <div class="module-card distract">
+                        <div class="module-icon distract">
+                            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        </div>
+                        <h4 data-ko="주의산만 감지 모듈" data-en="Distraction Detection Module">주의산만 감지 모듈</h4>
+                        <div class="module-subtitle">3D Gaze + Object Detection</div>
+                        <p data-ko="3D 시선 벡터로 전방 주시 여부(±15도)를 추적하고, YOLOv8n으로 스마트폰/음료 등을 실시간 탐지하며, MediaPipe로 핸들 미접촉을 감지합니다." data-en="Tracks forward gaze (±15°) with 3D gaze vector, detects phones/drinks via YOLOv8n, and monitors hands-off wheel using MediaPipe.">3D 시선 벡터로 전방 주시 여부(±15도)를 추적하고, YOLOv8n으로 스마트폰/음료 등을 실시간 탐지하며, MediaPipe로 핸들 미접촉을 감지합니다.</p>
+                        <div class="module-tags">
+                            <span class="module-tag">Pitch/Yaw ±15°</span>
+                            <span class="module-tag">YOLOv8n</span>
+                            <span class="module-tag">Hands-off 15s</span>
+                        </div>
+                    </div>
+
+                    <!-- Edge AI Optimization Module -->
+                    <div class="module-card edge">
+                        <div class="module-icon edge">
+                            <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                        </div>
+                        <h4 data-ko="엣지 최적화 모듈" data-en="Edge AI Optimization">엣지 최적화 모듈</h4>
+                        <div class="module-subtitle">TensorRT FP16 + CUDA Stream</div>
+                        <p data-ko="GPU 부하 85% 초과 시 적응형 프레임 스킵을 적용하고, CUDA Stream 병렬 전처리로 CPU 부하 50% 감소, TensorRT FP16으로 6~10배 추론 가속을 실현합니다." data-en="Adaptive frame skip at 85%+ GPU load, CUDA Stream parallel preprocessing reduces CPU by 50%, TensorRT FP16 accelerates inference 6-10x.">GPU 부하 85% 초과 시 적응형 프레임 스킵을 적용하고, CUDA Stream 병렬 전처리로 CPU 부하 50% 감소, TensorRT FP16으로 6~10배 추론 가속을 실현합니다.</p>
+                        <div class="module-tags">
+                            <span class="module-tag">Adaptive Skip</span>
+                            <span class="module-tag">FP16</span>
+                            <span class="module-tag">6~10x Speed</span>
+                        </div>
+                    </div>
+
+                    <!-- Face ID Module -->
+                    <div class="module-card face">
+                        <div class="module-icon face">
+                            <svg viewBox="0 0 24 24"><path d="M9 11.75c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zm6 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.29.02-.58.05-.86 2.36-1.05 4.23-2.98 5.21-5.37C11.07 8.33 14.05 10 17.42 10c.78 0 1.53-.09 2.25-.26.21.71.33 1.47.33 2.26 0 4.41-3.59 8-8 8z"/></svg>
+                        </div>
+                        <h4 data-ko="신원 인식 모듈" data-en="Face ID Module">신원 인식 모듈</h4>
+                        <div class="module-subtitle">ArcFace + Anti-Spoofing</div>
+                        <p data-ko="RetinaFace로 얼굴 검출 후 ArcFace 512차원 임베딩으로 운전자를 식별하고, MiniFASNet 앙상블로 사진/영상 위조 시도를 차단합니다." data-en="Detects face with RetinaFace, identifies driver via ArcFace 512-dim embedding, and blocks photo/video spoofing with MiniFASNet ensemble.">RetinaFace로 얼굴 검출 후 ArcFace 512차원 임베딩으로 운전자를 식별하고, MiniFASNet 앙상블로 사진/영상 위조 시도를 차단합니다.</p>
+                        <div class="module-tags">
+                            <span class="module-tag">512-dim Embedding</span>
+                            <span class="module-tag">RetinaFace</span>
+                            <span class="module-tag">MiniFASNet</span>
                         </div>
                     </div>
                 </div>
