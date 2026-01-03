@@ -445,6 +445,13 @@
             color: var(--text-primary);
         }
     </style>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("aVCoVUskCTP7ATtWp");
+        })();
+    </script>
 </head>
 <body>
     <div class="progress-bar" id="progressBar"></div>
@@ -1118,7 +1125,7 @@
         document.getElementById('meetingName')?.addEventListener('input', checkShowSubmitButton);
         document.getElementById('meetingEmail')?.addEventListener('input', checkShowSubmitButton);
 
-        function submitMeeting() {
+        async function submitMeeting() {
             const name = document.getElementById('meetingName').value;
             const email = document.getElementById('meetingEmail').value;
             const company = document.getElementById('meetingCompany').value;
@@ -1128,46 +1135,56 @@
                 return;
             }
 
-            const dateStr = `${selectedDate.year}-${String(selectedDate.month + 1).padStart(2, '0')}-${String(selectedDate.day).padStart(2, '0')}`;
+            const dateStr = `${selectedDate.year}년 ${selectedDate.month + 1}월 ${selectedDate.day}일`;
             const typeNames = { zoom: 'Zoom', google: 'Google Meet', teams: 'Microsoft Teams' };
 
-            const subject = encodeURIComponent(`[미팅예약] ${company ? company + ' - ' : ''}${name} (${dateStr} ${selectedTime})`);
-            const body = encodeURIComponent(
-                `미팅 예약 요청\n` +
-                `==================\n\n` +
-                `이름: ${name}\n` +
-                `이메일: ${email}\n` +
-                `회사: ${company || '개인'}\n\n` +
-                `희망 일시: ${dateStr} ${selectedTime}\n` +
-                `미팅 방식: ${typeNames[selectedMeetingTypeValue]}\n\n` +
-                `---\n` +
-                `이 요청은 i-DMS 웹사이트에서 자동 생성되었습니다.`
-            );
+            // 버튼 비활성화 (중복 클릭 방지)
+            const submitBtn = document.getElementById('meetingSubmit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = currentLang === 'ko' ? '전송 중...' : 'Sending...';
 
-            window.location.href = `mailto:ioplanet@funnytech21.com?subject=${subject}&body=${body}`;
+            try {
+                // EmailJS로 이메일 전송
+                await emailjs.send('service_ee0f24o', 'template_0mjc1kk', {
+                    from_name: name,
+                    from_email: email,
+                    company: company || '개인',
+                    meeting_date: dateStr,
+                    meeting_time: selectedTime,
+                    meeting_type: typeNames[selectedMeetingTypeValue]
+                });
 
-            // Show success message
-            document.getElementById('meetingSuccess').style.display = 'block';
-            document.getElementById('meetingSubmit').style.display = 'none';
-            document.getElementById('selectedMeeting').style.display = 'none';
-            document.getElementById('meetingForm').style.display = 'none';
-            document.getElementById('meetingType').style.display = 'none';
-            document.getElementById('timeSlots').style.display = 'none';
+                // 성공 메시지 표시
+                document.getElementById('meetingSuccess').style.display = 'block';
+                document.getElementById('meetingSubmit').style.display = 'none';
+                document.getElementById('selectedMeeting').style.display = 'none';
+                document.getElementById('meetingForm').style.display = 'none';
+                document.getElementById('meetingType').style.display = 'none';
+                document.getElementById('timeSlots').style.display = 'none';
 
-            // Reset form
-            document.getElementById('meetingName').value = '';
-            document.getElementById('meetingEmail').value = '';
-            document.getElementById('meetingCompany').value = '';
-            selectedDate = null;
-            selectedTime = null;
-            selectedMeetingTypeValue = null;
-            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-            document.querySelectorAll('.meeting-option').forEach(o => o.classList.remove('selected'));
-            renderCalendar();
+                // 폼 리셋
+                document.getElementById('meetingName').value = '';
+                document.getElementById('meetingEmail').value = '';
+                document.getElementById('meetingCompany').value = '';
+                selectedDate = null;
+                selectedTime = null;
+                selectedMeetingTypeValue = null;
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                document.querySelectorAll('.meeting-option').forEach(o => o.classList.remove('selected'));
+                renderCalendar();
 
-            setTimeout(() => {
-                document.getElementById('meetingSuccess').style.display = 'none';
-            }, 5000);
+                setTimeout(() => {
+                    document.getElementById('meetingSuccess').style.display = 'none';
+                }, 5000);
+
+            } catch (error) {
+                console.error('EmailJS Error:', error);
+                alert(currentLang === 'ko'
+                    ? '이메일 전송에 실패했습니다. 다시 시도해주세요.'
+                    : 'Failed to send email. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = currentLang === 'ko' ? '미팅 예약 요청 →' : 'Request Meeting →';
+            }
         }
 
         // Initialize calendar on page load
