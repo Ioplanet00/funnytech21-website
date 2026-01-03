@@ -50,6 +50,15 @@
         .nav-links { display: flex; gap: 36px; list-style: none; }
         .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
         .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a.nav-highlight {
+            font-weight: 700;
+            color: var(--primary-blue);
+            animation: navBlink 1.5s ease-in-out infinite;
+        }
+        @keyframes navBlink {
+            0%, 100% { opacity: 1; color: var(--primary-blue); }
+            50% { opacity: 0.6; color: var(--electric-blue); }
+        }
         .nav-cta {
             background: var(--blue-gradient); color: white; padding: 10px 22px;
             border-radius: 8px; font-weight: 600; text-decoration: none;
@@ -681,7 +690,7 @@
                 <img src="imgs/funnytech_logo_original.png" alt="퍼니테크21 로고" class="logo-img">
             </a>
             <ul class="nav-links">
-                <li><a href="faceid.html" data-ko="Face ID" data-en="Face ID">Face ID</a></li>
+                <li><a href="faceid.html" class="nav-highlight" data-ko="Face ID" data-en="Face ID">Face ID</a></li>
                 <li><a href="#overview" data-ko="제품 소개" data-en="Products">제품 소개</a></li>
                 <li><a href="#technologies" data-ko="핵심 기술" data-en="Technology">핵심 기술</a></li>
                 <li><a href="#performance" data-ko="성능 데이터" data-en="Performance">성능 데이터</a></li>
@@ -703,7 +712,7 @@
         <div class="mobile-menu-content" onclick="event.stopPropagation()">
             <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
             <ul class="mobile-menu-links">
-                <li><a href="faceid.html" onclick="closeMobileMenu()" data-ko="Face ID" data-en="Face ID">Face ID</a></li>
+                <li><a href="faceid.html" onclick="closeMobileMenu()" class="nav-highlight" data-ko="Face ID" data-en="Face ID">Face ID</a></li>
                 <li><a href="#overview" onclick="closeMobileMenu()" data-ko="제품 소개" data-en="Products">제품 소개</a></li>
                 <li><a href="#technologies" onclick="closeMobileMenu()" data-ko="핵심 기술" data-en="Technology">핵심 기술</a></li>
                 <li><a href="#performance" onclick="closeMobileMenu()" data-ko="성능 데이터" data-en="Performance">성능 데이터</a></li>

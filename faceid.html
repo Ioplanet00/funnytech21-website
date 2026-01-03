@@ -191,6 +191,59 @@
         .arch-module-title { font-size: 0.8rem; font-weight: 600; color: var(--text-white); }
         .arch-module-sub { font-size: 0.65rem; color: var(--text-muted); }
 
+        /* Usage Guide */
+        .usage-section { background: var(--bg-darker); }
+        .usage-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        .usage-step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .usage-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border-color: var(--electric-blue);
+        }
+        .usage-step-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .usage-step-content { padding: 20px; }
+        .usage-step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--electric-blue);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .usage-step h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 8px;
+        }
+        .usage-step p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        @media (max-width: 1200px) { .usage-steps { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 768px) { .usage-steps { grid-template-columns: 1fr; } }
+
         /* Features Grid */
         .features-section { background: var(--bg-darker); }
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -446,6 +499,62 @@
                         <div class="arch-box-title">Database</div>
                         <div class="arch-box-sub">SQLite</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Usage Guide -->
+    <div class="container usage-section">
+        <div class="section-header">
+            <div class="section-tag">How It Works</div>
+            <h2 class="section-title">Solution Interface</h2>
+            <p class="section-subtitle">Simple 3-step process: Register, Recognize, Manage</p>
+        </div>
+
+        <div class="usage-steps">
+            <div class="usage-step">
+                <img src="imgs/faceid/01_main_menu.png" alt="Main Menu" class="usage-step-img">
+                <div class="usage-step-content">
+                    <div class="usage-step-number">1</div>
+                    <h4>Main Dashboard</h4>
+                    <p>Choose from Register, Recognize, or Manage options for driver authentication.</p>
+                </div>
+            </div>
+
+            <div class="usage-step">
+                <img src="imgs/faceid/04_registration.png" alt="Registration" class="usage-step-img">
+                <div class="usage-step-content">
+                    <div class="usage-step-number">2</div>
+                    <h4>Face Registration</h4>
+                    <p>Follow 7-step guided process with head tilts for comprehensive face capture.</p>
+                </div>
+            </div>
+
+            <div class="usage-step">
+                <img src="imgs/faceid/02_scan_face.png" alt="Scan Face" class="usage-step-img">
+                <div class="usage-step-content">
+                    <div class="usage-step-number">3</div>
+                    <h4>Face Scanning</h4>
+                    <p>Look at the camera and tap "Scan Face" for instant recognition.</p>
+                </div>
+            </div>
+
+            <div class="usage-step">
+                <img src="imgs/faceid/03_unknown.png" alt="Unknown Face" class="usage-step-img">
+                <div class="usage-step-content">
+                    <div class="usage-step-number">4</div>
+                    <h4>Unknown Detection</h4>
+                    <p>Unregistered faces are flagged as "Unknown" with red indicator.</p>
+                </div>
+            </div>
+
+            <div class="usage-step">
+                <img src="imgs/faceid/05_recognized.png" alt="Recognized" class="usage-step-img">
+                <div class="usage-step-content">
+                    <div class="usage-step-number">5</div>
+                    <h4>Recognition Success</h4>
+                    <p>Registered users are identified with name and confidence score.</p>
                 </div>
             </div>
         </div>
