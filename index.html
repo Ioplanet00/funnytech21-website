@@ -985,6 +985,181 @@
             .arch-arrow { transform: rotate(90deg); }
             .arch-outputs { flex-direction: row; flex-wrap: wrap; justify-content: center; }
         }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 24px;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: white;
+        }
+        .newsletter-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .newsletter-box {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 48px;
+        }
+        .newsletter-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .newsletter-desc {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .newsletter-topics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .newsletter-topic {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.9);
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        .newsletter-form input[type="email"]::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        .newsletter-form input[type="email"]:focus {
+            outline: none;
+            border-color: var(--electric-blue);
+            background: rgba(255,255,255,0.15);
+        }
+        .newsletter-btn {
+            padding: 16px 32px;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .newsletter-btn:hover {
+            background: #E51E1E;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,34,34,0.3);
+        }
+        .newsletter-privacy {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+        }
+        @media (max-width: 600px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-box {
+                padding: 32px 24px;
+            }
+            .newsletter-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Cookie Consent Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1E293B;
+            color: white;
+            padding: 20px 24px;
+            z-index: 10000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+            display: none;
+        }
+        .cookie-banner.show {
+            display: block;
+        }
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        .cookie-text {
+            flex: 1;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.5;
+        }
+        .cookie-text a {
+            color: var(--electric-blue);
+            text-decoration: underline;
+        }
+        .cookie-actions {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .cookie-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        .cookie-btn-accept {
+            background: var(--electric-blue);
+            color: white;
+        }
+        .cookie-btn-accept:hover {
+            background: #2563EB;
+        }
+        .cookie-btn-decline {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .cookie-btn-decline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        @media (max-width: 768px) {
+            .cookie-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cookie-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1472,6 +1647,30 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="newsletter-container">
+            <div class="newsletter-box">
+                <h2 class="newsletter-title" data-ko="기술 뉴스레터 구독" data-en="Subscribe to Tech Newsletter" data-fr="Abonnez-vous à la Newsletter" data-ja="テクニカルニュースレター購読" data-zh="订阅技术通讯" data-de="Tech-Newsletter abonnieren" data-es="Suscríbete al Boletín Técnico" data-vi="Đăng ký Bản tin Kỹ thuật" data-th="สมัครรับจดหมายข่าวเทคโนโลยี">기술 뉴스레터 구독</h2>
+                <p class="newsletter-desc" data-ko="비접촉 생체신호 검출 기술의 실증 데이터와 의료기기 대비 성능 검증 결과를 공유합니다. 안면 영상 기반 rPPG 기술의 실제 측정 데이터와 분석 결과를 받아보세요." data-en="We share validation data from contactless vital sign detection technology and performance verification results compared to medical devices. Receive real measurement data and analysis results from facial video-based rPPG technology." data-fr="Nous partageons les données de validation de la technologie de détection des signes vitaux sans contact et les résultats de vérification des performances par rapport aux dispositifs médicaux." data-ja="非接触バイタルサイン検出技術の実証データと医療機器との性能検証結果を共有します。顔映像ベースrPPG技術の実測データと分析結果をお届けします。" data-zh="我们分享非接触式生命体征检测技术的验证数据以及与医疗设备相比的性能验证结果。接收基于面部视频的rPPG技术的实际测量数据和分析结果。" data-de="Wir teilen Validierungsdaten der kontaktlosen Vitalzeichenerkennung und Leistungsvergleiche mit medizinischen Geräten." data-es="Compartimos datos de validación de tecnología de detección de signos vitales sin contacto y resultados de verificación de rendimiento comparados con dispositivos médicos." data-vi="Chúng tôi chia sẻ dữ liệu xác nhận từ công nghệ phát hiện dấu hiệu sinh tồn không tiếp xúc và kết quả so sánh hiệu suất với thiết bị y tế." data-th="เราแชร์ข้อมูลการตรวจสอบจากเทคโนโลยีตรวจจับสัญญาณชีพแบบไร้สัมผัสและผลการเปรียบเทียบประสิทธิภาพกับอุปกรณ์การแพทย์">비접촉 생체신호 검출 기술의 실증 데이터와 의료기기 대비 성능 검증 결과를 공유합니다. 안면 영상 기반 rPPG 기술의 실제 측정 데이터와 분석 결과를 받아보세요.</p>
+
+                <div class="newsletter-topics">
+                    <span class="newsletter-topic" data-ko="비접촉 생체신호 실증 데이터" data-en="Contactless Vital Sign Validation Data" data-fr="Données de Validation des Signes Vitaux" data-ja="非接触バイタルサイン実証データ" data-zh="非接触式生命体征验证数据" data-de="Kontaktlose Vitalzeichen-Validierungsdaten" data-es="Datos de Validación de Signos Vitales" data-vi="Dữ liệu Xác nhận Dấu hiệu Sinh tồn" data-th="ข้อมูลการตรวจสอบสัญญาณชีพ">비접촉 생체신호 실증 데이터</span>
+                    <span class="newsletter-topic" data-ko="글로벌 NCAP 대응 현황" data-en="Global NCAP Compliance Updates" data-fr="Mises à jour Conformité NCAP Global" data-ja="グローバルNCAP対応状況" data-zh="全球NCAP合规更新" data-de="Globale NCAP-Compliance-Updates" data-es="Actualizaciones de Cumplimiento NCAP Global" data-vi="Cập nhật Tuân thủ NCAP Toàn cầu" data-th="อัปเดตการปฏิบัติตาม NCAP ทั่วโลก">글로벌 NCAP 대응 현황</span>
+                    <span class="newsletter-topic" data-ko="의료기기 대비 성능 분석" data-en="Medical Device Comparison Analysis" data-fr="Analyse Comparative Dispositifs Médicaux" data-ja="医療機器対比性能分析" data-zh="医疗设备对比性能分析" data-de="Medizingeräte-Vergleichsanalyse" data-es="Análisis Comparativo con Dispositivos Médicos" data-vi="Phân tích So sánh Thiết bị Y tế" data-th="การวิเคราะห์เปรียบเทียบอุปกรณ์การแพทย์">의료기기 대비 성능 분석</span>
+                    <span class="newsletter-topic" data-ko="기술 업데이트" data-en="Technology Updates" data-fr="Mises à jour Technologiques" data-ja="技術アップデート" data-zh="技术更新" data-de="Technologie-Updates" data-es="Actualizaciones Tecnológicas" data-vi="Cập nhật Công nghệ" data-th="อัปเดตเทคโนโลยี">기술 업데이트</span>
+                </div>
+
+                <form class="newsletter-form" id="newsletterForm" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="_blank">
+                    <input type="email" name="entry.EMAIL_ENTRY_ID" placeholder="email@company.com" required data-ko="이메일 주소 입력" data-en="Enter your email" data-fr="Entrez votre email" data-ja="メールアドレスを入力" data-zh="输入您的邮箱" data-de="E-Mail eingeben" data-es="Ingrese su email" data-vi="Nhập email của bạn" data-th="กรอกอีเมลของคุณ">
+                    <button type="submit" class="newsletter-btn" data-ko="구독하기" data-en="Subscribe" data-fr="S'abonner" data-ja="購読する" data-zh="订阅" data-de="Abonnieren" data-es="Suscribirse" data-vi="Đăng ký" data-th="สมัครสมาชิก">구독하기</button>
+                </form>
+
+                <p class="newsletter-privacy" data-ko="구독 정보는 뉴스레터 발송 목적으로만 사용되며, 언제든지 구독을 취소할 수 있습니다." data-en="Your information will only be used for newsletter delivery. You can unsubscribe at any time." data-fr="Vos informations seront utilisées uniquement pour l'envoi de la newsletter. Vous pouvez vous désabonner à tout moment." data-ja="ご登録情報はニュースレター配信のみに使用されます。いつでも購読解除できます。" data-zh="您的信息仅用于发送通讯。您可以随时取消订阅。" data-de="Ihre Daten werden nur für den Newsletter-Versand verwendet. Sie können sich jederzeit abmelden." data-es="Su información solo se usará para enviar el boletín. Puede cancelar su suscripción en cualquier momento." data-vi="Thông tin của bạn chỉ được sử dụng để gửi bản tin. Bạn có thể hủy đăng ký bất cứ lúc nào." data-th="ข้อมูลของคุณจะใช้เฉพาะสำหรับส่งจดหมายข่าว คุณสามารถยกเลิกการสมัครได้ตลอดเวลา">구독 정보는 뉴스레터 발송 목적으로만 사용되며, 언제든지 구독을 취소할 수 있습니다.</p>
             </div>
         </div>
     </section>
@@ -4414,5 +4613,38 @@
 })();
 
 </script>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <span data-ko="이 웹사이트는 사용자 경험 향상 및 웹사이트 트래픽 분석을 위해 쿠키를 사용합니다. 계속 사용하시면 쿠키 사용에 동의하는 것으로 간주됩니다." data-en="This website uses cookies to enhance user experience and analyze website traffic. By continuing to use this site, you consent to our use of cookies." data-fr="Ce site utilise des cookies pour améliorer l'expérience utilisateur et analyser le trafic. En continuant, vous acceptez notre utilisation des cookies." data-ja="このウェブサイトは、ユーザー体験の向上とトラフィック分析のためにクッキーを使用しています。" data-zh="本网站使用cookies来提升用户体验并分析网站流量。继续使用本站即表示您同意我们使用cookies。" data-de="Diese Website verwendet Cookies zur Verbesserung der Nutzererfahrung und Analyse des Website-Traffics." data-es="Este sitio web utiliza cookies para mejorar la experiencia del usuario y analizar el tráfico." data-vi="Trang web này sử dụng cookies để nâng cao trải nghiệm người dùng và phân tích lưu lượng truy cập." data-th="เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์ผู้ใช้และวิเคราะห์การเข้าชม">이 웹사이트는 사용자 경험 향상 및 웹사이트 트래픽 분석을 위해 쿠키를 사용합니다.</span>
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()" data-ko="거부" data-en="Decline" data-fr="Refuser" data-ja="拒否" data-zh="拒绝" data-de="Ablehnen" data-es="Rechazar" data-vi="Từ chối" data-th="ปฏิเสธ">거부</button>
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()" data-ko="동의" data-en="Accept" data-fr="Accepter" data-ja="同意" data-zh="接受" data-de="Akzeptieren" data-es="Aceptar" data-vi="Chấp nhận" data-th="ยอมรับ">동의</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Consent Functions
+        function checkCookieConsent() {
+            const consent = localStorage.getItem('funnytech_cookie_consent');
+            if (!consent) {
+                document.getElementById('cookieBanner').classList.add('show');
+            }
+        }
+        function acceptCookies() {
+            localStorage.setItem('funnytech_cookie_consent', 'accepted');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+        function declineCookies() {
+            localStorage.setItem('funnytech_cookie_consent', 'declined');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+        // Check on page load
+        document.addEventListener('DOMContentLoaded', checkCookieConsent);
+    </script>
 </body>
 </html>

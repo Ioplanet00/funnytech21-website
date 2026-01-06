@@ -598,6 +598,19 @@
             .pdf-header { flex-direction: column; gap: 16px; text-align: center; }
             .back-link { position: static; margin-bottom: 20px; justify-content: center; }
         }
+
+        /* Cookie Consent Banner */
+        .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #1E293B; color: white; padding: 20px 24px; z-index: 10000; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); display: none; }
+        .cookie-banner.show { display: block; }
+        .cookie-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+        .cookie-text { flex: 1; font-size: 0.9rem; color: rgba(255,255,255,0.9); line-height: 1.5; }
+        .cookie-actions { display: flex; gap: 12px; flex-shrink: 0; }
+        .cookie-btn { padding: 12px 24px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
+        .cookie-btn-accept { background: #3B82F6; color: white; }
+        .cookie-btn-accept:hover { background: #2563EB; }
+        .cookie-btn-decline { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); }
+        .cookie-btn-decline:hover { background: rgba(255,255,255,0.1); }
+        @media (max-width: 768px) { .cookie-content { flex-direction: column; text-align: center; } .cookie-actions { width: 100%; justify-content: center; } }
     </style>
 </head>
 <body>
@@ -937,6 +950,25 @@
                 document.querySelector('.lang-dropdown')?.classList.remove('active');
             }
         });
+    </script>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <span data-ko="이 웹사이트는 사용자 경험 향상 및 웹사이트 트래픽 분석을 위해 쿠키를 사용합니다." data-en="This website uses cookies to enhance user experience and analyze website traffic." data-fr="Ce site utilise des cookies pour améliorer l'expérience utilisateur et analyser le trafic." data-ja="このウェブサイトは、ユーザー体験の向上とトラフィック分析のためにクッキーを使用しています。" data-zh="本网站使用cookies来提升用户体验并分析网站流量。" data-de="Diese Website verwendet Cookies zur Verbesserung der Nutzererfahrung." data-es="Este sitio web utiliza cookies para mejorar la experiencia del usuario." data-vi="Trang web này sử dụng cookies để nâng cao trải nghiệm người dùng." data-th="เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์ผู้ใช้">이 웹사이트는 사용자 경험 향상 및 웹사이트 트래픽 분석을 위해 쿠키를 사용합니다.</span>
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()" data-ko="거부" data-en="Decline" data-fr="Refuser" data-ja="拒否" data-zh="拒绝" data-de="Ablehnen" data-es="Rechazar" data-vi="Từ chối" data-th="ปฏิเสธ">거부</button>
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()" data-ko="동의" data-en="Accept" data-fr="Accepter" data-ja="同意" data-zh="接受" data-de="Akzeptieren" data-es="Aceptar" data-vi="Chấp nhận" data-th="ยอมรับ">동의</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function checkCookieConsent() { if (!localStorage.getItem('funnytech_cookie_consent')) document.getElementById('cookieBanner').classList.add('show'); }
+        function acceptCookies() { localStorage.setItem('funnytech_cookie_consent', 'accepted'); document.getElementById('cookieBanner').classList.remove('show'); }
+        function declineCookies() { localStorage.setItem('funnytech_cookie_consent', 'declined'); document.getElementById('cookieBanner').classList.remove('show'); }
+        document.addEventListener('DOMContentLoaded', checkCookieConsent);
     </script>
 </body>
 </html>
