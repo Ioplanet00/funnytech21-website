@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VT16VXN7KD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VT16VXN7KD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딥러닝 기반 rPPG 실도로 주행 테스트 결과 | FunnyTech21 Blog</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FunnyTech21의 딥러닝 기반 rPPG 기술을 55.4km 실도로 주행에서 테스트한 결과입니다. 의료기기 Polar H10과 비교하여 MAE 2.38 BPM의 높은 정확도를 달성했습니다.">
+    <meta name="keywords" content="rPPG, 딥러닝, 실도로 테스트, 비접촉 심박수, Polar H10, 운전자 모니터링, DMS, 심박수 측정">
+    <meta name="author" content="(주)퍼니테크21 FunnyTech21 Co., Ltd.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.funnytech21.com/blog-rppg-driving-test.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.funnytech21.com/blog-rppg-driving-test.html">
+    <meta property="og:title" content="딥러닝 기반 rPPG 실도로 주행 테스트 결과">
+    <meta property="og:description" content="55.4km 실도로 주행에서 의료기기 대비 MAE 2.38 BPM 달성">
+    <meta property="og:image" content="https://www.funnytech21.com/imgs/funnytech_logo_original.png">
+    <meta property="article:published_time" content="2026-01-06">
+    <meta property="article:author" content="FunnyTech21">
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "딥러닝 기반 rPPG 실도로 주행 테스트 결과",
+        "description": "FunnyTech21의 딥러닝 기반 rPPG 기술을 실도로 주행에서 의료기기와 비교 테스트한 결과",
+        "author": {
+            "@type": "Organization",
+            "name": "FunnyTech21"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "FunnyTech21",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.funnytech21.com/imgs/funnytech_logo_original.png"
+            }
+        },
+        "datePublished": "2026-01-06",
+        "dateModified": "2026-01-06"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --primary-blue: #15539E;
+            --electric-blue: #3B82F6;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --bg-hover: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            --red-gradient: linear-gradient(135deg, #FF2222 0%, #FF6B6B 100%);
+            --blue-gradient: linear-gradient(135deg, #15539E 0%, #3B82F6 100%);
+            --container-width: 1280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: var(--container-width); margin: 0 auto; padding: 14px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 82px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a.active { color: var(--primary-blue); font-weight: 600; }
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+
+        .lang-selector { position: relative; }
+        .lang-selector-btn {
+            display: flex; align-items: center; gap: 6px;
+            background: var(--bg-light); color: var(--text-primary); padding: 8px 14px;
+            border: 1px solid var(--border-light); border-radius: 6px; font-weight: 500;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+        }
+        .lang-selector-btn:hover { background: var(--bg-hover); border-color: var(--primary-blue); }
+        .lang-selector-btn svg { width: 14px; height: 14px; }
+        .lang-dropdown {
+            position: absolute; top: 100%; right: 0; margin-top: 8px;
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 160px; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.2s; z-index: 1000;
+        }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            cursor: pointer; transition: background 0.2s; font-size: 0.9rem;
+        }
+        .lang-option:first-child { border-radius: 10px 10px 0 0; }
+        .lang-option:last-child { border-radius: 0 0 10px 10px; }
+        .lang-option:hover { background: var(--bg-light); }
+        .lang-option.active { background: rgba(21, 83, 158, 0.1); color: var(--primary-blue); font-weight: 600; }
+        .lang-flag { font-size: 1.2rem; }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 24px 60px;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        }
+        .article-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .article-category {
+            padding: 6px 14px;
+            background: rgba(255, 34, 34, 0.2);
+            color: #FF6B6B;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .article-date {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+        .article-header h1 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+        .article-summary {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Article Content */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        .article-content {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 48px;
+        }
+        .article-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 40px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-red);
+        }
+        .article-content h2:first-child {
+            margin-top: 0;
+        }
+        .article-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 30px 0 16px;
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 24px;
+            color: var(--text-secondary);
+        }
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        /* Image Placeholder */
+        .article-image {
+            width: 100%;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+        }
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .article-image.placeholder {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .image-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.95rem;
+        }
+        .data-table th, .data-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+        .data-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .data-table td {
+            color: var(--text-secondary);
+        }
+        .data-table tr:hover td {
+            background: var(--bg-hover);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255,34,34,0.05) 0%, rgba(21,83,158,0.05) 100%);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+        .highlight-box h4 {
+            color: var(--primary-red);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        /* Result Card */
+        .result-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .result-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        .result-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+        .result-card .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .result-card.highlight {
+            background: var(--primary-red);
+            border-color: var(--primary-red);
+        }
+        .result-card.highlight .value,
+        .result-card.highlight .label {
+            color: white;
+        }
+
+        /* Back to Blog */
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: gap 0.2s;
+        }
+        .back-to-blog:hover {
+            gap: 12px;
+        }
+        .back-to-blog svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* CTA Section */
+        .article-cta {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .article-cta h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+        .article-cta p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 24px;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--red-gradient);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,34,34,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            padding: 40px 24px;
+        }
+        .footer-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-logo img { height: 50px; }
+        .footer-text { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--text-primary);
+            padding: 20px 24px;
+            z-index: 9999;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+            display: none;
+        }
+        .cookie-banner.show { display: block; }
+        .cookie-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .cookie-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 300px;
+        }
+        .cookie-actions { display: flex; gap: 12px; }
+        .cookie-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .cookie-btn-accept {
+            background: var(--primary-blue);
+            color: white;
+        }
+        .cookie-btn-decline {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .article-content { padding: 24px; }
+            .result-cards { grid-template-columns: 1fr; }
+            .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21 Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="faceid.html">Face ID</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="lang-selector" id="langSelector">
+                    <button class="lang-selector-btn" onclick="toggleLangDropdown()">
+                        <span class="lang-current">한국어</span>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-option active" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                        <div class="lang-option" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                        <div class="lang-option" onclick="changeLanguage('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+                        <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                        <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                        <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                        <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                        <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                        <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ไทย</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="article-header-content">
+            <div class="article-meta">
+                <span class="article-category">rPPG Technology</span>
+                <span class="article-date">2026.01.06</span>
+            </div>
+            <h1>딥러닝 기반 rPPG 실도로 주행 테스트 결과: 글로벌 벤치마크 대비 61.9% 성능 향상</h1>
+            <p class="article-summary">
+                실제 고속도로/시내 주행 환경에서 FunnyTech21 i-DMS의 rPPG 기술이
+                학술 문헌 벤치마크(MAE 16.6 BPM) 대비 61.9% 우수한 MAE 6.33 BPM을 달성,
+                Smart Eye 등 글로벌 선두 기업과 동등한 수준의 성능을 입증했습니다.
+            </p>
+        </div>
+    </header>
+
+    <div class="article-container">
+        <a href="blog.html" class="back-to-blog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            블로그 목록으로
+        </a>
+
+        <article class="article-content">
+            <h2>테스트 개요</h2>
+            <p>
+                FunnyTech21은 자사의 딥러닝 기반 rPPG-Net 기술의 실제 주행 환경에서의 성능을 검증하기 위해
+                2026년 1월 5일 실도로 주행 테스트를 실시했습니다. 이번 테스트는 기존 신호처리 방식과
+                새로운 딥러닝 기반 알고리즘의 성능을 직접 비교하기 위해 설계되었습니다.
+            </p>
+
+            <!-- Driving test image -->
+            <div class="article-image" id="image-driving-test">
+                <img src="imgs/blog-idms-safe.png" alt="i-DMS 실도로 주행 테스트 - SAFE 상태">
+            </div>
+            <p class="image-caption">i-DMS 실도로 주행 테스트: SAFE 상태 - 심박수 82 BPM, PERCLOS 13.7%</p>
+
+            <h2>테스트 환경</h2>
+
+            <table class="data-table">
+                <tr>
+                    <th>항목</th>
+                    <th>내용</th>
+                </tr>
+                <tr>
+                    <td>테스트 일자</td>
+                    <td>2026년 1월 5일</td>
+                </tr>
+                <tr>
+                    <td>테스트 차량</td>
+                    <td>기아 니로 하이브리드</td>
+                </tr>
+                <tr>
+                    <td>주행 거리</td>
+                    <td>55.4 km</td>
+                </tr>
+                <tr>
+                    <td>기준 장비</td>
+                    <td>Polar H10 (가슴 착용형 ECG 센서)</td>
+                </tr>
+                <tr>
+                    <td>테스트 방식</td>
+                    <td>딥러닝 기반 vs 기존 신호처리 방식 비교</td>
+                </tr>
+            </table>
+
+            <!-- Phone usage detection image -->
+            <div class="article-image" id="image-equipment">
+                <img src="imgs/blog-idms-caution.png" alt="i-DMS 폰 사용 감지 - CAUTION 상태">
+            </div>
+            <p class="image-caption">폰 사용 감지: CAUTION 상태 - 실시간 위험 행동 감지</p>
+
+            <h2>테스트 세션 상세</h2>
+
+            <h3>테스트 1: 딥러닝 기반 rPPG-Net</h3>
+            <ul>
+                <li><strong>시간:</strong> 12:40 ~ 13:10 (약 27.5분)</li>
+                <li><strong>수집 데이터:</strong> 1,651건</li>
+                <li><strong>알고리즘:</strong> FunnyTech21 자체 개발 딥러닝 모델</li>
+            </ul>
+
+            <h3>테스트 2: 기존 신호처리 방식</h3>
+            <ul>
+                <li><strong>시간:</strong> 14:44 ~ 15:43 (약 58분)</li>
+                <li><strong>수집 데이터:</strong> 3,483건</li>
+                <li><strong>알고리즘:</strong> 전통적인 신호처리 기반 rPPG</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>왜 딥러닝 테스트 시간이 더 짧은가?</h4>
+                <p>
+                    딥러닝 기반 알고리즘은 더 적은 데이터로도 안정적인 결과를 도출하며,
+                    노이즈에 강한 특성을 보입니다. 이로 인해 더 짧은 시간 내에 신뢰성 있는
+                    데이터를 수집할 수 있었습니다.
+                </p>
+            </div>
+
+            <h2>테스트 결과</h2>
+
+            <div class="result-cards">
+                <div class="result-card highlight">
+                    <div class="value">6.33</div>
+                    <div class="label">MAE (BPM)<br>실제 주행</div>
+                </div>
+                <div class="result-card">
+                    <div class="value">61.9%</div>
+                    <div class="label">문헌 벤치마크<br>대비 개선</div>
+                </div>
+                <div class="result-card">
+                    <div class="value">82.8%</div>
+                    <div class="label">±10 BPM 내<br>정확도</div>
+                </div>
+            </div>
+
+            <!-- Drowsiness detection image -->
+            <div class="article-image" id="image-graph">
+                <img src="imgs/blog-idms-drowsiness.png" alt="i-DMS 졸음 감지 알림">
+            </div>
+            <p class="image-caption">졸음 감지 알림: rPPG 기반 바이탈 사인 분석으로 운전자 상태 모니터링</p>
+
+            <h3>글로벌 업계 벤치마크 비교</h3>
+
+            <table class="data-table">
+                <tr>
+                    <th>지표</th>
+                    <th>FunnyTech21</th>
+                    <th>Smart Eye</th>
+                    <th>문헌 (주행)</th>
+                </tr>
+                <tr>
+                    <td>MAE (BPM)</td>
+                    <td><strong>6.33</strong></td>
+                    <td>~6.5</td>
+                    <td>16.6</td>
+                </tr>
+                <tr>
+                    <td>RMSE (BPM)</td>
+                    <td><strong>7.68</strong></td>
+                    <td>~8.5</td>
+                    <td>20.0</td>
+                </tr>
+                <tr>
+                    <td>±10 BPM 내 정확도</td>
+                    <td><strong>82.8%</strong></td>
+                    <td>~80-85%</td>
+                    <td>~40%</td>
+                </tr>
+                <tr>
+                    <td>테스트 조건</td>
+                    <td><strong>실제 주행</strong></td>
+                    <td>혼합</td>
+                    <td>실제 주행</td>
+                </tr>
+            </table>
+
+            <h2>주요 발견 사항</h2>
+
+            <h3>1. 글로벌 선두 기업과 동등한 성능</h3>
+            <p>
+                FunnyTech21 i-DMS는 가장 도전적인 테스트 조건인 실제 주행에서
+                Smart Eye, Seeing Machines, Bosch 등 글로벌 업계 선두와 동등한 성능을 달성했습니다.
+            </p>
+
+            <h3>2. 학술 벤치마크 60% 초과 달성</h3>
+            <p>
+                실제 주행에서 MAE 6.33 BPM은 학술 문헌 벤치마크(15-17 BPM)를
+                60% 이상 초과하는 성능으로, 도전적 조건에서 우수한 알고리즘 성능을 입증했습니다.
+            </p>
+
+            <h3>3. Euro NCAP 2026 핵심 기능 준수</h3>
+            <p>
+                핵심 DMS 기능(시선 추적, 머리 추적, 졸음 감지, 주의분산 감지)은
+                Euro NCAP 2026 요구사항을 완전 준수합니다. 생체 신호 모니터링 기능은
+                더 높은 안전 등급 달성을 위한 추가 가치를 제공합니다.
+            </p>
+
+
+            <h2>결론</h2>
+            <p>
+                이번 실도로 테스트를 통해 FunnyTech21 i-DMS가 가장 도전적인 테스트 조건인
+                실제 주행에서 글로벌 업계 선두(Smart Eye, Seeing Machines, Bosch)와 동등한
+                성능을 보여줌을 입증했습니다.
+            </p>
+            <p>
+                성능 지표는 i-DMS가 자동차 애플리케이션에 상용 배포 준비가 되었음을 나타내며,
+                운전자 건강 모니터링, 졸음 상관관계 분석, 장기 건강 추적 용도에
+                적합한 정확도를 보유하고 있습니다.
+            </p>
+
+            <div class="highlight-box">
+                <h4>기술 검증(PoC) 문의</h4>
+                <p>
+                    FunnyTech21의 rPPG 기술을 직접 테스트해보고 싶으시다면,
+                    기술 검증(PoC)을 신청해주세요. OEM 및 Tier1 파트너사에 맞춤형 데모를 제공합니다.
+                </p>
+            </div>
+
+            <div class="article-cta">
+                <h3>기술 데모 및 PoC 문의</h3>
+                <p>FunnyTech21의 딥러닝 기반 rPPG 기술을 직접 경험해보세요</p>
+                <a href="index.html#contact" class="cta-btn">
+                    문의하기
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21">
+            </div>
+            <p class="footer-text">© 2026 FunnyTech21 Co., Ltd. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                이 웹사이트는 사용자 경험 향상을 위해 쿠키를 사용합니다.
+                계속 이용하시면 쿠키 사용에 동의하는 것으로 간주됩니다.
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()">거부</button>
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">동의</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleLangDropdown() {
+            document.querySelector('.lang-dropdown').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.lang-selector')) {
+                document.querySelector('.lang-dropdown').classList.remove('active');
+            }
+        });
+
+        const langNames = {
+            ko: '한국어', en: 'English', fr: 'Français', ja: '日本語',
+            zh: '中文', de: 'Deutsch', es: 'Español', vi: 'Tiếng Việt', th: 'ไทย'
+        };
+
+        function changeLanguage(lang) {
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                if (opt.textContent.includes(langNames[lang])) opt.classList.add('active');
+            });
+            document.querySelector('.lang-current').textContent = langNames[lang];
+            document.querySelector('.lang-dropdown').classList.remove('active');
+            localStorage.setItem('selectedLang', lang);
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('selectedLang') || 'ko';
+            changeLanguage(savedLang);
+
+            if (!localStorage.getItem('cookieConsent')) {
+                document.getElementById('cookieBanner').classList.add('show');
+            }
+        });
+    </script>
+</body>
+</html>

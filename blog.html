@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VT16VXN7KD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VT16VXN7KD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog | FunnyTech21 - DMS & rPPG Technology Insights</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FunnyTech21 기술 블로그 - 운전자 모니터링 시스템(DMS), rPPG 비접촉 생체신호 측정, Euro NCAP 2026 기준 등 최신 자동차 안전 기술 정보를 제공합니다.">
+    <meta name="keywords" content="DMS 기술 블로그, 운전자 모니터링 시스템, Euro NCAP 2026, rPPG 기술, 비접촉 심박수 측정, 자동차 안전 기술">
+    <meta name="author" content="(주)퍼니테크21 FunnyTech21 Co., Ltd.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.funnytech21.com/blog.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.funnytech21.com/blog.html">
+    <meta property="og:title" content="Tech Blog | FunnyTech21">
+    <meta property="og:description" content="DMS, rPPG, Euro NCAP 등 자동차 안전 기술 인사이트">
+    <meta property="og:image" content="https://www.funnytech21.com/imgs/funnytech_logo_original.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --primary-blue: #15539E;
+            --electric-blue: #3B82F6;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --bg-hover: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            --red-gradient: linear-gradient(135deg, #FF2222 0%, #FF6B6B 100%);
+            --blue-gradient: linear-gradient(135deg, #15539E 0%, #3B82F6 100%);
+            --container-width: 1280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: var(--container-width); margin: 0 auto; padding: 14px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 82px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a.active { color: var(--primary-blue); font-weight: 600; }
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+
+        .lang-selector { position: relative; }
+        .lang-selector-btn {
+            display: flex; align-items: center; gap: 6px;
+            background: var(--bg-light); color: var(--text-primary); padding: 8px 14px;
+            border: 1px solid var(--border-light); border-radius: 6px; font-weight: 500;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+        }
+        .lang-selector-btn:hover { background: var(--bg-hover); border-color: var(--primary-blue); }
+        .lang-selector-btn svg { width: 14px; height: 14px; transition: transform 0.2s; }
+        .lang-dropdown {
+            position: absolute; top: 100%; right: 0; margin-top: 8px;
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 160px; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.2s; z-index: 1000;
+        }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            cursor: pointer; transition: background 0.2s; font-size: 0.9rem;
+        }
+        .lang-option:first-child { border-radius: 10px 10px 0 0; }
+        .lang-option:last-child { border-radius: 0 0 10px 10px; }
+        .lang-option:hover { background: var(--bg-light); }
+        .lang-option.active { background: rgba(21, 83, 158, 0.1); color: var(--primary-blue); font-weight: 600; }
+        .lang-flag { font-size: 1.2rem; }
+
+        /* Blog Hero */
+        .blog-hero {
+            padding: 140px 24px 60px;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            text-align: center;
+        }
+        .blog-hero h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .blog-hero p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Blog Container */
+        .blog-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* Blog Card */
+        .blog-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+        .blog-card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+        .blog-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .blog-category {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .blog-category.ncap {
+            background: rgba(21, 83, 158, 0.1);
+            color: var(--primary-blue);
+        }
+        .blog-category.rppg {
+            background: rgba(255, 34, 34, 0.1);
+            color: var(--primary-red);
+        }
+        .blog-category.tech {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--electric-blue);
+        }
+        .blog-date {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        .blog-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .blog-card h2 a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+        .blog-card h2 a:hover {
+            color: var(--primary-blue);
+        }
+        .blog-excerpt {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .blog-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: gap 0.2s;
+        }
+        .blog-read-more:hover {
+            gap: 12px;
+        }
+        .blog-read-more svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Tags */
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .blog-tag {
+            padding: 4px 10px;
+            background: var(--bg-light);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            padding: 40px 24px;
+        }
+        .footer-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-logo img { height: 50px; }
+        .footer-text { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--text-primary);
+            padding: 20px 24px;
+            z-index: 9999;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+            display: none;
+        }
+        .cookie-banner.show { display: block; }
+        .cookie-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .cookie-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 300px;
+        }
+        .cookie-actions { display: flex; gap: 12px; }
+        .cookie-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .cookie-btn-accept {
+            background: var(--primary-blue);
+            color: white;
+        }
+        .cookie-btn-accept:hover { background: #1a65b8; }
+        .cookie-btn-decline {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .cookie-btn-decline:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .blog-hero h1 { font-size: 1.8rem; }
+            .blog-card { padding: 24px; }
+            .blog-card h2 { font-size: 1.25rem; }
+            .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+            .cookie-content { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21 Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a></li>
+                <li><a href="faceid.html" data-ko="Face ID" data-en="Face ID" data-ja="Face ID" data-zh="Face ID" data-de="Face ID" data-es="Face ID" data-fr="Face ID" data-vi="Face ID" data-th="Face ID">Face ID</a></li>
+                <li><a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Về chúng tôi" data-th="เกี่ยวกับเรา">About</a></li>
+                <li><a href="blog.html" class="active" data-ko="블로그" data-en="Blog" data-ja="ブログ" data-zh="博客" data-de="Blog" data-es="Blog" data-fr="Blog" data-vi="Blog" data-th="บล็อก">Blog</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="lang-selector" id="langSelector">
+                    <button class="lang-selector-btn" onclick="toggleLangDropdown()">
+                        <span class="lang-current">English</span>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-option" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                        <div class="lang-option active" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                        <div class="lang-option" onclick="changeLanguage('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+                        <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                        <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                        <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                        <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                        <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                        <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ไทย</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="blog-hero">
+        <h1 data-ko="기술 블로그" data-en="Tech Blog" data-ja="テクニカルブログ" data-zh="技术博客" data-de="Tech Blog" data-es="Blog Técnico" data-fr="Blog Technique" data-vi="Blog Kỹ thuật" data-th="บล็อกเทคโนโลยี">Tech Blog</h1>
+        <p data-ko="DMS, rPPG, Euro NCAP 등 자동차 안전 기술의 최신 인사이트를 공유합니다" data-en="Sharing insights on DMS, rPPG, Euro NCAP and automotive safety technology" data-ja="DMS、rPPG、Euro NCAPなど自動車安全技術の最新インサイトを共有します" data-zh="分享DMS、rPPG、Euro NCAP及汽车安全技术的最新见解" data-de="Einblicke in DMS, rPPG, Euro NCAP und Fahrzeugsicherheitstechnologie" data-es="Compartiendo información sobre DMS, rPPG, Euro NCAP y tecnología de seguridad automotriz" data-fr="Partage d'informations sur le DMS, le rPPG, l'Euro NCAP et la technologie de sécurité automobile" data-vi="Chia sẻ thông tin về DMS, rPPG, Euro NCAP và công nghệ an toàn ô tô" data-th="แบ่งปันข้อมูลเชิงลึกเกี่ยวกับ DMS, rPPG, Euro NCAP และเทคโนโลยีความปลอดภัยยานยนต์">Sharing insights on DMS, rPPG, Euro NCAP and automotive safety technology</p>
+    </section>
+
+    <div class="blog-container">
+        <!-- Blog Post 1: rPPG Driving Test -->
+        <article class="blog-card">
+            <div class="blog-card-header">
+                <span class="blog-category rppg">rPPG Technology</span>
+                <span class="blog-date">2026.01.06</span>
+            </div>
+            <h2><a href="blog-rppg-driving-test.html" data-ko="딥러닝 기반 rPPG 실도로 주행 테스트 결과: 의료기기급 정확도 달성" data-en="Deep Learning rPPG Real-world Driving Test: Medical-grade Accuracy Achieved" data-ja="ディープラーニング基盤rPPG実道路走行テスト結果：医療機器級の精度達成" data-zh="基于深度学习的rPPG实际道路驾驶测试结果：达到医疗级精度">딥러닝 기반 rPPG 실도로 주행 테스트 결과: 의료기기급 정확도 달성</a></h2>
+            <div class="blog-tags">
+                <span class="blog-tag">rPPG</span>
+                <span class="blog-tag">Deep Learning</span>
+                <span class="blog-tag">Polar H10</span>
+                <span class="blog-tag">Real-world Test</span>
+            </div>
+            <p class="blog-excerpt" data-ko="55.4km 실도로 주행 환경에서 FunnyTech21의 딥러닝 기반 rPPG-Net 기술과 의료기기 Polar H10을 비교 테스트한 결과, MAE 2.38 BPM의 높은 정확도를 달성했습니다. 기존 신호처리 방식 대비 53.5% 성능 향상." data-en="Comparative test of FunnyTech21's deep learning-based rPPG-Net technology and medical device Polar H10 in 55.4km real-world driving conditions achieved high accuracy of MAE 2.38 BPM. 53.5% performance improvement over traditional signal processing." data-ja="55.4kmの実道路走行環境でFunnyTech21のディープラーニング基盤rPPG-Net技術と医療機器Polar H10を比較テストした結果、MAE 2.38 BPMの高い精度を達成しました。" data-zh="在55.4公里实际道路驾驶环境中，FunnyTech21基于深度学习的rPPG-Net技术与医疗设备Polar H10的对比测试达到了MAE 2.38 BPM的高精度。">55.4km 실도로 주행 환경에서 FunnyTech21의 딥러닝 기반 rPPG-Net 기술과 의료기기 Polar H10을 비교 테스트한 결과, MAE 2.38 BPM의 높은 정확도를 달성했습니다. 기존 신호처리 방식 대비 53.5% 성능 향상.</p>
+            <a href="blog-rppg-driving-test.html" class="blog-read-more" data-ko="자세히 보기" data-en="Read more" data-ja="詳細を見る" data-zh="阅读更多" data-de="Mehr lesen" data-es="Leer más" data-fr="Lire la suite" data-vi="Đọc thêm" data-th="อ่านเพิ่มเติม">
+                자세히 보기
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </article>
+
+        <!-- Blog Post 2: Euro NCAP -->
+        <article class="blog-card">
+            <div class="blog-card-header">
+                <span class="blog-category ncap">Euro NCAP</span>
+                <span class="blog-date">2026.01.06</span>
+            </div>
+            <h2><a href="blog-euro-ncap-2026.html" data-ko="Euro NCAP 2026 DMS 기술 요구사항 완벽 분석" data-en="Complete Analysis of Euro NCAP 2026 DMS Technical Requirements" data-ja="Euro NCAP 2026 DMS技術要件の完全分析" data-zh="Euro NCAP 2026 DMS技术要求完整分析">Euro NCAP 2026 DMS 기술 요구사항 완벽 분석</a></h2>
+            <div class="blog-tags">
+                <span class="blog-tag">Euro NCAP</span>
+                <span class="blog-tag">DMS</span>
+                <span class="blog-tag">Driver Monitoring</span>
+                <span class="blog-tag">2026 Protocol</span>
+            </div>
+            <p class="blog-excerpt" data-ko="2026년부터 시행되는 Euro NCAP의 운전자 모니터링 시스템(DMS) 요구사항을 상세히 분석합니다. 졸음 감지, 주의력 분산 감지, 그리고 새롭게 추가된 rPPG 기반 생체신호 모니터링 요구사항까지 완벽하게 정리했습니다." data-en="A detailed analysis of Euro NCAP's Driver Monitoring System (DMS) requirements effective from 2026. Complete coverage of drowsiness detection, distraction detection, and newly added rPPG-based vital sign monitoring requirements." data-ja="2026年から施行されるEuro NCAPの運転者モニタリングシステム（DMS）要件を詳細に分析します。居眠り検知、注意散漫検知、新たに追加されたrPPGベースのバイタルサインモニタリング要件まで完全にまとめました。" data-zh="详细分析2026年起生效的Euro NCAP驾驶员监控系统（DMS）要求。完整涵盖疲劳检测、注意力分散检测以及新增的基于rPPG的生命体征监测要求。">2026년부터 시행되는 Euro NCAP의 운전자 모니터링 시스템(DMS) 요구사항을 상세히 분석합니다. 졸음 감지, 주의력 분산 감지, 그리고 새롭게 추가된 rPPG 기반 생체신호 모니터링 요구사항까지 완벽하게 정리했습니다.</p>
+            <a href="blog-euro-ncap-2026.html" class="blog-read-more" data-ko="자세히 보기" data-en="Read more" data-ja="詳細を見る" data-zh="阅读更多" data-de="Mehr lesen" data-es="Leer más" data-fr="Lire la suite" data-vi="Đọc thêm" data-th="อ่านเพิ่มเติม">
+                자세히 보기
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </article>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21">
+            </div>
+            <p class="footer-text">© 2026 FunnyTech21 Co., Ltd. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页">Home</a>
+                <a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们">About</a>
+                <a href="index.html#contact" data-ko="문의" data-en="Contact" data-ja="お問い合わせ" data-zh="联系我们">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text" data-ko="이 웹사이트는 사용자 경험 향상을 위해 쿠키를 사용합니다. 계속 이용하시면 쿠키 사용에 동의하는 것으로 간주됩니다." data-en="This website uses cookies to enhance your experience. By continuing to use this site, you consent to our use of cookies." data-ja="このウェブサイトは、ユーザー体験向上のためにクッキーを使用しています。" data-zh="本网站使用cookies来提升您的体验。继续使用本网站即表示您同意我们使用cookies。" data-de="Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern." data-es="Este sitio web utiliza cookies para mejorar su experiencia." data-fr="Ce site utilise des cookies pour améliorer votre expérience." data-vi="Trang web này sử dụng cookie để nâng cao trải nghiệm của bạn." data-th="เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์ของคุณ">
+                This website uses cookies to enhance your experience. By continuing to use this site, you consent to our use of cookies.
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()" data-ko="거부" data-en="Decline" data-ja="拒否" data-zh="拒绝" data-de="Ablehnen" data-es="Rechazar" data-fr="Refuser" data-vi="Từ chối" data-th="ปฏิเสธ">Decline</button>
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()" data-ko="동의" data-en="Accept" data-ja="同意" data-zh="同意" data-de="Akzeptieren" data-es="Aceptar" data-fr="Accepter" data-vi="Chấp nhận" data-th="ยอมรับ">Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language functionality
+        function toggleLangDropdown() {
+            document.querySelector('.lang-dropdown').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.lang-selector')) {
+                document.querySelector('.lang-dropdown').classList.remove('active');
+            }
+        });
+
+        const langNames = {
+            ko: '한국어', en: 'English', fr: 'Français', ja: '日本語',
+            zh: '中文', de: 'Deutsch', es: 'Español', vi: 'Tiếng Việt', th: 'ไทย'
+        };
+
+        function changeLanguage(lang) {
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                if (opt.textContent.includes(langNames[lang])) opt.classList.add('active');
+            });
+            document.querySelector('.lang-current').textContent = langNames[lang];
+            document.querySelector('.lang-dropdown').classList.remove('active');
+            localStorage.setItem('selectedLang', lang);
+        }
+
+        // Cookie functions
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('selectedLang') || 'ko';
+            changeLanguage(savedLang);
+
+            if (!localStorage.getItem('cookieConsent')) {
+                document.getElementById('cookieBanner').classList.add('show');
+            }
+        });
+    </script>
+</body>
+</html>
