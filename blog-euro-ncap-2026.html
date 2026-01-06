@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VT16VXN7KD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VT16VXN7KD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euro NCAP 2026 DMS 기술 요구사항 완벽 분석 | FunnyTech21 Blog</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Euro NCAP 2026 운전자 모니터링 시스템(DMS) 요구사항 상세 분석. 졸음 감지, 주의력 분산 감지, rPPG 기반 생체신호 모니터링까지 완벽 정리.">
+    <meta name="keywords" content="Euro NCAP 2026, DMS, 운전자 모니터링 시스템, 졸음 감지, 주의력 분산, rPPG, 자동차 안전">
+    <meta name="author" content="(주)퍼니테크21 FunnyTech21 Co., Ltd.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.funnytech21.com/blog-euro-ncap-2026.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.funnytech21.com/blog-euro-ncap-2026.html">
+    <meta property="og:title" content="Euro NCAP 2026 DMS 기술 요구사항 완벽 분석">
+    <meta property="og:description" content="2026년 시행 Euro NCAP DMS 요구사항 상세 분석">
+    <meta property="og:image" content="https://www.funnytech21.com/imgs/funnytech_logo_original.png">
+    <meta property="article:published_time" content="2026-01-06">
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Euro NCAP 2026 DMS 기술 요구사항 완벽 분석",
+        "description": "Euro NCAP 2026 운전자 모니터링 시스템 요구사항 상세 분석",
+        "author": {
+            "@type": "Organization",
+            "name": "FunnyTech21"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "FunnyTech21",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.funnytech21.com/imgs/funnytech_logo_original.png"
+            }
+        },
+        "datePublished": "2026-01-06",
+        "dateModified": "2026-01-06"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --primary-blue: #15539E;
+            --electric-blue: #3B82F6;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --bg-hover: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red-gradient: linear-gradient(135deg, #FF2222 0%, #FF6B6B 100%);
+            --blue-gradient: linear-gradient(135deg, #15539E 0%, #3B82F6 100%);
+            --container-width: 1280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: var(--container-width); margin: 0 auto; padding: 14px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 82px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a.active { color: var(--primary-blue); font-weight: 600; }
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+
+        .lang-selector { position: relative; }
+        .lang-selector-btn {
+            display: flex; align-items: center; gap: 6px;
+            background: var(--bg-light); color: var(--text-primary); padding: 8px 14px;
+            border: 1px solid var(--border-light); border-radius: 6px; font-weight: 500;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+        }
+        .lang-selector-btn:hover { background: var(--bg-hover); border-color: var(--primary-blue); }
+        .lang-selector-btn svg { width: 14px; height: 14px; }
+        .lang-dropdown {
+            position: absolute; top: 100%; right: 0; margin-top: 8px;
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 160px; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.2s; z-index: 1000;
+        }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            cursor: pointer; transition: background 0.2s; font-size: 0.9rem;
+        }
+        .lang-option:first-child { border-radius: 10px 10px 0 0; }
+        .lang-option:last-child { border-radius: 0 0 10px 10px; }
+        .lang-option:hover { background: var(--bg-light); }
+        .lang-option.active { background: rgba(21, 83, 158, 0.1); color: var(--primary-blue); font-weight: 600; }
+        .lang-flag { font-size: 1.2rem; }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 24px 60px;
+            background: linear-gradient(135deg, #15539E 0%, #1E40AF 100%);
+        }
+        .article-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .article-category {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .article-date {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        .article-header h1 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+        .article-summary {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Article Content */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        .article-content {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 48px;
+        }
+        .article-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 40px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+        .article-content h2:first-child {
+            margin-top: 0;
+        }
+        .article-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 30px 0 16px;
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 24px;
+            color: var(--text-secondary);
+        }
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.95rem;
+        }
+        .data-table th, .data-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border: 1px solid var(--border-light);
+        }
+        .data-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .data-table td {
+            color: var(--text-secondary);
+        }
+        .data-table tr:hover td {
+            background: var(--bg-hover);
+        }
+
+        /* Requirement Box */
+        .requirement-box {
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        .requirement-box h4 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .requirement-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .requirement-box li {
+            margin-bottom: 8px;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-required {
+            background: rgba(255, 34, 34, 0.1);
+            color: var(--primary-red);
+        }
+        .status-optional {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--electric-blue);
+        }
+        .status-bonus {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--green);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(21,83,158,0.05) 0%, rgba(59,130,246,0.05) 100%);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+        .highlight-box h4 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        /* Compliance Card */
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 30px 0;
+        }
+        .compliance-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .compliance-card.compliant {
+            border-color: var(--green);
+            background: rgba(34, 197, 94, 0.05);
+        }
+        .compliance-card.partial {
+            border-color: var(--yellow);
+            background: rgba(245, 158, 11, 0.05);
+        }
+        .compliance-card h5 {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .compliance-card .status {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .compliance-card.compliant .status { color: var(--green); }
+        .compliance-card.partial .status { color: var(--yellow); }
+
+        /* Back to Blog */
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: gap 0.2s;
+        }
+        .back-to-blog:hover {
+            gap: 12px;
+        }
+        .back-to-blog svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* CTA Section */
+        .article-cta {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .article-cta h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+        .article-cta p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 24px;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--red-gradient);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,34,34,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            padding: 40px 24px;
+        }
+        .footer-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-logo img { height: 50px; }
+        .footer-text { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--text-primary);
+            padding: 20px 24px;
+            z-index: 9999;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+            display: none;
+        }
+        .cookie-banner.show { display: block; }
+        .cookie-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .cookie-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 300px;
+        }
+        .cookie-actions { display: flex; gap: 12px; }
+        .cookie-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .cookie-btn-accept {
+            background: var(--primary-blue);
+            color: white;
+        }
+        .cookie-btn-decline {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .article-content { padding: 24px; }
+            .compliance-grid { grid-template-columns: 1fr; }
+            .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21 Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="faceid.html">Face ID</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="lang-selector" id="langSelector">
+                    <button class="lang-selector-btn" onclick="toggleLangDropdown()">
+                        <span class="lang-current">한국어</span>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-option active" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                        <div class="lang-option" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                        <div class="lang-option" onclick="changeLanguage('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+                        <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                        <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                        <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                        <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                        <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                        <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ไทย</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="article-header-content">
+            <div class="article-meta">
+                <span class="article-category">Euro NCAP</span>
+                <span class="article-date">2026.01.06</span>
+            </div>
+            <h1>Euro NCAP 2026 DMS 기술 요구사항 완벽 분석</h1>
+            <p class="article-summary">
+                2026년부터 시행되는 Euro NCAP의 운전자 모니터링 시스템(DMS) 요구사항을 상세히 분석합니다.
+                졸음 감지, 주의력 분산 감지, 그리고 새롭게 추가된 rPPG 기반 생체신호 모니터링 요구사항까지 완벽하게 정리했습니다.
+            </p>
+        </div>
+    </header>
+
+    <div class="article-container">
+        <a href="blog.html" class="back-to-blog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            블로그 목록으로
+        </a>
+
+        <article class="article-content">
+            <h2>Euro NCAP 2026 개요</h2>
+            <p>
+                Euro NCAP(European New Car Assessment Programme)은 2026년부터 2009년 이후 가장 큰 규모의
+                프로토콜 개정을 시행합니다. 이번 개정의 핵심은 <strong>운전자 모니터링 시스템(DMS)</strong>과
+                <strong>실내 모니터링(In-Cabin Monitoring)</strong>에 대한 강화된 요구사항입니다.
+            </p>
+
+            <div class="highlight-box">
+                <h4>핵심 변경 사항</h4>
+                <p>
+                    Euro NCAP 2026은 DMS를 <strong>필수 평가 항목</strong>으로 지정했습니다.
+                    이전에는 선택적 가점 요소였던 DMS가 이제 별점 획득의 핵심 조건이 됩니다.
+                </p>
+            </div>
+
+            <h2>DMS 핵심 요구사항</h2>
+
+            <h3>1. 운전자 모니터링 시스템 (필수)</h3>
+            <div class="requirement-box">
+                <h4><span class="status-badge status-required">필수</span> Driver Monitoring System</h4>
+                <ul>
+                    <li><strong>시선 추적 (Gaze Tracking):</strong> 운전자의 시선 방향 지속 모니터링</li>
+                    <li><strong>머리 추적 (Head Tracking):</strong> 머리 위치 및 방향 실시간 감지</li>
+                    <li><strong>졸음 감지 (Drowsiness Detection):</strong> PERCLOS, 눈 깜빡임 패턴 분석</li>
+                    <li><strong>주의분산 감지 (Distraction Detection):</strong> 도로 외 시선 감지</li>
+                </ul>
+            </div>
+
+            <table class="data-table">
+                <tr>
+                    <th>요구사항</th>
+                    <th>세부 기준</th>
+                    <th>FunnyTech21 i-DMS</th>
+                </tr>
+                <tr>
+                    <td>시선 추적 정확도</td>
+                    <td>±5° 이내</td>
+                    <td>✓ 준수</td>
+                </tr>
+                <tr>
+                    <td>머리 위치 추적</td>
+                    <td>3축 실시간 추적</td>
+                    <td>✓ 준수</td>
+                </tr>
+                <tr>
+                    <td>졸음 감지 응답시간</td>
+                    <td>3초 이내 경고</td>
+                    <td>✓ 준수</td>
+                </tr>
+                <tr>
+                    <td>주의분산 감지</td>
+                    <td>2초 이상 시선 이탈 시 경고</td>
+                    <td>✓ 준수</td>
+                </tr>
+            </table>
+
+            <h3>2. 장애 감지 (추가 점수)</h3>
+            <div class="requirement-box">
+                <h4><span class="status-badge status-bonus">가점</span> Impairment Detection</h4>
+                <ul>
+                    <li><strong>약물/알코올 장애 징후:</strong> 비정상적 행동 패턴 감지</li>
+                    <li><strong>행동 분석:</strong> 운전 패턴 이상 탐지</li>
+                    <li><strong>조향 패턴 분석:</strong> 비정상적 조향 감지</li>
+                </ul>
+            </div>
+
+            <h3>3. 생체 신호 모니터링 (권장)</h3>
+            <div class="requirement-box">
+                <h4><span class="status-badge status-optional">권장</span> Vital Signs Monitoring</h4>
+                <ul>
+                    <li><strong>심박수 감지 (rPPG):</strong> 비접촉 카메라 기반 심박수 측정</li>
+                    <li><strong>호흡 모니터링:</strong> 호흡 패턴 분석</li>
+                    <li><strong>급성 질환 감지:</strong> 심장 발작, 뇌졸중 등 응급 상황 감지</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>rPPG 기술의 중요성</h4>
+                <p>
+                    Euro NCAP 2026에서는 rPPG 기반 심박수 측정을 <strong>권장 사항</strong>으로 명시했습니다.
+                    이는 향후 필수 요구사항으로 전환될 가능성이 높으며, 조기 도입 시 경쟁 우위 확보가 가능합니다.
+                    FunnyTech21 i-DMS는 이미 MAE 6.33 BPM의 높은 정확도로 이 요구사항을 충족합니다.
+                </p>
+            </div>
+
+            <h2>비반응 운전자 대응</h2>
+
+            <h3>4. 비반응 운전자 감지 (추가 점수)</h3>
+            <div class="requirement-box">
+                <h4><span class="status-badge status-bonus">가점</span> Unresponsive Driver</h4>
+                <ul>
+                    <li><strong>감지 기능:</strong> 운전자 무반응 상태 탐지</li>
+                    <li><strong>안전 정차:</strong> 자동 비상 정차 시스템 연동</li>
+                    <li><strong>비상 호출:</strong> eCall 시스템 자동 연동</li>
+                </ul>
+            </div>
+
+            <h2>유아 존재 감지 (CPD)</h2>
+
+            <h3>5. Child Presence Detection (필수 점수)</h3>
+            <div class="requirement-box">
+                <h4><span class="status-badge status-required">점수 필수</span> 유아 존재 감지</h4>
+                <ul>
+                    <li><strong>직접 감지:</strong> 움직임/호흡 기반 탐지</li>
+                    <li><strong>전 좌석 커버:</strong> 모든 좌석 위치 모니터링</li>
+                    <li><strong>경고 시스템:</strong> 시각/청각 경고 + 외부 알림</li>
+                </ul>
+            </div>
+
+            <h2>FunnyTech21 i-DMS 준수 현황</h2>
+
+            <div class="compliance-grid">
+                <div class="compliance-card compliant">
+                    <h5>시선 추적</h5>
+                    <span class="status">✓ 완전 준수</span>
+                </div>
+                <div class="compliance-card compliant">
+                    <h5>머리 추적</h5>
+                    <span class="status">✓ 완전 준수</span>
+                </div>
+                <div class="compliance-card compliant">
+                    <h5>졸음 감지</h5>
+                    <span class="status">✓ 완전 준수</span>
+                </div>
+                <div class="compliance-card compliant">
+                    <h5>주의분산 감지</h5>
+                    <span class="status">✓ 완전 준수</span>
+                </div>
+                <div class="compliance-card compliant">
+                    <h5>심박수 측정 (rPPG)</h5>
+                    <span class="status">✓ 완전 준수</span>
+                </div>
+                <div class="compliance-card partial">
+                    <h5>호흡 모니터링</h5>
+                    <span class="status">◐ 부분 준수</span>
+                </div>
+                <div class="compliance-card compliant">
+                    <h5>행동 분석</h5>
+                    <span class="status">✓ 완전 준수</span>
+                </div>
+                <div class="compliance-card partial">
+                    <h5>장애 감지</h5>
+                    <span class="status">◐ 부분 준수</span>
+                </div>
+            </div>
+
+            <h2>평가 배점 구조</h2>
+
+            <table class="data-table">
+                <tr>
+                    <th>카테고리</th>
+                    <th>최대 점수</th>
+                    <th>비고</th>
+                </tr>
+                <tr>
+                    <td>성인 탑승자 보호</td>
+                    <td>40점</td>
+                    <td>DMS 연동 시 가점</td>
+                </tr>
+                <tr>
+                    <td>어린이 탑승자 보호</td>
+                    <td>40점</td>
+                    <td>CPD 필수</td>
+                </tr>
+                <tr>
+                    <td>취약 도로 사용자 보호</td>
+                    <td>40점</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>안전 지원</td>
+                    <td>40점</td>
+                    <td>DMS 핵심 항목</td>
+                </tr>
+            </table>
+
+            <h2>OEM을 위한 권장 사항</h2>
+
+            <ol>
+                <li>
+                    <strong>DMS 필수 기능 우선 구현</strong>
+                    <p>시선 추적, 머리 추적, 졸음/주의분산 감지는 별점 획득의 기본 조건입니다.</p>
+                </li>
+                <li>
+                    <strong>rPPG 기술 조기 도입</strong>
+                    <p>현재 권장 사항이지만 향후 필수화 예상. 선제 대응으로 경쟁 우위 확보 가능.</p>
+                </li>
+                <li>
+                    <strong>CPD 시스템 통합</strong>
+                    <p>유아 존재 감지는 필수 점수 항목. 별도 시스템 또는 DMS 통합 검토 필요.</p>
+                </li>
+                <li>
+                    <strong>ADAS 연동 설계</strong>
+                    <p>비반응 운전자 감지 시 자동 비상 정차 등 ADAS 연동 아키텍처 구축.</p>
+                </li>
+            </ol>
+
+            <h2>결론</h2>
+            <p>
+                Euro NCAP 2026은 자동차 안전의 새로운 기준을 제시합니다. 운전자 모니터링 시스템은
+                더 이상 선택이 아닌 <strong>필수</strong>가 되었으며, rPPG 기반 생체 신호 모니터링은
+                다음 단계의 차별화 요소가 됩니다.
+            </p>
+            <p>
+                FunnyTech21 i-DMS는 Euro NCAP 2026의 핵심 DMS 요구사항을 완전 준수하며,
+                rPPG 기술을 통해 권장 사항까지 충족하는 포괄적인 솔루션을 제공합니다.
+            </p>
+
+            <div class="highlight-box">
+                <h4>참고 자료</h4>
+                <p>
+                    Euro NCAP 2026 공식 프로토콜:
+                    <a href="https://www.euroncap.com/en/for-engineers/protocols/2026-protocols/" target="_blank" style="color: var(--primary-blue);">
+                        https://www.euroncap.com/en/for-engineers/protocols/2026-protocols/
+                    </a>
+                </p>
+            </div>
+
+            <div class="article-cta">
+                <h3>Euro NCAP 2026 대응 솔루션</h3>
+                <p>FunnyTech21 i-DMS로 Euro NCAP 2026 요구사항을 충족하세요</p>
+                <a href="index.html#contact" class="cta-btn">
+                    기술 상담 신청
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21">
+            </div>
+            <p class="footer-text">© 2026 FunnyTech21 Co., Ltd. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                이 웹사이트는 사용자 경험 향상을 위해 쿠키를 사용합니다.
+                계속 이용하시면 쿠키 사용에 동의하는 것으로 간주됩니다.
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()">거부</button>
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">동의</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleLangDropdown() {
+            document.querySelector('.lang-dropdown').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.lang-selector')) {
+                document.querySelector('.lang-dropdown').classList.remove('active');
+            }
+        });
+
+        const langNames = {
+            ko: '한국어', en: 'English', fr: 'Français', ja: '日本語',
+            zh: '中文', de: 'Deutsch', es: 'Español', vi: 'Tiếng Việt', th: 'ไทย'
+        };
+
+        function changeLanguage(lang) {
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                if (opt.textContent.includes(langNames[lang])) opt.classList.add('active');
+            });
+            document.querySelector('.lang-current').textContent = langNames[lang];
+            document.querySelector('.lang-dropdown').classList.remove('active');
+            localStorage.setItem('selectedLang', lang);
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('selectedLang') || 'ko';
+            changeLanguage(savedLang);
+
+            if (!localStorage.getItem('cookieConsent')) {
+                document.getElementById('cookieBanner').classList.add('show');
+            }
+        });
+    </script>
+</body>
+</html>
