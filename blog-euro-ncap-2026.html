@@ -459,6 +459,16 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
 
+        /* Table Wrapper for Mobile */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 20px 0;
+        }
+        .table-wrapper .data-table {
+            min-width: 500px;
+        }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
@@ -466,6 +476,43 @@
             .article-content { padding: 24px; }
             .compliance-grid { grid-template-columns: 1fr; }
             .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+
+            .table-wrapper {
+                margin: 20px -24px;
+                padding: 0 24px;
+            }
+            .data-table th, .data-table td {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+            .requirement-box {
+                padding: 16px;
+            }
+            .highlight-box {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article-header h1 { font-size: 1.4rem; }
+            .article-summary { font-size: 0.95rem; }
+            .article-content { padding: 16px; }
+            .article-content h2 { font-size: 1.25rem; }
+            .article-content h3 { font-size: 1.1rem; }
+            .table-wrapper {
+                margin: 16px -16px;
+                padding: 0 16px;
+            }
+            .data-table th, .data-table td {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+            .compliance-card {
+                padding: 14px;
+            }
+            .compliance-card h5 {
+                font-size: 0.85rem;
+            }
         }
 
         /* Mobile Menu */
@@ -617,6 +664,7 @@
                 </ul>
             </div>
 
+            <div class="table-wrapper">
             <table class="data-table">
                 <tr>
                     <th data-ko="요구사항" data-en="Requirement" data-ja="要件" data-zh="要求" data-de="Anforderung" data-es="Requisito" data-fr="Exigence" data-vi="Yêu cầu" data-th="ข้อกำหนด">요구사항</th>
@@ -644,6 +692,7 @@
                     <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合" data-de="✓ Konform" data-es="✓ Cumple" data-fr="✓ Conforme" data-vi="✓ Tuân thủ" data-th="✓ สอดคล้อง">✓ 준수</td>
                 </tr>
             </table>
+            </div>
 
             <h3 data-ko="2. 장애 감지 (추가 점수)" data-en="2. Impairment Detection (Bonus Points)" data-ja="2. 障害検知（追加点数）" data-zh="2. 障碍检测（额外得分）" data-de="2. Beeinträchtigungserkennung (Bonuspunkte)" data-es="2. Detección de Deterioro (Puntos Bonus)" data-fr="2. Détection de Déficience (Points Bonus)" data-vi="2. Phát hiện Suy giảm (Điểm Thưởng)" data-th="2. การตรวจจับความบกพร่อง (คะแนนโบนัส)">2. 장애 감지 (추가 점수)</h3>
             <div class="requirement-box">
@@ -737,6 +786,7 @@
 
             <h2 data-ko="평가 배점 구조" data-en="Scoring Structure" data-ja="評価配点構造" data-zh="评分结构" data-de="Bewertungsstruktur" data-es="Estructura de Puntuación" data-fr="Structure de Notation" data-vi="Cấu trúc Điểm số" data-th="โครงสร้างการให้คะแนน">평가 배점 구조</h2>
 
+            <div class="table-wrapper">
             <table class="data-table">
                 <tr>
                     <th data-ko="카테고리" data-en="Category" data-ja="カテゴリー" data-zh="类别" data-de="Kategorie" data-es="Categoría" data-fr="Catégorie" data-vi="Danh mục" data-th="หมวดหมู่">카테고리</th>
@@ -764,6 +814,7 @@
                     <td data-ko="DMS 핵심 항목" data-en="DMS Key Item" data-ja="DMSコア項目" data-zh="DMS核心项目" data-de="DMS Kernelement" data-es="Elemento Clave DMS" data-fr="Élément Clé DMS" data-vi="Mục Chính DMS" data-th="รายการหลัก DMS">DMS 핵심 항목</td>
                 </tr>
             </table>
+            </div>
 
             <h2 data-ko="OEM을 위한 권장 사항" data-en="Recommendations for OEMs" data-ja="OEM向け推奨事項" data-zh="对OEM的建议" data-de="Empfehlungen für OEMs" data-es="Recomendaciones para OEMs" data-fr="Recommandations pour les OEM" data-vi="Khuyến nghị cho OEM" data-th="คำแนะนำสำหรับ OEM">OEM을 위한 권장 사항</h2>
 

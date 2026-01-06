@@ -441,6 +441,16 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
 
+        /* Table Wrapper for Mobile */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 20px 0;
+        }
+        .table-wrapper .data-table {
+            min-width: 500px;
+        }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: block; }
@@ -448,6 +458,43 @@
             .article-content { padding: 24px; }
             .result-cards { grid-template-columns: 1fr; }
             .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+
+            .table-wrapper {
+                margin: 20px -24px;
+                padding: 0 24px;
+            }
+            .data-table th, .data-table td {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+            .info-box {
+                padding: 16px;
+            }
+            .highlight-box {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article-header h1 { font-size: 1.4rem; }
+            .article-summary { font-size: 0.95rem; }
+            .article-content { padding: 16px; }
+            .article-content h2 { font-size: 1.25rem; }
+            .article-content h3 { font-size: 1.1rem; }
+            .table-wrapper {
+                margin: 16px -16px;
+                padding: 0 16px;
+            }
+            .data-table th, .data-table td {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+            .result-card {
+                padding: 16px;
+            }
+            .result-card .value {
+                font-size: 1.8rem;
+            }
         }
 
         /* Mobile Menu */
@@ -586,6 +633,7 @@
 
             <h2 data-ko="테스트 환경" data-en="Test Environment" data-ja="テスト環境" data-zh="测试环境" data-de="Testumgebung" data-es="Entorno de Prueba" data-fr="Environnement de Test" data-vi="Môi trường Thử nghiệm" data-th="สภาพแวดล้อมการทดสอบ">테스트 환경</h2>
 
+            <div class="table-wrapper">
             <table class="data-table">
                 <tr>
                     <th data-ko="항목" data-en="Item" data-ja="項目" data-zh="项目" data-de="Element" data-es="Elemento" data-fr="Élément" data-vi="Mục" data-th="รายการ">항목</th>
@@ -612,6 +660,7 @@
                     <td data-ko="딥러닝 기반 vs 기존 신호처리 방식 비교" data-en="Deep Learning vs Traditional Signal Processing Comparison" data-ja="ディープラーニング基盤 vs 従来の信号処理方式比較" data-zh="深度学习 vs 传统信号处理方法对比" data-de="Deep Learning vs. traditionelle Signalverarbeitung" data-es="Deep Learning vs Procesamiento de señales tradicional" data-fr="Deep Learning vs Traitement de signal traditionnel" data-vi="Deep Learning vs Xử lý tín hiệu truyền thống" data-th="Deep Learning เทียบกับการประมวลผลสัญญาณแบบดั้งเดิม">딥러닝 기반 vs 기존 신호처리 방식 비교</td>
                 </tr>
             </table>
+            </div>
 
             <!-- Phone usage detection image -->
             <div class="article-image" id="image-equipment">
@@ -669,6 +718,7 @@
 
             <h3 data-ko="글로벌 업계 벤치마크 비교" data-en="Global Industry Benchmark Comparison" data-ja="グローバル業界ベンチマーク比較" data-zh="全球行业基准对比" data-de="Globaler Branchen-Benchmark-Vergleich" data-es="Comparación de referencia de la industria global" data-fr="Comparaison des benchmarks de l'industrie mondiale" data-vi="So sánh tiêu chuẩn ngành công nghiệp toàn cầu" data-th="การเปรียบเทียบมาตรฐานอุตสาหกรรมระดับโลก">글로벌 업계 벤치마크 비교</h3>
 
+            <div class="table-wrapper">
             <table class="data-table">
                 <tr>
                     <th data-ko="지표" data-en="Metric" data-ja="指標" data-zh="指标" data-de="Metrik" data-es="Métrica" data-fr="Métrique" data-vi="Chỉ số" data-th="ตัวชี้วัด">지표</th>
@@ -701,6 +751,7 @@
                     <td data-ko="실제 주행" data-en="Real Driving" data-ja="実走行" data-zh="实际驾驶" data-de="Echte Fahrt" data-es="Conducción real" data-fr="Conduite réelle" data-vi="Lái xe thực tế" data-th="การขับขี่จริง">실제 주행</td>
                 </tr>
             </table>
+            </div>
 
             <h2 data-ko="주요 발견 사항" data-en="Key Findings" data-ja="主な発見事項" data-zh="主要发现" data-de="Wichtige Erkenntnisse" data-es="Hallazgos clave" data-fr="Résultats clés" data-vi="Phát hiện chính" data-th="ข้อค้นพบสำคัญ">주요 발견 사항</h2>
 
