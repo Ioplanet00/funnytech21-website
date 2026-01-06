@@ -586,6 +586,21 @@
         .footer a { color: var(--electric-blue); text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
 
+        /* Table Wrapper for Mobile Scroll */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0 -16px;
+            padding: 0 16px;
+        }
+        .table-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 3px;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .metrics-grid { grid-template-columns: repeat(2, 1fr); }
@@ -593,18 +608,35 @@
         }
         @media (max-width: 768px) {
             .metrics-grid { grid-template-columns: 1fr; }
-            .comparison-table { font-size: 0.85rem; }
-            .comparison-table th, .comparison-table td { padding: 12px 16px; }
-            .conditions-table { font-size: 0.85rem; }
+            .comparison-table { font-size: 0.85rem; min-width: 550px; }
+            .comparison-table th, .comparison-table td { padding: 12px 14px; }
+            .conditions-table { font-size: 0.85rem; min-width: 500px; }
             .conditions-table th, .conditions-table td { padding: 12px 16px; }
             .conditions-table .item-desc { display: none; }
-            .sessions-table { font-size: 0.8rem; }
+            .sessions-table { font-size: 0.8rem; min-width: 450px; }
             .sessions-table th, .sessions-table td { padding: 10px 12px; }
             .algo-badge { font-size: 0.75rem; padding: 4px 10px; }
             .ncap-upgrade { flex-direction: column; gap: 12px; }
             .ncap-arrow { transform: rotate(90deg); }
             .pdf-header { flex-direction: column; gap: 16px; text-align: center; }
             .back-link { position: static; margin-bottom: 20px; justify-content: center; }
+            .test-conditions-section { padding: 40px 16px; }
+            .test-sessions { padding: 20px 16px; }
+            .section-title { font-size: 1.3rem; }
+            .header { padding: 80px 16px 40px; }
+            .header h1 { font-size: 1.6rem; }
+            .header p { font-size: 0.95rem; }
+        }
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.4rem; }
+            .header p { font-size: 0.9rem; }
+            .metric-card { padding: 16px; }
+            .metric-value { font-size: 1.8rem; }
+            .metric-label { font-size: 0.8rem; }
+            .section-title { font-size: 1.2rem; }
+            .conditions-table th, .conditions-table td { padding: 10px 12px; font-size: 0.8rem; }
+            .sessions-table th, .sessions-table td { padding: 8px 10px; font-size: 0.75rem; }
+            .algo-badge { font-size: 0.7rem; padding: 3px 8px; }
         }
 
         /* Cookie Consent Banner */
@@ -666,6 +698,7 @@
                 <h2 class="section-title" data-ko="실차 주행 테스트 환경" data-en="Real-World Driving Test Environment" data-fr="Environnement de Test de Conduite Réel" data-ja="実車走行テスト環境" data-zh="实车驾驶测试环境" data-de="Reale Fahrtestumgebung" data-es="Entorno de Prueba de Conducción Real" data-vi="Môi trường Kiểm tra Lái xe Thực tế" data-th="สภาพแวดล้อมการทดสอบขับขี่จริง">Real-World Driving Test Environment</h2>
             </div>
             <!-- Test Environment Table -->
+            <div class="table-wrapper">
             <table class="conditions-table">
                 <thead>
                     <tr>
@@ -697,9 +730,11 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
             <!-- Test Sessions Table -->
             <div class="test-sessions">
                 <h3 class="sessions-title" data-ko="테스트 세션 상세" data-en="Test Session Details" data-fr="Détails des Sessions de Test" data-ja="テストセッション詳細" data-zh="测试会话详情" data-de="Testsitzungsdetails" data-es="Detalles de las Sesiones de Prueba" data-vi="Chi tiết Phiên Kiểm tra" data-th="รายละเอียดเซสชันทดสอบ">Test Session Details</h3>
+                <div class="table-wrapper">
                 <table class="sessions-table">
                     <thead>
                         <tr>
@@ -727,6 +762,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </section>
@@ -779,6 +815,7 @@
                 <h2 class="section-title" data-ko="종합 성능 비교표" data-en="Comprehensive Performance Summary" data-fr="Résumé Complet des Performances" data-ja="総合性能比較表" data-zh="综合性能对比表" data-de="Umfassende Leistungsübersicht" data-es="Resumen Completo de Rendimiento" data-vi="Tổng hợp Hiệu suất" data-th="สรุปประสิทธิภาพโดยรวม">Comprehensive Performance Summary</h2>
                 <p class="section-subtitle" data-ko="Polar H10 ECG 기준 실차 주행 테스트 결과" data-en="Real-world driving test results vs Polar H10 ECG reference" data-fr="Résultats des tests de conduite réels vs référence Polar H10 ECG" data-ja="Polar H10 ECG基準 実車走行テスト結果" data-zh="Polar H10 ECG参考标准实车驾驶测试结果" data-de="Echte Fahrtestergebnisse vs Polar H10 EKG-Referenz" data-es="Resultados de prueba de conducción real vs referencia Polar H10 ECG" data-vi="Kết quả kiểm tra lái xe thực tế so với tham chiếu Polar H10 ECG" data-th="ผลทดสอบขับขี่จริงเทียบกับอ้างอิง Polar H10 ECG">Real-world driving test results vs Polar H10 ECG reference</p>
             </div>
+            <div class="table-wrapper">
             <table class="comparison-table">
                 <thead>
                     <tr>
@@ -841,6 +878,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </section>
 
