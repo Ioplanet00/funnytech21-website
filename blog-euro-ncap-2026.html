@@ -798,13 +798,19 @@
             localStorage.setItem('selectedLang', lang);
 
             // Apply translations to all elements with data-* language attributes
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+            // Process in reverse order (children first) to avoid parent overwriting children
+            const elements = Array.from(document.querySelectorAll('[data-' + lang + ']'));
+            elements.reverse().forEach(el => {
                 const translation = el.getAttribute('data-' + lang);
                 if (translation) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        el.placeholder = translation;
-                    } else {
-                        el.innerHTML = translation;
+                    // Only translate if element has no translatable children
+                    const hasTranslatableChildren = el.querySelector('[data-' + lang + ']');
+                    if (!hasTranslatableChildren) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                            el.placeholder = translation;
+                        } else {
+                            el.innerHTML = translation;
+                        }
                     }
                 }
             });
