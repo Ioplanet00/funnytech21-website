@@ -1665,8 +1665,10 @@
                     <span class="newsletter-topic" data-ko="기술 업데이트" data-en="Technology Updates" data-fr="Mises à jour Technologiques" data-ja="技術アップデート" data-zh="技术更新" data-de="Technologie-Updates" data-es="Actualizaciones Tecnológicas" data-vi="Cập nhật Công nghệ" data-th="อัปเดตเทคโนโลยี">기술 업데이트</span>
                 </div>
 
-                <form class="newsletter-form" id="newsletterForm" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="_blank">
-                    <input type="email" name="entry.EMAIL_ENTRY_ID" placeholder="email@company.com" required data-ko="이메일 주소 입력" data-en="Enter your email" data-fr="Entrez votre email" data-ja="メールアドレスを入力" data-zh="输入您的邮箱" data-de="E-Mail eingeben" data-es="Ingrese su email" data-vi="Nhập email của bạn" data-th="กรอกอีเมลของคุณ">
+                <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/xaqngoly" method="POST">
+                    <input type="email" name="email" placeholder="email@company.com" required data-ko="이메일 주소 입력" data-en="Enter your email" data-fr="Entrez votre email" data-ja="メールアドレスを入力" data-zh="输入您的邮箱" data-de="E-Mail eingeben" data-es="Ingrese su email" data-vi="Nhập email của bạn" data-th="กรอกอีเมลของคุณ">
+                    <input type="hidden" name="_subject" value="FunnyTech21 뉴스레터 신규 구독">
+                    <input type="hidden" name="_next" value="https://www.funnytech21.com/?subscribed=true">
                     <button type="submit" class="newsletter-btn" data-ko="구독하기" data-en="Subscribe" data-fr="S'abonner" data-ja="購読する" data-zh="订阅" data-de="Abonnieren" data-es="Suscribirse" data-vi="Đăng ký" data-th="สมัครสมาชิก">구독하기</button>
                 </form>
 
