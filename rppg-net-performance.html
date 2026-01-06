@@ -211,60 +211,43 @@
 
         /* Test Conditions Section */
         .test-conditions-section { padding: 60px 24px; background: var(--bg-white); }
-        .test-conditions-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .test-condition-card {
-            background: var(--bg-light);
-            border: 2px solid var(--border-light);
+        .conditions-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            border-collapse: collapse;
+            background: var(--bg-white);
             border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            transition: all 0.3s;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-        .test-condition-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        .conditions-table th {
+            background: var(--bg-dark);
+            color: white;
+            padding: 16px 24px;
+            font-weight: 600;
+            text-align: left;
+            font-size: 0.95rem;
         }
-        .test-condition-card.reference { border-color: var(--primary-red); }
-        .test-condition-card.vehicle { border-color: var(--primary-blue); }
-        .test-condition-card.distance { border-color: var(--success-green); }
-        .test-condition-card.date { border-color: #F59E0B; }
-        .condition-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 12px;
-            background: var(--blue-gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .conditions-table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.95rem;
         }
-        .test-condition-card.reference .condition-icon { background: var(--red-gradient); }
-        .test-condition-card.distance .condition-icon { background: var(--green-gradient); }
-        .test-condition-card.date .condition-icon { background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%); }
-        .condition-icon svg { width: 24px; height: 24px; fill: white; }
-        .condition-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .condition-value {
-            font-size: 1.3rem;
-            font-weight: 700;
+        .conditions-table tr:last-child td { border-bottom: none; }
+        .conditions-table tr:hover { background: rgba(59, 130, 246, 0.03); }
+        .conditions-table .item-label {
+            font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 6px;
+            white-space: nowrap;
         }
-        .condition-desc {
-            font-size: 0.8rem;
+        .conditions-table .item-value {
+            font-weight: 700;
+            color: var(--electric-blue);
+            white-space: nowrap;
+        }
+        .conditions-table .item-desc {
             color: var(--text-secondary);
-            line-height: 1.4;
         }
         .test-sessions {
             background: var(--bg-light);
@@ -590,14 +573,15 @@
         /* Responsive */
         @media (max-width: 992px) {
             .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-            .test-conditions-grid { grid-template-columns: repeat(2, 1fr); }
             .header h1 { font-size: 2rem; }
         }
         @media (max-width: 768px) {
             .metrics-grid { grid-template-columns: 1fr; }
-            .test-conditions-grid { grid-template-columns: 1fr; }
             .comparison-table { font-size: 0.85rem; }
             .comparison-table th, .comparison-table td { padding: 12px 16px; }
+            .conditions-table { font-size: 0.85rem; }
+            .conditions-table th, .conditions-table td { padding: 12px 16px; }
+            .conditions-table .item-desc { display: none; }
             .sessions-table { font-size: 0.8rem; }
             .sessions-table th, .sessions-table td { padding: 10px 12px; }
             .algo-badge { font-size: 0.75rem; padding: 4px 10px; }
@@ -652,44 +636,38 @@
                 <span class="section-tag" data-ko="테스트 조건" data-en="Test Conditions" data-fr="Conditions de Test" data-ja="テスト条件" data-zh="测试条件" data-de="Testbedingungen" data-es="Condiciones de Prueba" data-vi="Điều kiện Kiểm tra" data-th="เงื่อนไขการทดสอบ">Test Conditions</span>
                 <h2 class="section-title" data-ko="실차 주행 테스트 환경" data-en="Real-World Driving Test Environment" data-fr="Environnement de Test de Conduite Réel" data-ja="実車走行テスト環境" data-zh="实车驾驶测试环境" data-de="Reale Fahrtestumgebung" data-es="Entorno de Prueba de Conducción Real" data-vi="Môi trường Kiểm tra Lái xe Thực tế" data-th="สภาพแวดล้อมการทดสอบขับขี่จริง">Real-World Driving Test Environment</h2>
             </div>
-            <div class="test-conditions-grid">
-                <!-- Reference Device -->
-                <div class="test-condition-card reference">
-                    <div class="condition-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                    </div>
-                    <div class="condition-label" data-ko="기준 장비" data-en="Reference Device" data-fr="Appareil de Référence" data-ja="基準機器" data-zh="参考设备" data-de="Referenzgerät" data-es="Dispositivo de Referencia" data-vi="Thiết bị Tham chiếu" data-th="อุปกรณ์อ้างอิง">Reference Device</div>
-                    <div class="condition-value">Polar H10</div>
-                    <div class="condition-desc" data-ko="가슴 착용형 ECG 센서 (심박수 측정 표준)" data-en="Chest-worn ECG Sensor (Heart Rate Measurement Standard)" data-fr="Capteur ECG Porté sur la Poitrine (Standard de Mesure de Fréquence Cardiaque)" data-ja="胸部装着型ECGセンサー（心拍数測定標準）" data-zh="胸戴式ECG传感器（心率测量标准）" data-de="Brustgetragener EKG-Sensor (Herzfrequenzmessstandard)" data-es="Sensor ECG Pectoral (Estándar de Medición de Frecuencia Cardíaca)" data-vi="Cảm biến ECG đeo ngực (Tiêu chuẩn Đo nhịp tim)" data-th="เซ็นเซอร์ ECG สวมหน้าอก (มาตรฐานการวัดอัตราการเต้นของหัวใจ)">Chest-worn ECG Sensor (Heart Rate Measurement Standard)</div>
-                </div>
-                <!-- Test Vehicle -->
-                <div class="test-condition-card vehicle">
-                    <div class="condition-icon">
-                        <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
-                    </div>
-                    <div class="condition-label" data-ko="테스트 차량" data-en="Test Vehicle" data-fr="Véhicule de Test" data-ja="テスト車両" data-zh="测试车辆" data-de="Testfahrzeug" data-es="Vehículo de Prueba" data-vi="Xe Kiểm tra" data-th="รถทดสอบ">Test Vehicle</div>
-                    <div class="condition-value">Kia Niro Hybrid</div>
-                    <div class="condition-desc" data-ko="기아자동차 니로 하이브리드" data-en="Kia Motors Niro Hybrid" data-fr="Kia Motors Niro Hybride" data-ja="起亜自動車 ニロ ハイブリッド" data-zh="起亚汽车 Niro 混合动力" data-de="Kia Motors Niro Hybrid" data-es="Kia Motors Niro Híbrido" data-vi="Kia Motors Niro Hybrid" data-th="Kia Motors Niro Hybrid">Kia Motors Niro Hybrid</div>
-                </div>
-                <!-- Driving Distance -->
-                <div class="test-condition-card distance">
-                    <div class="condition-icon">
-                        <svg viewBox="0 0 24 24"><path d="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z"/></svg>
-                    </div>
-                    <div class="condition-label" data-ko="주행 거리" data-en="Driving Distance" data-fr="Distance Parcourue" data-ja="走行距離" data-zh="行驶距离" data-de="Fahrstrecke" data-es="Distancia Recorrida" data-vi="Khoảng cách Lái xe" data-th="ระยะทางขับขี่">Driving Distance</div>
-                    <div class="condition-value">55.4 km</div>
-                    <div class="condition-desc" data-ko="실제 도로 주행 테스트" data-en="Real road driving test" data-fr="Test de conduite sur route réelle" data-ja="実道路走行テスト" data-zh="实际道路驾驶测试" data-de="Echter Straßenfahrtest" data-es="Prueba de conducción en carretera real" data-vi="Kiểm tra lái xe trên đường thực" data-th="ทดสอบขับขี่บนถนนจริง">Real road driving test</div>
-                </div>
-                <!-- Test Date -->
-                <div class="test-condition-card date">
-                    <div class="condition-icon">
-                        <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
-                    </div>
-                    <div class="condition-label" data-ko="테스트 일자" data-en="Test Date" data-fr="Date du Test" data-ja="テスト日" data-zh="测试日期" data-de="Testdatum" data-es="Fecha de Prueba" data-vi="Ngày Kiểm tra" data-th="วันทดสอบ">Test Date</div>
-                    <div class="condition-value">2026-01-05</div>
-                    <div class="condition-desc" data-ko="실차 주행 테스트" data-en="Real-world driving test" data-fr="Test de conduite réel" data-ja="実車走行テスト" data-zh="实车驾驶测试" data-de="Echter Fahrtest" data-es="Prueba de conducción real" data-vi="Kiểm tra lái xe thực tế" data-th="ทดสอบขับขี่จริง">Real-world driving test</div>
-                </div>
-            </div>
+            <!-- Test Environment Table -->
+            <table class="conditions-table">
+                <thead>
+                    <tr>
+                        <th data-ko="항목" data-en="Item" data-fr="Élément" data-ja="項目" data-zh="项目" data-de="Element" data-es="Elemento" data-vi="Mục" data-th="รายการ">Item</th>
+                        <th data-ko="값" data-en="Value" data-fr="Valeur" data-ja="値" data-zh="值" data-de="Wert" data-es="Valor" data-vi="Giá trị" data-th="ค่า">Value</th>
+                        <th data-ko="설명" data-en="Description" data-fr="Description" data-ja="説明" data-zh="说明" data-de="Beschreibung" data-es="Descripción" data-vi="Mô tả" data-th="คำอธิบาย">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="item-label" data-ko="테스트 일자" data-en="Test Date" data-fr="Date du Test" data-ja="テスト日" data-zh="测试日期" data-de="Testdatum" data-es="Fecha de Prueba" data-vi="Ngày Kiểm tra" data-th="วันทดสอบ">Test Date</td>
+                        <td class="item-value">2026-01-05</td>
+                        <td class="item-desc" data-ko="실차 주행 테스트 수행일" data-en="Real-world driving test date" data-fr="Date du test de conduite réel" data-ja="実車走行テスト実施日" data-zh="实车驾驶测试日期" data-de="Datum des Fahrtests" data-es="Fecha de prueba de conducción real" data-vi="Ngày kiểm tra lái xe thực tế" data-th="วันทดสอบขับขี่จริง">Real-world driving test date</td>
+                    </tr>
+                    <tr>
+                        <td class="item-label" data-ko="기준 장비" data-en="Reference Device" data-fr="Appareil de Référence" data-ja="基準機器" data-zh="参考设备" data-de="Referenzgerät" data-es="Dispositivo de Referencia" data-vi="Thiết bị Tham chiếu" data-th="อุปกรณ์อ้างอิง">Reference Device</td>
+                        <td class="item-value">Polar H10</td>
+                        <td class="item-desc" data-ko="가슴 착용형 ECG 센서 (심박수 측정 표준)" data-en="Chest-worn ECG Sensor (Heart Rate Measurement Standard)" data-fr="Capteur ECG porté sur la poitrine (Standard de mesure)" data-ja="胸部装着型ECGセンサー（心拍数測定標準）" data-zh="胸戴式ECG传感器（心率测量标准）" data-de="Brustgetragener EKG-Sensor (Messstandard)" data-es="Sensor ECG pectoral (Estándar de medición)" data-vi="Cảm biến ECG đeo ngực (Tiêu chuẩn đo)" data-th="เซ็นเซอร์ ECG สวมหน้าอก (มาตรฐานการวัด)">Chest-worn ECG Sensor (Heart Rate Measurement Standard)</td>
+                    </tr>
+                    <tr>
+                        <td class="item-label" data-ko="테스트 차량" data-en="Test Vehicle" data-fr="Véhicule de Test" data-ja="テスト車両" data-zh="测试车辆" data-de="Testfahrzeug" data-es="Vehículo de Prueba" data-vi="Xe Kiểm tra" data-th="รถทดสอบ">Test Vehicle</td>
+                        <td class="item-value">Kia Niro Hybrid</td>
+                        <td class="item-desc" data-ko="기아자동차 니로 하이브리드" data-en="Kia Motors Niro Hybrid" data-fr="Kia Motors Niro Hybride" data-ja="起亜自動車 ニロ ハイブリッド" data-zh="起亚汽车 Niro 混合动力" data-de="Kia Motors Niro Hybrid" data-es="Kia Motors Niro Híbrido" data-vi="Kia Motors Niro Hybrid" data-th="Kia Motors Niro Hybrid">Kia Motors Niro Hybrid</td>
+                    </tr>
+                    <tr>
+                        <td class="item-label" data-ko="주행 거리" data-en="Driving Distance" data-fr="Distance Parcourue" data-ja="走行距離" data-zh="行驶距离" data-de="Fahrstrecke" data-es="Distancia Recorrida" data-vi="Khoảng cách Lái xe" data-th="ระยะทางขับขี่">Driving Distance</td>
+                        <td class="item-value">55.4 km</td>
+                        <td class="item-desc" data-ko="실제 도로 주행 테스트 거리" data-en="Real road driving test distance" data-fr="Distance de test sur route réelle" data-ja="実道路走行テスト距離" data-zh="实际道路驾驶测试距离" data-de="Echte Straßenfahrtstrecke" data-es="Distancia de prueba en carretera real" data-vi="Khoảng cách kiểm tra trên đường thực" data-th="ระยะทางทดสอบบนถนนจริง">Real road driving test distance</td>
+                    </tr>
+                </tbody>
+            </table>
             <!-- Test Sessions Table -->
             <div class="test-sessions">
                 <h3 class="sessions-title" data-ko="테스트 세션 상세" data-en="Test Session Details" data-fr="Détails des Sessions de Test" data-ja="テストセッション詳細" data-zh="测试会话详情" data-de="Testsitzungsdetails" data-es="Detalles de las Sesiones de Prueba" data-vi="Chi tiết Phiên Kiểm tra" data-th="รายละเอียดเซสชันทดสอบ">Test Session Details</h3>
