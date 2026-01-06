@@ -445,7 +445,7 @@
 
         /* Video Section */
         .video-showcase { background: var(--bg-white); }
-        .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .video-card {
             background: var(--bg-light); border: 1px solid var(--border-light);
             border-radius: 14px; overflow: hidden;
@@ -460,6 +460,81 @@
         .video-card-header p { font-size: 0.85rem; color: var(--text-muted); }
         .video-card-content { position: relative; width: 100%; padding-bottom: 56.25%; }
         .video-card-content iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* Performance Card (New) */
+        .performance-report-card {
+            background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(52,211,153,0.05) 100%);
+            border: 2px solid #10B981;
+            position: relative;
+        }
+        .performance-report-card:hover { border-color: #059669; transform: translateY(-5px); box-shadow: 0 12px 40px rgba(16,185,129,0.2); }
+        .new-badge-card {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, #FF2222 0%, #FF6B6B 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 5;
+        }
+        .performance-preview {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .perf-metric {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .perf-metric-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #10B981;
+        }
+        .perf-metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .perf-ncap-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+        .btn-view-report {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: var(--blue-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .btn-view-report:hover { box-shadow: 0 6px 20px rgba(21,83,158,0.3); transform: translateY(-2px); }
 
         /* Contact with Form */
         .contact { text-align: center; background: var(--bg-light); }
@@ -1351,6 +1426,42 @@
                     </div>
                     <div class="video-card-content">
                         <iframe src="https://www.youtube.com/embed/VOH8M-Eh3WU" title="건강분석 솔루션" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!-- NEW: rPPG-Net Performance Card -->
+                <div class="video-card performance-report-card">
+                    <span class="new-badge-card">NEW</span>
+                    <div class="video-card-header">
+                        <div class="icon" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg></div>
+                        <div><h3 data-ko="rPPG-Net 성능 비교" data-en="rPPG-Net Performance" data-fr="Performance rPPG-Net" data-ja="rPPG-Net 性能比較" data-zh="rPPG-Net 性能对比" data-de="rPPG-Net Leistung" data-es="Rendimiento rPPG-Net" data-vi="Hiệu suất rPPG-Net" data-th="ประสิทธิภาพ rPPG-Net">rPPG-Net Performance</h3><p data-ko="딥러닝 vs 기존 신호처리" data-en="Deep Learning vs Traditional" data-fr="Deep Learning vs Traditionnel" data-ja="ディープラーニング vs 従来方式" data-zh="深度学习 vs 传统方式" data-de="Deep Learning vs Traditionell" data-es="Deep Learning vs Tradicional" data-vi="Deep Learning vs Truyền thống" data-th="Deep Learning vs แบบดั้งเดิม">Deep Learning vs Traditional</p></div>
+                    </div>
+                    <div class="performance-preview">
+                        <div class="performance-metrics">
+                            <div class="perf-metric">
+                                <div class="perf-metric-value">+23.5%</div>
+                                <div class="perf-metric-label">MAE</div>
+                            </div>
+                            <div class="perf-metric">
+                                <div class="perf-metric-value">+43.3%</div>
+                                <div class="perf-metric-label">Bias</div>
+                            </div>
+                            <div class="perf-metric">
+                                <div class="perf-metric-value">+28.0%</div>
+                                <div class="perf-metric-label" data-ko="±10bpm 정확도" data-en="±10bpm Acc." data-fr="Préc. ±10bpm" data-ja="±10bpm精度" data-zh="±10bpm精度" data-de="±10bpm Gen." data-es="Prec. ±10bpm" data-vi="Độ c.x. ±10bpm" data-th="ความแม่นยำ ±10bpm">±10bpm Acc.</div>
+                            </div>
+                            <div class="perf-metric">
+                                <div class="perf-metric-value">+17.2%</div>
+                                <div class="perf-metric-label" data-ko="얼굴 인식률" data-en="Face Det." data-fr="Dét. Visage" data-ja="顔認識率" data-zh="人脸检测" data-de="Gesichtserkennung" data-es="Det. Facial" data-vi="Nhận dạng mặt" data-th="ตรวจจับใบหน้า">Face Det.</div>
+                            </div>
+                        </div>
+                        <div class="perf-ncap-badge">
+                            <span>Euro NCAP 2026:</span>
+                            <span style="background: white; color: #10B981; padding: 4px 12px; border-radius: 6px;">EXCELLENT</span>
+                        </div>
+                        <a href="rppg-net-performance.html" class="btn-view-report">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            <span data-ko="성능 리포트 보기" data-en="View Performance Report" data-fr="Voir le Rapport" data-ja="性能レポートを見る" data-zh="查看性能报告" data-de="Leistungsbericht anzeigen" data-es="Ver Informe" data-vi="Xem Báo cáo" data-th="ดูรายงานประสิทธิภาพ">View Performance Report</span>
+                        </a>
                     </div>
                 </div>
             </div>

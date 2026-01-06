@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rPPG-Net Deep Learning Performance | FunnyTech21 i-DMS</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="rPPG-Net deep learning algorithm achieves Euro NCAP EXCELLENT rating with 23.5% MAE improvement. Real-world driving test comparison: Traditional Signal Processing vs Deep Learning rPPG technology.">
+    <meta name="keywords" content="rPPG-Net, deep learning, heart rate measurement, rPPG technology, Euro NCAP 2026, MAE improvement, RMSE, contactless vital signs, driver monitoring system, DMS performance, 1D CNN LSTM, real-world driving test, Polar H10 comparison, FunnyTech21, i-DMS">
+    <meta name="author" content="FunnyTech21 Co., Ltd.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.funnytech21.com/rppg-net-performance.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.funnytech21.com/rppg-net-performance.html">
+    <meta property="og:title" content="rPPG-Net: Deep Learning Achieves Euro NCAP EXCELLENT Rating">
+    <meta property="og:description" content="23.5% MAE improvement, 43.3% Bias reduction. Real-world driving test results comparing Traditional vs Deep Learning rPPG algorithms.">
+    <meta property="og:image" content="https://www.funnytech21.com/imgs/rppg-net-performance-og.png">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="rPPG-Net: Deep Learning Performance Gains">
+    <meta name="twitter:description" content="Euro NCAP rating upgraded from PASS to EXCELLENT with deep learning rPPG technology.">
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="en" href="https://www.funnytech21.com/rppg-net-performance.html">
+    <link rel="alternate" hreflang="ko" href="https://www.funnytech21.com/rppg-net-performance.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.funnytech21.com/rppg-net-performance.html">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "rPPG-Net Deep Learning Algorithm Performance Comparison",
+        "description": "Comprehensive performance analysis comparing traditional signal processing vs deep learning rPPG-Net for contactless heart rate measurement in real-world driving conditions.",
+        "author": {
+            "@type": "Organization",
+            "name": "FunnyTech21"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "FunnyTech21",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.funnytech21.com/imgs/funnytech_logo_original.png"
+            }
+        },
+        "datePublished": "2026-01-05",
+        "keywords": "rPPG, deep learning, heart rate, Euro NCAP, driver monitoring"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --primary-blue: #15539E;
+            --electric-blue: #3B82F6;
+            --success-green: #10B981;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --bg-dark: #0F172A;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            --red-gradient: linear-gradient(135deg, #FF2222 0%, #FF6B6B 100%);
+            --blue-gradient: linear-gradient(135deg, #15539E 0%, #3B82F6 100%);
+            --green-gradient: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1E293B 100%);
+            color: white;
+            padding: 80px 24px 60px;
+            text-align: center;
+            position: relative;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .header-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 24px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+            z-index: 10;
+        }
+        .back-link:hover { color: white; }
+        .new-badge {
+            display: inline-block;
+            background: var(--red-gradient);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .header h1 span { color: var(--electric-blue); }
+        .header-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 24px;
+        }
+        .test-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            z-index: 10;
+        }
+        .lang-selector-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 8px 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-selector-btn:hover { background: rgba(255,255,255,0.2); }
+        .lang-selector-btn svg { width: 14px; height: 14px; }
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            min-width: 160px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s;
+            z-index: 1000;
+        }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .lang-option:first-child { border-radius: 10px 10px 0 0; }
+        .lang-option:last-child { border-radius: 0 0 10px 10px; }
+        .lang-option:hover { background: var(--bg-light); }
+        .lang-option.active { background: rgba(21, 83, 158, 0.1); color: var(--primary-blue); font-weight: 600; }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Key Metrics Section */
+        .metrics-section { padding: 60px 24px; background: var(--bg-white); }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .metric-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+        .metric-card.highlight {
+            background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(52,211,153,0.1) 100%);
+            border-color: var(--success-green);
+        }
+        .metric-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px;
+            background: var(--blue-gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .metric-card.highlight .metric-icon { background: var(--green-gradient); }
+        .metric-icon svg { width: 28px; height: 28px; fill: white; }
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .metric-card.highlight .metric-value { color: var(--success-green); }
+        .metric-improvement {
+            display: inline-block;
+            background: var(--success-green);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Comparison Table Section */
+        .comparison-section { padding: 60px 24px; background: var(--bg-light); }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-tag {
+            display: inline-block;
+            background: rgba(255,34,34,0.08);
+            color: var(--primary-red);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .comparison-table th {
+            background: var(--bg-dark);
+            color: white;
+            padding: 18px 24px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .comparison-table th:first-child { text-align: left; }
+        .comparison-table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-light);
+            text-align: center;
+        }
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table .traditional { color: var(--text-secondary); }
+        .comparison-table .deep-learning { color: var(--electric-blue); font-weight: 600; }
+        .comparison-table .improvement { color: var(--success-green); font-weight: 700; }
+        .winner-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .winner-badge.dl { background: var(--success-green); color: white; }
+        .winner-badge.trad { background: #F97316; color: white; }
+
+        /* Euro NCAP Section */
+        .ncap-section {
+            padding: 60px 24px;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1E293B 100%);
+            color: white;
+            text-align: center;
+        }
+        .ncap-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255,255,255,0.1);
+            padding: 24px 40px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        .ncap-logo { height: 60px; }
+        .ncap-rating {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--green-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ncap-upgrade {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.2rem;
+        }
+        .ncap-old {
+            padding: 12px 24px;
+            background: #FCD34D;
+            color: var(--bg-dark);
+            border-radius: 8px;
+            font-weight: 700;
+        }
+        .ncap-arrow { font-size: 2rem; }
+        .ncap-new {
+            padding: 12px 24px;
+            background: var(--success-green);
+            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        /* PDF Preview Section */
+        .pdf-section { padding: 60px 24px; background: var(--bg-white); }
+        .pdf-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .pdf-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+        }
+        .pdf-title { font-weight: 600; color: var(--text-primary); }
+        .pdf-actions { display: flex; gap: 12px; }
+        .pdf-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .pdf-btn-primary {
+            background: var(--blue-gradient);
+            color: white;
+        }
+        .pdf-btn-primary:hover { box-shadow: 0 4px 15px rgba(21,83,158,0.3); }
+        .pdf-btn-secondary {
+            background: var(--bg-light);
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+        .pdf-btn-secondary:hover { background: var(--bg-white); }
+        .pdf-embed {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 60px 24px;
+            background: var(--bg-light);
+            text-align: center;
+        }
+        .cta-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .cta-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .cta-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: var(--red-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,34,34,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: rgba(255,255,255,0.7);
+            padding: 30px 24px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .footer a { color: var(--electric-blue); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .header h1 { font-size: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .metrics-grid { grid-template-columns: 1fr; }
+            .comparison-table { font-size: 0.85rem; }
+            .comparison-table th, .comparison-table td { padding: 12px 16px; }
+            .ncap-upgrade { flex-direction: column; gap: 12px; }
+            .ncap-arrow { transform: rotate(90deg); }
+            .pdf-header { flex-direction: column; gap: 16px; text-align: center; }
+            .back-link { position: static; margin-bottom: 20px; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <a href="index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            <span data-ko="홈으로 돌아가기" data-en="Back to Home" data-fr="Retour à l'accueil" data-ja="ホームに戻る" data-zh="返回首页" data-de="Zurück zur Startseite" data-es="Volver al Inicio" data-vi="Quay lại Trang chủ" data-th="กลับหน้าแรก">Back to Home</span>
+        </a>
+
+        <div class="lang-selector">
+            <button class="lang-selector-btn" onclick="toggleLangDropdown()">
+                <span class="lang-current">English</span>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div class="lang-dropdown">
+                <div class="lang-option" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                <div class="lang-option active" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                <div class="lang-option" onclick="changeLanguage('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+                <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ไทย</div>
+            </div>
+        </div>
+
+        <div class="header-content">
+            <span class="new-badge">NEW - 2026</span>
+            <h1 data-ko="rPPG-Net: <span>딥러닝</span> 성능 비교" data-en="rPPG-Net: <span>Deep Learning</span> Performance Gains" data-fr="rPPG-Net: Gains de Performance <span>Deep Learning</span>" data-ja="rPPG-Net: <span>ディープラーニング</span>性能向上" data-zh="rPPG-Net: <span>深度学习</span>性能提升" data-de="rPPG-Net: <span>Deep Learning</span> Leistungssteigerung" data-es="rPPG-Net: Mejoras de Rendimiento <span>Deep Learning</span>" data-vi="rPPG-Net: Cải thiện Hiệu suất <span>Deep Learning</span>" data-th="rPPG-Net: ประสิทธิภาพ <span>Deep Learning</span>">rPPG-Net: <span>Deep Learning</span> Performance Gains</h1>
+            <p class="header-subtitle" data-ko="기존 신호처리 vs 딥러닝 알고리즘 실차 주행 테스트 결과" data-en="Traditional Signal Processing vs Deep Learning Algorithm - Real-World Driving Test Results" data-fr="Traitement de Signal Traditionnel vs Algorithme Deep Learning - Résultats de Tests de Conduite Réels" data-ja="従来の信号処理 vs ディープラーニングアルゴリズム - 実車走行テスト結果" data-zh="传统信号处理 vs 深度学习算法 - 实际驾驶测试结果" data-de="Traditionelle Signalverarbeitung vs Deep Learning Algorithmus - Echte Fahrtestergebnisse" data-es="Procesamiento de Señal Tradicional vs Algoritmo Deep Learning - Resultados de Pruebas de Conducción Real" data-vi="Xử lý Tín hiệu Truyền thống vs Thuật toán Deep Learning - Kết quả Kiểm tra Lái xe Thực tế" data-th="การประมวลผลสัญญาณแบบดั้งเดิม vs อัลกอริทึม Deep Learning - ผลการทดสอบขับขี่จริง">Traditional Signal Processing vs Deep Learning Algorithm - Real-World Driving Test Results</p>
+            <div class="test-info">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+                <span data-ko="테스트 일자: 2026-01-05 | 기준 장비: Polar H10" data-en="Test Date: 2026-01-05 | Reference: Polar H10 ECG" data-fr="Date du Test: 2026-01-05 | Référence: Polar H10 ECG" data-ja="テスト日: 2026-01-05 | 基準機器: Polar H10" data-zh="测试日期: 2026-01-05 | 参考设备: Polar H10" data-de="Testdatum: 2026-01-05 | Referenz: Polar H10 EKG" data-es="Fecha de Prueba: 2026-01-05 | Referencia: Polar H10 ECG" data-vi="Ngày Test: 2026-01-05 | Thiết bị Tham chiếu: Polar H10" data-th="วันทดสอบ: 2026-01-05 | อ้างอิง: Polar H10 ECG">Test Date: 2026-01-05 | Reference: Polar H10 ECG</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Metrics -->
+    <section class="metrics-section">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+                    </div>
+                    <div class="metric-label" data-ko="MAE (평균 절대 오차)" data-en="MAE (Mean Absolute Error)" data-fr="MAE (Erreur Absolue Moyenne)" data-ja="MAE (平均絶対誤差)" data-zh="MAE (平均绝对误差)" data-de="MAE (Mittlerer absoluter Fehler)" data-es="MAE (Error Absoluto Medio)" data-vi="MAE (Sai số Tuyệt đối Trung bình)" data-th="MAE (ค่าเฉลี่ยความคลาดเคลื่อนสัมบูรณ์)">MAE (Mean Absolute Error)</div>
+                    <div class="metric-value">6.33 <small style="font-size:0.5em">bpm</small></div>
+                    <span class="metric-improvement">+23.5%</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                    </div>
+                    <div class="metric-label" data-ko="Bias (체계적 오차)" data-en="Bias (Systematic Error)" data-fr="Biais (Erreur Systématique)" data-ja="バイアス (系統誤差)" data-zh="偏差 (系统误差)" data-de="Bias (Systematischer Fehler)" data-es="Sesgo (Error Sistemático)" data-vi="Bias (Sai số Hệ thống)" data-th="Bias (ความคลาดเคลื่อนเชิงระบบ)">Bias (Systematic Error)</div>
+                    <div class="metric-value">-3.53 <small style="font-size:0.5em">bpm</small></div>
+                    <span class="metric-improvement">+43.3%</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </div>
+                    <div class="metric-label" data-ko="±10 bpm 정확도" data-en="±10 bpm Accuracy" data-fr="Précision ±10 bpm" data-ja="±10 bpm 精度" data-zh="±10 bpm 准确度" data-de="±10 bpm Genauigkeit" data-es="Precisión ±10 bpm" data-vi="Độ chính xác ±10 bpm" data-th="ความแม่นยำ ±10 bpm">±10 bpm Accuracy</div>
+                    <div class="metric-value">82.8%</div>
+                    <span class="metric-improvement">+28.0%</span>
+                </div>
+                <div class="metric-card highlight">
+                    <div class="metric-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <div class="metric-label">Euro NCAP 2026</div>
+                    <div class="metric-value">EXCELLENT</div>
+                    <span class="metric-improvement" data-ko="PASS에서 상승" data-en="Upgraded from PASS" data-fr="Amélioré depuis PASS" data-ja="PASSから向上" data-zh="从PASS提升" data-de="Von PASS aufgestuft" data-es="Mejorado desde PASS" data-vi="Nâng cấp từ PASS" data-th="อัพเกรดจาก PASS">Upgraded from PASS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-ko="상세 비교" data-en="Detailed Comparison" data-fr="Comparaison Détaillée" data-ja="詳細比較" data-zh="详细对比" data-de="Detaillierter Vergleich" data-es="Comparación Detallada" data-vi="So sánh Chi tiết" data-th="เปรียบเทียบโดยละเอียด">Detailed Comparison</span>
+                <h2 class="section-title" data-ko="종합 성능 비교표" data-en="Comprehensive Performance Summary" data-fr="Résumé Complet des Performances" data-ja="総合性能比較表" data-zh="综合性能对比表" data-de="Umfassende Leistungsübersicht" data-es="Resumen Completo de Rendimiento" data-vi="Tổng hợp Hiệu suất" data-th="สรุปประสิทธิภาพโดยรวม">Comprehensive Performance Summary</h2>
+                <p class="section-subtitle" data-ko="Polar H10 ECG 기준 실차 주행 테스트 결과" data-en="Real-world driving test results vs Polar H10 ECG reference" data-fr="Résultats des tests de conduite réels vs référence Polar H10 ECG" data-ja="Polar H10 ECG基準 実車走行テスト結果" data-zh="Polar H10 ECG参考标准实车驾驶测试结果" data-de="Echte Fahrtestergebnisse vs Polar H10 EKG-Referenz" data-es="Resultados de prueba de conducción real vs referencia Polar H10 ECG" data-vi="Kết quả kiểm tra lái xe thực tế so với tham chiếu Polar H10 ECG" data-th="ผลทดสอบขับขี่จริงเทียบกับอ้างอิง Polar H10 ECG">Real-world driving test results vs Polar H10 ECG reference</p>
+            </div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th data-ko="지표 (Metric)" data-en="Metric" data-fr="Métrique" data-ja="指標" data-zh="指标" data-de="Metrik" data-es="Métrica" data-vi="Chỉ số" data-th="ตัวชี้วัด">Metric</th>
+                        <th data-ko="기존 신호처리" data-en="Traditional" data-fr="Traditionnel" data-ja="従来方式" data-zh="传统方式" data-de="Traditionell" data-es="Tradicional" data-vi="Truyền thống" data-th="แบบดั้งเดิม">Traditional</th>
+                        <th data-ko="딥러닝" data-en="Deep Learning" data-fr="Deep Learning" data-ja="ディープラーニング" data-zh="深度学习" data-de="Deep Learning" data-es="Deep Learning" data-vi="Deep Learning" data-th="Deep Learning">Deep Learning</th>
+                        <th data-ko="개선율" data-en="Improvement" data-fr="Amélioration" data-ja="改善率" data-zh="改善率" data-de="Verbesserung" data-es="Mejora" data-vi="Cải thiện" data-th="การปรับปรุง">Improvement</th>
+                        <th data-ko="우위" data-en="Winner" data-fr="Gagnant" data-ja="優位" data-zh="优胜" data-de="Gewinner" data-es="Ganador" data-vi="Chiến thắng" data-th="ผู้ชนะ">Winner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MAE (bpm)</td>
+                        <td class="traditional">8.27</td>
+                        <td class="deep-learning">6.33</td>
+                        <td class="improvement">+23.5%</td>
+                        <td><span class="winner-badge dl">DL</span></td>
+                    </tr>
+                    <tr>
+                        <td>RMSE (bpm)</td>
+                        <td class="traditional">9.90</td>
+                        <td class="deep-learning">7.68</td>
+                        <td class="improvement">+22.4%</td>
+                        <td><span class="winner-badge dl">DL</span></td>
+                    </tr>
+                    <tr>
+                        <td>Bias (bpm)</td>
+                        <td class="traditional">-6.23</td>
+                        <td class="deep-learning">-3.53</td>
+                        <td class="improvement">+43.3%</td>
+                        <td><span class="winner-badge dl">DL</span></td>
+                    </tr>
+                    <tr>
+                        <td data-ko="얼굴 인식률" data-en="Face Detection" data-fr="Détection Faciale" data-ja="顔認識率" data-zh="人脸检测率" data-de="Gesichtserkennung" data-es="Detección Facial" data-vi="Phát hiện Khuôn mặt" data-th="การตรวจจับใบหน้า">Face Detection</td>
+                        <td class="traditional">73.9%</td>
+                        <td class="deep-learning">86.6%</td>
+                        <td class="improvement">+17.2%</td>
+                        <td><span class="winner-badge dl">DL</span></td>
+                    </tr>
+                    <tr>
+                        <td data-ko="±5 bpm 정확도" data-en="±5 bpm Accuracy" data-fr="Précision ±5 bpm" data-ja="±5 bpm 精度" data-zh="±5 bpm 准确度" data-de="±5 bpm Genauigkeit" data-es="Precisión ±5 bpm" data-vi="Độ chính xác ±5 bpm" data-th="ความแม่นยำ ±5 bpm">±5 bpm Accuracy</td>
+                        <td class="traditional">36.4%</td>
+                        <td class="deep-learning">47.3%</td>
+                        <td class="improvement">+29.9%</td>
+                        <td><span class="winner-badge dl">DL</span></td>
+                    </tr>
+                    <tr>
+                        <td data-ko="±10 bpm 정확도" data-en="±10 bpm Accuracy" data-fr="Précision ±10 bpm" data-ja="±10 bpm 精度" data-zh="±10 bpm 准确度" data-de="±10 bpm Genauigkeit" data-es="Precisión ±10 bpm" data-vi="Độ chính xác ±10 bpm" data-th="ความแม่นยำ ±10 bpm">±10 bpm Accuracy</td>
+                        <td class="traditional">64.7%</td>
+                        <td class="deep-learning">82.8%</td>
+                        <td class="improvement">+28.0%</td>
+                        <td><span class="winner-badge dl">DL</span></td>
+                    </tr>
+                    <tr>
+                        <td>Euro NCAP 2026</td>
+                        <td class="traditional">PASS</td>
+                        <td class="deep-learning" style="color: var(--success-green);">EXCELLENT</td>
+                        <td>-</td>
+                        <td><span class="winner-badge dl">DL</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Euro NCAP Section -->
+    <section class="ncap-section">
+        <div class="container">
+            <div class="ncap-badge">
+                <img src="imgs/euro-ncap-logo.png" alt="Euro NCAP" class="ncap-logo" onerror="this.style.display='none'">
+                <div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">Euro NCAP 2026</div>
+                    <div class="ncap-rating">EXCELLENT</div>
+                </div>
+            </div>
+            <h2 style="font-size: 1.5rem; margin-bottom: 24px;" data-ko="Euro NCAP 등급 상승" data-en="Euro NCAP Rating Upgrade" data-fr="Amélioration de la Note Euro NCAP" data-ja="Euro NCAP等級向上" data-zh="Euro NCAP评级提升" data-de="Euro NCAP Bewertungsverbesserung" data-es="Mejora de Calificación Euro NCAP" data-vi="Nâng cấp Xếp hạng Euro NCAP" data-th="อัพเกรดเรทติ้ง Euro NCAP">Euro NCAP Rating Upgrade</h2>
+            <div class="ncap-upgrade">
+                <span class="ncap-old">PASS</span>
+                <span class="ncap-arrow">→</span>
+                <span class="ncap-new">EXCELLENT</span>
+            </div>
+            <p style="margin-top: 24px; opacity: 0.8; max-width: 600px; margin-left: auto; margin-right: auto;" data-ko="딥러닝 rPPG-Net 모델은 MAE 6.33 bpm을 달성하여 Euro NCAP EXCELLENT 기준(8 bpm 미만)을 충족합니다." data-en="Deep Learning rPPG-Net model achieves MAE of 6.33 bpm, meeting Euro NCAP EXCELLENT criteria (below 8 bpm)." data-fr="Le modèle Deep Learning rPPG-Net atteint un MAE de 6.33 bpm, répondant aux critères EXCELLENT d'Euro NCAP (moins de 8 bpm)." data-ja="ディープラーニングrPPG-NetモデルはMAE 6.33 bpmを達成し、Euro NCAP EXCELLENT基準(8 bpm未満)を満たしています。" data-zh="深度学习rPPG-Net模型达到MAE 6.33 bpm，满足Euro NCAP EXCELLENT标准（低于8 bpm）。" data-de="Das Deep Learning rPPG-Net Modell erreicht einen MAE von 6.33 bpm und erfüllt die Euro NCAP EXCELLENT Kriterien (unter 8 bpm)." data-es="El modelo Deep Learning rPPG-Net logra un MAE de 6.33 bpm, cumpliendo los criterios EXCELLENT de Euro NCAP (por debajo de 8 bpm)." data-vi="Mô hình Deep Learning rPPG-Net đạt MAE 6.33 bpm, đáp ứng tiêu chí EXCELLENT của Euro NCAP (dưới 8 bpm)." data-th="โมเดล Deep Learning rPPG-Net ได้ MAE 6.33 bpm ตรงตามเกณฑ์ EXCELLENT ของ Euro NCAP (ต่ำกว่า 8 bpm)">Deep Learning rPPG-Net model achieves MAE of 6.33 bpm, meeting Euro NCAP EXCELLENT criteria (below 8 bpm).</p>
+        </div>
+    </section>
+
+    <!-- PDF Preview Section -->
+    <section class="pdf-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-ko="상세 보고서" data-en="Full Report" data-fr="Rapport Complet" data-ja="詳細レポート" data-zh="完整报告" data-de="Vollständiger Bericht" data-es="Informe Completo" data-vi="Báo cáo Đầy đủ" data-th="รายงานฉบับเต็ม">Full Report</span>
+                <h2 class="section-title" data-ko="성능 테스트 보고서 미리보기" data-en="Performance Test Report Preview" data-fr="Aperçu du Rapport de Test de Performance" data-ja="性能テストレポートプレビュー" data-zh="性能测试报告预览" data-de="Vorschau des Leistungstestberichts" data-es="Vista Previa del Informe de Prueba de Rendimiento" data-vi="Xem trước Báo cáo Kiểm tra Hiệu suất" data-th="ตัวอย่างรายงานการทดสอบประสิทธิภาพ">Performance Test Report Preview</h2>
+            </div>
+            <div class="pdf-container">
+                <div class="pdf-header">
+                    <span class="pdf-title" data-ko="Deep_Learning_i-DMS_Performance_Gains.pdf" data-en="Deep_Learning_i-DMS_Performance_Gains.pdf">Deep_Learning_i-DMS_Performance_Gains.pdf</span>
+                    <div class="pdf-actions">
+                        <a href="Deep_Learning_i-DMS_Performance_Gains.pdf" download class="pdf-btn pdf-btn-secondary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                            <span data-ko="다운로드" data-en="Download" data-fr="Télécharger" data-ja="ダウンロード" data-zh="下载" data-de="Herunterladen" data-es="Descargar" data-vi="Tải xuống" data-th="ดาวน์โหลด">Download</span>
+                        </a>
+                        <a href="Deep_Learning_i-DMS_Performance_Gains.pdf" target="_blank" class="pdf-btn pdf-btn-primary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                            <span data-ko="새 탭에서 열기" data-en="Open in New Tab" data-fr="Ouvrir dans un Nouvel Onglet" data-ja="新しいタブで開く" data-zh="在新标签页中打开" data-de="In neuem Tab öffnen" data-es="Abrir en Nueva Pestaña" data-vi="Mở trong Tab Mới" data-th="เปิดในแท็บใหม่">Open in New Tab</span>
+                        </a>
+                    </div>
+                </div>
+                <iframe src="Deep_Learning_i-DMS_Performance_Gains.pdf" class="pdf-embed" title="Performance Report PDF"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-box">
+            <h2 class="cta-title" data-ko="기술 데모를 요청하세요" data-en="Request a Technical Demo" data-fr="Demandez une Démonstration Technique" data-ja="技術デモをリクエスト" data-zh="请求技术演示" data-de="Technische Demo anfordern" data-es="Solicite una Demo Técnica" data-vi="Yêu cầu Demo Kỹ thuật" data-th="ขอสาธิตเทคนิค">Request a Technical Demo</h2>
+            <p class="cta-subtitle" data-ko="rPPG-Net 딥러닝 알고리즘의 실제 성능을 직접 확인해보세요." data-en="Experience the real-world performance of our rPPG-Net deep learning algorithm firsthand." data-fr="Découvrez par vous-même les performances réelles de notre algorithme deep learning rPPG-Net." data-ja="rPPG-Netディープラーニングアルゴリズムの実際の性能を直接ご確認ください。" data-zh="亲身体验我们rPPG-Net深度学习算法的实际性能。" data-de="Erleben Sie die reale Leistung unseres rPPG-Net Deep Learning Algorithmus aus erster Hand." data-es="Experimente de primera mano el rendimiento real de nuestro algoritmo de deep learning rPPG-Net." data-vi="Trải nghiệm trực tiếp hiệu suất thực tế của thuật toán deep learning rPPG-Net của chúng tôi." data-th="สัมผัสประสิทธิภาพจริงของอัลกอริทึม deep learning rPPG-Net ของเราด้วยตัวเอง">Experience the real-world performance of our rPPG-Net deep learning algorithm firsthand.</p>
+            <a href="index.html#contact" class="cta-btn">
+                <span data-ko="기술 문의하기" data-en="Contact Us" data-fr="Nous Contacter" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontaktieren Sie uns" data-es="Contáctenos" data-vi="Liên hệ" data-th="ติดต่อเรา">Contact Us</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            <span data-ko="© 2026 (주)퍼니테크21" data-en="© 2026 FunnyTech21 Co., Ltd." data-ja="© 2026 FunnyTech21株式会社" data-zh="© 2026 FunnyTech21有限公司" data-de="© 2026 FunnyTech21 GmbH" data-es="© 2026 FunnyTech21 S.L." data-fr="© 2026 FunnyTech21 SARL" data-vi="© 2026 FunnyTech21 Co., Ltd." data-th="© 2026 FunnyTech21 Co., Ltd.">© 2026 FunnyTech21 Co., Ltd.</span> |
+            <a href="mailto:ioplanet@funnytech21.com">ioplanet@funnytech21.com</a> |
+            <a href="https://www.funnytech21.com">www.funnytech21.com</a>
+        </p>
+    </footer>
+
+    <script>
+        const langNames = {
+            ko: '한국어', en: 'English', fr: 'Français', ja: '日本語', zh: '中文',
+            de: 'Deutsch', es: 'Español', vi: 'Tiếng Việt', th: 'ไทย'
+        };
+        let currentLang = localStorage.getItem('funnytech_lang') || 'en';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            applyLanguage(currentLang);
+        });
+
+        function toggleLangDropdown() {
+            document.querySelector('.lang-dropdown').classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('funnytech_lang', lang);
+            applyLanguage(lang);
+            document.querySelector('.lang-dropdown').classList.remove('active');
+        }
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.innerHTML = text;
+                    }
+                }
+            });
+            document.querySelector('.lang-current').textContent = langNames[lang];
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.getAttribute('onclick')?.includes(lang)) {
+                    opt.classList.add('active');
+                }
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-selector')) {
+                document.querySelector('.lang-dropdown')?.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
