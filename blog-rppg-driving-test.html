@@ -53,6 +53,14 @@
     }
     </script>
 
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#15539E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="FunnyTech21">
+    <link rel="apple-touch-icon" href="/imgs/icons/icon-152x152.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -435,10 +443,61 @@
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
             .article-header h1 { font-size: 1.6rem; }
             .article-content { padding: 24px; }
             .result-cards { grid-template-columns: 1fr; }
             .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 8px; }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+        .mobile-menu.active { display: block; }
+        .mobile-menu-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-white);
+            padding: 80px 24px 24px;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+        }
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            list-style: none;
+        }
+        .mobile-menu-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .mobile-menu-links a.active {
+            color: var(--primary-blue);
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -449,12 +508,13 @@
                 <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21 Logo" class="logo-img">
             </a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a></li>
                 <li><a href="faceid.html">Face ID</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Giới thiệu" data-th="เกี่ยวกับ">About</a></li>
+                <li><a href="blog.html" class="active" data-ko="블로그" data-en="Blog" data-ja="ブログ" data-zh="博客" data-de="Blog" data-es="Blog" data-fr="Blog" data-vi="Blog" data-th="บล็อก">Blog</a></li>
             </ul>
             <div class="nav-right">
+                <button class="mobile-menu-btn" onclick="openMobileMenu()">☰</button>
                 <div class="lang-selector" id="langSelector">
                     <button class="lang-selector-btn" onclick="toggleLangDropdown()">
                         <span class="lang-current">한국어</span>
@@ -475,6 +535,19 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" onclick="closeMobileMenu()">
+        <div class="mobile-menu-content" onclick="event.stopPropagation()">
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+            <ul class="mobile-menu-links">
+                <li><a href="index.html" onclick="closeMobileMenu()" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a></li>
+                <li><a href="faceid.html" onclick="closeMobileMenu()">Face ID</a></li>
+                <li><a href="about.html" onclick="closeMobileMenu()" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Giới thiệu" data-th="เกี่ยวกับ">About</a></li>
+                <li><a href="blog.html" onclick="closeMobileMenu()" class="active" data-ko="블로그" data-en="Blog" data-ja="ブログ" data-zh="博客" data-de="Blog" data-es="Blog" data-fr="Blog" data-vi="Blog" data-th="บล็อก">Blog</a></li>
+            </ul>
+        </div>
+    </div>
 
     <header class="article-header">
         <div class="article-header-content">
@@ -499,7 +572,7 @@
 
         <article class="article-content">
             <h2 data-ko="테스트 개요" data-en="Test Overview" data-ja="テスト概要" data-zh="测试概述" data-de="Testübersicht" data-es="Resumen de la Prueba" data-fr="Aperçu du Test" data-vi="Tổng quan Thử nghiệm" data-th="ภาพรวมการทดสอบ">테스트 개요</h2>
-            <p data-ko="FunnyTech21은 자사의 딥러닝 기반 rPPG-Net 기술의 실제 주행 환경에서의 성능을 검증하기 위해 2026년 1월 5일 실도로 주행 테스트를 실시했습니다. 이번 테스트는 기존 신호처리 방식과 새로운 딥러닝 기반 알고리즘의 성능을 직접 비교하기 위해 설계되었습니다." data-en="FunnyTech21 conducted real-world driving tests on January 5, 2026 to verify the performance of its deep learning-based rPPG-Net technology. This test was designed to directly compare traditional signal processing methods with the new deep learning-based algorithm." data-ja="FunnyTech21は、自社のディープラーニング基盤rPPG-Net技術の実際の走行環境での性能を検証するため、2026年1月5日に実道路走行テストを実施しました。" data-zh="FunnyTech21于2026年1月5日进行了实际道路驾驶测试，以验证其基于深度学习的rPPG-Net技术的性能。">
+            <p data-ko="FunnyTech21은 자사의 딥러닝 기반 rPPG-Net 기술의 실제 주행 환경에서의 성능을 검증하기 위해 2026년 1월 5일 실도로 주행 테스트를 실시했습니다. 이번 테스트는 기존 신호처리 방식과 새로운 딥러닝 기반 알고리즘의 성능을 직접 비교하기 위해 설계되었습니다." data-en="FunnyTech21 conducted real-world driving tests on January 5, 2026 to verify the performance of its deep learning-based rPPG-Net technology. This test was designed to directly compare traditional signal processing methods with the new deep learning-based algorithm." data-ja="FunnyTech21は、自社のディープラーニング基盤rPPG-Net技術の実際の走行環境での性能を検証するため、2026年1月5日に実道路走行テストを実施しました。" data-zh="FunnyTech21于2026年1月5日进行了实际道路驾驶测试，以验证其基于深度学习的rPPG-Net技术的性能。" data-de="FunnyTech21 führte am 5. Januar 2026 Fahrversuche in der realen Welt durch, um die Leistung seiner Deep-Learning-basierten rPPG-Net-Technologie zu verifizieren." data-es="FunnyTech21 realizó pruebas de conducción en el mundo real el 5 de enero de 2026 para verificar el rendimiento de su tecnología rPPG-Net basada en aprendizaje profundo." data-fr="FunnyTech21 a effectué des tests de conduite réels le 5 janvier 2026 pour vérifier les performances de sa technologie rPPG-Net basée sur l'apprentissage profond." data-vi="FunnyTech21 đã tiến hành thử nghiệm lái xe thực tế vào ngày 5 tháng 1 năm 2026 để xác minh hiệu suất của công nghệ rPPG-Net dựa trên deep learning." data-th="FunnyTech21 ได้ทำการทดสอบการขับขี่จริงเมื่อวันที่ 5 มกราคม 2026 เพื่อยืนยันประสิทธิภาพของเทคโนโลยี rPPG-Net ที่ใช้ deep learning">
                 FunnyTech21은 자사의 딥러닝 기반 rPPG-Net 기술의 실제 주행 환경에서의 성능을 검증하기 위해
                 2026년 1월 5일 실도로 주행 테스트를 실시했습니다. 이번 테스트는 기존 신호처리 방식과
                 새로운 딥러닝 기반 알고리즘의 성능을 직접 비교하기 위해 설계되었습니다.
@@ -509,34 +582,34 @@
             <div class="article-image" id="image-driving-test">
                 <img src="imgs/blog-idms-safe.png" alt="i-DMS 실도로 주행 테스트 - SAFE 상태">
             </div>
-            <p class="image-caption" data-ko="i-DMS 실도로 주행 테스트: SAFE 상태 - 심박수 82 BPM, PERCLOS 13.7%" data-en="i-DMS Real-world Driving Test: SAFE Status - Heart Rate 82 BPM, PERCLOS 13.7%" data-ja="i-DMS実道路走行テスト：SAFEステータス - 心拍数82 BPM、PERCLOS 13.7%" data-zh="i-DMS实际道路驾驶测试：SAFE状态 - 心率82 BPM，PERCLOS 13.7%">i-DMS 실도로 주행 테스트: SAFE 상태 - 심박수 82 BPM, PERCLOS 13.7%</p>
+            <p class="image-caption" data-ko="i-DMS 실도로 주행 테스트: SAFE 상태 - 심박수 82 BPM, PERCLOS 13.7%" data-en="i-DMS Real-world Driving Test: SAFE Status - Heart Rate 82 BPM, PERCLOS 13.7%" data-ja="i-DMS実道路走行テスト：SAFEステータス - 心拍数82 BPM、PERCLOS 13.7%" data-zh="i-DMS实际道路驾驶测试：SAFE状态 - 心率82 BPM，PERCLOS 13.7%" data-de="i-DMS Realwelt-Fahrtest: SAFE Status - Herzfrequenz 82 BPM, PERCLOS 13.7%" data-es="Prueba de conducción real i-DMS: Estado SAFE - Frecuencia cardíaca 82 BPM, PERCLOS 13.7%" data-fr="Test de conduite réel i-DMS: Statut SAFE - Fréquence cardiaque 82 BPM, PERCLOS 13.7%" data-vi="Thử nghiệm lái xe thực tế i-DMS: Trạng thái SAFE - Nhịp tim 82 BPM, PERCLOS 13.7%" data-th="การทดสอบขับขี่จริง i-DMS: สถานะ SAFE - อัตราการเต้นหัวใจ 82 BPM, PERCLOS 13.7%">i-DMS 실도로 주행 테스트: SAFE 상태 - 심박수 82 BPM, PERCLOS 13.7%</p>
 
             <h2 data-ko="테스트 환경" data-en="Test Environment" data-ja="テスト環境" data-zh="测试环境" data-de="Testumgebung" data-es="Entorno de Prueba" data-fr="Environnement de Test" data-vi="Môi trường Thử nghiệm" data-th="สภาพแวดล้อมการทดสอบ">테스트 환경</h2>
 
             <table class="data-table">
                 <tr>
-                    <th data-ko="항목" data-en="Item" data-ja="項目" data-zh="项目">항목</th>
-                    <th data-ko="내용" data-en="Details" data-ja="内容" data-zh="内容">내용</th>
+                    <th data-ko="항목" data-en="Item" data-ja="項目" data-zh="项目" data-de="Element" data-es="Elemento" data-fr="Élément" data-vi="Mục" data-th="รายการ">항목</th>
+                    <th data-ko="내용" data-en="Details" data-ja="内容" data-zh="内容" data-de="Details" data-es="Detalles" data-fr="Détails" data-vi="Chi tiết" data-th="รายละเอียด">내용</th>
                 </tr>
                 <tr>
-                    <td data-ko="테스트 일자" data-en="Test Date" data-ja="テスト日" data-zh="测试日期">테스트 일자</td>
-                    <td data-ko="2026년 1월 5일" data-en="January 5, 2026" data-ja="2026年1月5日" data-zh="2026年1月5日">2026년 1월 5일</td>
+                    <td data-ko="테스트 일자" data-en="Test Date" data-ja="テスト日" data-zh="测试日期" data-de="Testdatum" data-es="Fecha de prueba" data-fr="Date du test" data-vi="Ngày thử nghiệm" data-th="วันที่ทดสอบ">테스트 일자</td>
+                    <td data-ko="2026년 1월 5일" data-en="January 5, 2026" data-ja="2026年1月5日" data-zh="2026年1月5日" data-de="5. Januar 2026" data-es="5 de enero de 2026" data-fr="5 janvier 2026" data-vi="5 tháng 1, 2026" data-th="5 มกราคม 2026">2026년 1월 5일</td>
                 </tr>
                 <tr>
-                    <td data-ko="테스트 차량" data-en="Test Vehicle" data-ja="テスト車両" data-zh="测试车辆">테스트 차량</td>
-                    <td data-ko="기아 니로 하이브리드" data-en="Kia Niro Hybrid" data-ja="キア ニロ ハイブリッド" data-zh="起亚Niro混合动力">기아 니로 하이브리드</td>
+                    <td data-ko="테스트 차량" data-en="Test Vehicle" data-ja="テスト車両" data-zh="测试车辆" data-de="Testfahrzeug" data-es="Vehículo de prueba" data-fr="Véhicule de test" data-vi="Xe thử nghiệm" data-th="รถทดสอบ">테스트 차량</td>
+                    <td data-ko="기아 니로 하이브리드" data-en="Kia Niro Hybrid" data-ja="キア ニロ ハイブリッド" data-zh="起亚Niro混合动力" data-de="Kia Niro Hybrid" data-es="Kia Niro Hybrid" data-fr="Kia Niro Hybrid" data-vi="Kia Niro Hybrid" data-th="Kia Niro Hybrid">기아 니로 하이브리드</td>
                 </tr>
                 <tr>
-                    <td data-ko="주행 거리" data-en="Driving Distance" data-ja="走行距離" data-zh="行驶距离">주행 거리</td>
+                    <td data-ko="주행 거리" data-en="Driving Distance" data-ja="走行距離" data-zh="行驶距离" data-de="Fahrstrecke" data-es="Distancia recorrida" data-fr="Distance parcourue" data-vi="Quãng đường lái" data-th="ระยะทางขับขี่">주행 거리</td>
                     <td>55.4 km</td>
                 </tr>
                 <tr>
-                    <td data-ko="기준 장비" data-en="Reference Device" data-ja="基準機器" data-zh="参考设备">기준 장비</td>
-                    <td data-ko="Polar H10 (가슴 착용형 ECG 센서)" data-en="Polar H10 (Chest-worn ECG Sensor)" data-ja="Polar H10（胸部装着型ECGセンサー）" data-zh="Polar H10（胸戴式ECG传感器）">Polar H10 (가슴 착용형 ECG 센서)</td>
+                    <td data-ko="기준 장비" data-en="Reference Device" data-ja="基準機器" data-zh="参考设备" data-de="Referenzgerät" data-es="Dispositivo de referencia" data-fr="Appareil de référence" data-vi="Thiết bị tham chiếu" data-th="อุปกรณ์อ้างอิง">기준 장비</td>
+                    <td data-ko="Polar H10 (가슴 착용형 ECG 센서)" data-en="Polar H10 (Chest-worn ECG Sensor)" data-ja="Polar H10（胸部装着型ECGセンサー）" data-zh="Polar H10（胸戴式ECG传感器）" data-de="Polar H10 (Brustgurt-EKG-Sensor)" data-es="Polar H10 (Sensor ECG de pecho)" data-fr="Polar H10 (Capteur ECG thoracique)" data-vi="Polar H10 (Cảm biến ECG đeo ngực)" data-th="Polar H10 (เซ็นเซอร์ ECG สวมหน้าอก)">Polar H10 (가슴 착용형 ECG 센서)</td>
                 </tr>
                 <tr>
-                    <td data-ko="테스트 방식" data-en="Test Method" data-ja="テスト方式" data-zh="测试方法">테스트 방식</td>
-                    <td data-ko="딥러닝 기반 vs 기존 신호처리 방식 비교" data-en="Deep Learning vs Traditional Signal Processing Comparison" data-ja="ディープラーニング基盤 vs 従来の信号処理方式比較" data-zh="深度学习 vs 传统信号处理方法对比">딥러닝 기반 vs 기존 신호처리 방식 비교</td>
+                    <td data-ko="테스트 방식" data-en="Test Method" data-ja="テスト方式" data-zh="测试方法" data-de="Testmethode" data-es="Método de prueba" data-fr="Méthode de test" data-vi="Phương pháp thử nghiệm" data-th="วิธีการทดสอบ">테스트 방식</td>
+                    <td data-ko="딥러닝 기반 vs 기존 신호처리 방식 비교" data-en="Deep Learning vs Traditional Signal Processing Comparison" data-ja="ディープラーニング基盤 vs 従来の信号処理方式比較" data-zh="深度学习 vs 传统信号处理方法对比" data-de="Deep Learning vs. traditionelle Signalverarbeitung" data-es="Deep Learning vs Procesamiento de señales tradicional" data-fr="Deep Learning vs Traitement de signal traditionnel" data-vi="Deep Learning vs Xử lý tín hiệu truyền thống" data-th="Deep Learning เทียบกับการประมวลผลสัญญาณแบบดั้งเดิม">딥러닝 기반 vs 기존 신호처리 방식 비교</td>
                 </tr>
             </table>
 
@@ -544,47 +617,47 @@
             <div class="article-image" id="image-equipment">
                 <img src="imgs/blog-idms-caution.png" alt="i-DMS 폰 사용 감지 - CAUTION 상태">
             </div>
-            <p class="image-caption" data-ko="폰 사용 감지: CAUTION 상태 - 실시간 위험 행동 감지" data-en="Phone Usage Detection: CAUTION Status - Real-time Risk Behavior Detection" data-ja="スマホ使用検知：CAUTIONステータス - リアルタイム危険行動検知" data-zh="手机使用检测：CAUTION状态 - 实时风险行为检测">폰 사용 감지: CAUTION 상태 - 실시간 위험 행동 감지</p>
+            <p class="image-caption" data-ko="폰 사용 감지: CAUTION 상태 - 실시간 위험 행동 감지" data-en="Phone Usage Detection: CAUTION Status - Real-time Risk Behavior Detection" data-ja="スマホ使用検知：CAUTIONステータス - リアルタイム危険行動検知" data-zh="手机使用检测：CAUTION状态 - 实时风险行为检测" data-de="Telefonnutzungserkennung: CAUTION Status - Echtzeit-Risikoverhaltenserkennung" data-es="Detección de uso del teléfono: Estado CAUTION - Detección de comportamiento de riesgo en tiempo real" data-fr="Détection d'utilisation du téléphone: Statut CAUTION - Détection de comportement à risque en temps réel" data-vi="Phát hiện sử dụng điện thoại: Trạng thái CAUTION - Phát hiện hành vi rủi ro thời gian thực" data-th="ตรวจจับการใช้โทรศัพท์: สถานะ CAUTION - ตรวจจับพฤติกรรมเสี่ยงแบบเรียลไทม์">폰 사용 감지: CAUTION 상태 - 실시간 위험 행동 감지</p>
 
-            <h2 data-ko="테스트 세션 상세" data-en="Test Session Details" data-ja="テストセッション詳細" data-zh="测试会话详情">테스트 세션 상세</h2>
+            <h2 data-ko="테스트 세션 상세" data-en="Test Session Details" data-ja="テストセッション詳細" data-zh="测试会话详情" data-de="Testsitzungsdetails" data-es="Detalles de la sesión de prueba" data-fr="Détails de la session de test" data-vi="Chi tiết phiên thử nghiệm" data-th="รายละเอียดเซสชันการทดสอบ">테스트 세션 상세</h2>
 
-            <h3 data-ko="테스트 1: 딥러닝 기반 rPPG-Net" data-en="Test 1: Deep Learning-based rPPG-Net" data-ja="テスト1：ディープラーニング基盤rPPG-Net" data-zh="测试1：基于深度学习的rPPG-Net">테스트 1: 딥러닝 기반 rPPG-Net</h3>
+            <h3 data-ko="테스트 1: 딥러닝 기반 rPPG-Net" data-en="Test 1: Deep Learning-based rPPG-Net" data-ja="テスト1：ディープラーニング基盤rPPG-Net" data-zh="测试1：基于深度学习的rPPG-Net" data-de="Test 1: Deep Learning-basiertes rPPG-Net" data-es="Prueba 1: rPPG-Net basado en Deep Learning" data-fr="Test 1: rPPG-Net basé sur Deep Learning" data-vi="Thử nghiệm 1: rPPG-Net dựa trên Deep Learning" data-th="การทดสอบ 1: rPPG-Net ที่ใช้ Deep Learning">테스트 1: 딥러닝 기반 rPPG-Net</h3>
             <ul>
-                <li><strong data-ko="시간:" data-en="Time:" data-ja="時間:" data-zh="时间:">시간:</strong> 12:40 ~ 13:10 (<span data-ko="약 27.5분" data-en="approx. 27.5 min" data-ja="約27.5分" data-zh="约27.5分钟">약 27.5분</span>)</li>
-                <li><strong data-ko="수집 데이터:" data-en="Data Collected:" data-ja="収集データ:" data-zh="采集数据:">수집 데이터:</strong> <span data-ko="1,651건" data-en="1,651 samples" data-ja="1,651件" data-zh="1,651条">1,651건</span></li>
-                <li><strong data-ko="알고리즘:" data-en="Algorithm:" data-ja="アルゴリズム:" data-zh="算法:">알고리즘:</strong> <span data-ko="FunnyTech21 자체 개발 딥러닝 모델" data-en="FunnyTech21 proprietary deep learning model" data-ja="FunnyTech21自社開発ディープラーニングモデル" data-zh="FunnyTech21自主研发深度学习模型">FunnyTech21 자체 개발 딥러닝 모델</span></li>
+                <li><strong data-ko="시간:" data-en="Time:" data-ja="時間:" data-zh="时间:" data-de="Zeit:" data-es="Tiempo:" data-fr="Temps:" data-vi="Thời gian:" data-th="เวลา:">시간:</strong> 12:40 ~ 13:10 (<span data-ko="약 27.5분" data-en="approx. 27.5 min" data-ja="約27.5分" data-zh="约27.5分钟" data-de="ca. 27,5 Min" data-es="aprox. 27,5 min" data-fr="env. 27,5 min" data-vi="khoảng 27,5 phút" data-th="ประมาณ 27.5 นาที">약 27.5분</span>)</li>
+                <li><strong data-ko="수집 데이터:" data-en="Data Collected:" data-ja="収集データ:" data-zh="采集数据:" data-de="Gesammelte Daten:" data-es="Datos recopilados:" data-fr="Données collectées:" data-vi="Dữ liệu thu thập:" data-th="ข้อมูลที่เก็บรวบรวม:">수집 데이터:</strong> <span data-ko="1,651건" data-en="1,651 samples" data-ja="1,651件" data-zh="1,651条" data-de="1.651 Proben" data-es="1.651 muestras" data-fr="1 651 échantillons" data-vi="1.651 mẫu" data-th="1,651 ตัวอย่าง">1,651건</span></li>
+                <li><strong data-ko="알고리즘:" data-en="Algorithm:" data-ja="アルゴリズム:" data-zh="算法:" data-de="Algorithmus:" data-es="Algoritmo:" data-fr="Algorithme:" data-vi="Thuật toán:" data-th="อัลกอริทึม:">알고리즘:</strong> <span data-ko="FunnyTech21 자체 개발 딥러닝 모델" data-en="FunnyTech21 proprietary deep learning model" data-ja="FunnyTech21自社開発ディープラーニングモデル" data-zh="FunnyTech21自主研发深度学习模型" data-de="FunnyTech21 proprietäres Deep Learning Modell" data-es="Modelo de Deep Learning propietario de FunnyTech21" data-fr="Modèle Deep Learning propriétaire FunnyTech21" data-vi="Mô hình Deep Learning độc quyền của FunnyTech21" data-th="โมเดล Deep Learning ของ FunnyTech21">FunnyTech21 자체 개발 딥러닝 모델</span></li>
             </ul>
 
-            <h3 data-ko="테스트 2: 기존 신호처리 방식" data-en="Test 2: Traditional Signal Processing" data-ja="テスト2：従来の信号処理方式" data-zh="测试2：传统信号处理方法">테스트 2: 기존 신호처리 방식</h3>
+            <h3 data-ko="테스트 2: 기존 신호처리 방식" data-en="Test 2: Traditional Signal Processing" data-ja="テスト2：従来の信号処理方式" data-zh="测试2：传统信号处理方法" data-de="Test 2: Traditionelle Signalverarbeitung" data-es="Prueba 2: Procesamiento de señales tradicional" data-fr="Test 2: Traitement de signal traditionnel" data-vi="Thử nghiệm 2: Xử lý tín hiệu truyền thống" data-th="การทดสอบ 2: การประมวลผลสัญญาณแบบดั้งเดิม">테스트 2: 기존 신호처리 방식</h3>
             <ul>
-                <li><strong data-ko="시간:" data-en="Time:" data-ja="時間:" data-zh="时间:">시간:</strong> 14:44 ~ 15:43 (<span data-ko="약 58분" data-en="approx. 58 min" data-ja="約58分" data-zh="约58分钟">약 58분</span>)</li>
-                <li><strong data-ko="수집 데이터:" data-en="Data Collected:" data-ja="収集データ:" data-zh="采集数据:">수집 데이터:</strong> <span data-ko="3,483건" data-en="3,483 samples" data-ja="3,483件" data-zh="3,483条">3,483건</span></li>
-                <li><strong data-ko="알고리즘:" data-en="Algorithm:" data-ja="アルゴリズム:" data-zh="算法:">알고리즘:</strong> <span data-ko="전통적인 신호처리 기반 rPPG" data-en="Traditional signal processing-based rPPG" data-ja="従来の信号処理基盤rPPG" data-zh="传统信号处理rPPG">전통적인 신호처리 기반 rPPG</span></li>
+                <li><strong data-ko="시간:" data-en="Time:" data-ja="時間:" data-zh="时间:" data-de="Zeit:" data-es="Tiempo:" data-fr="Temps:" data-vi="Thời gian:" data-th="เวลา:">시간:</strong> 14:44 ~ 15:43 (<span data-ko="약 58분" data-en="approx. 58 min" data-ja="約58分" data-zh="约58分钟" data-de="ca. 58 Min" data-es="aprox. 58 min" data-fr="env. 58 min" data-vi="khoảng 58 phút" data-th="ประมาณ 58 นาที">약 58분</span>)</li>
+                <li><strong data-ko="수집 데이터:" data-en="Data Collected:" data-ja="収集データ:" data-zh="采集数据:" data-de="Gesammelte Daten:" data-es="Datos recopilados:" data-fr="Données collectées:" data-vi="Dữ liệu thu thập:" data-th="ข้อมูลที่เก็บรวบรวม:">수집 데이터:</strong> <span data-ko="3,483건" data-en="3,483 samples" data-ja="3,483件" data-zh="3,483条" data-de="3.483 Proben" data-es="3.483 muestras" data-fr="3 483 échantillons" data-vi="3.483 mẫu" data-th="3,483 ตัวอย่าง">3,483건</span></li>
+                <li><strong data-ko="알고리즘:" data-en="Algorithm:" data-ja="アルゴリズム:" data-zh="算法:" data-de="Algorithmus:" data-es="Algoritmo:" data-fr="Algorithme:" data-vi="Thuật toán:" data-th="อัลกอริทึม:">알고리즘:</strong> <span data-ko="전통적인 신호처리 기반 rPPG" data-en="Traditional signal processing-based rPPG" data-ja="従来の信号処理基盤rPPG" data-zh="传统信号处理rPPG" data-de="Traditionelle signalverarbeitungsbasierte rPPG" data-es="rPPG basado en procesamiento de señales tradicional" data-fr="rPPG basé sur le traitement de signal traditionnel" data-vi="rPPG dựa trên xử lý tín hiệu truyền thống" data-th="rPPG ที่ใช้การประมวลผลสัญญาณแบบดั้งเดิม">전통적인 신호처리 기반 rPPG</span></li>
             </ul>
 
             <div class="highlight-box">
-                <h4 data-ko="왜 딥러닝 테스트 시간이 더 짧은가?" data-en="Why is the deep learning test time shorter?" data-ja="なぜディープラーニングテスト時間が短いのか？" data-zh="为什么深度学习测试时间更短？">왜 딥러닝 테스트 시간이 더 짧은가?</h4>
-                <p data-ko="딥러닝 기반 알고리즘은 더 적은 데이터로도 안정적인 결과를 도출하며, 노이즈에 강한 특성을 보입니다. 이로 인해 더 짧은 시간 내에 신뢰성 있는 데이터를 수집할 수 있었습니다." data-en="Deep learning-based algorithms produce stable results with less data and are more robust to noise. This allowed us to collect reliable data in a shorter time." data-ja="ディープラーニング基盤アルゴリズムは、より少ないデータでも安定した結果を導き出し、ノイズに強い特性を示します。" data-zh="基于深度学习的算法能够用更少的数据产生稳定的结果，并且对噪声具有更强的抗干扰能力。">
+                <h4 data-ko="왜 딥러닝 테스트 시간이 더 짧은가?" data-en="Why is the deep learning test time shorter?" data-ja="なぜディープラーニングテスト時間が短いのか？" data-zh="为什么深度学习测试时间更短？" data-de="Warum ist die Deep Learning Testzeit kürzer?" data-es="¿Por qué el tiempo de prueba de Deep Learning es más corto?" data-fr="Pourquoi le temps de test Deep Learning est-il plus court?" data-vi="Tại sao thời gian thử nghiệm Deep Learning ngắn hơn?" data-th="ทำไมเวลาทดสอบ Deep Learning จึงสั้นกว่า?">왜 딥러닝 테스트 시간이 더 짧은가?</h4>
+                <p data-ko="딥러닝 기반 알고리즘은 더 적은 데이터로도 안정적인 결과를 도출하며, 노이즈에 강한 특성을 보입니다. 이로 인해 더 짧은 시간 내에 신뢰성 있는 데이터를 수집할 수 있었습니다." data-en="Deep learning-based algorithms produce stable results with less data and are more robust to noise. This allowed us to collect reliable data in a shorter time." data-ja="ディープラーニング基盤アルゴリズムは、より少ないデータでも安定した結果を導き出し、ノイズに強い特性を示します。" data-zh="基于深度学习的算法能够用更少的数据产生稳定的结果，并且对噪声具有更强的抗干扰能力。" data-de="Deep Learning-Algorithmen liefern stabile Ergebnisse mit weniger Daten und sind robuster gegenüber Rauschen." data-es="Los algoritmos basados en Deep Learning producen resultados estables con menos datos y son más robustos al ruido." data-fr="Les algorithmes basés sur le Deep Learning produisent des résultats stables avec moins de données et sont plus robustes au bruit." data-vi="Các thuật toán dựa trên Deep Learning tạo ra kết quả ổn định với ít dữ liệu hơn và chống nhiễu tốt hơn." data-th="อัลกอริทึมที่ใช้ Deep Learning ให้ผลลัพธ์ที่เสถียรด้วยข้อมูลน้อยกว่าและทนทานต่อสัญญาณรบกวนมากขึ้น">
                     딥러닝 기반 알고리즘은 더 적은 데이터로도 안정적인 결과를 도출하며,
                     노이즈에 강한 특성을 보입니다. 이로 인해 더 짧은 시간 내에 신뢰성 있는
                     데이터를 수집할 수 있었습니다.
                 </p>
             </div>
 
-            <h2 data-ko="테스트 결과" data-en="Test Results" data-ja="テスト結果" data-zh="测试结果">테스트 결과</h2>
+            <h2 data-ko="테스트 결과" data-en="Test Results" data-ja="テスト結果" data-zh="测试结果" data-de="Testergebnisse" data-es="Resultados de la prueba" data-fr="Résultats du test" data-vi="Kết quả thử nghiệm" data-th="ผลการทดสอบ">테스트 결과</h2>
 
             <div class="result-cards">
                 <div class="result-card highlight">
                     <div class="value">6.33</div>
-                    <div class="label" data-ko="MAE (BPM)<br>실제 주행" data-en="MAE (BPM)<br>Real Driving" data-ja="MAE (BPM)<br>実走行" data-zh="MAE (BPM)<br>实际驾驶">MAE (BPM)<br>실제 주행</div>
+                    <div class="label" data-ko="MAE (BPM)<br>실제 주행" data-en="MAE (BPM)<br>Real Driving" data-ja="MAE (BPM)<br>実走行" data-zh="MAE (BPM)<br>实际驾驶" data-de="MAE (BPM)<br>Reale Fahrt" data-es="MAE (BPM)<br>Conducción real" data-fr="MAE (BPM)<br>Conduite réelle" data-vi="MAE (BPM)<br>Lái xe thực tế" data-th="MAE (BPM)<br>การขับขี่จริง">MAE (BPM)<br>실제 주행</div>
                 </div>
                 <div class="result-card">
                     <div class="value">61.9%</div>
-                    <div class="label" data-ko="문헌 벤치마크<br>대비 개선" data-en="Improvement vs<br>Literature Benchmark" data-ja="文献ベンチマーク<br>比改善" data-zh="文献基准<br>改进率">문헌 벤치마크<br>대비 개선</div>
+                    <div class="label" data-ko="문헌 벤치마크<br>대비 개선" data-en="Improvement vs<br>Literature Benchmark" data-ja="文献ベンチマーク<br>比改善" data-zh="文献基准<br>改进率" data-de="Verbesserung vs<br>Literatur-Benchmark" data-es="Mejora vs<br>Benchmark de literatura" data-fr="Amélioration vs<br>Benchmark littérature" data-vi="Cải thiện so với<br>chuẩn văn học" data-th="ปรับปรุงเทียบกับ<br>มาตรฐานวรรณกรรม">문헌 벤치마크<br>대비 개선</div>
                 </div>
                 <div class="result-card">
                     <div class="value">82.8%</div>
-                    <div class="label" data-ko="±10 BPM 내<br>정확도" data-en="Accuracy within<br>±10 BPM" data-ja="±10 BPM以内<br>精度" data-zh="±10 BPM内<br>准确率">±10 BPM 내<br>정확도</div>
+                    <div class="label" data-ko="±10 BPM 내<br>정확도" data-en="Accuracy within<br>±10 BPM" data-ja="±10 BPM以内<br>精度" data-zh="±10 BPM内<br>准确率" data-de="Genauigkeit innerhalb<br>±10 BPM" data-es="Precisión dentro de<br>±10 BPM" data-fr="Précision dans<br>±10 BPM" data-vi="Độ chính xác trong<br>±10 BPM" data-th="ความแม่นยำภายใน<br>±10 BPM">±10 BPM 내<br>정확도</div>
                 </div>
             </div>
 
@@ -592,16 +665,16 @@
             <div class="article-image" id="image-graph">
                 <img src="imgs/blog-idms-drowsiness.png" alt="i-DMS 졸음 감지 알림">
             </div>
-            <p class="image-caption" data-ko="졸음 감지 알림: rPPG 기반 바이탈 사인 분석으로 운전자 상태 모니터링" data-en="Drowsiness Alert: Driver status monitoring via rPPG-based vital sign analysis" data-ja="居眠り検知アラート：rPPG基盤バイタルサイン分析による運転者状態モニタリング" data-zh="睡意警报：通过rPPG生命体征分析进行驾驶员状态监测">졸음 감지 알림: rPPG 기반 바이탈 사인 분석으로 운전자 상태 모니터링</p>
+            <p class="image-caption" data-ko="졸음 감지 알림: rPPG 기반 바이탈 사인 분석으로 운전자 상태 모니터링" data-en="Drowsiness Alert: Driver status monitoring via rPPG-based vital sign analysis" data-ja="居眠り検知アラート：rPPG基盤バイタルサイン分析による運転者状態モニタリング" data-zh="睡意警报：通过rPPG生命体征分析进行驾驶员状态监测" data-de="Müdigkeitswarnung: Fahrerstatusüberwachung durch rPPG-basierte Vitalzeichenanalyse" data-es="Alerta de somnolencia: Monitoreo del estado del conductor mediante análisis de signos vitales basado en rPPG" data-fr="Alerte de somnolence: Surveillance de l'état du conducteur via l'analyse des signes vitaux basée sur rPPG" data-vi="Cảnh báo buồn ngủ: Giám sát trạng thái tài xế qua phân tích dấu hiệu sinh tồn dựa trên rPPG" data-th="การเตือนง่วง: การตรวจสอบสถานะผู้ขับขี่ผ่านการวิเคราะห์สัญญาณชีพตาม rPPG">졸음 감지 알림: rPPG 기반 바이탈 사인 분석으로 운전자 상태 모니터링</p>
 
-            <h3 data-ko="글로벌 업계 벤치마크 비교" data-en="Global Industry Benchmark Comparison" data-ja="グローバル業界ベンチマーク比較" data-zh="全球行业基准对比">글로벌 업계 벤치마크 비교</h3>
+            <h3 data-ko="글로벌 업계 벤치마크 비교" data-en="Global Industry Benchmark Comparison" data-ja="グローバル業界ベンチマーク比較" data-zh="全球行业基准对比" data-de="Globaler Branchen-Benchmark-Vergleich" data-es="Comparación de referencia de la industria global" data-fr="Comparaison des benchmarks de l'industrie mondiale" data-vi="So sánh tiêu chuẩn ngành công nghiệp toàn cầu" data-th="การเปรียบเทียบมาตรฐานอุตสาหกรรมระดับโลก">글로벌 업계 벤치마크 비교</h3>
 
             <table class="data-table">
                 <tr>
-                    <th data-ko="지표" data-en="Metric" data-ja="指標" data-zh="指标">지표</th>
+                    <th data-ko="지표" data-en="Metric" data-ja="指標" data-zh="指标" data-de="Metrik" data-es="Métrica" data-fr="Métrique" data-vi="Chỉ số" data-th="ตัวชี้วัด">지표</th>
                     <th>FunnyTech21</th>
                     <th>Smart Eye</th>
-                    <th data-ko="문헌 (주행)" data-en="Literature (Driving)" data-ja="文献（走行）" data-zh="文献（驾驶）">문헌 (주행)</th>
+                    <th data-ko="문헌 (주행)" data-en="Literature (Driving)" data-ja="文献（走行）" data-zh="文献（驾驶）" data-de="Literatur (Fahren)" data-es="Literatura (Conducción)" data-fr="Littérature (Conduite)" data-vi="Văn học (Lái xe)" data-th="วรรณกรรม (การขับขี่)">문헌 (주행)</th>
                 </tr>
                 <tr>
                     <td>MAE (BPM)</td>
@@ -616,66 +689,66 @@
                     <td>20.0</td>
                 </tr>
                 <tr>
-                    <td data-ko="±10 BPM 내 정확도" data-en="Accuracy within ±10 BPM" data-ja="±10 BPM以内精度" data-zh="±10 BPM内准确率">±10 BPM 내 정확도</td>
+                    <td data-ko="±10 BPM 내 정확도" data-en="Accuracy within ±10 BPM" data-ja="±10 BPM以内精度" data-zh="±10 BPM内准确率" data-de="Genauigkeit innerhalb ±10 BPM" data-es="Precisión dentro de ±10 BPM" data-fr="Précision dans ±10 BPM" data-vi="Độ chính xác trong ±10 BPM" data-th="ความแม่นยำภายใน ±10 BPM">±10 BPM 내 정확도</td>
                     <td><strong>82.8%</strong></td>
                     <td>~80-85%</td>
                     <td>~40%</td>
                 </tr>
                 <tr>
-                    <td data-ko="테스트 조건" data-en="Test Conditions" data-ja="テスト条件" data-zh="测试条件">테스트 조건</td>
-                    <td><strong data-ko="실제 주행" data-en="Real Driving" data-ja="実走行" data-zh="实际驾驶">실제 주행</strong></td>
-                    <td data-ko="혼합" data-en="Mixed" data-ja="混合" data-zh="混合">혼합</td>
-                    <td data-ko="실제 주행" data-en="Real Driving" data-ja="実走行" data-zh="实际驾驶">실제 주행</td>
+                    <td data-ko="테스트 조건" data-en="Test Conditions" data-ja="テスト条件" data-zh="测试条件" data-de="Testbedingungen" data-es="Condiciones de prueba" data-fr="Conditions de test" data-vi="Điều kiện thử nghiệm" data-th="เงื่อนไขการทดสอบ">테스트 조건</td>
+                    <td><strong data-ko="실제 주행" data-en="Real Driving" data-ja="実走行" data-zh="实际驾驶" data-de="Echte Fahrt" data-es="Conducción real" data-fr="Conduite réelle" data-vi="Lái xe thực tế" data-th="การขับขี่จริง">실제 주행</strong></td>
+                    <td data-ko="혼합" data-en="Mixed" data-ja="混合" data-zh="混合" data-de="Gemischt" data-es="Mixto" data-fr="Mixte" data-vi="Hỗn hợp" data-th="ผสม">혼합</td>
+                    <td data-ko="실제 주행" data-en="Real Driving" data-ja="実走行" data-zh="实际驾驶" data-de="Echte Fahrt" data-es="Conducción real" data-fr="Conduite réelle" data-vi="Lái xe thực tế" data-th="การขับขี่จริง">실제 주행</td>
                 </tr>
             </table>
 
-            <h2 data-ko="주요 발견 사항" data-en="Key Findings" data-ja="主な発見事項" data-zh="主要发现">주요 발견 사항</h2>
+            <h2 data-ko="주요 발견 사항" data-en="Key Findings" data-ja="主な発見事項" data-zh="主要发现" data-de="Wichtige Erkenntnisse" data-es="Hallazgos clave" data-fr="Résultats clés" data-vi="Phát hiện chính" data-th="ข้อค้นพบสำคัญ">주요 발견 사항</h2>
 
-            <h3 data-ko="1. 글로벌 선두 기업과 동등한 성능" data-en="1. Performance Comparable to Global Leaders" data-ja="1. グローバルリーダーと同等の性能" data-zh="1. 与全球领先企业同等的性能">1. 글로벌 선두 기업과 동등한 성능</h3>
-            <p data-ko="FunnyTech21 i-DMS는 가장 도전적인 테스트 조건인 실제 주행에서 Smart Eye, Seeing Machines, Bosch 등 글로벌 업계 선두와 동등한 성능을 달성했습니다." data-en="FunnyTech21 i-DMS achieved performance comparable to global industry leaders like Smart Eye, Seeing Machines, and Bosch in the most challenging test condition - real-world driving." data-ja="FunnyTech21 i-DMSは、最も困難なテスト条件である実際の走行で、Smart Eye、Seeing Machines、Boschなどのグローバル業界リーダーと同等の性能を達成しました。" data-zh="FunnyTech21 i-DMS在最具挑战性的测试条件（实际驾驶）中达到了与Smart Eye、Seeing Machines、Bosch等全球行业领导者同等的性能。">
+            <h3 data-ko="1. 글로벌 선두 기업과 동등한 성능" data-en="1. Performance Comparable to Global Leaders" data-ja="1. グローバルリーダーと同等の性能" data-zh="1. 与全球领先企业同等的性能" data-de="1. Leistung vergleichbar mit globalen Marktführern" data-es="1. Rendimiento comparable con líderes globales" data-fr="1. Performance comparable aux leaders mondiaux" data-vi="1. Hiệu suất tương đương các công ty hàng đầu toàn cầu" data-th="1. ประสิทธิภาพเทียบเท่ากับผู้นำระดับโลก">1. 글로벌 선두 기업과 동등한 성능</h3>
+            <p data-ko="FunnyTech21 i-DMS는 가장 도전적인 테스트 조건인 실제 주행에서 Smart Eye, Seeing Machines, Bosch 등 글로벌 업계 선두와 동등한 성능을 달성했습니다." data-en="FunnyTech21 i-DMS achieved performance comparable to global industry leaders like Smart Eye, Seeing Machines, and Bosch in the most challenging test condition - real-world driving." data-ja="FunnyTech21 i-DMSは、最も困難なテスト条件である実際の走行で、Smart Eye、Seeing Machines、Boschなどのグローバル業界リーダーと同等の性能を達成しました。" data-zh="FunnyTech21 i-DMS在最具挑战性的测试条件（实际驾驶）中达到了与Smart Eye、Seeing Machines、Bosch等全球行业领导者同等的性能。" data-de="FunnyTech21 i-DMS erzielte unter den anspruchsvollsten Testbedingungen - dem realen Fahren - eine Leistung, die mit globalen Branchenführern wie Smart Eye, Seeing Machines und Bosch vergleichbar ist." data-es="FunnyTech21 i-DMS logró un rendimiento comparable con líderes globales de la industria como Smart Eye, Seeing Machines y Bosch en las condiciones de prueba más desafiantes: conducción real." data-fr="FunnyTech21 i-DMS a atteint des performances comparables aux leaders mondiaux de l'industrie comme Smart Eye, Seeing Machines et Bosch dans les conditions de test les plus exigeantes - la conduite réelle." data-vi="FunnyTech21 i-DMS đạt hiệu suất tương đương với các công ty hàng đầu toàn cầu như Smart Eye, Seeing Machines và Bosch trong điều kiện thử nghiệm khó khăn nhất - lái xe thực tế." data-th="FunnyTech21 i-DMS ได้รับประสิทธิภาพเทียบเท่ากับผู้นำอุตสาหกรรมระดับโลก เช่น Smart Eye, Seeing Machines และ Bosch ในสภาวะการทดสอบที่ท้าทายที่สุด - การขับขี่จริง">
                 FunnyTech21 i-DMS는 가장 도전적인 테스트 조건인 실제 주행에서
                 Smart Eye, Seeing Machines, Bosch 등 글로벌 업계 선두와 동등한 성능을 달성했습니다.
             </p>
 
-            <h3 data-ko="2. 학술 벤치마크 60% 초과 달성" data-en="2. Exceeded Literature Benchmark by 60%" data-ja="2. 学術ベンチマーク60%超過達成" data-zh="2. 超越学术基准60%以上">2. 학술 벤치마크 60% 초과 달성</h3>
-            <p data-ko="실제 주행에서 MAE 6.33 BPM은 학술 문헌 벤치마크(15-17 BPM)를 60% 이상 초과하는 성능으로, 도전적 조건에서 우수한 알고리즘 성능을 입증했습니다." data-en="MAE 6.33 BPM in real driving exceeds the academic literature benchmark (15-17 BPM) by over 60%, demonstrating superior algorithm performance in challenging conditions." data-ja="実走行でのMAE 6.33 BPMは、学術文献ベンチマーク（15-17 BPM）を60%以上超える性能で、困難な条件での優れたアルゴリズム性能を実証しました。" data-zh="实际驾驶中MAE 6.33 BPM超越学术文献基准（15-17 BPM）60%以上，证明了在挑战性条件下出色的算法性能。">
+            <h3 data-ko="2. 학술 벤치마크 60% 초과 달성" data-en="2. Exceeded Literature Benchmark by 60%" data-ja="2. 学術ベンチマーク60%超過達成" data-zh="2. 超越学术基准60%以上" data-de="2. Literatur-Benchmark um 60% übertroffen" data-es="2. Superó el benchmark de literatura en un 60%" data-fr="2. Dépassement du benchmark littérature de 60%" data-vi="2. Vượt qua chuẩn văn học 60%" data-th="2. เกินมาตรฐานวรรณกรรม 60%">2. 학술 벤치마크 60% 초과 달성</h3>
+            <p data-ko="실제 주행에서 MAE 6.33 BPM은 학술 문헌 벤치마크(15-17 BPM)를 60% 이상 초과하는 성능으로, 도전적 조건에서 우수한 알고리즘 성능을 입증했습니다." data-en="MAE 6.33 BPM in real driving exceeds the academic literature benchmark (15-17 BPM) by over 60%, demonstrating superior algorithm performance in challenging conditions." data-ja="実走行でのMAE 6.33 BPMは、学術文献ベンチマーク（15-17 BPM）を60%以上超える性能で、困難な条件での優れたアルゴリズム性能を実証しました。" data-zh="实际驾驶中MAE 6.33 BPM超越学术文献基准（15-17 BPM）60%以上，证明了在挑战性条件下出色的算法性能。" data-de="MAE 6,33 BPM beim realen Fahren übertrifft den akademischen Literatur-Benchmark (15-17 BPM) um über 60% und demonstriert überlegene Algorithmusleistung unter anspruchsvollen Bedingungen." data-es="MAE 6.33 BPM en conducción real supera el benchmark de literatura académica (15-17 BPM) en más del 60%, demostrando un rendimiento superior del algoritmo en condiciones desafiantes." data-fr="MAE 6,33 BPM en conduite réelle dépasse le benchmark de la littérature académique (15-17 BPM) de plus de 60%, démontrant des performances d'algorithme supérieures dans des conditions difficiles." data-vi="MAE 6.33 BPM trong lái xe thực tế vượt qua chuẩn văn học học thuật (15-17 BPM) hơn 60%, chứng minh hiệu suất thuật toán vượt trội trong điều kiện khó khăn." data-th="MAE 6.33 BPM ในการขับขี่จริงเกินมาตรฐานวรรณกรรมวิชาการ (15-17 BPM) มากกว่า 60% แสดงให้เห็นประสิทธิภาพอัลกอริทึมที่เหนือกว่าในสภาวะที่ท้าทาย">
                 실제 주행에서 MAE 6.33 BPM은 학술 문헌 벤치마크(15-17 BPM)를
                 60% 이상 초과하는 성능으로, 도전적 조건에서 우수한 알고리즘 성능을 입증했습니다.
             </p>
 
-            <h3 data-ko="3. Euro NCAP 2026 핵심 기능 준수" data-en="3. Euro NCAP 2026 Core Compliance" data-ja="3. Euro NCAP 2026コア機能準拠" data-zh="3. 符合Euro NCAP 2026核心功能">3. Euro NCAP 2026 핵심 기능 준수</h3>
-            <p data-ko="핵심 DMS 기능(시선 추적, 머리 추적, 졸음 감지, 주의분산 감지)은 Euro NCAP 2026 요구사항을 완전 준수합니다. 생체 신호 모니터링 기능은 더 높은 안전 등급 달성을 위한 추가 가치를 제공합니다." data-en="Core DMS functions (gaze tracking, head tracking, drowsiness detection, distraction detection) fully comply with Euro NCAP 2026 requirements. Vital sign monitoring capabilities provide additional value for achieving higher safety ratings." data-ja="コアDMS機能（視線追跡、頭部追跡、居眠り検知、注意散漫検知）はEuro NCAP 2026要件に完全準拠しています。バイタルサインモニタリング機能は、より高い安全等級達成のための追加価値を提供します。" data-zh="核心DMS功能（视线追踪、头部追踪、疲劳检测、注意力分散检测）完全符合Euro NCAP 2026要求。生命体征监测功能为实现更高安全等级提供额外价值。">
+            <h3 data-ko="3. Euro NCAP 2026 핵심 기능 준수" data-en="3. Euro NCAP 2026 Core Compliance" data-ja="3. Euro NCAP 2026コア機能準拠" data-zh="3. 符合Euro NCAP 2026核心功能" data-de="3. Euro NCAP 2026 Kernkonformität" data-es="3. Cumplimiento central de Euro NCAP 2026" data-fr="3. Conformité aux exigences Euro NCAP 2026" data-vi="3. Tuân thủ Euro NCAP 2026" data-th="3. การปฏิบัติตาม Euro NCAP 2026">3. Euro NCAP 2026 핵심 기능 준수</h3>
+            <p data-ko="핵심 DMS 기능(시선 추적, 머리 추적, 졸음 감지, 주의분산 감지)은 Euro NCAP 2026 요구사항을 완전 준수합니다. 생체 신호 모니터링 기능은 더 높은 안전 등급 달성을 위한 추가 가치를 제공합니다." data-en="Core DMS functions (gaze tracking, head tracking, drowsiness detection, distraction detection) fully comply with Euro NCAP 2026 requirements. Vital sign monitoring capabilities provide additional value for achieving higher safety ratings." data-ja="コアDMS機能（視線追跡、頭部追跡、居眠り検知、注意散漫検知）はEuro NCAP 2026要件に完全準拠しています。バイタルサインモニタリング機能は、より高い安全等級達成のための追加価値を提供します。" data-zh="核心DMS功能（视线追踪、头部追踪、疲劳检测、注意力分散检测）完全符合Euro NCAP 2026要求。生命体征监测功能为实现更高安全等级提供额外价值。" data-de="Kern-DMS-Funktionen (Blickverfolgung, Kopfverfolgung, Müdigkeitserkennung, Ablenkungserkennung) erfüllen vollständig die Euro NCAP 2026 Anforderungen. Vitalzeichenüberwachung bietet zusätzlichen Wert für höhere Sicherheitsbewertungen." data-es="Las funciones principales de DMS (seguimiento de mirada, seguimiento de cabeza, detección de somnolencia, detección de distracción) cumplen completamente con los requisitos de Euro NCAP 2026. Las capacidades de monitoreo de signos vitales proporcionan valor adicional para lograr calificaciones de seguridad más altas." data-fr="Les fonctions DMS principales (suivi du regard, suivi de la tête, détection de somnolence, détection de distraction) sont entièrement conformes aux exigences Euro NCAP 2026. Les capacités de surveillance des signes vitaux apportent une valeur ajoutée pour atteindre des notes de sécurité plus élevées." data-vi="Các chức năng DMS cốt lõi (theo dõi ánh mắt, theo dõi đầu, phát hiện buồn ngủ, phát hiện mất tập trung) hoàn toàn tuân thủ yêu cầu Euro NCAP 2026. Khả năng giám sát dấu hiệu sinh tồn cung cấp giá trị bổ sung để đạt xếp hạng an toàn cao hơn." data-th="ฟังก์ชัน DMS หลัก (การติดตามสายตา, การติดตามศีรษะ, การตรวจจับความง่วง, การตรวจจับความเสียสมาธิ) ปฏิบัติตามข้อกำหนด Euro NCAP 2026 อย่างสมบูรณ์ ความสามารถในการตรวจสอบสัญญาณชีพให้มูลค่าเพิ่มเติมเพื่อให้ได้คะแนนความปลอดภัยที่สูงขึ้น">
                 핵심 DMS 기능(시선 추적, 머리 추적, 졸음 감지, 주의분산 감지)은
                 Euro NCAP 2026 요구사항을 완전 준수합니다. 생체 신호 모니터링 기능은
                 더 높은 안전 등급 달성을 위한 추가 가치를 제공합니다.
             </p>
 
 
-            <h2 data-ko="결론" data-en="Conclusion" data-ja="結論" data-zh="结论">결론</h2>
-            <p data-ko="이번 실도로 테스트를 통해 FunnyTech21 i-DMS가 가장 도전적인 테스트 조건인 실제 주행에서 글로벌 업계 선두(Smart Eye, Seeing Machines, Bosch)와 동등한 성능을 보여줌을 입증했습니다." data-en="This real-world driving test demonstrated that FunnyTech21 i-DMS shows performance comparable to global industry leaders (Smart Eye, Seeing Machines, Bosch) in the most challenging test conditions." data-ja="今回の実道路テストを通じて、FunnyTech21 i-DMSが最も困難なテスト条件である実際の走行でグローバル業界リーダー（Smart Eye、Seeing Machines、Bosch）と同等の性能を示すことを実証しました。" data-zh="通过这次实际道路测试，证明了FunnyTech21 i-DMS在最具挑战性的测试条件下展现出与全球行业领导者（Smart Eye、Seeing Machines、Bosch）同等的性能。">
+            <h2 data-ko="결론" data-en="Conclusion" data-ja="結論" data-zh="结论" data-de="Fazit" data-es="Conclusión" data-fr="Conclusion" data-vi="Kết luận" data-th="สรุป">결론</h2>
+            <p data-ko="이번 실도로 테스트를 통해 FunnyTech21 i-DMS가 가장 도전적인 테스트 조건인 실제 주행에서 글로벌 업계 선두(Smart Eye, Seeing Machines, Bosch)와 동등한 성능을 보여줌을 입증했습니다." data-en="This real-world driving test demonstrated that FunnyTech21 i-DMS shows performance comparable to global industry leaders (Smart Eye, Seeing Machines, Bosch) in the most challenging test conditions." data-ja="今回の実道路テストを通じて、FunnyTech21 i-DMSが最も困難なテスト条件である実際の走行でグローバル業界リーダー（Smart Eye、Seeing Machines、Bosch）と同等の性能を示すことを実証しました。" data-zh="通过这次实际道路测试，证明了FunnyTech21 i-DMS在最具挑战性的测试条件下展现出与全球行业领导者（Smart Eye、Seeing Machines、Bosch）同等的性能。" data-de="Dieser Realwelt-Fahrtest hat gezeigt, dass FunnyTech21 i-DMS unter den anspruchsvollsten Testbedingungen eine Leistung vergleichbar mit globalen Branchenführern (Smart Eye, Seeing Machines, Bosch) zeigt." data-es="Esta prueba de conducción en el mundo real demostró que FunnyTech21 i-DMS muestra un rendimiento comparable con los líderes globales de la industria (Smart Eye, Seeing Machines, Bosch) en las condiciones de prueba más desafiantes." data-fr="Ce test de conduite réel a démontré que FunnyTech21 i-DMS présente des performances comparables aux leaders mondiaux de l'industrie (Smart Eye, Seeing Machines, Bosch) dans les conditions de test les plus exigeantes." data-vi="Thử nghiệm lái xe thực tế này đã chứng minh rằng FunnyTech21 i-DMS có hiệu suất tương đương với các công ty hàng đầu toàn cầu (Smart Eye, Seeing Machines, Bosch) trong điều kiện thử nghiệm khó khăn nhất." data-th="การทดสอบขับขี่ในโลกจริงนี้แสดงให้เห็นว่า FunnyTech21 i-DMS มีประสิทธิภาพเทียบเท่ากับผู้นำอุตสาหกรรมระดับโลก (Smart Eye, Seeing Machines, Bosch) ในสภาวะการทดสอบที่ท้าทายที่สุด">
                 이번 실도로 테스트를 통해 FunnyTech21 i-DMS가 가장 도전적인 테스트 조건인
                 실제 주행에서 글로벌 업계 선두(Smart Eye, Seeing Machines, Bosch)와 동등한
                 성능을 보여줌을 입증했습니다.
             </p>
-            <p data-ko="성능 지표는 i-DMS가 자동차 애플리케이션에 상용 배포 준비가 되었음을 나타내며, 운전자 건강 모니터링, 졸음 상관관계 분석, 장기 건강 추적 용도에 적합한 정확도를 보유하고 있습니다." data-en="Performance metrics indicate that i-DMS is ready for commercial deployment in automotive applications, with suitable accuracy for driver health monitoring, drowsiness correlation analysis, and long-term health tracking." data-ja="性能指標は、i-DMSが自動車アプリケーションでの商用展開の準備ができていることを示しており、運転者の健康モニタリング、居眠り相関分析、長期健康追跡に適した精度を備えています。" data-zh="性能指标表明i-DMS已准备好在汽车应用中进行商业部署，具有适合驾驶员健康监测、疲劳相关性分析和长期健康跟踪的精度。">
+            <p data-ko="성능 지표는 i-DMS가 자동차 애플리케이션에 상용 배포 준비가 되었음을 나타내며, 운전자 건강 모니터링, 졸음 상관관계 분석, 장기 건강 추적 용도에 적합한 정확도를 보유하고 있습니다." data-en="Performance metrics indicate that i-DMS is ready for commercial deployment in automotive applications, with suitable accuracy for driver health monitoring, drowsiness correlation analysis, and long-term health tracking." data-ja="性能指標は、i-DMSが自動車アプリケーションでの商用展開の準備ができていることを示しており、運転者の健康モニタリング、居眠り相関分析、長期健康追跡に適した精度を備えています。" data-zh="性能指标表明i-DMS已准备好在汽车应用中进行商业部署，具有适合驾驶员健康监测、疲劳相关性分析和长期健康跟踪的精度。" data-de="Leistungskennzahlen zeigen, dass i-DMS für den kommerziellen Einsatz in Automobilanwendungen bereit ist, mit geeigneter Genauigkeit für Fahrergesundheitsüberwachung, Müdigkeitskorrelationsanalyse und langfristige Gesundheitsverfolgung." data-es="Las métricas de rendimiento indican que i-DMS está listo para el despliegue comercial en aplicaciones automotrices, con precisión adecuada para el monitoreo de salud del conductor, análisis de correlación de somnolencia y seguimiento de salud a largo plazo." data-fr="Les métriques de performance indiquent que i-DMS est prêt pour un déploiement commercial dans les applications automobiles, avec une précision adaptée à la surveillance de la santé du conducteur, l'analyse de corrélation de somnolence et le suivi de santé à long terme." data-vi="Các chỉ số hiệu suất cho thấy i-DMS đã sẵn sàng để triển khai thương mại trong các ứng dụng ô tô, với độ chính xác phù hợp cho giám sát sức khỏe tài xế, phân tích tương quan buồn ngủ và theo dõi sức khỏe dài hạn." data-th="ตัวชี้วัดประสิทธิภาพบ่งชี้ว่า i-DMS พร้อมสำหรับการใช้งานเชิงพาณิชย์ในแอปพลิเคชันยานยนต์ ด้วยความแม่นยำที่เหมาะสมสำหรับการตรวจสอบสุขภาพผู้ขับขี่ การวิเคราะห์ความสัมพันธ์ของความง่วง และการติดตามสุขภาพระยะยาว">
                 성능 지표는 i-DMS가 자동차 애플리케이션에 상용 배포 준비가 되었음을 나타내며,
                 운전자 건강 모니터링, 졸음 상관관계 분석, 장기 건강 추적 용도에
                 적합한 정확도를 보유하고 있습니다.
             </p>
 
             <div class="highlight-box">
-                <h4 data-ko="기술 검증(PoC) 문의" data-en="Technical Verification (PoC) Inquiry" data-ja="技術検証（PoC）お問い合わせ" data-zh="技术验证（PoC）咨询">기술 검증(PoC) 문의</h4>
-                <p data-ko="FunnyTech21의 rPPG 기술을 직접 테스트해보고 싶으시다면, 기술 검증(PoC)을 신청해주세요. OEM 및 Tier1 파트너사에 맞춤형 데모를 제공합니다." data-en="If you want to test FunnyTech21's rPPG technology directly, please apply for technical verification (PoC). We provide customized demos for OEM and Tier1 partners." data-ja="FunnyTech21のrPPG技術を直接テストしたい場合は、技術検証（PoC）をお申し込みください。OEMおよびTier1パートナー向けにカスタマイズデモを提供します。" data-zh="如果您想直接测试FunnyTech21的rPPG技术，请申请技术验证（PoC）。我们为OEM和Tier1合作伙伴提供定制演示。">
+                <h4 data-ko="기술 검증(PoC) 문의" data-en="Technical Verification (PoC) Inquiry" data-ja="技術検証（PoC）お問い合わせ" data-zh="技术验证（PoC）咨询" data-de="Technische Verifizierung (PoC) Anfrage" data-es="Consulta de Verificación Técnica (PoC)" data-fr="Demande de Vérification Technique (PoC)" data-vi="Yêu cầu Xác minh Kỹ thuật (PoC)" data-th="สอบถามการตรวจสอบทางเทคนิค (PoC)">기술 검증(PoC) 문의</h4>
+                <p data-ko="FunnyTech21의 rPPG 기술을 직접 테스트해보고 싶으시다면, 기술 검증(PoC)을 신청해주세요. OEM 및 Tier1 파트너사에 맞춤형 데모를 제공합니다." data-en="If you want to test FunnyTech21's rPPG technology directly, please apply for technical verification (PoC). We provide customized demos for OEM and Tier1 partners." data-ja="FunnyTech21のrPPG技術を直接テストしたい場合は、技術検証（PoC）をお申し込みください。OEMおよびTier1パートナー向けにカスタマイズデモを提供します。" data-zh="如果您想直接测试FunnyTech21的rPPG技术，请申请技术验证（PoC）。我们为OEM和Tier1合作伙伴提供定制演示。" data-de="Wenn Sie die rPPG-Technologie von FunnyTech21 direkt testen möchten, beantragen Sie bitte eine technische Verifizierung (PoC). Wir bieten maßgeschneiderte Demos für OEM- und Tier1-Partner." data-es="Si desea probar directamente la tecnología rPPG de FunnyTech21, solicite una verificación técnica (PoC). Proporcionamos demostraciones personalizadas para socios OEM y Tier1." data-fr="Si vous souhaitez tester directement la technologie rPPG de FunnyTech21, veuillez demander une vérification technique (PoC). Nous fournissons des démonstrations personnalisées pour les partenaires OEM et Tier1." data-vi="Nếu bạn muốn thử nghiệm trực tiếp công nghệ rPPG của FunnyTech21, vui lòng đăng ký xác minh kỹ thuật (PoC). Chúng tôi cung cấp bản demo tùy chỉnh cho các đối tác OEM và Tier1." data-th="หากคุณต้องการทดสอบเทคโนโลยี rPPG ของ FunnyTech21 โดยตรง โปรดสมัครการตรวจสอบทางเทคนิค (PoC) เราให้บริการสาธิตที่ปรับแต่งสำหรับพันธมิตร OEM และ Tier1">
                     FunnyTech21의 rPPG 기술을 직접 테스트해보고 싶으시다면,
                     기술 검증(PoC)을 신청해주세요. OEM 및 Tier1 파트너사에 맞춤형 데모를 제공합니다.
                 </p>
             </div>
 
             <div class="article-cta">
-                <h3 data-ko="기술 데모 및 PoC 문의" data-en="Technical Demo & PoC Inquiry" data-ja="技術デモ＆PoC問い合わせ" data-zh="技术演示与PoC咨询">기술 데모 및 PoC 문의</h3>
-                <p data-ko="FunnyTech21의 딥러닝 기반 rPPG 기술을 직접 경험해보세요" data-en="Experience FunnyTech21's deep learning-based rPPG technology firsthand" data-ja="FunnyTech21のディープラーニング基盤rPPG技術を直接体験してください" data-zh="亲身体验FunnyTech21基于深度学习的rPPG技术">FunnyTech21의 딥러닝 기반 rPPG 기술을 직접 경험해보세요</p>
-                <a href="index.html#contact" class="cta-btn" data-ko="문의하기" data-en="Contact Us" data-ja="お問い合わせ" data-zh="联系我们">
-                    <span data-ko="문의하기" data-en="Contact Us" data-ja="お問い合わせ" data-zh="联系我们">문의하기</span>
+                <h3 data-ko="기술 데모 및 PoC 문의" data-en="Technical Demo & PoC Inquiry" data-ja="技術デモ＆PoC問い合わせ" data-zh="技术演示与PoC咨询" data-de="Technische Demo & PoC-Anfrage" data-es="Demo Técnica y Consulta de PoC" data-fr="Démo Technique et Demande PoC" data-vi="Demo Kỹ thuật & Yêu cầu PoC" data-th="สาธิตทางเทคนิคและสอบถาม PoC">기술 데모 및 PoC 문의</h3>
+                <p data-ko="FunnyTech21의 딥러닝 기반 rPPG 기술을 직접 경험해보세요" data-en="Experience FunnyTech21's deep learning-based rPPG technology firsthand" data-ja="FunnyTech21のディープラーニング基盤rPPG技術を直接体験してください" data-zh="亲身体验FunnyTech21基于深度学习的rPPG技术" data-de="Erleben Sie die Deep Learning-basierte rPPG-Technologie von FunnyTech21 aus erster Hand" data-es="Experimente de primera mano la tecnología rPPG basada en Deep Learning de FunnyTech21" data-fr="Découvrez de première main la technologie rPPG basée sur le Deep Learning de FunnyTech21" data-vi="Trải nghiệm trực tiếp công nghệ rPPG dựa trên Deep Learning của FunnyTech21" data-th="สัมผัสเทคโนโลยี rPPG ที่ใช้ Deep Learning ของ FunnyTech21 โดยตรง">FunnyTech21의 딥러닝 기반 rPPG 기술을 직접 경험해보세요</p>
+                <a href="index.html#contact" class="cta-btn" data-ko="문의하기" data-en="Contact Us" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontaktieren Sie uns" data-es="Contáctenos" data-fr="Contactez-nous" data-vi="Liên hệ" data-th="ติดต่อเรา">
+                    <span data-ko="문의하기" data-en="Contact Us" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontaktieren Sie uns" data-es="Contáctenos" data-fr="Contactez-nous" data-vi="Liên hệ" data-th="ติดต่อเรา">문의하기</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
             </div>
@@ -689,9 +762,9 @@
             </div>
             <p class="footer-text">© 2026 FunnyTech21 Co., Ltd. All rights reserved.</p>
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a>
+                <a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Giới thiệu" data-th="เกี่ยวกับ">About</a>
+                <a href="index.html#contact" data-ko="문의" data-en="Contact" data-ja="お問い合わせ" data-zh="联系" data-de="Kontakt" data-es="Contacto" data-fr="Contact" data-vi="Liên hệ" data-th="ติดต่อ">Contact</a>
             </div>
         </div>
     </footer>
@@ -699,18 +772,28 @@
     <!-- Cookie Banner -->
     <div class="cookie-banner" id="cookieBanner">
         <div class="cookie-content">
-            <div class="cookie-text">
+            <div class="cookie-text" data-ko="이 웹사이트는 사용자 경험 향상을 위해 쿠키를 사용합니다. 계속 이용하시면 쿠키 사용에 동의하는 것으로 간주됩니다." data-en="This website uses cookies to improve user experience. By continuing to use this site, you consent to our use of cookies." data-ja="このウェブサイトはユーザー体験向上のためにクッキーを使用しています。引き続きご利用いただくと、クッキーの使用に同意したものとみなされます。" data-zh="本网站使用Cookie来改善用户体验。继续使用本网站即表示您同意我们使用Cookie。" data-de="Diese Website verwendet Cookies zur Verbesserung der Benutzererfahrung. Durch die weitere Nutzung stimmen Sie der Verwendung von Cookies zu." data-es="Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al continuar usando este sitio, acepta nuestro uso de cookies." data-fr="Ce site web utilise des cookies pour améliorer l'expérience utilisateur. En continuant à utiliser ce site, vous acceptez notre utilisation des cookies." data-vi="Trang web này sử dụng cookie để cải thiện trải nghiệm người dùng. Tiếp tục sử dụng trang web này đồng nghĩa với việc bạn đồng ý sử dụng cookie." data-th="เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์ผู้ใช้ การใช้งานต่อไปถือว่าคุณยินยอมให้ใช้คุกกี้">
                 이 웹사이트는 사용자 경험 향상을 위해 쿠키를 사용합니다.
                 계속 이용하시면 쿠키 사용에 동의하는 것으로 간주됩니다.
             </div>
             <div class="cookie-actions">
-                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()">거부</button>
-                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">동의</button>
+                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()" data-ko="거부" data-en="Decline" data-ja="拒否" data-zh="拒绝" data-de="Ablehnen" data-es="Rechazar" data-fr="Refuser" data-vi="Từ chối" data-th="ปฏิเสธ">거부</button>
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()" data-ko="동의" data-en="Accept" data-ja="同意" data-zh="同意" data-de="Akzeptieren" data-es="Aceptar" data-fr="Accepter" data-vi="Chấp nhận" data-th="ยอมรับ">동의</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Mobile menu functions
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
         function toggleLangDropdown() {
             document.querySelector('.lang-dropdown').classList.toggle('active');
         }
@@ -733,7 +816,7 @@
             });
             document.querySelector('.lang-current').textContent = langNames[lang];
             document.querySelector('.lang-dropdown').classList.remove('active');
-            localStorage.setItem('selectedLang', lang);
+            localStorage.setItem('funnytech_lang', lang);
 
             // Apply translations to all elements with data-* language attributes
             // Process in reverse order (children first) to avoid parent overwriting children
@@ -765,13 +848,24 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            const savedLang = localStorage.getItem('funnytech_lang') || 'en';
             changeLanguage(savedLang);
 
             if (!localStorage.getItem('cookieConsent')) {
                 document.getElementById('cookieBanner').classList.add('show');
             }
         });
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered:', registration.scope))
+                    .catch(error => console.log('SW registration failed:', error));
+            });
+        }
     </script>
 </body>
 </html>

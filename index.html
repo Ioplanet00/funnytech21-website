@@ -42,6 +42,16 @@
     <link rel="alternate" hreflang="fr" href="https://www.funnytech21.com/">
     <link rel="alternate" hreflang="x-default" href="https://www.funnytech21.com/">
 
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#15539E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="FunnyTech21">
+    <link rel="apple-touch-icon" href="/imgs/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/imgs/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/imgs/icons/icon-512x512.png">
+
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -727,7 +737,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0,0,0,0.5);
-            z-index: 999;
+            z-index: 2000;
         }
         .mobile-menu.active { display: block; }
         .mobile-menu-content {
@@ -1217,6 +1227,7 @@
                 <li><a href="#applications" onclick="closeMobileMenu()" data-ko="적용 분야" data-en="Applications" data-ja="適用分野" data-zh="应用领域" data-de="Anwendungen" data-es="Aplicaciones" data-fr="Applications" data-vi="Ứng dụng" data-th="การใช้งาน">적용 분야</a></li>
                 <li><a href="#architecture" onclick="closeMobileMenu()" data-ko="시스템 구조" data-en="Architecture" data-ja="アーキテクチャ" data-zh="系统架构" data-de="Architektur" data-es="Arquitectura" data-fr="Architecture" data-vi="Kiến trúc" data-th="สถาปัตยกรรม">시스템 구조</a></li>
                 <li><a href="#videos" onclick="closeMobileMenu()" data-ko="영상 소개" data-en="Videos" data-ja="動画紹介" data-zh="视频介绍" data-de="Videos" data-es="Videos" data-fr="Vidéos" data-vi="Video" data-th="วิดีโอ">영상 소개</a></li>
+                <li><a href="blog.html" onclick="closeMobileMenu()" data-ko="블로그" data-en="Blog" data-ja="ブログ" data-zh="博客" data-de="Blog" data-es="Blog" data-fr="Blog" data-vi="Blog" data-th="บล็อก">블로그</a></li>
                 <li><a href="#contact" onclick="closeMobileMenu()" data-ko="문의하기" data-en="Contact" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontakt" data-es="Contacto" data-fr="Contact" data-vi="Liên hệ" data-th="ติดต่อ">문의하기</a></li>
             </ul>
         </div>
@@ -4647,6 +4658,21 @@
         }
         // Check on page load
         document.addEventListener('DOMContentLoaded', checkCookieConsent);
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('SW registration failed:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>

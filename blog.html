@@ -27,6 +27,14 @@
     <meta property="og:description" content="DMS, rPPG, Euro NCAP 등 자동차 안전 기술 인사이트">
     <meta property="og:image" content="https://www.funnytech21.com/imgs/funnytech_logo_original.png">
 
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#15539E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="FunnyTech21">
+    <link rel="apple-touch-icon" href="/imgs/icons/icon-152x152.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -295,11 +303,62 @@
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
             .blog-hero h1 { font-size: 1.8rem; }
             .blog-card { padding: 24px; }
             .blog-card h2 { font-size: 1.25rem; }
             .footer-container { flex-direction: column; gap: 20px; text-align: center; }
             .cookie-content { flex-direction: column; text-align: center; }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 8px; }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+        .mobile-menu.active { display: block; }
+        .mobile-menu-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-white);
+            padding: 80px 24px 24px;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+        }
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            list-style: none;
+        }
+        .mobile-menu-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .mobile-menu-links a.active {
+            color: var(--primary-blue);
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -334,8 +393,22 @@
                     </div>
                 </div>
             </div>
+            <button class="mobile-menu-btn" onclick="openMobileMenu()">☰</button>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" onclick="closeMobileMenu()">
+        <div class="mobile-menu-content" onclick="event.stopPropagation()">
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+            <ul class="mobile-menu-links">
+                <li><a href="index.html" onclick="closeMobileMenu()" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a></li>
+                <li><a href="faceid.html" onclick="closeMobileMenu()" data-ko="Face ID" data-en="Face ID" data-ja="Face ID" data-zh="Face ID" data-de="Face ID" data-es="Face ID" data-fr="Face ID" data-vi="Face ID" data-th="Face ID">Face ID</a></li>
+                <li><a href="about.html" onclick="closeMobileMenu()" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Về chúng tôi" data-th="เกี่ยวกับเรา">About</a></li>
+                <li><a href="blog.html" onclick="closeMobileMenu()" class="active" data-ko="블로그" data-en="Blog" data-ja="ブログ" data-zh="博客" data-de="Blog" data-es="Blog" data-fr="Blog" data-vi="Blog" data-th="บล็อก">Blog</a></li>
+            </ul>
+        </div>
+    </div>
 
     <section class="blog-hero">
         <h1 data-ko="기술 블로그" data-en="Tech Blog" data-ja="テクニカルブログ" data-zh="技术博客" data-de="Tech Blog" data-es="Blog Técnico" data-fr="Blog Technique" data-vi="Blog Kỹ thuật" data-th="บล็อกเทคโนโลยี">Tech Blog</h1>
@@ -349,14 +422,14 @@
                 <span class="blog-category rppg">rPPG Technology</span>
                 <span class="blog-date">2026.01.06</span>
             </div>
-            <h2><a href="blog-rppg-driving-test.html" data-ko="딥러닝 기반 rPPG 실도로 주행 테스트 결과: 의료기기급 정확도 달성" data-en="Deep Learning rPPG Real-world Driving Test: Medical-grade Accuracy Achieved" data-ja="ディープラーニング基盤rPPG実道路走行テスト結果：医療機器級の精度達成" data-zh="基于深度学习的rPPG实际道路驾驶测试结果：达到医疗级精度">딥러닝 기반 rPPG 실도로 주행 테스트 결과: 의료기기급 정확도 달성</a></h2>
+            <h2><a href="blog-rppg-driving-test.html" data-ko="딥러닝 기반 rPPG 실도로 주행 테스트 결과: 의료기기급 정확도 달성" data-en="Deep Learning rPPG Real-world Driving Test: Medical-grade Accuracy Achieved" data-ja="ディープラーニング基盤rPPG実道路走行テスト結果：医療機器級の精度達成" data-zh="基于深度学习的rPPG实际道路驾驶测试结果：达到医疗级精度" data-de="Deep Learning rPPG Realwelt-Fahrtest: Medizinische Genauigkeit erreicht" data-es="Prueba de conducción rPPG Deep Learning: Precisión de grado médico alcanzada" data-fr="Test de conduite rPPG Deep Learning : Précision de niveau médical atteinte" data-vi="Kiểm tra lái xe thực tế rPPG Deep Learning: Đạt độ chính xác cấp y tế" data-th="การทดสอบขับขี่จริง rPPG Deep Learning: ความแม่นยำระดับการแพทย์">딥러닝 기반 rPPG 실도로 주행 테스트 결과: 의료기기급 정확도 달성</a></h2>
             <div class="blog-tags">
                 <span class="blog-tag">rPPG</span>
                 <span class="blog-tag">Deep Learning</span>
                 <span class="blog-tag">Polar H10</span>
                 <span class="blog-tag">Real-world Test</span>
             </div>
-            <p class="blog-excerpt" data-ko="55.4km 실도로 주행 환경에서 FunnyTech21의 딥러닝 기반 rPPG-Net 기술과 의료기기 Polar H10을 비교 테스트한 결과, MAE 2.38 BPM의 높은 정확도를 달성했습니다. 기존 신호처리 방식 대비 53.5% 성능 향상." data-en="Comparative test of FunnyTech21's deep learning-based rPPG-Net technology and medical device Polar H10 in 55.4km real-world driving conditions achieved high accuracy of MAE 2.38 BPM. 53.5% performance improvement over traditional signal processing." data-ja="55.4kmの実道路走行環境でFunnyTech21のディープラーニング基盤rPPG-Net技術と医療機器Polar H10を比較テストした結果、MAE 2.38 BPMの高い精度を達成しました。" data-zh="在55.4公里实际道路驾驶环境中，FunnyTech21基于深度学习的rPPG-Net技术与医疗设备Polar H10的对比测试达到了MAE 2.38 BPM的高精度。">55.4km 실도로 주행 환경에서 FunnyTech21의 딥러닝 기반 rPPG-Net 기술과 의료기기 Polar H10을 비교 테스트한 결과, MAE 2.38 BPM의 높은 정확도를 달성했습니다. 기존 신호처리 방식 대비 53.5% 성능 향상.</p>
+            <p class="blog-excerpt" data-ko="55.4km 실도로 주행 환경에서 FunnyTech21의 딥러닝 기반 rPPG-Net 기술과 의료기기 Polar H10을 비교 테스트한 결과, MAE 2.38 BPM의 높은 정확도를 달성했습니다. 기존 신호처리 방식 대비 53.5% 성능 향상." data-en="Comparative test of FunnyTech21's deep learning-based rPPG-Net technology and medical device Polar H10 in 55.4km real-world driving conditions achieved high accuracy of MAE 2.38 BPM. 53.5% performance improvement over traditional signal processing." data-ja="55.4kmの実道路走行環境でFunnyTech21のディープラーニング基盤rPPG-Net技術と医療機器Polar H10を比較テストした結果、MAE 2.38 BPMの高い精度を達成しました。" data-zh="在55.4公里实际道路驾驶环境中，FunnyTech21基于深度学习的rPPG-Net技术与医疗设备Polar H10的对比测试达到了MAE 2.38 BPM的高精度。" data-de="Vergleichstest der Deep-Learning-basierten rPPG-Net-Technologie von FunnyTech21 und dem medizinischen Gerät Polar H10 unter realen Fahrbedingungen auf 55,4 km erreichte eine hohe Genauigkeit von MAE 2,38 BPM. 53,5% Leistungsverbesserung." data-es="La prueba comparativa de la tecnología rPPG-Net basada en deep learning de FunnyTech21 y el dispositivo médico Polar H10 en 55.4 km de conducción real logró una alta precisión de MAE 2.38 BPM. 53.5% de mejora del rendimiento." data-fr="Le test comparatif de la technologie rPPG-Net de FunnyTech21 basée sur le deep learning et du dispositif médical Polar H10 dans 55,4 km de conduite réelle a atteint une haute précision de MAE 2,38 BPM. 53,5% d'amélioration." data-vi="Thử nghiệm so sánh công nghệ rPPG-Net dựa trên deep learning của FunnyTech21 và thiết bị y tế Polar H10 trong 55.4km lái xe thực tế đạt độ chính xác cao MAE 2.38 BPM. Cải thiện hiệu suất 53.5%." data-th="การทดสอบเปรียบเทียบเทคโนโลยี rPPG-Net ที่ใช้ deep learning ของ FunnyTech21 และอุปกรณ์การแพทย์ Polar H10 ในสภาพการขับขี่จริง 55.4 กม. บรรลุความแม่นยำสูง MAE 2.38 BPM ประสิทธิภาพดีขึ้น 53.5%">55.4km 실도로 주행 환경에서 FunnyTech21의 딥러닝 기반 rPPG-Net 기술과 의료기기 Polar H10을 비교 테스트한 결과, MAE 2.38 BPM의 높은 정확도를 달성했습니다. 기존 신호처리 방식 대비 53.5% 성능 향상.</p>
             <a href="blog-rppg-driving-test.html" class="blog-read-more" data-ko="자세히 보기" data-en="Read more" data-ja="詳細を見る" data-zh="阅读更多" data-de="Mehr lesen" data-es="Leer más" data-fr="Lire la suite" data-vi="Đọc thêm" data-th="อ่านเพิ่มเติม">
                 자세히 보기
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -369,14 +442,14 @@
                 <span class="blog-category ncap">Euro NCAP</span>
                 <span class="blog-date">2026.01.06</span>
             </div>
-            <h2><a href="blog-euro-ncap-2026.html" data-ko="Euro NCAP 2026 DMS 기술 요구사항 완벽 분석" data-en="Complete Analysis of Euro NCAP 2026 DMS Technical Requirements" data-ja="Euro NCAP 2026 DMS技術要件の完全分析" data-zh="Euro NCAP 2026 DMS技术要求完整分析">Euro NCAP 2026 DMS 기술 요구사항 완벽 분석</a></h2>
+            <h2><a href="blog-euro-ncap-2026.html" data-ko="Euro NCAP 2026 DMS 기술 요구사항 완벽 분석" data-en="Complete Analysis of Euro NCAP 2026 DMS Technical Requirements" data-ja="Euro NCAP 2026 DMS技術要件の完全分析" data-zh="Euro NCAP 2026 DMS技术要求完整分析" data-de="Vollständige Analyse der Euro NCAP 2026 DMS Technischen Anforderungen" data-es="Análisis Completo de los Requisitos Técnicos DMS Euro NCAP 2026" data-fr="Analyse Complète des Exigences Techniques DMS Euro NCAP 2026" data-vi="Phân tích Đầy đủ Yêu cầu Kỹ thuật DMS Euro NCAP 2026" data-th="การวิเคราะห์ข้อกำหนดทางเทคนิค DMS Euro NCAP 2026 อย่างครบถ้วน">Euro NCAP 2026 DMS 기술 요구사항 완벽 분석</a></h2>
             <div class="blog-tags">
                 <span class="blog-tag">Euro NCAP</span>
                 <span class="blog-tag">DMS</span>
                 <span class="blog-tag">Driver Monitoring</span>
                 <span class="blog-tag">2026 Protocol</span>
             </div>
-            <p class="blog-excerpt" data-ko="2026년부터 시행되는 Euro NCAP의 운전자 모니터링 시스템(DMS) 요구사항을 상세히 분석합니다. 졸음 감지, 주의력 분산 감지, 그리고 새롭게 추가된 rPPG 기반 생체신호 모니터링 요구사항까지 완벽하게 정리했습니다." data-en="A detailed analysis of Euro NCAP's Driver Monitoring System (DMS) requirements effective from 2026. Complete coverage of drowsiness detection, distraction detection, and newly added rPPG-based vital sign monitoring requirements." data-ja="2026年から施行されるEuro NCAPの運転者モニタリングシステム（DMS）要件を詳細に分析します。居眠り検知、注意散漫検知、新たに追加されたrPPGベースのバイタルサインモニタリング要件まで完全にまとめました。" data-zh="详细分析2026年起生效的Euro NCAP驾驶员监控系统（DMS）要求。完整涵盖疲劳检测、注意力分散检测以及新增的基于rPPG的生命体征监测要求。">2026년부터 시행되는 Euro NCAP의 운전자 모니터링 시스템(DMS) 요구사항을 상세히 분석합니다. 졸음 감지, 주의력 분산 감지, 그리고 새롭게 추가된 rPPG 기반 생체신호 모니터링 요구사항까지 완벽하게 정리했습니다.</p>
+            <p class="blog-excerpt" data-ko="2026년부터 시행되는 Euro NCAP의 운전자 모니터링 시스템(DMS) 요구사항을 상세히 분석합니다. 졸음 감지, 주의력 분산 감지, 그리고 새롭게 추가된 rPPG 기반 생체신호 모니터링 요구사항까지 완벽하게 정리했습니다." data-en="A detailed analysis of Euro NCAP's Driver Monitoring System (DMS) requirements effective from 2026. Complete coverage of drowsiness detection, distraction detection, and newly added rPPG-based vital sign monitoring requirements." data-ja="2026年から施行されるEuro NCAPの運転者モニタリングシステム（DMS）要件を詳細に分析します。居眠り検知、注意散漫検知、新たに追加されたrPPGベースのバイタルサインモニタリング要件まで完全にまとめました。" data-zh="详细分析2026年起生效的Euro NCAP驾驶员监控系统（DMS）要求。完整涵盖疲劳检测、注意力分散检测以及新增的基于rPPG的生命体征监测要求。" data-de="Detaillierte Analyse der Euro NCAP DMS-Anforderungen ab 2026. Vollständige Abdeckung von Müdigkeitserkennung, Ablenkungserkennung und neu hinzugefügten rPPG-basierten Vitalzeichen-Überwachungsanforderungen." data-es="Análisis detallado de los requisitos del Sistema de Monitoreo del Conductor (DMS) de Euro NCAP vigentes desde 2026. Cobertura completa de detección de somnolencia, distracción y requisitos de monitoreo de signos vitales basados en rPPG." data-fr="Analyse détaillée des exigences du Système de Surveillance du Conducteur (DMS) Euro NCAP en vigueur à partir de 2026. Couverture complète de la détection de somnolence, de distraction et des nouvelles exigences de surveillance des signes vitaux basées sur rPPG." data-vi="Phân tích chi tiết các yêu cầu của Hệ thống Giám sát Tài xế (DMS) Euro NCAP có hiệu lực từ năm 2026. Bao gồm đầy đủ phát hiện buồn ngủ, mất tập trung và các yêu cầu giám sát dấu hiệu sinh tồn dựa trên rPPG mới được thêm vào." data-th="การวิเคราะห์โดยละเอียดของข้อกำหนด DMS Euro NCAP ที่มีผลบังคับใช้ตั้งแต่ปี 2026 ครอบคลุมการตรวจจับความง่วง การเสียสมาธิ และข้อกำหนดการตรวจสอบสัญญาณชีพตาม rPPG ที่เพิ่มเข้ามาใหม่">2026년부터 시행되는 Euro NCAP의 운전자 모니터링 시스템(DMS) 요구사항을 상세히 분석합니다. 졸음 감지, 주의력 분산 감지, 그리고 새롭게 추가된 rPPG 기반 생체신호 모니터링 요구사항까지 완벽하게 정리했습니다.</p>
             <a href="blog-euro-ncap-2026.html" class="blog-read-more" data-ko="자세히 보기" data-en="Read more" data-ja="詳細を見る" data-zh="阅读更多" data-de="Mehr lesen" data-es="Leer más" data-fr="Lire la suite" data-vi="Đọc thêm" data-th="อ่านเพิ่มเติม">
                 자세히 보기
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -391,9 +464,9 @@
             </div>
             <p class="footer-text">© 2026 FunnyTech21 Co., Ltd. All rights reserved.</p>
             <div class="footer-links">
-                <a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页">Home</a>
-                <a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们">About</a>
-                <a href="index.html#contact" data-ko="문의" data-en="Contact" data-ja="お問い合わせ" data-zh="联系我们">Contact</a>
+                <a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a>
+                <a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Giới thiệu" data-th="เกี่ยวกับ">About</a>
+                <a href="index.html#contact" data-ko="문의" data-en="Contact" data-ja="お問い合わせ" data-zh="联系我们" data-de="Kontakt" data-es="Contacto" data-fr="Contact" data-vi="Liên hệ" data-th="ติดต่อ">Contact</a>
             </div>
         </div>
     </footer>
@@ -412,6 +485,17 @@
     </div>
 
     <script>
+        // Mobile menu functionality
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
         // Language functionality
         function toggleLangDropdown() {
             document.querySelector('.lang-dropdown').classList.toggle('active');
@@ -446,7 +530,7 @@
             });
             document.querySelector('.lang-current').textContent = langNames[lang];
             document.querySelector('.lang-dropdown').classList.remove('active');
-            localStorage.setItem('selectedLang', lang);
+            localStorage.setItem('funnytech_lang', lang);
         }
 
         // Cookie functions
@@ -462,13 +546,24 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('selectedLang') || 'ko';
+            const savedLang = localStorage.getItem('funnytech_lang') || 'en';
             changeLanguage(savedLang);
 
             if (!localStorage.getItem('cookieConsent')) {
                 document.getElementById('cookieBanner').classList.add('show');
             }
         });
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered:', registration.scope))
+                    .catch(error => console.log('SW registration failed:', error));
+            });
+        }
     </script>
 </body>
 </html>

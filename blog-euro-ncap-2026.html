@@ -52,6 +52,14 @@
     }
     </script>
 
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#15539E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="FunnyTech21">
+    <link rel="apple-touch-icon" href="/imgs/icons/icon-152x152.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -453,10 +461,62 @@
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
             .article-header h1 { font-size: 1.6rem; }
             .article-content { padding: 24px; }
             .compliance-grid { grid-template-columns: 1fr; }
             .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 8px; }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+        .mobile-menu.active { display: block; }
+        .mobile-menu-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-white);
+            padding: 80px 24px 24px;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+        }
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            list-style: none;
+        }
+        .mobile-menu-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .mobile-menu-links a.active {
+            color: var(--primary-blue);
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
         }
     </style>
 </head>
@@ -467,12 +527,13 @@
                 <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21 Logo" class="logo-img">
             </a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a></li>
                 <li><a href="faceid.html">Face ID</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Giới thiệu" data-th="เกี่ยวกับ">About</a></li>
+                <li><a href="blog.html" class="active" data-ko="블로그" data-en="Blog" data-ja="ブログ" data-zh="博客" data-de="Blog" data-es="Blog" data-fr="Blog" data-vi="Blog" data-th="บล็อก">Blog</a></li>
             </ul>
             <div class="nav-right">
+                <button class="mobile-menu-btn" onclick="openMobileMenu()">☰</button>
                 <div class="lang-selector" id="langSelector">
                     <button class="lang-selector-btn" onclick="toggleLangDropdown()">
                         <span class="lang-current">한국어</span>
@@ -494,6 +555,19 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" onclick="closeMobileMenu()">
+        <div class="mobile-menu-content" onclick="event.stopPropagation()">
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+            <ul class="mobile-menu-links">
+                <li><a href="index.html" onclick="closeMobileMenu()" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a></li>
+                <li><a href="faceid.html" onclick="closeMobileMenu()">Face ID</a></li>
+                <li><a href="about.html" onclick="closeMobileMenu()" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Giới thiệu" data-th="เกี่ยวกับ">About</a></li>
+                <li><a href="blog.html" onclick="closeMobileMenu()" class="active" data-ko="블로그" data-en="Blog" data-ja="ブログ" data-zh="博客" data-de="Blog" data-es="Blog" data-fr="Blog" data-vi="Blog" data-th="บล็อก">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+
     <header class="article-header">
         <div class="article-header-content">
             <div class="article-meta">
@@ -509,14 +583,14 @@
     </header>
 
     <div class="article-container">
-        <a href="blog.html" class="back-to-blog">
+        <a href="blog.html" class="back-to-blog" data-ko="블로그 목록으로" data-en="Back to Blog" data-ja="ブログ一覧へ" data-zh="返回博客列表" data-de="Zurück zum Blog" data-es="Volver al Blog" data-fr="Retour au Blog" data-vi="Quay lại Blog" data-th="กลับไปบล็อก">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             <span data-ko="블로그 목록으로" data-en="Back to Blog" data-ja="ブログ一覧へ" data-zh="返回博客列表" data-de="Zurück zum Blog" data-es="Volver al Blog" data-fr="Retour au Blog" data-vi="Quay lại Blog" data-th="กลับไปบล็อก">블로그 목록으로</span>
         </a>
 
         <article class="article-content">
             <h2 data-ko="Euro NCAP 2026 개요" data-en="Euro NCAP 2026 Overview" data-ja="Euro NCAP 2026概要" data-zh="Euro NCAP 2026概述" data-de="Euro NCAP 2026 Übersicht" data-es="Resumen de Euro NCAP 2026" data-fr="Aperçu Euro NCAP 2026" data-vi="Tổng quan Euro NCAP 2026" data-th="ภาพรวม Euro NCAP 2026">Euro NCAP 2026 개요</h2>
-            <p data-ko="Euro NCAP(European New Car Assessment Programme)은 2026년부터 2009년 이후 가장 큰 규모의 프로토콜 개정을 시행합니다. 이번 개정의 핵심은 운전자 모니터링 시스템(DMS)과 실내 모니터링(In-Cabin Monitoring)에 대한 강화된 요구사항입니다." data-en="Euro NCAP (European New Car Assessment Programme) will implement its largest protocol revision since 2009 starting in 2026. The core of this revision is enhanced requirements for Driver Monitoring Systems (DMS) and In-Cabin Monitoring." data-ja="Euro NCAP（European New Car Assessment Programme）は2026年から2009年以来最大規模のプロトコル改訂を実施します。今回の改訂の核心は運転者モニタリングシステム（DMS）と車内モニタリングに対する強化された要件です。" data-zh="Euro NCAP（欧洲新车评估计划）将从2026年起实施自2009年以来最大规模的协议修订。此次修订的核心是对驾驶员监控系统（DMS）和车内监控的强化要求。">
+            <p data-ko="Euro NCAP(European New Car Assessment Programme)은 2026년부터 2009년 이후 가장 큰 규모의 프로토콜 개정을 시행합니다. 이번 개정의 핵심은 운전자 모니터링 시스템(DMS)과 실내 모니터링(In-Cabin Monitoring)에 대한 강화된 요구사항입니다." data-en="Euro NCAP (European New Car Assessment Programme) will implement its largest protocol revision since 2009 starting in 2026. The core of this revision is enhanced requirements for Driver Monitoring Systems (DMS) and In-Cabin Monitoring." data-ja="Euro NCAP（European New Car Assessment Programme）は2026年から2009年以来最大規模のプロトコル改訂を実施します。今回の改訂の核心は運転者モニタリングシステム（DMS）と車内モニタリングに対する強化された要件です。" data-zh="Euro NCAP（欧洲新车评估计划）将从2026年起实施自2009年以来最大规模的协议修订。此次修订的核心是对驾驶员监控系统（DMS）和车内监控的强化要求。" data-de="Euro NCAP (European New Car Assessment Programme) wird ab 2026 die größte Protokollrevision seit 2009 umsetzen. Der Kern dieser Revision sind erweiterte Anforderungen an Driver Monitoring Systems (DMS) und In-Cabin Monitoring." data-es="Euro NCAP (European New Car Assessment Programme) implementará su mayor revisión de protocolo desde 2009 a partir de 2026. El núcleo de esta revisión son requisitos mejorados para sistemas de monitoreo del conductor (DMS) y monitoreo en cabina." data-fr="Euro NCAP (European New Car Assessment Programme) mettra en œuvre sa plus grande révision de protocole depuis 2009 à partir de 2026. Le cœur de cette révision est l'amélioration des exigences pour les systèmes de surveillance du conducteur (DMS) et la surveillance en cabine." data-vi="Euro NCAP (European New Car Assessment Programme) sẽ thực hiện sửa đổi giao thức lớn nhất kể từ năm 2009 bắt đầu từ năm 2026. Cốt lõi của sửa đổi này là các yêu cầu nâng cao cho Hệ thống Giám sát Tài xế (DMS) và Giám sát Trong Xe." data-th="Euro NCAP (European New Car Assessment Programme) จะดำเนินการแก้ไขโปรโตคอลครั้งใหญ่ที่สุดตั้งแต่ปี 2009 เริ่มตั้งแต่ปี 2026 หัวใจของการแก้ไขนี้คือข้อกำหนดที่เพิ่มขึ้นสำหรับระบบตรวจสอบคนขับ (DMS) และการตรวจสอบภายในห้องโดยสาร">
                 Euro NCAP(European New Car Assessment Programme)은 2026년부터 2009년 이후 가장 큰 규모의
                 프로토콜 개정을 시행합니다. 이번 개정의 핵심은 <strong>운전자 모니터링 시스템(DMS)</strong>과
                 <strong>실내 모니터링(In-Cabin Monitoring)</strong>에 대한 강화된 요구사항입니다.
@@ -524,7 +598,7 @@
 
             <div class="highlight-box">
                 <h4 data-ko="핵심 변경 사항" data-en="Key Changes" data-ja="主な変更点" data-zh="核心变更" data-de="Wichtige Änderungen" data-es="Cambios Clave" data-fr="Changements Clés" data-vi="Thay đổi Chính" data-th="การเปลี่ยนแปลงหลัก">핵심 변경 사항</h4>
-                <p data-ko="Euro NCAP 2026은 DMS를 필수 평가 항목으로 지정했습니다. 이전에는 선택적 가점 요소였던 DMS가 이제 별점 획득의 핵심 조건이 됩니다." data-en="Euro NCAP 2026 has designated DMS as a mandatory evaluation item. DMS, which was previously an optional bonus element, is now a key condition for star rating achievement." data-ja="Euro NCAP 2026はDMSを必須評価項目に指定しました。以前は選択的な加点要素だったDMSが、今や星評価獲得の核心条件になります。" data-zh="Euro NCAP 2026已将DMS指定为强制性评估项目。此前作为可选加分项的DMS现已成为获得星级评级的关键条件。">
+                <p data-ko="Euro NCAP 2026은 DMS를 필수 평가 항목으로 지정했습니다. 이전에는 선택적 가점 요소였던 DMS가 이제 별점 획득의 핵심 조건이 됩니다." data-en="Euro NCAP 2026 has designated DMS as a mandatory evaluation item. DMS, which was previously an optional bonus element, is now a key condition for star rating achievement." data-ja="Euro NCAP 2026はDMSを必須評価項目に指定しました。以前は選択的な加点要素だったDMSが、今や星評価獲得の核心条件になります。" data-zh="Euro NCAP 2026已将DMS指定为强制性评估项目。此前作为可选加分项的DMS现已成为获得星级评级的关键条件。" data-de="Euro NCAP 2026 hat DMS als obligatorisches Bewertungskriterium festgelegt. DMS, das zuvor ein optionaler Bonusfaktor war, ist jetzt eine Schlüsselbedingung für die Sternebewertung." data-es="Euro NCAP 2026 ha designado el DMS como elemento de evaluación obligatorio. El DMS, que anteriormente era un elemento de bonificación opcional, ahora es una condición clave para obtener la calificación de estrellas." data-fr="Euro NCAP 2026 a désigné le DMS comme élément d'évaluation obligatoire. Le DMS, qui était auparavant un élément bonus optionnel, est maintenant une condition clé pour l'obtention des étoiles." data-vi="Euro NCAP 2026 đã chỉ định DMS là hạng mục đánh giá bắt buộc. DMS, trước đây là yếu tố điểm thưởng tùy chọn, giờ đây là điều kiện quan trọng để đạt được xếp hạng sao." data-th="Euro NCAP 2026 ได้กำหนดให้ DMS เป็นรายการประเมินบังคับ DMS ซึ่งก่อนหน้านี้เป็นองค์ประกอบโบนัสทางเลือก ตอนนี้เป็นเงื่อนไขสำคัญสำหรับการได้รับการจัดอันดับดาว">
                     Euro NCAP 2026은 DMS를 <strong>필수 평가 항목</strong>으로 지정했습니다.
                     이전에는 선택적 가점 요소였던 DMS가 이제 별점 획득의 핵심 조건이 됩니다.
                 </p>
@@ -532,201 +606,201 @@
 
             <h2 data-ko="DMS 핵심 요구사항" data-en="DMS Core Requirements" data-ja="DMSコア要件" data-zh="DMS核心要求" data-de="DMS Kernanforderungen" data-es="Requisitos Principales de DMS" data-fr="Exigences Fondamentales DMS" data-vi="Yêu cầu Cốt lõi DMS" data-th="ข้อกำหนดหลัก DMS">DMS 핵심 요구사항</h2>
 
-            <h3 data-ko="1. 운전자 모니터링 시스템 (필수)" data-en="1. Driver Monitoring System (Mandatory)" data-ja="1. 運転者モニタリングシステム（必須）" data-zh="1. 驾驶员监控系统（必需）">1. 운전자 모니터링 시스템 (필수)</h3>
+            <h3 data-ko="1. 운전자 모니터링 시스템 (필수)" data-en="1. Driver Monitoring System (Mandatory)" data-ja="1. 運転者モニタリングシステム（必須）" data-zh="1. 驾驶员监控系统（必需）" data-de="1. Driver Monitoring System (Pflicht)" data-es="1. Sistema de Monitoreo del Conductor (Obligatorio)" data-fr="1. Système de Surveillance du Conducteur (Obligatoire)" data-vi="1. Hệ thống Giám sát Tài xế (Bắt buộc)" data-th="1. ระบบตรวจสอบคนขับ (บังคับ)">1. 운전자 모니터링 시스템 (필수)</h3>
             <div class="requirement-box">
-                <h4><span class="status-badge status-required" data-ko="필수" data-en="Required" data-ja="必須" data-zh="必需">필수</span> Driver Monitoring System</h4>
+                <h4><span class="status-badge status-required" data-ko="필수" data-en="Required" data-ja="必須" data-zh="必需" data-de="Erforderlich" data-es="Obligatorio" data-fr="Requis" data-vi="Bắt buộc" data-th="จำเป็น">필수</span> Driver Monitoring System</h4>
                 <ul>
-                    <li><strong data-ko="시선 추적 (Gaze Tracking):" data-en="Gaze Tracking:" data-ja="視線追跡:" data-zh="视线追踪:">시선 추적 (Gaze Tracking):</strong> <span data-ko="운전자의 시선 방향 지속 모니터링" data-en="Continuous monitoring of driver gaze direction" data-ja="運転者の視線方向の継続的モニタリング" data-zh="持续监控驾驶员视线方向">운전자의 시선 방향 지속 모니터링</span></li>
-                    <li><strong data-ko="머리 추적 (Head Tracking):" data-en="Head Tracking:" data-ja="頭部追跡:" data-zh="头部追踪:">머리 추적 (Head Tracking):</strong> <span data-ko="머리 위치 및 방향 실시간 감지" data-en="Real-time head position and orientation detection" data-ja="頭部位置と方向のリアルタイム検知" data-zh="实时检测头部位置和方向">머리 위치 및 방향 실시간 감지</span></li>
-                    <li><strong data-ko="졸음 감지 (Drowsiness Detection):" data-en="Drowsiness Detection:" data-ja="居眠り検知:" data-zh="疲劳检测:">졸음 감지 (Drowsiness Detection):</strong> <span data-ko="PERCLOS, 눈 깜빡임 패턴 분석" data-en="PERCLOS, blink pattern analysis" data-ja="PERCLOS、まばたきパターン分析" data-zh="PERCLOS、眨眼模式分析">PERCLOS, 눈 깜빡임 패턴 분석</span></li>
-                    <li><strong data-ko="주의분산 감지 (Distraction Detection):" data-en="Distraction Detection:" data-ja="注意散漫検知:" data-zh="注意力分散检测:">주의분산 감지 (Distraction Detection):</strong> <span data-ko="도로 외 시선 감지" data-en="Off-road gaze detection" data-ja="道路外視線検知" data-zh="道路外视线检测">도로 외 시선 감지</span></li>
+                    <li><strong data-ko="시선 추적 (Gaze Tracking):" data-en="Gaze Tracking:" data-ja="視線追跡:" data-zh="视线追踪:" data-de="Blickverfolgung:" data-es="Seguimiento de Mirada:" data-fr="Suivi du Regard:" data-vi="Theo dõi Ánh mắt:" data-th="การติดตามสายตา:">시선 추적 (Gaze Tracking):</strong> <span data-ko="운전자의 시선 방향 지속 모니터링" data-en="Continuous monitoring of driver gaze direction" data-ja="運転者の視線方向の継続的モニタリング" data-zh="持续监控驾驶员视线方向" data-de="Kontinuierliche Überwachung der Blickrichtung des Fahrers" data-es="Monitoreo continuo de la dirección de la mirada del conductor" data-fr="Surveillance continue de la direction du regard du conducteur" data-vi="Giám sát liên tục hướng nhìn của tài xế" data-th="การตรวจสอบทิศทางสายตาของผู้ขับขี่อย่างต่อเนื่อง">운전자의 시선 방향 지속 모니터링</span></li>
+                    <li><strong data-ko="머리 추적 (Head Tracking):" data-en="Head Tracking:" data-ja="頭部追跡:" data-zh="头部追踪:" data-de="Kopfverfolgung:" data-es="Seguimiento de Cabeza:" data-fr="Suivi de Tête:" data-vi="Theo dõi Đầu:" data-th="การติดตามศีรษะ:">머리 추적 (Head Tracking):</strong> <span data-ko="머리 위치 및 방향 실시간 감지" data-en="Real-time head position and orientation detection" data-ja="頭部位置と方向のリアルタイム検知" data-zh="实时检测头部位置和方向" data-de="Echtzeit-Erkennung von Kopfposition und -ausrichtung" data-es="Detección en tiempo real de posición y orientación de la cabeza" data-fr="Détection en temps réel de la position et de l'orientation de la tête" data-vi="Phát hiện vị trí và hướng đầu theo thời gian thực" data-th="การตรวจจับตำแหน่งและทิศทางศีรษะแบบเรียลไทม์">머리 위치 및 방향 실시간 감지</span></li>
+                    <li><strong data-ko="졸음 감지 (Drowsiness Detection):" data-en="Drowsiness Detection:" data-ja="居眠り検知:" data-zh="疲劳检测:" data-de="Müdigkeitserkennung:" data-es="Detección de Somnolencia:" data-fr="Détection de Somnolence:" data-vi="Phát hiện Buồn ngủ:" data-th="การตรวจจับความง่วง:">졸음 감지 (Drowsiness Detection):</strong> <span data-ko="PERCLOS, 눈 깜빡임 패턴 분석" data-en="PERCLOS, blink pattern analysis" data-ja="PERCLOS、まばたきパターン分析" data-zh="PERCLOS、眨眼模式分析" data-de="PERCLOS, Blinkmusteranalyse" data-es="PERCLOS, análisis de patrón de parpadeo" data-fr="PERCLOS, analyse du schéma de clignement" data-vi="PERCLOS, phân tích mẫu chớp mắt" data-th="PERCLOS การวิเคราะห์รูปแบบการกระพริบตา">PERCLOS, 눈 깜빡임 패턴 분석</span></li>
+                    <li><strong data-ko="주의분산 감지 (Distraction Detection):" data-en="Distraction Detection:" data-ja="注意散漫検知:" data-zh="注意力分散检测:" data-de="Ablenkungserkennung:" data-es="Detección de Distracción:" data-fr="Détection de Distraction:" data-vi="Phát hiện Mất tập trung:" data-th="การตรวจจับการเสียสมาธิ:">주의분산 감지 (Distraction Detection):</strong> <span data-ko="도로 외 시선 감지" data-en="Off-road gaze detection" data-ja="道路外視線検知" data-zh="道路外视线检测" data-de="Erkennung von Blicken abseits der Straße" data-es="Detección de mirada fuera de la carretera" data-fr="Détection du regard hors route" data-vi="Phát hiện ánh mắt ngoài đường" data-th="การตรวจจับสายตานอกถนน">도로 외 시선 감지</span></li>
                 </ul>
             </div>
 
             <table class="data-table">
                 <tr>
-                    <th data-ko="요구사항" data-en="Requirement" data-ja="要件" data-zh="要求">요구사항</th>
-                    <th data-ko="세부 기준" data-en="Detailed Criteria" data-ja="詳細基準" data-zh="详细标准">세부 기준</th>
+                    <th data-ko="요구사항" data-en="Requirement" data-ja="要件" data-zh="要求" data-de="Anforderung" data-es="Requisito" data-fr="Exigence" data-vi="Yêu cầu" data-th="ข้อกำหนด">요구사항</th>
+                    <th data-ko="세부 기준" data-en="Detailed Criteria" data-ja="詳細基準" data-zh="详细标准" data-de="Detaillierte Kriterien" data-es="Criterios Detallados" data-fr="Critères Détaillés" data-vi="Tiêu chí Chi tiết" data-th="เกณฑ์โดยละเอียด">세부 기준</th>
                     <th>FunnyTech21 i-DMS</th>
                 </tr>
                 <tr>
-                    <td data-ko="시선 추적 정확도" data-en="Gaze Tracking Accuracy" data-ja="視線追跡精度" data-zh="视线追踪精度">시선 추적 정확도</td>
-                    <td data-ko="±5° 이내" data-en="Within ±5°" data-ja="±5°以内" data-zh="±5°以内">±5° 이내</td>
-                    <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合">✓ 준수</td>
+                    <td data-ko="시선 추적 정확도" data-en="Gaze Tracking Accuracy" data-ja="視線追跡精度" data-zh="视线追踪精度" data-de="Blickverfolgungsgenauigkeit" data-es="Precisión de Seguimiento de Mirada" data-fr="Précision du Suivi du Regard" data-vi="Độ chính xác Theo dõi Ánh mắt" data-th="ความแม่นยำในการติดตามสายตา">시선 추적 정확도</td>
+                    <td data-ko="±5° 이내" data-en="Within ±5°" data-ja="±5°以内" data-zh="±5°以内" data-de="Innerhalb ±5°" data-es="Dentro de ±5°" data-fr="Dans ±5°" data-vi="Trong ±5°" data-th="ภายใน ±5°">±5° 이내</td>
+                    <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合" data-de="✓ Konform" data-es="✓ Cumple" data-fr="✓ Conforme" data-vi="✓ Tuân thủ" data-th="✓ สอดคล้อง">✓ 준수</td>
                 </tr>
                 <tr>
-                    <td data-ko="머리 위치 추적" data-en="Head Position Tracking" data-ja="頭部位置追跡" data-zh="头部位置追踪">머리 위치 추적</td>
-                    <td data-ko="3축 실시간 추적" data-en="3-axis Real-time Tracking" data-ja="3軸リアルタイム追跡" data-zh="3轴实时追踪">3축 실시간 추적</td>
-                    <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合">✓ 준수</td>
+                    <td data-ko="머리 위치 추적" data-en="Head Position Tracking" data-ja="頭部位置追跡" data-zh="头部位置追踪" data-de="Kopfpositionsverfolgung" data-es="Seguimiento de Posición de Cabeza" data-fr="Suivi de Position de Tête" data-vi="Theo dõi Vị trí Đầu" data-th="การติดตามตำแหน่งศีรษะ">머리 위치 추적</td>
+                    <td data-ko="3축 실시간 추적" data-en="3-axis Real-time Tracking" data-ja="3軸リアルタイム追跡" data-zh="3轴实时追踪" data-de="3-Achsen-Echtzeit-Tracking" data-es="Seguimiento en tiempo real de 3 ejes" data-fr="Suivi en temps réel 3 axes" data-vi="Theo dõi thời gian thực 3 trục" data-th="การติดตาม 3 แกนแบบเรียลไทม์">3축 실시간 추적</td>
+                    <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合" data-de="✓ Konform" data-es="✓ Cumple" data-fr="✓ Conforme" data-vi="✓ Tuân thủ" data-th="✓ สอดคล้อง">✓ 준수</td>
                 </tr>
                 <tr>
-                    <td data-ko="졸음 감지 응답시간" data-en="Drowsiness Detection Response Time" data-ja="居眠り検知応答時間" data-zh="疲劳检测响应时间">졸음 감지 응답시간</td>
-                    <td data-ko="3초 이내 경고" data-en="Warning within 3 seconds" data-ja="3秒以内に警告" data-zh="3秒内警告">3초 이내 경고</td>
-                    <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合">✓ 준수</td>
+                    <td data-ko="졸음 감지 응답시간" data-en="Drowsiness Detection Response Time" data-ja="居眠り検知応答時間" data-zh="疲劳检测响应时间" data-de="Reaktionszeit Müdigkeitserkennung" data-es="Tiempo de Respuesta Detección de Somnolencia" data-fr="Temps de Réponse Détection de Somnolence" data-vi="Thời gian Phản hồi Phát hiện Buồn ngủ" data-th="เวลาตอบสนองการตรวจจับความง่วง">졸음 감지 응답시간</td>
+                    <td data-ko="3초 이내 경고" data-en="Warning within 3 seconds" data-ja="3秒以内に警告" data-zh="3秒内警告" data-de="Warnung innerhalb 3 Sekunden" data-es="Advertencia en 3 segundos" data-fr="Avertissement sous 3 secondes" data-vi="Cảnh báo trong 3 giây" data-th="แจ้งเตือนภายใน 3 วินาที">3초 이내 경고</td>
+                    <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合" data-de="✓ Konform" data-es="✓ Cumple" data-fr="✓ Conforme" data-vi="✓ Tuân thủ" data-th="✓ สอดคล้อง">✓ 준수</td>
                 </tr>
                 <tr>
-                    <td data-ko="주의분산 감지" data-en="Distraction Detection" data-ja="注意散漫検知" data-zh="注意力分散检测">주의분산 감지</td>
-                    <td data-ko="2초 이상 시선 이탈 시 경고" data-en="Warning when gaze leaves for 2+ seconds" data-ja="2秒以上視線逸脱時に警告" data-zh="视线离开2秒以上时警告">2초 이상 시선 이탈 시 경고</td>
-                    <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合">✓ 준수</td>
+                    <td data-ko="주의분산 감지" data-en="Distraction Detection" data-ja="注意散漫検知" data-zh="注意力分散检测" data-de="Ablenkungserkennung" data-es="Detección de Distracción" data-fr="Détection de Distraction" data-vi="Phát hiện Mất tập trung" data-th="การตรวจจับการเสียสมาธิ">주의분산 감지</td>
+                    <td data-ko="2초 이상 시선 이탈 시 경고" data-en="Warning when gaze leaves for 2+ seconds" data-ja="2秒以上視線逸脱時に警告" data-zh="视线离开2秒以上时警告" data-de="Warnung bei Blickabweichung über 2 Sekunden" data-es="Advertencia al desviar mirada más de 2 segundos" data-fr="Avertissement si regard détourné plus de 2 secondes" data-vi="Cảnh báo khi nhìn ra ngoài hơn 2 giây" data-th="แจ้งเตือนเมื่อสายตาละจากถนนมากกว่า 2 วินาที">2초 이상 시선 이탈 시 경고</td>
+                    <td data-ko="✓ 준수" data-en="✓ Compliant" data-ja="✓ 準拠" data-zh="✓ 符合" data-de="✓ Konform" data-es="✓ Cumple" data-fr="✓ Conforme" data-vi="✓ Tuân thủ" data-th="✓ สอดคล้อง">✓ 준수</td>
                 </tr>
             </table>
 
-            <h3 data-ko="2. 장애 감지 (추가 점수)" data-en="2. Impairment Detection (Bonus Points)" data-ja="2. 障害検知（追加点数）" data-zh="2. 障碍检测（额外得分）">2. 장애 감지 (추가 점수)</h3>
+            <h3 data-ko="2. 장애 감지 (추가 점수)" data-en="2. Impairment Detection (Bonus Points)" data-ja="2. 障害検知（追加点数）" data-zh="2. 障碍检测（额外得分）" data-de="2. Beeinträchtigungserkennung (Bonuspunkte)" data-es="2. Detección de Deterioro (Puntos Bonus)" data-fr="2. Détection de Déficience (Points Bonus)" data-vi="2. Phát hiện Suy giảm (Điểm Thưởng)" data-th="2. การตรวจจับความบกพร่อง (คะแนนโบนัส)">2. 장애 감지 (추가 점수)</h3>
             <div class="requirement-box">
-                <h4><span class="status-badge status-bonus" data-ko="가점" data-en="Bonus" data-ja="加点" data-zh="加分">가점</span> Impairment Detection</h4>
+                <h4><span class="status-badge status-bonus" data-ko="가점" data-en="Bonus" data-ja="加点" data-zh="加分" data-de="Bonus" data-es="Bonus" data-fr="Bonus" data-vi="Thưởng" data-th="โบนัส">가점</span> Impairment Detection</h4>
                 <ul>
-                    <li><strong data-ko="약물/알코올 장애 징후:" data-en="Drug/Alcohol Impairment Signs:" data-ja="薬物/アルコール障害兆候:" data-zh="药物/酒精障碍迹象:">약물/알코올 장애 징후:</strong> <span data-ko="비정상적 행동 패턴 감지" data-en="Abnormal behavior pattern detection" data-ja="異常行動パターン検知" data-zh="异常行为模式检测">비정상적 행동 패턴 감지</span></li>
-                    <li><strong data-ko="행동 분석:" data-en="Behavior Analysis:" data-ja="行動分析:" data-zh="行为分析:">행동 분석:</strong> <span data-ko="운전 패턴 이상 탐지" data-en="Driving pattern anomaly detection" data-ja="運転パターン異常検知" data-zh="驾驶模式异常检测">운전 패턴 이상 탐지</span></li>
-                    <li><strong data-ko="조향 패턴 분석:" data-en="Steering Pattern Analysis:" data-ja="ステアリングパターン分析:" data-zh="转向模式分析:">조향 패턴 분석:</strong> <span data-ko="비정상적 조향 감지" data-en="Abnormal steering detection" data-ja="異常操舵検知" data-zh="异常转向检测">비정상적 조향 감지</span></li>
+                    <li><strong data-ko="약물/알코올 장애 징후:" data-en="Drug/Alcohol Impairment Signs:" data-ja="薬物/アルコール障害兆候:" data-zh="药物/酒精障碍迹象:" data-de="Drogen-/Alkoholbeeinträchtigung:" data-es="Signos de Deterioro por Drogas/Alcohol:" data-fr="Signes de Déficience Drogue/Alcool:" data-vi="Dấu hiệu Suy giảm Ma túy/Rượu:" data-th="อาการบกพร่องจากยา/แอลกอฮอล์:">약물/알코올 장애 징후:</strong> <span data-ko="비정상적 행동 패턴 감지" data-en="Abnormal behavior pattern detection" data-ja="異常行動パターン検知" data-zh="异常行为模式检测" data-de="Erkennung abnormaler Verhaltensmuster" data-es="Detección de patrones de comportamiento anormales" data-fr="Détection de schémas comportementaux anormaux" data-vi="Phát hiện mẫu hành vi bất thường" data-th="การตรวจจับรูปแบบพฤติกรรมผิดปกติ">비정상적 행동 패턴 감지</span></li>
+                    <li><strong data-ko="행동 분석:" data-en="Behavior Analysis:" data-ja="行動分析:" data-zh="行为分析:" data-de="Verhaltensanalyse:" data-es="Análisis de Comportamiento:" data-fr="Analyse Comportementale:" data-vi="Phân tích Hành vi:" data-th="การวิเคราะห์พฤติกรรม:">행동 분석:</strong> <span data-ko="운전 패턴 이상 탐지" data-en="Driving pattern anomaly detection" data-ja="運転パターン異常検知" data-zh="驾驶模式异常检测" data-de="Erkennung von Anomalien im Fahrmuster" data-es="Detección de anomalías en patrones de conducción" data-fr="Détection d'anomalies dans les schémas de conduite" data-vi="Phát hiện bất thường trong mẫu lái xe" data-th="การตรวจจับความผิดปกติในรูปแบบการขับขี่">운전 패턴 이상 탐지</span></li>
+                    <li><strong data-ko="조향 패턴 분석:" data-en="Steering Pattern Analysis:" data-ja="ステアリングパターン分析:" data-zh="转向模式分析:" data-de="Lenkverhaltenanalyse:" data-es="Análisis de Patrón de Dirección:" data-fr="Analyse du Schéma de Direction:" data-vi="Phân tích Mẫu Lái:" data-th="การวิเคราะห์รูปแบบการบังคับเลี้ยว:">조향 패턴 분석:</strong> <span data-ko="비정상적 조향 감지" data-en="Abnormal steering detection" data-ja="異常操舵検知" data-zh="异常转向检测" data-de="Erkennung abnormaler Lenkbewegungen" data-es="Detección de dirección anormal" data-fr="Détection de direction anormale" data-vi="Phát hiện lái bất thường" data-th="การตรวจจับการบังคับเลี้ยวผิดปกติ">비정상적 조향 감지</span></li>
                 </ul>
             </div>
 
-            <h3 data-ko="3. 생체 신호 모니터링 (권장)" data-en="3. Vital Signs Monitoring (Recommended)" data-ja="3. バイタルサインモニタリング（推奨）" data-zh="3. 生命体征监测（推荐）">3. 생체 신호 모니터링 (권장)</h3>
+            <h3 data-ko="3. 생체 신호 모니터링 (권장)" data-en="3. Vital Signs Monitoring (Recommended)" data-ja="3. バイタルサインモニタリング（推奨）" data-zh="3. 生命体征监测（推荐）" data-de="3. Vitalzeichen-Überwachung (Empfohlen)" data-es="3. Monitoreo de Signos Vitales (Recomendado)" data-fr="3. Surveillance des Signes Vitaux (Recommandé)" data-vi="3. Giám sát Dấu hiệu Sinh tồn (Khuyến nghị)" data-th="3. การตรวจสอบสัญญาณชีพ (แนะนำ)">3. 생체 신호 모니터링 (권장)</h3>
             <div class="requirement-box">
-                <h4><span class="status-badge status-optional" data-ko="권장" data-en="Recommended" data-ja="推奨" data-zh="推荐">권장</span> Vital Signs Monitoring</h4>
+                <h4><span class="status-badge status-optional" data-ko="권장" data-en="Recommended" data-ja="推奨" data-zh="推荐" data-de="Empfohlen" data-es="Recomendado" data-fr="Recommandé" data-vi="Khuyến nghị" data-th="แนะนำ">권장</span> Vital Signs Monitoring</h4>
                 <ul>
-                    <li><strong data-ko="심박수 감지 (rPPG):" data-en="Heart Rate Detection (rPPG):" data-ja="心拍数検知（rPPG）:" data-zh="心率检测（rPPG）:">심박수 감지 (rPPG):</strong> <span data-ko="비접촉 카메라 기반 심박수 측정" data-en="Non-contact camera-based heart rate measurement" data-ja="非接触カメラ基盤心拍数測定" data-zh="基于非接触式摄像头的心率测量">비접촉 카메라 기반 심박수 측정</span></li>
-                    <li><strong data-ko="호흡 모니터링:" data-en="Respiration Monitoring:" data-ja="呼吸モニタリング:" data-zh="呼吸监测:">호흡 모니터링:</strong> <span data-ko="호흡 패턴 분석" data-en="Breathing pattern analysis" data-ja="呼吸パターン分析" data-zh="呼吸模式分析">호흡 패턴 분석</span></li>
-                    <li><strong data-ko="급성 질환 감지:" data-en="Acute Medical Event Detection:" data-ja="急性疾患検知:" data-zh="急性疾病检测:">급성 질환 감지:</strong> <span data-ko="심장 발작, 뇌졸중 등 응급 상황 감지" data-en="Emergency detection including heart attack, stroke" data-ja="心臓発作、脳卒中などの緊急状況検知" data-zh="检测心脏病发作、中风等紧急情况">심장 발작, 뇌졸중 등 응급 상황 감지</span></li>
+                    <li><strong data-ko="심박수 감지 (rPPG):" data-en="Heart Rate Detection (rPPG):" data-ja="心拍数検知（rPPG）:" data-zh="心率检测（rPPG）:" data-de="Herzfrequenzerkennung (rPPG):" data-es="Detección de Frecuencia Cardíaca (rPPG):" data-fr="Détection Fréquence Cardiaque (rPPG):" data-vi="Phát hiện Nhịp tim (rPPG):" data-th="การตรวจจับอัตราการเต้นหัวใจ (rPPG):">심박수 감지 (rPPG):</strong> <span data-ko="비접촉 카메라 기반 심박수 측정" data-en="Non-contact camera-based heart rate measurement" data-ja="非接触カメラ基盤心拍数測定" data-zh="基于非接触式摄像头的心率测量" data-de="Kontaktlose kamerabasierte Herzfrequenzmessung" data-es="Medición de frecuencia cardíaca sin contacto basada en cámara" data-fr="Mesure de fréquence cardiaque sans contact par caméra" data-vi="Đo nhịp tim không tiếp xúc dựa trên camera" data-th="การวัดอัตราการเต้นหัวใจแบบไม่สัมผัสด้วยกล้อง">비접촉 카메라 기반 심박수 측정</span></li>
+                    <li><strong data-ko="호흡 모니터링:" data-en="Respiration Monitoring:" data-ja="呼吸モニタリング:" data-zh="呼吸监测:" data-de="Atemüberwachung:" data-es="Monitoreo de Respiración:" data-fr="Surveillance Respiratoire:" data-vi="Giám sát Hô hấp:" data-th="การตรวจสอบการหายใจ:">호흡 모니터링:</strong> <span data-ko="호흡 패턴 분석" data-en="Breathing pattern analysis" data-ja="呼吸パターン分析" data-zh="呼吸模式分析" data-de="Atemzugmusteranalyse" data-es="Análisis de patrón de respiración" data-fr="Analyse du schéma respiratoire" data-vi="Phân tích mẫu hô hấp" data-th="การวิเคราะห์รูปแบบการหายใจ">호흡 패턴 분석</span></li>
+                    <li><strong data-ko="급성 질환 감지:" data-en="Acute Medical Event Detection:" data-ja="急性疾患検知:" data-zh="急性疾病检测:" data-de="Erkennung akuter medizinischer Ereignisse:" data-es="Detección de Eventos Médicos Agudos:" data-fr="Détection d'Événements Médicaux Aigus:" data-vi="Phát hiện Sự cố Y tế Cấp tính:" data-th="การตรวจจับเหตุการณ์ทางการแพทย์เฉียบพลัน:">급성 질환 감지:</strong> <span data-ko="심장 발작, 뇌졸중 등 응급 상황 감지" data-en="Emergency detection including heart attack, stroke" data-ja="心臓発作、脳卒中などの緊急状況検知" data-zh="检测心脏病发作、中风等紧急情况" data-de="Notfallerkennung einschließlich Herzinfarkt, Schlaganfall" data-es="Detección de emergencias incluyendo ataque cardíaco, accidente cerebrovascular" data-fr="Détection d'urgence incluant crise cardiaque, AVC" data-vi="Phát hiện cấp cứu bao gồm đau tim, đột quỵ" data-th="การตรวจจับเหตุฉุกเฉินรวมถึงหัวใจวาย โรคหลอดเลือดสมอง">심장 발작, 뇌졸중 등 응급 상황 감지</span></li>
                 </ul>
             </div>
 
             <div class="highlight-box">
-                <h4 data-ko="rPPG 기술의 중요성" data-en="Importance of rPPG Technology" data-ja="rPPG技術の重要性" data-zh="rPPG技术的重要性">rPPG 기술의 중요성</h4>
-                <p data-ko="Euro NCAP 2026에서는 rPPG 기반 심박수 측정을 권장 사항으로 명시했습니다. 이는 향후 필수 요구사항으로 전환될 가능성이 높으며, 조기 도입 시 경쟁 우위 확보가 가능합니다. FunnyTech21 i-DMS는 이미 MAE 6.33 BPM의 높은 정확도로 이 요구사항을 충족합니다." data-en="Euro NCAP 2026 specifies rPPG-based heart rate measurement as a recommended feature. This is likely to become a mandatory requirement in the future, and early adoption can provide competitive advantage. FunnyTech21 i-DMS already meets this requirement with high accuracy of MAE 6.33 BPM." data-ja="Euro NCAP 2026では、rPPG基盤心拍数測定を推奨事項として明示しています。これは将来必須要件に転換される可能性が高く、早期導入により競争優位確保が可能です。FunnyTech21 i-DMSは既にMAE 6.33 BPMの高精度でこの要件を満たしています。" data-zh="Euro NCAP 2026将基于rPPG的心率测量明确为推荐功能。这很可能在未来成为强制性要求，早期采用可以提供竞争优势。FunnyTech21 i-DMS已经以MAE 6.33 BPM的高精度满足这一要求。">
+                <h4 data-ko="rPPG 기술의 중요성" data-en="Importance of rPPG Technology" data-ja="rPPG技術の重要性" data-zh="rPPG技术的重要性" data-de="Bedeutung der rPPG-Technologie" data-es="Importancia de la Tecnología rPPG" data-fr="Importance de la Technologie rPPG" data-vi="Tầm quan trọng của Công nghệ rPPG" data-th="ความสำคัญของเทคโนโลยี rPPG">rPPG 기술의 중요성</h4>
+                <p data-ko="Euro NCAP 2026에서는 rPPG 기반 심박수 측정을 권장 사항으로 명시했습니다. 이는 향후 필수 요구사항으로 전환될 가능성이 높으며, 조기 도입 시 경쟁 우위 확보가 가능합니다. FunnyTech21 i-DMS는 이미 MAE 6.33 BPM의 높은 정확도로 이 요구사항을 충족합니다." data-en="Euro NCAP 2026 specifies rPPG-based heart rate measurement as a recommended feature. This is likely to become a mandatory requirement in the future, and early adoption can provide competitive advantage. FunnyTech21 i-DMS already meets this requirement with high accuracy of MAE 6.33 BPM." data-ja="Euro NCAP 2026では、rPPG基盤心拍数測定を推奨事項として明示しています。これは将来必須要件に転換される可能性が高く、早期導入により競争優位確保が可能です。FunnyTech21 i-DMSは既にMAE 6.33 BPMの高精度でこの要件を満たしています。" data-zh="Euro NCAP 2026将基于rPPG的心率测量明确为推荐功能。这很可能在未来成为强制性要求，早期采用可以提供竞争优势。FunnyTech21 i-DMS已经以MAE 6.33 BPM的高精度满足这一要求。" data-de="Euro NCAP 2026 spezifiziert rPPG-basierte Herzfrequenzmessung als empfohlene Funktion. Dies wird wahrscheinlich in Zukunft zu einer Pflichtanforderung. FunnyTech21 i-DMS erfüllt diese Anforderung bereits mit hoher Genauigkeit von MAE 6,33 BPM." data-es="Euro NCAP 2026 especifica la medición de frecuencia cardíaca basada en rPPG como característica recomendada. Es probable que se convierta en requisito obligatorio en el futuro. FunnyTech21 i-DMS ya cumple este requisito con alta precisión de MAE 6.33 BPM." data-fr="Euro NCAP 2026 spécifie la mesure de fréquence cardiaque basée sur rPPG comme fonctionnalité recommandée. Cela deviendra probablement une exigence obligatoire à l'avenir. FunnyTech21 i-DMS répond déjà à cette exigence avec une haute précision de MAE 6,33 BPM." data-vi="Euro NCAP 2026 chỉ định đo nhịp tim dựa trên rPPG là tính năng khuyến nghị. Điều này có thể trở thành yêu cầu bắt buộc trong tương lai. FunnyTech21 i-DMS đã đáp ứng yêu cầu này với độ chính xác cao MAE 6.33 BPM." data-th="Euro NCAP 2026 กำหนดให้การวัดอัตราการเต้นของหัวใจด้วย rPPG เป็นคุณสมบัติที่แนะนำ ซึ่งมีแนวโน้มจะกลายเป็นข้อกำหนดบังคับในอนาคต FunnyTech21 i-DMS ตอบสนองข้อกำหนดนี้แล้วด้วยความแม่นยำสูง MAE 6.33 BPM">
                     Euro NCAP 2026에서는 rPPG 기반 심박수 측정을 <strong>권장 사항</strong>으로 명시했습니다.
                     이는 향후 필수 요구사항으로 전환될 가능성이 높으며, 조기 도입 시 경쟁 우위 확보가 가능합니다.
                     FunnyTech21 i-DMS는 이미 MAE 6.33 BPM의 높은 정확도로 이 요구사항을 충족합니다.
                 </p>
             </div>
 
-            <h2 data-ko="비반응 운전자 대응" data-en="Unresponsive Driver Response" data-ja="無反応運転者対応" data-zh="无反应驾驶员应对">비반응 운전자 대응</h2>
+            <h2 data-ko="비반응 운전자 대응" data-en="Unresponsive Driver Response" data-ja="無反応運転者対応" data-zh="无反应驾驶员应对" data-de="Reaktion auf nicht reagierende Fahrer" data-es="Respuesta ante Conductor No Responsivo" data-fr="Réponse au Conducteur Non Réactif" data-vi="Phản hồi Tài xế Không Phản ứng" data-th="การตอบสนองต่อคนขับไม่ตอบสนอง">비반응 운전자 대응</h2>
 
-            <h3 data-ko="4. 비반응 운전자 감지 (추가 점수)" data-en="4. Unresponsive Driver Detection (Bonus Points)" data-ja="4. 無反応運転者検知（追加点数）" data-zh="4. 无反应驾驶员检测（额外得分）">4. 비반응 운전자 감지 (추가 점수)</h3>
+            <h3 data-ko="4. 비반응 운전자 감지 (추가 점수)" data-en="4. Unresponsive Driver Detection (Bonus Points)" data-ja="4. 無反応運転者検知（追加点数）" data-zh="4. 无反应驾驶员检测（额外得分）" data-de="4. Erkennung nicht reagierender Fahrer (Bonuspunkte)" data-es="4. Detección de Conductor No Responsivo (Puntos Bonus)" data-fr="4. Détection de Conducteur Non Réactif (Points Bonus)" data-vi="4. Phát hiện Tài xế Không Phản hồi (Điểm Thưởng)" data-th="4. การตรวจจับคนขับไม่ตอบสนอง (คะแนนโบนัส)">4. 비반응 운전자 감지 (추가 점수)</h3>
             <div class="requirement-box">
-                <h4><span class="status-badge status-bonus" data-ko="가점" data-en="Bonus" data-ja="加点" data-zh="加分">가점</span> Unresponsive Driver</h4>
+                <h4><span class="status-badge status-bonus" data-ko="가점" data-en="Bonus" data-ja="加点" data-zh="加分" data-de="Bonus" data-es="Bonus" data-fr="Bonus" data-vi="Thưởng" data-th="โบนัส">가점</span> Unresponsive Driver</h4>
                 <ul>
-                    <li><strong data-ko="감지 기능:" data-en="Detection Function:" data-ja="検知機能:" data-zh="检测功能:">감지 기능:</strong> <span data-ko="운전자 무반응 상태 탐지" data-en="Driver unresponsive state detection" data-ja="運転者無反応状態検知" data-zh="驾驶员无反应状态检测">운전자 무반응 상태 탐지</span></li>
-                    <li><strong data-ko="안전 정차:" data-en="Safe Stop:" data-ja="安全停車:" data-zh="安全停车:">안전 정차:</strong> <span data-ko="자동 비상 정차 시스템 연동" data-en="Automatic emergency stop system integration" data-ja="自動緊急停車システム連動" data-zh="自动紧急停车系统联动">자동 비상 정차 시스템 연동</span></li>
-                    <li><strong data-ko="비상 호출:" data-en="Emergency Call:" data-ja="緊急呼出:" data-zh="紧急呼叫:">비상 호출:</strong> <span data-ko="eCall 시스템 자동 연동" data-en="Automatic eCall system integration" data-ja="eCallシステム自動連動" data-zh="eCall系统自动联动">eCall 시스템 자동 연동</span></li>
+                    <li><strong data-ko="감지 기능:" data-en="Detection Function:" data-ja="検知機能:" data-zh="检测功能:" data-de="Erkennungsfunktion:" data-es="Función de Detección:" data-fr="Fonction de Détection:" data-vi="Chức năng Phát hiện:" data-th="ฟังก์ชันการตรวจจับ:">감지 기능:</strong> <span data-ko="운전자 무반응 상태 탐지" data-en="Driver unresponsive state detection" data-ja="運転者無反応状態検知" data-zh="驾驶员无反应状态检测" data-de="Erkennung nicht reagierender Fahrerszustand" data-es="Detección de estado de conductor no responsivo" data-fr="Détection d'état de conducteur non réactif" data-vi="Phát hiện trạng thái tài xế không phản hồi" data-th="การตรวจจับสถานะคนขับไม่ตอบสนอง">운전자 무반응 상태 탐지</span></li>
+                    <li><strong data-ko="안전 정차:" data-en="Safe Stop:" data-ja="安全停車:" data-zh="安全停车:" data-de="Sichere Haltung:" data-es="Parada Segura:" data-fr="Arrêt Sécurisé:" data-vi="Dừng An toàn:" data-th="หยุดอย่างปลอดภัย:">안전 정차:</strong> <span data-ko="자동 비상 정차 시스템 연동" data-en="Automatic emergency stop system integration" data-ja="自動緊急停車システム連動" data-zh="自动紧急停车系统联动" data-de="Integration des automatischen Nothaltsystems" data-es="Integración del sistema de parada de emergencia automática" data-fr="Intégration du système d'arrêt d'urgence automatique" data-vi="Tích hợp hệ thống dừng khẩn cấp tự động" data-th="การบูรณาการระบบหยุดฉุกเฉินอัตโนมัติ">자동 비상 정차 시스템 연동</span></li>
+                    <li><strong data-ko="비상 호출:" data-en="Emergency Call:" data-ja="緊急呼出:" data-zh="紧急呼叫:" data-de="Notruf:" data-es="Llamada de Emergencia:" data-fr="Appel d'Urgence:" data-vi="Cuộc gọi Khẩn cấp:" data-th="โทรฉุกเฉิน:">비상 호출:</strong> <span data-ko="eCall 시스템 자동 연동" data-en="Automatic eCall system integration" data-ja="eCallシステム自動連動" data-zh="eCall系统自动联动" data-de="Automatische eCall-Systemintegration" data-es="Integración automática del sistema eCall" data-fr="Intégration automatique du système eCall" data-vi="Tích hợp hệ thống eCall tự động" data-th="การบูรณาการระบบ eCall อัตโนมัติ">eCall 시스템 자동 연동</span></li>
                 </ul>
             </div>
 
-            <h2 data-ko="유아 존재 감지 (CPD)" data-en="Child Presence Detection (CPD)" data-ja="幼児存在検知（CPD）" data-zh="儿童存在检测（CPD）">유아 존재 감지 (CPD)</h2>
+            <h2 data-ko="유아 존재 감지 (CPD)" data-en="Child Presence Detection (CPD)" data-ja="幼児存在検知（CPD）" data-zh="儿童存在检测（CPD）" data-de="Kinderpräsenzerkennung (CPD)" data-es="Detección de Presencia de Niños (CPD)" data-fr="Détection de Présence d'Enfant (CPD)" data-vi="Phát hiện Sự hiện diện của Trẻ em (CPD)" data-th="การตรวจจับการมีอยู่ของเด็ก (CPD)">유아 존재 감지 (CPD)</h2>
 
-            <h3 data-ko="5. Child Presence Detection (필수 점수)" data-en="5. Child Presence Detection (Mandatory Scoring)" data-ja="5. Child Presence Detection（必須点数）" data-zh="5. 儿童存在检测（必需评分）">5. Child Presence Detection (필수 점수)</h3>
+            <h3 data-ko="5. Child Presence Detection (필수 점수)" data-en="5. Child Presence Detection (Mandatory Scoring)" data-ja="5. Child Presence Detection（必須点数）" data-zh="5. 儿童存在检测（必需评分）" data-de="5. Child Presence Detection (Pflichtbewertung)" data-es="5. Detección de Presencia de Niños (Puntuación Obligatoria)" data-fr="5. Détection de Présence d'Enfant (Score Obligatoire)" data-vi="5. Phát hiện Sự hiện diện Trẻ em (Điểm Bắt buộc)" data-th="5. การตรวจจับการมีอยู่ของเด็ก (คะแนนบังคับ)">5. Child Presence Detection (필수 점수)</h3>
             <div class="requirement-box">
-                <h4><span class="status-badge status-required" data-ko="점수 필수" data-en="Required" data-ja="点数必須" data-zh="必需评分">점수 필수</span> <span data-ko="유아 존재 감지" data-en="Child Presence Detection" data-ja="幼児存在検知" data-zh="儿童存在检测">유아 존재 감지</span></h4>
+                <h4><span class="status-badge status-required" data-ko="점수 필수" data-en="Required" data-ja="点数必須" data-zh="必需评分" data-de="Erforderlich" data-es="Obligatorio" data-fr="Requis" data-vi="Bắt buộc" data-th="จำเป็น">점수 필수</span> <span data-ko="유아 존재 감지" data-en="Child Presence Detection" data-ja="幼児存在検知" data-zh="儿童存在检测" data-de="Kinderpräsenzerkennung" data-es="Detección de Presencia de Niños" data-fr="Détection de Présence d'Enfant" data-vi="Phát hiện Sự hiện diện Trẻ em" data-th="การตรวจจับการมีอยู่ของเด็ก">유아 존재 감지</span></h4>
                 <ul>
-                    <li><strong data-ko="직접 감지:" data-en="Direct Detection:" data-ja="直接検知:" data-zh="直接检测:">직접 감지:</strong> <span data-ko="움직임/호흡 기반 탐지" data-en="Movement/respiration-based detection" data-ja="動き/呼吸基盤検知" data-zh="基于运动/呼吸的检测">움직임/호흡 기반 탐지</span></li>
-                    <li><strong data-ko="전 좌석 커버:" data-en="All Seat Coverage:" data-ja="全座席カバー:" data-zh="全座椅覆盖:">전 좌석 커버:</strong> <span data-ko="모든 좌석 위치 모니터링" data-en="All seat position monitoring" data-ja="全座席位置モニタリング" data-zh="所有座椅位置监控">모든 좌석 위치 모니터링</span></li>
-                    <li><strong data-ko="경고 시스템:" data-en="Warning System:" data-ja="警告システム:" data-zh="警告系统:">경고 시스템:</strong> <span data-ko="시각/청각 경고 + 외부 알림" data-en="Visual/auditory warning + external notification" data-ja="視覚/聴覚警告 + 外部通知" data-zh="视觉/听觉警告 + 外部通知">시각/청각 경고 + 외부 알림</span></li>
+                    <li><strong data-ko="직접 감지:" data-en="Direct Detection:" data-ja="直接検知:" data-zh="直接检测:" data-de="Direkte Erkennung:" data-es="Detección Directa:" data-fr="Détection Directe:" data-vi="Phát hiện Trực tiếp:" data-th="การตรวจจับโดยตรง:">직접 감지:</strong> <span data-ko="움직임/호흡 기반 탐지" data-en="Movement/respiration-based detection" data-ja="動き/呼吸基盤検知" data-zh="基于运动/呼吸的检测" data-de="Bewegungs-/Atmungsbasierte Erkennung" data-es="Detección basada en movimiento/respiración" data-fr="Détection basée sur le mouvement/la respiration" data-vi="Phát hiện dựa trên chuyển động/hô hấp" data-th="การตรวจจับตามการเคลื่อนไหว/การหายใจ">움직임/호흡 기반 탐지</span></li>
+                    <li><strong data-ko="전 좌석 커버:" data-en="All Seat Coverage:" data-ja="全座席カバー:" data-zh="全座椅覆盖:" data-de="Alle Sitze Abdeckung:" data-es="Cobertura de Todos los Asientos:" data-fr="Couverture de Tous les Sièges:" data-vi="Bao phủ Tất cả Ghế:" data-th="ครอบคลุมทุกที่นั่ง:">전 좌석 커버:</strong> <span data-ko="모든 좌석 위치 모니터링" data-en="All seat position monitoring" data-ja="全座席位置モニタリング" data-zh="所有座椅位置监控" data-de="Überwachung aller Sitzpositionen" data-es="Monitoreo de todas las posiciones de asientos" data-fr="Surveillance de toutes les positions de siège" data-vi="Giám sát tất cả vị trí ghế" data-th="การตรวจสอบตำแหน่งที่นั่งทั้งหมด">모든 좌석 위치 모니터링</span></li>
+                    <li><strong data-ko="경고 시스템:" data-en="Warning System:" data-ja="警告システム:" data-zh="警告系统:" data-de="Warnsystem:" data-es="Sistema de Advertencia:" data-fr="Système d'Avertissement:" data-vi="Hệ thống Cảnh báo:" data-th="ระบบเตือน:">경고 시스템:</strong> <span data-ko="시각/청각 경고 + 외부 알림" data-en="Visual/auditory warning + external notification" data-ja="視覚/聴覚警告 + 外部通知" data-zh="视觉/听觉警告 + 外部通知" data-de="Visuelle/akustische Warnung + externe Benachrichtigung" data-es="Advertencia visual/auditiva + notificación externa" data-fr="Avertissement visuel/sonore + notification externe" data-vi="Cảnh báo hình ảnh/âm thanh + thông báo bên ngoài" data-th="คำเตือนภาพ/เสียง + การแจ้งเตือนภายนอก">시각/청각 경고 + 외부 알림</span></li>
                 </ul>
             </div>
 
-            <h2 data-ko="FunnyTech21 i-DMS 준수 현황" data-en="FunnyTech21 i-DMS Compliance Status" data-ja="FunnyTech21 i-DMS準拠状況" data-zh="FunnyTech21 i-DMS合规状态">FunnyTech21 i-DMS 준수 현황</h2>
+            <h2 data-ko="FunnyTech21 i-DMS 준수 현황" data-en="FunnyTech21 i-DMS Compliance Status" data-ja="FunnyTech21 i-DMS準拠状況" data-zh="FunnyTech21 i-DMS合规状态" data-de="FunnyTech21 i-DMS Konformitätsstatus" data-es="Estado de Cumplimiento de FunnyTech21 i-DMS" data-fr="Statut de Conformité FunnyTech21 i-DMS" data-vi="Trạng thái Tuân thủ FunnyTech21 i-DMS" data-th="สถานะการปฏิบัติตาม FunnyTech21 i-DMS">FunnyTech21 i-DMS 준수 현황</h2>
 
             <div class="compliance-grid">
                 <div class="compliance-card compliant">
-                    <h5 data-ko="시선 추적" data-en="Gaze Tracking" data-ja="視線追跡" data-zh="视线追踪">시선 추적</h5>
-                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合">✓ 완전 준수</span>
+                    <h5 data-ko="시선 추적" data-en="Gaze Tracking" data-ja="視線追跡" data-zh="视线追踪" data-de="Blickverfolgung" data-es="Seguimiento de Mirada" data-fr="Suivi du Regard" data-vi="Theo dõi Ánh mắt" data-th="การติดตามสายตา">시선 추적</h5>
+                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合" data-de="✓ Vollständig Konform" data-es="✓ Totalmente Cumple" data-fr="✓ Entièrement Conforme" data-vi="✓ Tuân thủ Hoàn toàn" data-th="✓ สอดคล้องอย่างสมบูรณ์">✓ 완전 준수</span>
                 </div>
                 <div class="compliance-card compliant">
-                    <h5 data-ko="머리 추적" data-en="Head Tracking" data-ja="頭部追跡" data-zh="头部追踪">머리 추적</h5>
-                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合">✓ 완전 준수</span>
+                    <h5 data-ko="머리 추적" data-en="Head Tracking" data-ja="頭部追跡" data-zh="头部追踪" data-de="Kopfverfolgung" data-es="Seguimiento de Cabeza" data-fr="Suivi de Tête" data-vi="Theo dõi Đầu" data-th="การติดตามศีรษะ">머리 추적</h5>
+                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合" data-de="✓ Vollständig Konform" data-es="✓ Totalmente Cumple" data-fr="✓ Entièrement Conforme" data-vi="✓ Tuân thủ Hoàn toàn" data-th="✓ สอดคล้องอย่างสมบูรณ์">✓ 완전 준수</span>
                 </div>
                 <div class="compliance-card compliant">
-                    <h5 data-ko="졸음 감지" data-en="Drowsiness Detection" data-ja="居眠り検知" data-zh="疲劳检测">졸음 감지</h5>
-                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合">✓ 완전 준수</span>
+                    <h5 data-ko="졸음 감지" data-en="Drowsiness Detection" data-ja="居眠り検知" data-zh="疲劳检测" data-de="Müdigkeitserkennung" data-es="Detección de Somnolencia" data-fr="Détection de Somnolence" data-vi="Phát hiện Buồn ngủ" data-th="การตรวจจับความง่วง">졸음 감지</h5>
+                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合" data-de="✓ Vollständig Konform" data-es="✓ Totalmente Cumple" data-fr="✓ Entièrement Conforme" data-vi="✓ Tuân thủ Hoàn toàn" data-th="✓ สอดคล้องอย่างสมบูรณ์">✓ 완전 준수</span>
                 </div>
                 <div class="compliance-card compliant">
-                    <h5 data-ko="주의분산 감지" data-en="Distraction Detection" data-ja="注意散漫検知" data-zh="注意力分散检测">주의분산 감지</h5>
-                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合">✓ 완전 준수</span>
+                    <h5 data-ko="주의분산 감지" data-en="Distraction Detection" data-ja="注意散漫検知" data-zh="注意力分散检测" data-de="Ablenkungserkennung" data-es="Detección de Distracción" data-fr="Détection de Distraction" data-vi="Phát hiện Mất tập trung" data-th="การตรวจจับการเสียสมาธิ">주의분산 감지</h5>
+                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合" data-de="✓ Vollständig Konform" data-es="✓ Totalmente Cumple" data-fr="✓ Entièrement Conforme" data-vi="✓ Tuân thủ Hoàn toàn" data-th="✓ สอดคล้องอย่างสมบูรณ์">✓ 완전 준수</span>
                 </div>
                 <div class="compliance-card compliant">
-                    <h5 data-ko="심박수 측정 (rPPG)" data-en="Heart Rate (rPPG)" data-ja="心拍数測定（rPPG）" data-zh="心率测量（rPPG）">심박수 측정 (rPPG)</h5>
-                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合">✓ 완전 준수</span>
+                    <h5 data-ko="심박수 측정 (rPPG)" data-en="Heart Rate (rPPG)" data-ja="心拍数測定（rPPG）" data-zh="心率测量（rPPG）" data-de="Herzfrequenz (rPPG)" data-es="Frecuencia Cardíaca (rPPG)" data-fr="Fréquence Cardiaque (rPPG)" data-vi="Nhịp tim (rPPG)" data-th="อัตราการเต้นหัวใจ (rPPG)">심박수 측정 (rPPG)</h5>
+                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合" data-de="✓ Vollständig Konform" data-es="✓ Totalmente Cumple" data-fr="✓ Entièrement Conforme" data-vi="✓ Tuân thủ Hoàn toàn" data-th="✓ สอดคล้องอย่างสมบูรณ์">✓ 완전 준수</span>
                 </div>
                 <div class="compliance-card partial">
-                    <h5 data-ko="호흡 모니터링" data-en="Respiration Monitoring" data-ja="呼吸モニタリング" data-zh="呼吸监测">호흡 모니터링</h5>
-                    <span class="status" data-ko="◐ 부분 준수" data-en="◐ Partial Compliance" data-ja="◐ 部分準拠" data-zh="◐ 部分符合">◐ 부분 준수</span>
+                    <h5 data-ko="호흡 모니터링" data-en="Respiration Monitoring" data-ja="呼吸モニタリング" data-zh="呼吸监测" data-de="Atemüberwachung" data-es="Monitoreo de Respiración" data-fr="Surveillance Respiratoire" data-vi="Giám sát Hô hấp" data-th="การตรวจสอบการหายใจ">호흡 모니터링</h5>
+                    <span class="status" data-ko="◐ 부분 준수" data-en="◐ Partial Compliance" data-ja="◐ 部分準拠" data-zh="◐ 部分符合" data-de="◐ Teilweise Konform" data-es="◐ Cumple Parcialmente" data-fr="◐ Partiellement Conforme" data-vi="◐ Tuân thủ Một phần" data-th="◐ สอดคล้องบางส่วน">◐ 부분 준수</span>
                 </div>
                 <div class="compliance-card compliant">
-                    <h5 data-ko="행동 분석" data-en="Behavior Analysis" data-ja="行動分析" data-zh="行为分析">행동 분석</h5>
-                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合">✓ 완전 준수</span>
+                    <h5 data-ko="행동 분석" data-en="Behavior Analysis" data-ja="行動分析" data-zh="行为分析" data-de="Verhaltensanalyse" data-es="Análisis de Comportamiento" data-fr="Analyse Comportementale" data-vi="Phân tích Hành vi" data-th="การวิเคราะห์พฤติกรรม">행동 분석</h5>
+                    <span class="status" data-ko="✓ 완전 준수" data-en="✓ Fully Compliant" data-ja="✓ 完全準拠" data-zh="✓ 完全符合" data-de="✓ Vollständig Konform" data-es="✓ Totalmente Cumple" data-fr="✓ Entièrement Conforme" data-vi="✓ Tuân thủ Hoàn toàn" data-th="✓ สอดคล้องอย่างสมบูรณ์">✓ 완전 준수</span>
                 </div>
                 <div class="compliance-card partial">
-                    <h5 data-ko="장애 감지" data-en="Impairment Detection" data-ja="障害検知" data-zh="障碍检测">장애 감지</h5>
-                    <span class="status" data-ko="◐ 부분 준수" data-en="◐ Partial Compliance" data-ja="◐ 部分準拠" data-zh="◐ 部分符合">◐ 부분 준수</span>
+                    <h5 data-ko="장애 감지" data-en="Impairment Detection" data-ja="障害検知" data-zh="障碍检测" data-de="Beeinträchtigungserkennung" data-es="Detección de Deterioro" data-fr="Détection de Déficience" data-vi="Phát hiện Suy giảm" data-th="การตรวจจับความบกพร่อง">장애 감지</h5>
+                    <span class="status" data-ko="◐ 부분 준수" data-en="◐ Partial Compliance" data-ja="◐ 部分準拠" data-zh="◐ 部分符合" data-de="◐ Teilweise Konform" data-es="◐ Cumple Parcialmente" data-fr="◐ Partiellement Conforme" data-vi="◐ Tuân thủ Một phần" data-th="◐ สอดคล้องบางส่วน">◐ 부분 준수</span>
                 </div>
             </div>
 
-            <h2 data-ko="평가 배점 구조" data-en="Scoring Structure" data-ja="評価配点構造" data-zh="评分结构">평가 배점 구조</h2>
+            <h2 data-ko="평가 배점 구조" data-en="Scoring Structure" data-ja="評価配点構造" data-zh="评分结构" data-de="Bewertungsstruktur" data-es="Estructura de Puntuación" data-fr="Structure de Notation" data-vi="Cấu trúc Điểm số" data-th="โครงสร้างการให้คะแนน">평가 배점 구조</h2>
 
             <table class="data-table">
                 <tr>
-                    <th data-ko="카테고리" data-en="Category" data-ja="カテゴリー" data-zh="类别">카테고리</th>
-                    <th data-ko="최대 점수" data-en="Max Points" data-ja="最大点数" data-zh="最高分数">최대 점수</th>
-                    <th data-ko="비고" data-en="Notes" data-ja="備考" data-zh="备注">비고</th>
+                    <th data-ko="카테고리" data-en="Category" data-ja="カテゴリー" data-zh="类别" data-de="Kategorie" data-es="Categoría" data-fr="Catégorie" data-vi="Danh mục" data-th="หมวดหมู่">카테고리</th>
+                    <th data-ko="최대 점수" data-en="Max Points" data-ja="最大点数" data-zh="最高分数" data-de="Max Punkte" data-es="Puntos Máx" data-fr="Points Max" data-vi="Điểm Tối đa" data-th="คะแนนสูงสุด">최대 점수</th>
+                    <th data-ko="비고" data-en="Notes" data-ja="備考" data-zh="备注" data-de="Hinweise" data-es="Notas" data-fr="Notes" data-vi="Ghi chú" data-th="หมายเหตุ">비고</th>
                 </tr>
                 <tr>
-                    <td data-ko="성인 탑승자 보호" data-en="Adult Occupant Protection" data-ja="成人乗員保護" data-zh="成人乘员保护">성인 탑승자 보호</td>
-                    <td data-ko="40점" data-en="40 pts" data-ja="40点" data-zh="40分">40점</td>
-                    <td data-ko="DMS 연동 시 가점" data-en="Bonus with DMS integration" data-ja="DMS連動で加点" data-zh="与DMS联动时加分">DMS 연동 시 가점</td>
+                    <td data-ko="성인 탑승자 보호" data-en="Adult Occupant Protection" data-ja="成人乗員保護" data-zh="成人乘员保护" data-de="Erwachsenen-Insassenschutz" data-es="Protección de Ocupantes Adultos" data-fr="Protection des Occupants Adultes" data-vi="Bảo vệ Hành khách Người lớn" data-th="การคุ้มครองผู้โดยสารผู้ใหญ่">성인 탑승자 보호</td>
+                    <td data-ko="40점" data-en="40 pts" data-ja="40点" data-zh="40分" data-de="40 Pkt" data-es="40 pts" data-fr="40 pts" data-vi="40 điểm" data-th="40 คะแนน">40점</td>
+                    <td data-ko="DMS 연동 시 가점" data-en="Bonus with DMS integration" data-ja="DMS連動で加点" data-zh="与DMS联动时加分" data-de="Bonus mit DMS-Integration" data-es="Bonus con integración DMS" data-fr="Bonus avec intégration DMS" data-vi="Thưởng với tích hợp DMS" data-th="โบนัสเมื่อรวม DMS">DMS 연동 시 가점</td>
                 </tr>
                 <tr>
-                    <td data-ko="어린이 탑승자 보호" data-en="Child Occupant Protection" data-ja="子供乗員保護" data-zh="儿童乘员保护">어린이 탑승자 보호</td>
-                    <td data-ko="40점" data-en="40 pts" data-ja="40点" data-zh="40分">40점</td>
-                    <td data-ko="CPD 필수" data-en="CPD Required" data-ja="CPD必須" data-zh="CPD必需">CPD 필수</td>
+                    <td data-ko="어린이 탑승자 보호" data-en="Child Occupant Protection" data-ja="子供乗員保護" data-zh="儿童乘员保护" data-de="Kinder-Insassenschutz" data-es="Protección de Ocupantes Niños" data-fr="Protection des Occupants Enfants" data-vi="Bảo vệ Hành khách Trẻ em" data-th="การคุ้มครองผู้โดยสารเด็ก">어린이 탑승자 보호</td>
+                    <td data-ko="40점" data-en="40 pts" data-ja="40点" data-zh="40分" data-de="40 Pkt" data-es="40 pts" data-fr="40 pts" data-vi="40 điểm" data-th="40 คะแนน">40점</td>
+                    <td data-ko="CPD 필수" data-en="CPD Required" data-ja="CPD必須" data-zh="CPD必需" data-de="CPD Erforderlich" data-es="CPD Requerido" data-fr="CPD Requis" data-vi="CPD Bắt buộc" data-th="ต้องมี CPD">CPD 필수</td>
                 </tr>
                 <tr>
-                    <td data-ko="취약 도로 사용자 보호" data-en="Vulnerable Road User Protection" data-ja="脆弱道路使用者保護" data-zh="弱势道路使用者保护">취약 도로 사용자 보호</td>
-                    <td data-ko="40점" data-en="40 pts" data-ja="40点" data-zh="40分">40점</td>
+                    <td data-ko="취약 도로 사용자 보호" data-en="Vulnerable Road User Protection" data-ja="脆弱道路使用者保護" data-zh="弱势道路使用者保护" data-de="Schutz gefährdeter Verkehrsteilnehmer" data-es="Protección de Usuarios Viales Vulnerables" data-fr="Protection des Usagers Vulnérables de la Route" data-vi="Bảo vệ Người dùng Đường dễ bị tổn thương" data-th="การคุ้มครองผู้ใช้ถนนเปราะบาง">취약 도로 사용자 보호</td>
+                    <td data-ko="40점" data-en="40 pts" data-ja="40点" data-zh="40分" data-de="40 Pkt" data-es="40 pts" data-fr="40 pts" data-vi="40 điểm" data-th="40 คะแนน">40점</td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td data-ko="안전 지원" data-en="Safety Assist" data-ja="安全支援" data-zh="安全辅助">안전 지원</td>
-                    <td data-ko="40점" data-en="40 pts" data-ja="40点" data-zh="40分">40점</td>
-                    <td data-ko="DMS 핵심 항목" data-en="DMS Key Item" data-ja="DMSコア項目" data-zh="DMS核心项目">DMS 핵심 항목</td>
+                    <td data-ko="안전 지원" data-en="Safety Assist" data-ja="安全支援" data-zh="安全辅助" data-de="Sicherheitsassistenz" data-es="Asistencia de Seguridad" data-fr="Assistance à la Sécurité" data-vi="Hỗ trợ An toàn" data-th="ระบบช่วยเหลือความปลอดภัย">안전 지원</td>
+                    <td data-ko="40점" data-en="40 pts" data-ja="40点" data-zh="40分" data-de="40 Pkt" data-es="40 pts" data-fr="40 pts" data-vi="40 điểm" data-th="40 คะแนน">40점</td>
+                    <td data-ko="DMS 핵심 항목" data-en="DMS Key Item" data-ja="DMSコア項目" data-zh="DMS核心项目" data-de="DMS Kernelement" data-es="Elemento Clave DMS" data-fr="Élément Clé DMS" data-vi="Mục Chính DMS" data-th="รายการหลัก DMS">DMS 핵심 항목</td>
                 </tr>
             </table>
 
-            <h2 data-ko="OEM을 위한 권장 사항" data-en="Recommendations for OEMs" data-ja="OEM向け推奨事項" data-zh="对OEM的建议">OEM을 위한 권장 사항</h2>
+            <h2 data-ko="OEM을 위한 권장 사항" data-en="Recommendations for OEMs" data-ja="OEM向け推奨事項" data-zh="对OEM的建议" data-de="Empfehlungen für OEMs" data-es="Recomendaciones para OEMs" data-fr="Recommandations pour les OEM" data-vi="Khuyến nghị cho OEM" data-th="คำแนะนำสำหรับ OEM">OEM을 위한 권장 사항</h2>
 
             <ol>
                 <li>
-                    <strong data-ko="DMS 필수 기능 우선 구현" data-en="Prioritize DMS Core Functions" data-ja="DMS必須機能優先実装" data-zh="优先实现DMS核心功能">DMS 필수 기능 우선 구현</strong>
-                    <p data-ko="시선 추적, 머리 추적, 졸음/주의분산 감지는 별점 획득의 기본 조건입니다." data-en="Gaze tracking, head tracking, drowsiness/distraction detection are basic conditions for star rating." data-ja="視線追跡、頭部追跡、居眠り/注意散漫検知は星評価獲得の基本条件です。" data-zh="视线追踪、头部追踪、疲劳/注意力分散检测是获得星级评级的基本条件。">시선 추적, 머리 추적, 졸음/주의분산 감지는 별점 획득의 기본 조건입니다.</p>
+                    <strong data-ko="DMS 필수 기능 우선 구현" data-en="Prioritize DMS Core Functions" data-ja="DMS必須機能優先実装" data-zh="优先实现DMS核心功能" data-de="DMS Kernfunktionen priorisieren" data-es="Priorizar Funciones Principales de DMS" data-fr="Prioriser les Fonctions DMS Principales" data-vi="Ưu tiên Chức năng Cốt lõi DMS" data-th="จัดลำดับความสำคัญฟังก์ชันหลัก DMS">DMS 필수 기능 우선 구현</strong>
+                    <p data-ko="시선 추적, 머리 추적, 졸음/주의분산 감지는 별점 획득의 기본 조건입니다." data-en="Gaze tracking, head tracking, drowsiness/distraction detection are basic conditions for star rating." data-ja="視線追跡、頭部追跡、居眠り/注意散漫検知は星評価獲得の基本条件です。" data-zh="视线追踪、头部追踪、疲劳/注意力分散检测是获得星级评级的基本条件。" data-de="Blickverfolgung, Kopfverfolgung, Müdigkeits-/Ablenkungserkennung sind Grundbedingungen für die Sternebewertung." data-es="Seguimiento de mirada, cabeza, detección de somnolencia/distracción son condiciones básicas para la calificación de estrellas." data-fr="Le suivi du regard, de la tête, la détection de somnolence/distraction sont des conditions de base pour la notation étoilée." data-vi="Theo dõi ánh mắt, đầu, phát hiện buồn ngủ/mất tập trung là điều kiện cơ bản để đạt xếp hạng sao." data-th="การติดตามสายตา ศีรษะ การตรวจจับความง่วง/การเสียสมาธิ เป็นเงื่อนไขพื้นฐานสำหรับการจัดอันดับดาว">시선 추적, 머리 추적, 졸음/주의분산 감지는 별점 획득의 기본 조건입니다.</p>
                 </li>
                 <li>
-                    <strong data-ko="rPPG 기술 조기 도입" data-en="Early Adoption of rPPG Technology" data-ja="rPPG技術の早期導入" data-zh="尽早采用rPPG技术">rPPG 기술 조기 도입</strong>
-                    <p data-ko="현재 권장 사항이지만 향후 필수화 예상. 선제 대응으로 경쟁 우위 확보 가능." data-en="Currently recommended but expected to become mandatory. Early adoption can provide competitive advantage." data-ja="現在は推奨事項ですが将来必須化予想。先手対応で競争優位確保可能。" data-zh="目前为推荐项但预计将成为必需项。提前采用可获得竞争优势。">현재 권장 사항이지만 향후 필수화 예상. 선제 대응으로 경쟁 우위 확보 가능.</p>
+                    <strong data-ko="rPPG 기술 조기 도입" data-en="Early Adoption of rPPG Technology" data-ja="rPPG技術の早期導入" data-zh="尽早采用rPPG技术" data-de="Frühe Einführung der rPPG-Technologie" data-es="Adopción Temprana de Tecnología rPPG" data-fr="Adoption Précoce de la Technologie rPPG" data-vi="Áp dụng Sớm Công nghệ rPPG" data-th="การนำเทคโนโลยี rPPG มาใช้ตั้งแต่เนิ่นๆ">rPPG 기술 조기 도입</strong>
+                    <p data-ko="현재 권장 사항이지만 향후 필수화 예상. 선제 대응으로 경쟁 우위 확보 가능." data-en="Currently recommended but expected to become mandatory. Early adoption can provide competitive advantage." data-ja="現在は推奨事項ですが将来必須化予想。先手対応で競争優位確保可能。" data-zh="目前为推荐项但预计将成为必需项。提前采用可获得竞争优势。" data-de="Derzeit empfohlen, aber voraussichtlich obligatorisch. Frühe Einführung kann Wettbewerbsvorteil bieten." data-es="Actualmente recomendado pero se espera que sea obligatorio. La adopción temprana puede proporcionar ventaja competitiva." data-fr="Actuellement recommandé mais devrait devenir obligatoire. L'adoption précoce peut fournir un avantage concurrentiel." data-vi="Hiện tại được khuyến nghị nhưng dự kiến sẽ trở thành bắt buộc. Áp dụng sớm có thể mang lại lợi thế cạnh tranh." data-th="ปัจจุบันแนะนำแต่คาดว่าจะกลายเป็นข้อบังคับ การนำมาใช้ตั้งแต่เนิ่นๆ สามารถให้ความได้เปรียบในการแข่งขัน">현재 권장 사항이지만 향후 필수화 예상. 선제 대응으로 경쟁 우위 확보 가능.</p>
                 </li>
                 <li>
-                    <strong data-ko="CPD 시스템 통합" data-en="CPD System Integration" data-ja="CPDシステム統合" data-zh="CPD系统集成">CPD 시스템 통합</strong>
-                    <p data-ko="유아 존재 감지는 필수 점수 항목. 별도 시스템 또는 DMS 통합 검토 필요." data-en="Child presence detection is a mandatory scoring item. Consider separate system or DMS integration." data-ja="幼児存在検知は必須点数項目。別途システムまたはDMS統合検討必要。" data-zh="儿童存在检测是必需评分项。需考虑独立系统或DMS集成。">유아 존재 감지는 필수 점수 항목. 별도 시스템 또는 DMS 통합 검토 필요.</p>
+                    <strong data-ko="CPD 시스템 통합" data-en="CPD System Integration" data-ja="CPDシステム統合" data-zh="CPD系统集成" data-de="CPD-Systemintegration" data-es="Integración del Sistema CPD" data-fr="Intégration du Système CPD" data-vi="Tích hợp Hệ thống CPD" data-th="การบูรณาการระบบ CPD">CPD 시스템 통합</strong>
+                    <p data-ko="유아 존재 감지는 필수 점수 항목. 별도 시스템 또는 DMS 통합 검토 필요." data-en="Child presence detection is a mandatory scoring item. Consider separate system or DMS integration." data-ja="幼児存在検知は必須点数項目。別途システムまたはDMS統合検討必要。" data-zh="儿童存在检测是必需评分项。需考虑独立系统或DMS集成。" data-de="Kinderpräsenzerkennung ist ein obligatorischer Bewertungspunkt. Separate System oder DMS-Integration erwägen." data-es="La detección de presencia de niños es un elemento de puntuación obligatorio. Considere sistema separado o integración DMS." data-fr="La détection de présence d'enfant est un élément de notation obligatoire. Envisager un système séparé ou l'intégration DMS." data-vi="Phát hiện sự hiện diện của trẻ em là mục điểm bắt buộc. Xem xét hệ thống riêng hoặc tích hợp DMS." data-th="การตรวจจับการมีอยู่ของเด็กเป็นรายการคะแนนบังคับ พิจารณาระบบแยกต่างหากหรือการบูรณาการ DMS">유아 존재 감지는 필수 점수 항목. 별도 시스템 또는 DMS 통합 검토 필요.</p>
                 </li>
                 <li>
-                    <strong data-ko="ADAS 연동 설계" data-en="ADAS Integration Design" data-ja="ADAS連動設計" data-zh="ADAS联动设计">ADAS 연동 설계</strong>
-                    <p data-ko="비반응 운전자 감지 시 자동 비상 정차 등 ADAS 연동 아키텍처 구축." data-en="Build ADAS integration architecture for automatic emergency stop when unresponsive driver is detected." data-ja="無反応運転者検知時の自動緊急停車などADAS連動アーキテクチャ構築。" data-zh="构建ADAS联动架构，实现检测到无反应驾驶员时自动紧急停车等功能。">비반응 운전자 감지 시 자동 비상 정차 등 ADAS 연동 아키텍처 구축.</p>
+                    <strong data-ko="ADAS 연동 설계" data-en="ADAS Integration Design" data-ja="ADAS連動設計" data-zh="ADAS联动设计" data-de="ADAS-Integrationsdesign" data-es="Diseño de Integración ADAS" data-fr="Conception d'Intégration ADAS" data-vi="Thiết kế Tích hợp ADAS" data-th="การออกแบบการบูรณาการ ADAS">ADAS 연동 설계</strong>
+                    <p data-ko="비반응 운전자 감지 시 자동 비상 정차 등 ADAS 연동 아키텍처 구축." data-en="Build ADAS integration architecture for automatic emergency stop when unresponsive driver is detected." data-ja="無反応運転者検知時の自動緊急停車などADAS連動アーキテクチャ構築。" data-zh="构建ADAS联动架构，实现检测到无反应驾驶员时自动紧急停车等功能。" data-de="ADAS-Integrationsarchitektur für automatischen Notstopp bei erkanntem nicht reagierendem Fahrer aufbauen." data-es="Construir arquitectura de integración ADAS para parada de emergencia automática cuando se detecte conductor no responsivo." data-fr="Construire une architecture d'intégration ADAS pour l'arrêt d'urgence automatique lors de la détection d'un conducteur non réactif." data-vi="Xây dựng kiến trúc tích hợp ADAS để dừng khẩn cấp tự động khi phát hiện tài xế không phản hồi." data-th="สร้างสถาปัตยกรรมการบูรณาการ ADAS สำหรับการหยุดฉุกเฉินอัตโนมัติเมื่อตรวจพบคนขับไม่ตอบสนอง">비반응 운전자 감지 시 자동 비상 정차 등 ADAS 연동 아키텍처 구축.</p>
                 </li>
             </ol>
 
-            <h2 data-ko="결론" data-en="Conclusion" data-ja="結論" data-zh="结论">결론</h2>
-            <p data-ko="Euro NCAP 2026은 자동차 안전의 새로운 기준을 제시합니다. 운전자 모니터링 시스템은 더 이상 선택이 아닌 필수가 되었으며, rPPG 기반 생체 신호 모니터링은 다음 단계의 차별화 요소가 됩니다." data-en="Euro NCAP 2026 sets a new standard for automotive safety. Driver monitoring systems are no longer optional but mandatory, and rPPG-based vital sign monitoring becomes the next differentiating factor." data-ja="Euro NCAP 2026は自動車安全の新しい基準を提示します。運転者モニタリングシステムはもはや選択ではなく必須となり、rPPG基盤バイタルサインモニタリングが次の差別化要素になります。" data-zh="Euro NCAP 2026为汽车安全设定了新标准。驾驶员监控系统不再是可选项而是必需项，基于rPPG的生命体征监测成为下一个差异化因素。">
+            <h2 data-ko="결론" data-en="Conclusion" data-ja="結論" data-zh="结论" data-de="Fazit" data-es="Conclusión" data-fr="Conclusion" data-vi="Kết luận" data-th="สรุป">결론</h2>
+            <p data-ko="Euro NCAP 2026은 자동차 안전의 새로운 기준을 제시합니다. 운전자 모니터링 시스템은 더 이상 선택이 아닌 필수가 되었으며, rPPG 기반 생체 신호 모니터링은 다음 단계의 차별화 요소가 됩니다." data-en="Euro NCAP 2026 sets a new standard for automotive safety. Driver monitoring systems are no longer optional but mandatory, and rPPG-based vital sign monitoring becomes the next differentiating factor." data-ja="Euro NCAP 2026は自動車安全の新しい基準を提示します。運転者モニタリングシステムはもはや選択ではなく必須となり、rPPG基盤バイタルサインモニタリングが次の差別化要素になります。" data-zh="Euro NCAP 2026为汽车安全设定了新标准。驾驶员监控系统不再是可选项而是必需项，基于rPPG的生命体征监测成为下一个差异化因素。" data-de="Euro NCAP 2026 setzt einen neuen Standard für Fahrzeugsicherheit. Fahrerüberwachungssysteme sind nicht mehr optional, sondern obligatorisch, und rPPG-basierte Vitalzeichenüberwachung wird zum nächsten Differenzierungsfaktor." data-es="Euro NCAP 2026 establece un nuevo estándar para la seguridad automotriz. Los sistemas de monitoreo del conductor ya no son opcionales sino obligatorios, y el monitoreo de signos vitales basado en rPPG se convierte en el próximo factor diferenciador." data-fr="Euro NCAP 2026 établit une nouvelle norme pour la sécurité automobile. Les systèmes de surveillance du conducteur ne sont plus optionnels mais obligatoires, et la surveillance des signes vitaux basée sur rPPG devient le prochain facteur de différenciation." data-vi="Euro NCAP 2026 đặt ra tiêu chuẩn mới cho an toàn ô tô. Hệ thống giám sát tài xế không còn là tùy chọn mà là bắt buộc, và giám sát dấu hiệu sinh tồn dựa trên rPPG trở thành yếu tố khác biệt tiếp theo." data-th="Euro NCAP 2026 ตั้งมาตรฐานใหม่สำหรับความปลอดภัยยานยนต์ ระบบตรวจสอบคนขับไม่ได้เป็นทางเลือกอีกต่อไปแต่เป็นข้อบังคับ และการตรวจสอบสัญญาณชีพตาม rPPG กลายเป็นปัจจัยสร้างความแตกต่างถัดไป">
                 Euro NCAP 2026은 자동차 안전의 새로운 기준을 제시합니다. 운전자 모니터링 시스템은
                 더 이상 선택이 아닌 <strong>필수</strong>가 되었으며, rPPG 기반 생체 신호 모니터링은
                 다음 단계의 차별화 요소가 됩니다.
             </p>
-            <p data-ko="FunnyTech21 i-DMS는 Euro NCAP 2026의 핵심 DMS 요구사항을 완전 준수하며, rPPG 기술을 통해 권장 사항까지 충족하는 포괄적인 솔루션을 제공합니다." data-en="FunnyTech21 i-DMS fully complies with Euro NCAP 2026 core DMS requirements and provides a comprehensive solution that meets even recommended requirements through rPPG technology." data-ja="FunnyTech21 i-DMSはEuro NCAP 2026のコアDMS要件に完全準拠し、rPPG技術を通じて推奨事項まで満たす包括的なソリューションを提供します。" data-zh="FunnyTech21 i-DMS完全符合Euro NCAP 2026核心DMS要求，并通过rPPG技术提供甚至满足推荐要求的综合解决方案。">
+            <p data-ko="FunnyTech21 i-DMS는 Euro NCAP 2026의 핵심 DMS 요구사항을 완전 준수하며, rPPG 기술을 통해 권장 사항까지 충족하는 포괄적인 솔루션을 제공합니다." data-en="FunnyTech21 i-DMS fully complies with Euro NCAP 2026 core DMS requirements and provides a comprehensive solution that meets even recommended requirements through rPPG technology." data-ja="FunnyTech21 i-DMSはEuro NCAP 2026のコアDMS要件に完全準拠し、rPPG技術を通じて推奨事項まで満たす包括的なソリューションを提供します。" data-zh="FunnyTech21 i-DMS完全符合Euro NCAP 2026核心DMS要求，并通过rPPG技术提供甚至满足推荐要求的综合解决方案。" data-de="FunnyTech21 i-DMS erfüllt vollständig die Euro NCAP 2026 Kern-DMS-Anforderungen und bietet eine umfassende Lösung, die durch rPPG-Technologie sogar empfohlene Anforderungen erfüllt." data-es="FunnyTech21 i-DMS cumple completamente con los requisitos básicos de DMS de Euro NCAP 2026 y proporciona una solución integral que incluso cumple con los requisitos recomendados a través de la tecnología rPPG." data-fr="FunnyTech21 i-DMS est entièrement conforme aux exigences DMS principales d'Euro NCAP 2026 et fournit une solution complète qui répond même aux exigences recommandées grâce à la technologie rPPG." data-vi="FunnyTech21 i-DMS hoàn toàn tuân thủ các yêu cầu DMS cốt lõi của Euro NCAP 2026 và cung cấp giải pháp toàn diện đáp ứng cả các yêu cầu khuyến nghị thông qua công nghệ rPPG." data-th="FunnyTech21 i-DMS ปฏิบัติตามข้อกำหนด DMS หลักของ Euro NCAP 2026 อย่างครบถ้วน และให้โซลูชันครบวงจรที่ตอบสนองแม้แต่ข้อกำหนดที่แนะนำผ่านเทคโนโลยี rPPG">
                 FunnyTech21 i-DMS는 Euro NCAP 2026의 핵심 DMS 요구사항을 완전 준수하며,
                 rPPG 기술을 통해 권장 사항까지 충족하는 포괄적인 솔루션을 제공합니다.
             </p>
 
             <div class="highlight-box">
-                <h4 data-ko="참고 자료" data-en="References" data-ja="参考資料" data-zh="参考资料">참고 자료</h4>
+                <h4 data-ko="참고 자료" data-en="References" data-ja="参考資料" data-zh="参考资料" data-de="Referenzen" data-es="Referencias" data-fr="Références" data-vi="Tài liệu tham khảo" data-th="เอกสารอ้างอิง">참고 자료</h4>
                 <p>
-                    <span data-ko="Euro NCAP 2026 공식 프로토콜:" data-en="Euro NCAP 2026 Official Protocol:" data-ja="Euro NCAP 2026公式プロトコル:" data-zh="Euro NCAP 2026官方协议:">Euro NCAP 2026 공식 프로토콜:</span>
+                    <span data-ko="Euro NCAP 2026 공식 프로토콜:" data-en="Euro NCAP 2026 Official Protocol:" data-ja="Euro NCAP 2026公式プロトコル:" data-zh="Euro NCAP 2026官方协议:" data-de="Euro NCAP 2026 Offizielles Protokoll:" data-es="Protocolo Oficial Euro NCAP 2026:" data-fr="Protocole Officiel Euro NCAP 2026:" data-vi="Giao thức Chính thức Euro NCAP 2026:" data-th="โปรโตคอลอย่างเป็นทางการ Euro NCAP 2026:">Euro NCAP 2026 공식 프로토콜:</span>
                     <a href="https://www.euroncap.com/en/for-engineers/protocols/2026-protocols/" target="_blank" style="color: var(--primary-blue);">
                         https://www.euroncap.com/en/for-engineers/protocols/2026-protocols/
                     </a>
@@ -734,10 +808,10 @@
             </div>
 
             <div class="article-cta">
-                <h3 data-ko="Euro NCAP 2026 대응 솔루션" data-en="Euro NCAP 2026 Compliance Solution" data-ja="Euro NCAP 2026対応ソリューション" data-zh="Euro NCAP 2026合规解决方案">Euro NCAP 2026 대응 솔루션</h3>
-                <p data-ko="FunnyTech21 i-DMS로 Euro NCAP 2026 요구사항을 충족하세요" data-en="Meet Euro NCAP 2026 requirements with FunnyTech21 i-DMS" data-ja="FunnyTech21 i-DMSでEuro NCAP 2026要件を満たしてください" data-zh="使用FunnyTech21 i-DMS满足Euro NCAP 2026要求">FunnyTech21 i-DMS로 Euro NCAP 2026 요구사항을 충족하세요</p>
-                <a href="index.html#contact" class="cta-btn">
-                    <span data-ko="기술 상담 신청" data-en="Request Consultation" data-ja="技術相談申請" data-zh="申请技术咨询">기술 상담 신청</span>
+                <h3 data-ko="Euro NCAP 2026 대응 솔루션" data-en="Euro NCAP 2026 Compliance Solution" data-ja="Euro NCAP 2026対応ソリューション" data-zh="Euro NCAP 2026合规解决方案" data-de="Euro NCAP 2026 Konformitätslösung" data-es="Solución de Cumplimiento Euro NCAP 2026" data-fr="Solution de Conformité Euro NCAP 2026" data-vi="Giải pháp Tuân thủ Euro NCAP 2026" data-th="โซลูชันการปฏิบัติตาม Euro NCAP 2026">Euro NCAP 2026 대응 솔루션</h3>
+                <p data-ko="FunnyTech21 i-DMS로 Euro NCAP 2026 요구사항을 충족하세요" data-en="Meet Euro NCAP 2026 requirements with FunnyTech21 i-DMS" data-ja="FunnyTech21 i-DMSでEuro NCAP 2026要件を満たしてください" data-zh="使用FunnyTech21 i-DMS满足Euro NCAP 2026要求" data-de="Erfüllen Sie die Euro NCAP 2026 Anforderungen mit FunnyTech21 i-DMS" data-es="Cumpla con los requisitos de Euro NCAP 2026 con FunnyTech21 i-DMS" data-fr="Répondez aux exigences Euro NCAP 2026 avec FunnyTech21 i-DMS" data-vi="Đáp ứng yêu cầu Euro NCAP 2026 với FunnyTech21 i-DMS" data-th="ตอบสนองข้อกำหนด Euro NCAP 2026 ด้วย FunnyTech21 i-DMS">FunnyTech21 i-DMS로 Euro NCAP 2026 요구사항을 충족하세요</p>
+                <a href="index.html#contact" class="cta-btn" data-ko="기술 상담 신청" data-en="Request Consultation" data-ja="技術相談申請" data-zh="申请技术咨询" data-de="Beratung anfordern" data-es="Solicitar Consulta" data-fr="Demander une Consultation" data-vi="Yêu cầu Tư vấn" data-th="ขอรับคำปรึกษา">
+                    <span data-ko="기술 상담 신청" data-en="Request Consultation" data-ja="技術相談申請" data-zh="申请技术咨询" data-de="Beratung anfordern" data-es="Solicitar Consulta" data-fr="Demander une Consultation" data-vi="Yêu cầu Tư vấn" data-th="ขอรับคำปรึกษา">기술 상담 신청</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
             </div>
@@ -751,9 +825,9 @@
             </div>
             <p class="footer-text">© 2026 FunnyTech21 Co., Ltd. All rights reserved.</p>
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a>
+                <a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Giới thiệu" data-th="เกี่ยวกับ">About</a>
+                <a href="index.html#contact" data-ko="문의" data-en="Contact" data-ja="お問い合わせ" data-zh="联系" data-de="Kontakt" data-es="Contacto" data-fr="Contact" data-vi="Liên hệ" data-th="ติดต่อ">Contact</a>
             </div>
         </div>
     </footer>
@@ -761,18 +835,28 @@
     <!-- Cookie Banner -->
     <div class="cookie-banner" id="cookieBanner">
         <div class="cookie-content">
-            <div class="cookie-text">
+            <div class="cookie-text" data-ko="이 웹사이트는 사용자 경험 향상을 위해 쿠키를 사용합니다. 계속 이용하시면 쿠키 사용에 동의하는 것으로 간주됩니다." data-en="This website uses cookies to improve user experience. By continuing to use this site, you consent to our use of cookies." data-ja="このウェブサイトはユーザー体験向上のためにクッキーを使用しています。引き続きご利用いただくと、クッキーの使用に同意したものとみなされます。" data-zh="本网站使用Cookie来改善用户体验。继续使用本网站即表示您同意我们使用Cookie。" data-de="Diese Website verwendet Cookies zur Verbesserung der Benutzererfahrung. Durch die weitere Nutzung stimmen Sie der Verwendung von Cookies zu." data-es="Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al continuar usando este sitio, acepta nuestro uso de cookies." data-fr="Ce site web utilise des cookies pour améliorer l'expérience utilisateur. En continuant à utiliser ce site, vous acceptez notre utilisation des cookies." data-vi="Trang web này sử dụng cookie để cải thiện trải nghiệm người dùng. Tiếp tục sử dụng trang web này đồng nghĩa với việc bạn đồng ý sử dụng cookie." data-th="เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์ผู้ใช้ การใช้งานต่อไปถือว่าคุณยินยอมให้ใช้คุกกี้">
                 이 웹사이트는 사용자 경험 향상을 위해 쿠키를 사용합니다.
                 계속 이용하시면 쿠키 사용에 동의하는 것으로 간주됩니다.
             </div>
             <div class="cookie-actions">
-                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()">거부</button>
-                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">동의</button>
+                <button class="cookie-btn cookie-btn-decline" onclick="declineCookies()" data-ko="거부" data-en="Decline" data-ja="拒否" data-zh="拒绝" data-de="Ablehnen" data-es="Rechazar" data-fr="Refuser" data-vi="Từ chối" data-th="ปฏิเสธ">거부</button>
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()" data-ko="동의" data-en="Accept" data-ja="同意" data-zh="同意" data-de="Akzeptieren" data-es="Aceptar" data-fr="Accepter" data-vi="Chấp nhận" data-th="ยอมรับ">동의</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Mobile menu functions
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
         function toggleLangDropdown() {
             document.querySelector('.lang-dropdown').classList.toggle('active');
         }
@@ -795,7 +879,7 @@
             });
             document.querySelector('.lang-current').textContent = langNames[lang];
             document.querySelector('.lang-dropdown').classList.remove('active');
-            localStorage.setItem('selectedLang', lang);
+            localStorage.setItem('funnytech_lang', lang);
 
             // Apply translations to all elements with data-* language attributes
             // Process in reverse order (children first) to avoid parent overwriting children
@@ -827,13 +911,24 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            const savedLang = localStorage.getItem('funnytech_lang') || 'en';
             changeLanguage(savedLang);
 
             if (!localStorage.getItem('cookieConsent')) {
                 document.getElementById('cookieBanner').classList.add('show');
             }
         });
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered:', registration.scope))
+                    .catch(error => console.log('SW registration failed:', error));
+            });
+        }
     </script>
 </body>
 </html>
