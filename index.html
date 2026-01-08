@@ -1730,6 +1730,12 @@
                 <div class="contact-box">
                     <h3 data-ko="📧 이메일 문의" data-en="📧 Email Inquiry" data-ja="📧 メールでのお問い合わせ" data-zh="📧 邮件咨询" data-de="📧 E-Mail Anfrage" data-es="📧 Consulta por Email" data-fr="📧 Demande par Email" data-vi="📧 Liên hệ Email" data-th="📧 สอบถามทางอีเมล">📧 이메일 문의</h3>
                     <form class="contact-form" id="contactForm">
+                        <!-- Honeypot field - hidden from humans, bots will fill it -->
+                        <div style="position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden;" aria-hidden="true">
+                            <label for="website_url">Website (leave empty)</label>
+                            <input type="text" name="website_url" id="honeypotField" tabindex="-1" autocomplete="off">
+                        </div>
+                        <input type="hidden" id="formLoadTime" value="">
                         <div class="form-row">
                             <div class="form-group">
                                 <label data-ko="이름" data-en="Name" data-ja="お名前" data-zh="姓名" data-de="Name" data-es="Nombre" data-fr="Nom" data-vi="Tên" data-th="ชื่อ">이름</label>
@@ -1967,12 +1973,71 @@
         // Email API URL
         const EMAIL_API_URL = 'https://script.google.com/macros/s/AKfycbzX1GOiwlF1sUOO9qTatl2EEV9QGv64HVL8VvMDhbf4Iu2hr2xZtacgp5rn1Z98aEnQtQ/exec';
 
+        // ========== Anti-Spam Protection ==========
+        const MINIMUM_FORM_TIME = 3000; // 최소 3초 이상 소요되어야 함
+        let formLoadTimestamp = Date.now();
+
+        // 폼 로드 시간 기록
+        document.getElementById('formLoadTime').value = formLoadTimestamp;
+
+        // 스팸 검증 함수
+        function validateAntiSpam() {
+            // 1. Honeypot 검사 - 봇이 이 필드를 채우면 스팸
+            const honeypot = document.getElementById('honeypotField');
+            if (honeypot && honeypot.value.trim() !== '') {
+                console.log('Spam detected: honeypot filled');
+                return { valid: false, reason: 'honeypot' };
+            }
+
+            // 2. 시간 기반 검사 - 너무 빨리 제출하면 봇
+            const timeElapsed = Date.now() - formLoadTimestamp;
+            if (timeElapsed < MINIMUM_FORM_TIME) {
+                console.log('Spam detected: too fast submission');
+                return { valid: false, reason: 'too_fast' };
+            }
+
+            // 3. 내용 검사 - 무작위 문자열 패턴 감지
+            const name = document.getElementById('contactName').value;
+            const message = document.getElementById('contactMessage').value;
+
+            // 연속된 대문자+소문자 혼합 패턴 (예: "SRkNsNztuAYBJyBCNo")
+            const randomPattern = /^[A-Za-z]{10,}$/;
+            if (randomPattern.test(name) || randomPattern.test(message)) {
+                console.log('Spam detected: random pattern');
+                return { valid: false, reason: 'random_pattern' };
+            }
+
+            // 4. 이메일 도메인 검사 (일반적인 스팸 도메인 차단)
+            const email = document.getElementById('contactEmail').value;
+            const suspiciousDomains = ['tempmail', 'guerrillamail', 'mailinator', 'throwaway'];
+            const emailDomain = email.split('@')[1]?.toLowerCase() || '';
+            if (suspiciousDomains.some(d => emailDomain.includes(d))) {
+                console.log('Spam detected: suspicious email domain');
+                return { valid: false, reason: 'suspicious_email' };
+            }
+
+            return { valid: true };
+        }
+
         // Email form submission
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
             const submitBtn = form.querySelector('.contact-btn');
             const originalText = submitBtn.textContent;
+
+            // 스팸 검증
+            const spamCheck = validateAntiSpam();
+            if (!spamCheck.valid) {
+                // 스팸으로 감지되면 조용히 성공 메시지 표시 (봇에게 힌트 주지 않음)
+                document.getElementById('emailSuccess').style.display = 'block';
+                form.reset();
+                formLoadTimestamp = Date.now(); // 시간 리셋
+                setTimeout(() => {
+                    document.getElementById('emailSuccess').style.display = 'none';
+                }, 5000);
+                return;
+            }
 
             submitBtn.disabled = true;
             submitBtn.textContent = '전송 중...';
@@ -1987,13 +2052,17 @@
                         name: form.querySelector('#contactName').value,
                         company: form.querySelector('#contactCompany').value || '개인',
                         email: form.querySelector('#contactEmail').value,
-                        message: form.querySelector('#contactMessage').value
+                        message: form.querySelector('#contactMessage').value,
+                        // 스팸 방지 메타데이터
+                        _timestamp: Date.now(),
+                        _formTime: Date.now() - formLoadTimestamp
                     })
                 });
 
                 // Show success message
                 document.getElementById('emailSuccess').style.display = 'block';
                 form.reset();
+                formLoadTimestamp = Date.now(); // 시간 리셋
                 setTimeout(() => {
                     document.getElementById('emailSuccess').style.display = 'none';
                 }, 5000);
@@ -2184,6 +2253,23 @@
                 return;
             }
 
+            // 미팅 폼 스팸 검증
+            const randomPattern = /^[A-Za-z]{10,}$/;
+            if (randomPattern.test(name)) {
+                // 스팸으로 감지되면 조용히 성공 메시지 표시
+                document.getElementById('meetingSuccess').style.display = 'block';
+                document.getElementById('meetingSubmit').style.display = 'none';
+                return;
+            }
+
+            const suspiciousDomains = ['tempmail', 'guerrillamail', 'mailinator', 'throwaway'];
+            const emailDomain = email.split('@')[1]?.toLowerCase() || '';
+            if (suspiciousDomains.some(d => emailDomain.includes(d))) {
+                document.getElementById('meetingSuccess').style.display = 'block';
+                document.getElementById('meetingSubmit').style.display = 'none';
+                return;
+            }
+
             const dateStr = `${selectedDate.year}년 ${selectedDate.month + 1}월 ${selectedDate.day}일`;
             const typeNames = { zoom: 'Zoom', google: 'Google Meet', teams: 'Microsoft Teams' };
 
@@ -2205,7 +2291,8 @@
                         company: company || '개인',
                         date: dateStr,
                         time: selectedTime,
-                        meetingType: typeNames[selectedMeetingTypeValue]
+                        meetingType: typeNames[selectedMeetingTypeValue],
+                        _timestamp: Date.now()
                     })
                 });
 
