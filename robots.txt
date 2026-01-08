@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+User-agent: Yeti
+Allow: /
+
+User-agent: Naverbot
+Allow: /
+
 Sitemap: https://www.funnytech21.com/sitemap.xml
