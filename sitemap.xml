@@ -60,9 +60,15 @@
     </url>
     <url>
         <loc>https://www.funnytech21.com/blog.html</loc>
-        <lastmod>2026-01-06</lastmod>
+        <lastmod>2026-01-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.funnytech21.com/blog-idms-alcohol-detection.html</loc>
+        <lastmod>2026-01-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.funnytech21.com/blog-rppg-driving-test.html</loc>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VT16VXN7KD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VT16VXN7KD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-DMS: AI 기반 비접촉 알코올 검출 솔루션 | FunnyTech21 Blog</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FunnyTech21의 i-DMS(Intelligent Driver Monitoring System) - Euro NCAP 2026 Impairment Detection 기준을 만족하는 AI 기반 비접촉 알코올 검출 솔루션. 동공, 시선, 안진, HRV 분석을 통한 운전자 손상 상태 탐지.">
+    <meta name="keywords" content="i-DMS, 알코올 검출, Euro NCAP 2026, Impairment Detection, 운전자 모니터링, 비접촉 생체신호, 동공 분석, HRV, 안진">
+    <meta name="author" content="(주)퍼니테크21 FunnyTech21 Co., Ltd.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.funnytech21.com/blog-idms-alcohol-detection.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.funnytech21.com/blog-idms-alcohol-detection.html">
+    <meta property="og:title" content="i-DMS: AI 기반 비접촉 알코올 검출 솔루션">
+    <meta property="og:description" content="Euro NCAP 2026 Impairment Detection 기준 대응 AI 솔루션">
+    <meta property="og:image" content="https://www.funnytech21.com/imgs/blog/idms-scanner-safe.png">
+    <meta property="article:published_time" content="2026-01-09">
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "i-DMS: AI 기반 비접촉 알코올 검출 솔루션",
+        "description": "Euro NCAP 2026 Impairment Detection 기준을 만족하는 AI 기반 비접촉 알코올 검출 솔루션",
+        "author": {
+            "@type": "Organization",
+            "name": "FunnyTech21"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "FunnyTech21",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.funnytech21.com/imgs/funnytech_logo_original.png"
+            }
+        },
+        "datePublished": "2026-01-09",
+        "dateModified": "2026-01-09"
+    }
+    </script>
+
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#15539E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="FunnyTech21">
+    <link rel="apple-touch-icon" href="/imgs/icons/icon-152x152.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --primary-blue: #15539E;
+            --electric-blue: #3B82F6;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --bg-hover: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+            --border-light: #E2E8F0;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red-gradient: linear-gradient(135deg, #FF2222 0%, #FF6B6B 100%);
+            --blue-gradient: linear-gradient(135deg, #15539E 0%, #3B82F6 100%);
+            --container-width: 1280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: var(--container-width); margin: 0 auto; padding: 14px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 82px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a.active { color: var(--primary-blue); font-weight: 600; }
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+
+        .lang-selector { position: relative; }
+        .lang-selector-btn {
+            display: flex; align-items: center; gap: 6px;
+            background: var(--bg-light); color: var(--text-primary); padding: 8px 14px;
+            border: 1px solid var(--border-light); border-radius: 6px; font-weight: 500;
+            font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+        }
+        .lang-selector-btn:hover { background: var(--bg-hover); border-color: var(--primary-blue); }
+        .lang-selector-btn svg { width: 14px; height: 14px; }
+        .lang-dropdown {
+            position: absolute; top: 100%; right: 0; margin-top: 8px;
+            background: var(--bg-white); border: 1px solid var(--border-light);
+            border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-width: 160px; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.2s; z-index: 1000;
+        }
+        .lang-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-option {
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            cursor: pointer; transition: background 0.2s; font-size: 0.9rem;
+        }
+        .lang-option:first-child { border-radius: 10px 10px 0 0; }
+        .lang-option:last-child { border-radius: 0 0 10px 10px; }
+        .lang-option:hover { background: var(--bg-light); }
+        .lang-option.active { background: rgba(21, 83, 158, 0.1); color: var(--primary-blue); font-weight: 600; }
+        .lang-flag { font-size: 1.2rem; }
+
+        /* Article Header */
+        .article-header {
+            padding: 140px 24px 60px;
+            background: linear-gradient(135deg, #FF2222 0%, #FF6B6B 100%);
+        }
+        .article-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .article-category {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .article-date {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        .article-header h1 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+        .article-summary {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Article Content */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        .article-content {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 48px;
+        }
+        .article-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 40px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-red);
+        }
+        .article-content h2:first-child {
+            margin-top: 0;
+        }
+        .article-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 30px 0 16px;
+        }
+        .article-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 24px;
+            color: var(--text-secondary);
+        }
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        /* Image Container */
+        .image-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .image-container img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        .image-caption {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .feature-card h4 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Tech Box */
+        .tech-box {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 30px 0;
+            color: white;
+        }
+        .tech-box h4 {
+            color: var(--electric-blue);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .tech-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .tech-box li {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 10px;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-safe {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green);
+        }
+        .status-warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--yellow);
+        }
+        .status-danger {
+            background: rgba(255, 34, 34, 0.15);
+            color: var(--primary-red);
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: gap 0.2s;
+        }
+        .back-link:hover {
+            gap: 12px;
+        }
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            padding: 40px 24px;
+        }
+        .footer-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-logo img { height: 50px; }
+        .footer-text { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 8px; }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+        .mobile-menu.active { display: block; }
+        .mobile-menu-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-white);
+            padding: 80px 24px 24px;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+        }
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            list-style: none;
+        }
+        .mobile-menu-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .mobile-menu-links a.active {
+            color: var(--primary-blue);
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .article-header h1 { font-size: 1.6rem; }
+            .article-content { padding: 24px; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21 Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-ko="홈" data-en="Home" data-ja="ホーム" data-zh="首页" data-de="Startseite" data-es="Inicio" data-fr="Accueil" data-vi="Trang chủ" data-th="หน้าแรก">Home</a></li>
+                <li><a href="faceid.html" data-ko="Face ID" data-en="Face ID" data-ja="Face ID" data-zh="Face ID" data-de="Face ID" data-es="Face ID" data-fr="Face ID" data-vi="Face ID" data-th="Face ID">Face ID</a></li>
+                <li><a href="about.html" data-ko="회사 소개" data-en="About" data-ja="会社概要" data-zh="关于我们" data-de="Über uns" data-es="Nosotros" data-fr="À propos" data-vi="Về chúng tôi" data-th="เกี่ยวกับเรา">About</a></li>
+                <li><a href="blog.html" class="active" data-ko="블로그" data-en="Blog" data-ja="ブログ" data-zh="博客" data-de="Blog" data-es="Blog" data-fr="Blog" data-vi="Blog" data-th="บล็อก">Blog</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="lang-selector" id="langSelector">
+                    <button class="lang-selector-btn" onclick="toggleLangDropdown()">
+                        <span class="lang-current">English</span>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-option" onclick="changeLanguage('ko')"><span class="lang-flag">🇰🇷</span> 한국어</div>
+                        <div class="lang-option active" onclick="changeLanguage('en')"><span class="lang-flag">🇺🇸</span> English</div>
+                        <div class="lang-option" onclick="changeLanguage('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+                        <div class="lang-option" onclick="changeLanguage('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+                        <div class="lang-option" onclick="changeLanguage('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+                        <div class="lang-option" onclick="changeLanguage('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+                        <div class="lang-option" onclick="changeLanguage('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+                        <div class="lang-option" onclick="changeLanguage('vi')"><span class="lang-flag">🇻🇳</span> Tiếng Việt</div>
+                        <div class="lang-option" onclick="changeLanguage('th')"><span class="lang-flag">🇹🇭</span> ไทย</div>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" onclick="openMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" onclick="closeMobileMenu()">
+        <div class="mobile-menu-content" onclick="event.stopPropagation()">
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+            <ul class="mobile-menu-links">
+                <li><a href="index.html" onclick="closeMobileMenu()" data-ko="홈" data-en="Home">Home</a></li>
+                <li><a href="faceid.html" onclick="closeMobileMenu()" data-ko="Face ID" data-en="Face ID">Face ID</a></li>
+                <li><a href="about.html" onclick="closeMobileMenu()" data-ko="회사 소개" data-en="About">About</a></li>
+                <li><a href="blog.html" onclick="closeMobileMenu()" class="active" data-ko="블로그" data-en="Blog">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <header class="article-header">
+        <div class="article-header-content">
+            <div class="article-meta">
+                <span class="article-category" data-ko="i-DMS Technology" data-en="i-DMS Technology" data-ja="i-DMS技術" data-zh="i-DMS技术">i-DMS Technology</span>
+                <span class="article-date">2026.01.09</span>
+            </div>
+            <h1 data-ko="i-DMS: AI 기반 비접촉 알코올 검출 솔루션" data-en="i-DMS: AI-based Non-contact Alcohol Detection Solution" data-ja="i-DMS: AI基盤非接触アルコール検出ソリューション" data-zh="i-DMS: 基于AI的非接触式酒精检测解决方案">i-DMS: AI 기반 비접촉 알코올 검출 솔루션</h1>
+            <p class="article-summary" data-ko="Euro NCAP 2026 Impairment Detection 기준을 만족하는 FunnyTech21의 AI 기반 운전자 손상 상태 탐지 솔루션입니다. 동공, 시선, 안진, HRV 분석을 통해 운전자의 알코올 음주 상태를 비접촉으로 탐지합니다." data-en="FunnyTech21's AI-based driver impairment detection solution meeting Euro NCAP 2026 Impairment Detection standards. Non-contact alcohol detection through pupil, gaze, nystagmus, and HRV analysis." data-ja="Euro NCAP 2026 Impairment Detection基準を満たすFunnyTech21のAI基盤ドライバー損傷状態検出ソリューション。瞳孔、視線、眼振、HRV分析による非接触アルコール検出。" data-zh="满足Euro NCAP 2026损伤检测标准的FunnyTech21 AI驾驶员损伤状态检测解决方案。通过瞳孔、视线、眼震、HRV分析实现非接触式酒精检测。">Euro NCAP 2026 Impairment Detection 기준을 만족하는 FunnyTech21의 AI 기반 운전자 손상 상태 탐지 솔루션입니다. 동공, 시선, 안진, HRV 분석을 통해 운전자의 알코올 음주 상태를 비접촉으로 탐지합니다.</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+        <a href="blog.html" class="back-link" data-ko="← 블로그로 돌아가기" data-en="← Back to Blog" data-ja="← ブログに戻る" data-zh="← 返回博客">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            블로그로 돌아가기
+        </a>
+
+        <div class="article-content">
+            <h2 data-ko="Euro NCAP 2026 Impairment Detection" data-en="Euro NCAP 2026 Impairment Detection" data-ja="Euro NCAP 2026 Impairment Detection" data-zh="Euro NCAP 2026 Impairment Detection">Euro NCAP 2026 Impairment Detection</h2>
+
+            <p data-ko="2026년부터 Euro NCAP은 차량 안전 평가에 새로운 기준을 도입합니다. 기존의 졸음 감지(Drowsiness)와 주의력 분산 감지(Distraction)에 더해, 알코올 등 약물에 의한 운전자 손상 상태(Impairment)를 탐지하는 기능이 평가 항목에 추가됩니다." data-en="Starting in 2026, Euro NCAP introduces new criteria for vehicle safety assessment. In addition to existing drowsiness and distraction detection, driver impairment detection from alcohol and other substances will be added to the evaluation criteria." data-ja="2026年からEuro NCAPは車両安全評価に新しい基準を導入します。既存の居眠り検知と注意散漫検知に加え、アルコール等による運転者損傷状態の検出機能が評価項目に追加されます。" data-zh="从2026年开始，Euro NCAP将为车辆安全评估引入新标准。除了现有的疲劳检测和注意力分散检测外，还将增加对酒精等物质导致的驾驶员损伤状态检测的评估项目。">2026년부터 Euro NCAP은 차량 안전 평가에 새로운 기준을 도입합니다. 기존의 졸음 감지(Drowsiness)와 주의력 분산 감지(Distraction)에 더해, 알코올 등 약물에 의한 운전자 손상 상태(Impairment)를 탐지하는 기능이 평가 항목에 추가됩니다.</p>
+
+            <p data-ko="이는 음주운전으로 인한 교통사고를 예방하기 위한 중요한 기술적 진보입니다. 기존의 음주측정기는 운전자가 직접 호흡을 불어넣어야 하는 접촉 방식이지만, Euro NCAP 2026 기준은 카메라 기반의 비접촉 방식으로 운전자의 손상 상태를 탐지할 것을 요구합니다." data-en="This represents an important technological advancement in preventing drunk driving accidents. While traditional breathalyzers require direct breath contact, Euro NCAP 2026 standards require camera-based non-contact detection of driver impairment." data-ja="これは飲酒運転による交通事故を防止するための重要な技術的進歩です。従来の飲酒検知器は運転者が直接息を吹きかける接触方式ですが、Euro NCAP 2026基準はカメラベースの非接触方式での損傷状態検出を要求しています。" data-zh="这是预防酒驾事故的重要技术进步。传统酒精检测仪需要驾驶员直接吹气，而Euro NCAP 2026标准要求基于摄像头的非接触式驾驶员损伤状态检测。">이는 음주운전으로 인한 교통사고를 예방하기 위한 중요한 기술적 진보입니다. 기존의 음주측정기는 운전자가 직접 호흡을 불어넣어야 하는 접촉 방식이지만, Euro NCAP 2026 기준은 카메라 기반의 비접촉 방식으로 운전자의 손상 상태를 탐지할 것을 요구합니다.</p>
+
+            <h2 data-ko="i-DMS 솔루션 개요" data-en="i-DMS Solution Overview" data-ja="i-DMSソリューション概要" data-zh="i-DMS解决方案概述">i-DMS 솔루션 개요</h2>
+
+            <p data-ko="FunnyTech21의 i-DMS(Intelligent Driver Monitoring System)는 이러한 Euro NCAP 2026 기준을 만족시키기 위해 개발된 AI 기반 운전자 모니터링 솔루션입니다. 카메라로 촬영한 운전자의 얼굴 영상에서 다양한 생체지표를 분석하여 알코올 음주 상태를 판별합니다." data-en="FunnyTech21's i-DMS (Intelligent Driver Monitoring System) is an AI-based driver monitoring solution developed to meet Euro NCAP 2026 standards. It analyzes various biometric indicators from camera-captured driver facial images to detect alcohol intoxication." data-ja="FunnyTech21のi-DMS（Intelligent Driver Monitoring System）は、Euro NCAP 2026基準を満たすために開発されたAI基盤ドライバーモニタリングソリューションです。カメラで撮影した運転者の顔映像から様々な生体指標を分析してアルコール飲酒状態を判別します。" data-zh="FunnyTech21的i-DMS（智能驾驶员监控系统）是为满足Euro NCAP 2026标准而开发的AI驾驶员监控解决方案。它通过分析摄像头拍摄的驾驶员面部图像中的各种生物特征指标来检测酒精中毒状态。">FunnyTech21의 i-DMS(Intelligent Driver Monitoring System)는 이러한 Euro NCAP 2026 기준을 만족시키기 위해 개발된 AI 기반 운전자 모니터링 솔루션입니다. 카메라로 촬영한 운전자의 얼굴 영상에서 다양한 생체지표를 분석하여 알코올 음주 상태를 판별합니다.</p>
+
+            <div class="image-container">
+                <img src="imgs/blog/idms-scanner-scanning.png" alt="i-DMS Scanner Scanning Mode" data-ko="i-DMS 스캐너 - 스캔 진행 중" data-en="i-DMS Scanner - Scanning in Progress">
+                <p class="image-caption" data-ko="i-DMS 스캐너: 실시간 얼굴 분석 및 생체지표 측정 진행 화면" data-en="i-DMS Scanner: Real-time facial analysis and biometric measurement in progress" data-ja="i-DMSスキャナー：リアルタイム顔分析と生体指標測定進行画面" data-zh="i-DMS扫描仪：实时面部分析和生物特征测量进行中">i-DMS 스캐너: 실시간 얼굴 분석 및 생체지표 측정 진행 화면</p>
+            </div>
+
+            <h2 data-ko="핵심 생체지표 분석 기술" data-en="Core Biometric Analysis Technology" data-ja="コア生体指標分析技術" data-zh="核心生物特征分析技术">핵심 생체지표 분석 기술</h2>
+
+            <p data-ko="i-DMS는 알코올 섭취 시 나타나는 생리학적 변화를 다각도로 분석합니다. 다음의 4가지 핵심 생체지표를 통합 분석하여 운전자의 손상 상태를 판별합니다:" data-en="i-DMS analyzes physiological changes that occur with alcohol consumption from multiple angles. It determines driver impairment status through integrated analysis of the following 4 core biometric indicators:" data-ja="i-DMSはアルコール摂取時に現れる生理学的変化を多角的に分析します。以下の4つのコア生体指標を統合分析して運転者の損傷状態を判別します：" data-zh="i-DMS从多个角度分析酒精摄入时出现的生理变化。通过对以下4项核心生物特征指标的综合分析来判断驾驶员的损伤状态：">i-DMS는 알코올 섭취 시 나타나는 생리학적 변화를 다각도로 분석합니다. 다음의 4가지 핵심 생체지표를 통합 분석하여 운전자의 손상 상태를 판별합니다:</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4 data-ko="동공 분석 (Pupil Analysis)" data-en="Pupil Analysis" data-ja="瞳孔分析" data-zh="瞳孔分析">동공 분석 (Pupil Analysis)</h4>
+                    <p data-ko="알코올 섭취 시 동공의 크기 변화와 대광반사(Pupillary Light Reflex) 속도가 저하됩니다. i-DMS는 동공의 평균 크기, 표준편차, 변동 범위를 실시간으로 분석합니다." data-en="Alcohol consumption causes changes in pupil size and decreased pupillary light reflex speed. i-DMS analyzes pupil mean size, standard deviation, and variation range in real-time." data-ja="アルコール摂取時、瞳孔サイズの変化と対光反射速度が低下します。i-DMSは瞳孔の平均サイズ、標準偏差、変動範囲をリアルタイムで分析します。" data-zh="酒精摄入会导致瞳孔大小变化和瞳孔光反射速度下降。i-DMS实时分析瞳孔平均大小、标准差和变化范围。">알코올 섭취 시 동공의 크기 변화와 대광반사(Pupillary Light Reflex) 속도가 저하됩니다. i-DMS는 동공의 평균 크기, 표준편차, 변동 범위를 실시간으로 분석합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <h4 data-ko="시선 추적 (Gaze Tracking)" data-en="Gaze Tracking" data-ja="視線追跡" data-zh="视线追踪">시선 추적 (Gaze Tracking)</h4>
+                    <p data-ko="음주 상태에서는 시선의 안정성이 저하되고 불규칙한 움직임이 증가합니다. i-DMS는 시선 분산도, 단속성 안구운동(Saccade) 빈도를 분석하여 상태를 판별합니다." data-en="Intoxication reduces gaze stability and increases irregular eye movements. i-DMS analyzes gaze variance and saccade frequency to determine status." data-ja="飲酒状態では視線の安定性が低下し、不規則な動きが増加します。i-DMSは視線分散度とサッケード頻度を分析して状態を判別します。" data-zh="醉酒状态下视线稳定性下降，不规则眼球运动增加。i-DMS分析视线分散度和扫视频率来判断状态。">음주 상태에서는 시선의 안정성이 저하되고 불규칙한 움직임이 증가합니다. i-DMS는 시선 분산도, 단속성 안구운동(Saccade) 빈도를 분석하여 상태를 판별합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <h4 data-ko="안진 검출 (Nystagmus Detection)" data-en="Nystagmus Detection" data-ja="眼振検出" data-zh="眼震检测">안진 검출 (Nystagmus Detection)</h4>
+                    <p data-ko="수평주시안진(HGN: Horizontal Gaze Nystagmus)은 음주 시 나타나는 대표적인 증상입니다. 눈이 좌우 극단을 바라볼 때 발생하는 미세한 떨림을 분석합니다." data-en="Horizontal Gaze Nystagmus (HGN) is a typical symptom of intoxication. It analyzes subtle eye tremors that occur when eyes look to the extreme left or right." data-ja="水平注視眼振（HGN）は飲酒時に現れる代表的な症状です。目が左右の極端を見る時に発生する微細な震えを分析します。" data-zh="水平注视眼震（HGN）是醉酒时的典型症状。它分析眼睛看向左右极端时产生的细微震颤。">수평주시안진(HGN: Horizontal Gaze Nystagmus)은 음주 시 나타나는 대표적인 증상입니다. 눈이 좌우 극단을 바라볼 때 발생하는 미세한 떨림을 분석합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <h4 data-ko="심박 변이도 (HRV Analysis)" data-en="HRV Analysis" data-ja="心拍変動度分析" data-zh="心率变异性分析">심박 변이도 (HRV Analysis)</h4>
+                    <p data-ko="rPPG 기술로 비접촉 측정한 심박수에서 HRV를 분석합니다. 알코올은 자율신경계에 영향을 주어 HRV 패턴을 변화시키며, 이를 통해 음주 상태를 간접적으로 판별합니다." data-en="Analyzes HRV from heart rate measured non-contact via rPPG technology. Alcohol affects the autonomic nervous system, changing HRV patterns, enabling indirect detection of intoxication." data-ja="rPPG技術で非接触測定した心拍数からHRVを分析します。アルコールは自律神経系に影響を与えてHRVパターンを変化させ、これにより飲酒状態を間接的に判別します。" data-zh="通过rPPG技术非接触测量的心率分析HRV。酒精影响自主神经系统，改变HRV模式，从而间接检测醉酒状态。">rPPG 기술로 비접촉 측정한 심박수에서 HRV를 분석합니다. 알코올은 자율신경계에 영향을 주어 HRV 패턴을 변화시키며, 이를 통해 음주 상태를 간접적으로 판별합니다.</p>
+                </div>
+            </div>
+
+            <h2 data-ko="실시간 스캔 및 판정" data-en="Real-time Scanning and Assessment" data-ja="リアルタイムスキャンと判定" data-zh="实时扫描和评估">실시간 스캔 및 판정</h2>
+
+            <p data-ko="i-DMS 스캐너는 운전자의 상태를 실시간으로 분석하여 SAFE(안전), WARNING(주의), DANGER(위험)의 3단계로 판정합니다. 스캔 결과는 즉시 화면에 표시되어 운전자에게 직관적인 피드백을 제공합니다." data-en="The i-DMS scanner analyzes driver status in real-time, providing assessment in 3 levels: SAFE, WARNING, and DANGER. Scan results are immediately displayed on screen, providing intuitive feedback to drivers." data-ja="i-DMSスキャナーは運転者の状態をリアルタイムで分析し、SAFE（安全）、WARNING（注意）、DANGER（危険）の3段階で判定します。スキャン結果は即座に画面に表示され、運転者に直感的なフィードバックを提供します。" data-zh="i-DMS扫描仪实时分析驾驶员状态，提供SAFE（安全）、WARNING（警告）、DANGER（危险）三级评估。扫描结果立即显示在屏幕上，为驾驶员提供直观的反馈。">i-DMS 스캐너는 운전자의 상태를 실시간으로 분석하여 SAFE(안전), WARNING(주의), DANGER(위험)의 3단계로 판정합니다. 스캔 결과는 즉시 화면에 표시되어 운전자에게 직관적인 피드백을 제공합니다.</p>
+
+            <div class="image-container">
+                <img src="imgs/blog/idms-scanner-safe.png" alt="i-DMS Scanner Safe Result" data-ko="i-DMS 스캐너 - 안전 판정 결과" data-en="i-DMS Scanner - Safe Assessment Result">
+                <p class="image-caption" data-ko="i-DMS 스캐너: SAFE 판정 - 운전 가능 상태" data-en="i-DMS Scanner: SAFE assessment - Fit to drive" data-ja="i-DMSスキャナー：SAFE判定 - 運転可能状態" data-zh="i-DMS扫描仪：SAFE评估 - 适合驾驶">i-DMS 스캐너: SAFE 판정 - 운전 가능 상태</p>
+            </div>
+
+            <div class="tech-box">
+                <h4 data-ko="판정 기준" data-en="Assessment Criteria" data-ja="判定基準" data-zh="评估标准">판정 기준</h4>
+                <ul>
+                    <li data-ko="SAFE (안전): 모든 생체지표가 정상 범위 내 - 운전 가능" data-en="SAFE: All biometric indicators within normal range - Fit to drive" data-ja="SAFE（安全）：全ての生体指標が正常範囲内 - 運転可能" data-zh="SAFE（安全）：所有生物特征指标在正常范围内 - 适合驾驶"><span class="status-badge status-safe">SAFE</span> 모든 생체지표가 정상 범위 내 - 운전 가능</li>
+                    <li data-ko="WARNING (주의): 일부 지표가 경계값 부근 - 주의 필요" data-en="WARNING: Some indicators near threshold - Caution required" data-ja="WARNING（注意）：一部の指標が境界値付近 - 注意必要" data-zh="WARNING（警告）：部分指标接近阈值 - 需要注意"><span class="status-badge status-warning">WARNING</span> 일부 지표가 경계값 부근 - 주의 필요</li>
+                    <li data-ko="DANGER (위험): 복수의 지표가 비정상 - 운전 불가" data-en="DANGER: Multiple indicators abnormal - Unfit to drive" data-ja="DANGER（危険）：複数の指標が異常 - 運転不可" data-zh="DANGER（危险）：多项指标异常 - 不适合驾驶"><span class="status-badge status-danger">DANGER</span> 복수의 지표가 비정상 - 운전 불가</li>
+                </ul>
+            </div>
+
+            <h2 data-ko="i-DMS Data Manager" data-en="i-DMS Data Manager" data-ja="i-DMS Data Manager" data-zh="i-DMS Data Manager">i-DMS Data Manager</h2>
+
+            <p data-ko="i-DMS Data Manager는 알코올 검출 모델의 학습과 관리를 위한 전용 도구입니다. 데이터 수집, 전처리, 모델 학습, 변환, 테스트까지 전체 ML 파이프라인을 통합 관리할 수 있습니다." data-en="i-DMS Data Manager is a dedicated tool for training and managing alcohol detection models. It provides integrated management of the entire ML pipeline from data collection, preprocessing, model training, conversion, to testing." data-ja="i-DMS Data Managerはアルコール検出モデルの学習と管理のための専用ツールです。データ収集、前処理、モデル学習、変換、テストまで全MLパイプラインを統合管理できます。" data-zh="i-DMS Data Manager是用于训练和管理酒精检测模型的专用工具。它提供从数据收集、预处理、模型训练、转换到测试的整个ML管道的集成管理。">i-DMS Data Manager는 알코올 검출 모델의 학습과 관리를 위한 전용 도구입니다. 데이터 수집, 전처리, 모델 학습, 변환, 테스트까지 전체 ML 파이프라인을 통합 관리할 수 있습니다.</p>
+
+            <div class="image-container">
+                <img src="imgs/blog/idms-data-manager.png" alt="i-DMS Data Manager Interface" data-ko="i-DMS Data Manager 인터페이스" data-en="i-DMS Data Manager Interface">
+                <p class="image-caption" data-ko="i-DMS Data Manager: 모델 로드 및 통합 테스트 인터페이스" data-en="i-DMS Data Manager: Model loading and integration testing interface" data-ja="i-DMS Data Manager：モデルロードと統合テストインターフェース" data-zh="i-DMS Data Manager：模型加载和集成测试界面">i-DMS Data Manager: 모델 로드 및 통합 테스트 인터페이스</p>
+            </div>
+
+            <h3 data-ko="주요 기능" data-en="Key Features" data-ja="主要機能" data-zh="主要功能">주요 기능</h3>
+
+            <ul>
+                <li data-ko="데이터 수집: 피험자별 세션 관리 및 생체지표 녹화" data-en="Data Collection: Subject session management and biometric recording" data-ja="データ収集：被験者別セッション管理と生体指標録画" data-zh="数据收集：受试者会话管理和生物特征记录">데이터 수집: 피험자별 세션 관리 및 생체지표 녹화</li>
+                <li data-ko="데이터 관리: 수집된 세션의 조회, 삭제, 메타데이터 편집" data-en="Data Management: View, delete, and edit metadata of collected sessions" data-ja="データ管理：収集したセッションの照会、削除、メタデータ編集" data-zh="数据管理：查看、删除和编辑已收集会话的元数据">데이터 관리: 수집된 세션의 조회, 삭제, 메타데이터 편집</li>
+                <li data-ko="전처리: 특성 추출 및 데이터셋 구축" data-en="Preprocessing: Feature extraction and dataset construction" data-ja="前処理：特徴抽出とデータセット構築" data-zh="预处理：特征提取和数据集构建">전처리: 특성 추출 및 데이터셋 구축</li>
+                <li data-ko="모델 학습: RandomForest, GradientBoosting, LogisticRegression, SVM 비교 학습" data-en="Model Training: Comparative training with RandomForest, GradientBoosting, LogisticRegression, SVM" data-ja="モデル学習：RandomForest、GradientBoosting、LogisticRegression、SVM比較学習" data-zh="模型训练：RandomForest、GradientBoosting、LogisticRegression、SVM对比训练">모델 학습: RandomForest, GradientBoosting, LogisticRegression, SVM 비교 학습</li>
+                <li data-ko="모델 변환: ONNX 포맷 변환으로 다양한 플랫폼 배포 지원" data-en="Model Conversion: ONNX format conversion for multi-platform deployment" data-ja="モデル変換：ONNX形式変換による多様なプラットフォーム配布対応" data-zh="模型转换：ONNX格式转换支持多平台部署">모델 변환: ONNX 포맷 변환으로 다양한 플랫폼 배포 지원</li>
+                <li data-ko="적용 테스트: 학습된 모델을 i-DMS Scanner에 즉시 적용 및 테스트" data-en="Application Testing: Immediate application and testing of trained models in i-DMS Scanner" data-ja="適用テスト：学習したモデルをi-DMS Scannerに即座に適用とテスト" data-zh="应用测试：将训练好的模型立即应用到i-DMS扫描仪并进行测试">적용 테스트: 학습된 모델을 i-DMS Scanner에 즉시 적용 및 테스트</li>
+            </ul>
+
+            <div class="image-container">
+                <img src="imgs/blog/idms-history.png" alt="i-DMS History Tab" data-ko="i-DMS 히스토리 탭" data-en="i-DMS History Tab">
+                <p class="image-caption" data-ko="i-DMS Data Manager: 학습 히스토리 및 작업 타임라인 관리" data-en="i-DMS Data Manager: Training history and task timeline management" data-ja="i-DMS Data Manager：学習履歴と作業タイムライン管理" data-zh="i-DMS Data Manager：训练历史和任务时间线管理">i-DMS Data Manager: 학습 히스토리 및 작업 타임라인 관리</p>
+            </div>
+
+            <h2 data-ko="기술적 특징" data-en="Technical Features" data-ja="技術的特徴" data-zh="技术特点">기술적 특징</h2>
+
+            <div class="tech-box">
+                <h4 data-ko="Edge Computing 최적화" data-en="Edge Computing Optimization" data-ja="エッジコンピューティング最適化" data-zh="边缘计算优化">Edge Computing 최적화</h4>
+                <ul>
+                    <li data-ko="차량 내장 ECU에서 실시간 처리 가능하도록 최적화" data-en="Optimized for real-time processing in vehicle embedded ECU" data-ja="車両内蔵ECUでリアルタイム処理可能なよう最適化" data-zh="优化用于车辆嵌入式ECU的实时处理">차량 내장 ECU에서 실시간 처리 가능하도록 최적화</li>
+                    <li data-ko="ONNX Runtime 기반 경량 추론 엔진 지원" data-en="ONNX Runtime-based lightweight inference engine support" data-ja="ONNX Runtime基盤軽量推論エンジン対応" data-zh="基于ONNX Runtime的轻量级推理引擎支持">ONNX Runtime 기반 경량 추론 엔진 지원</li>
+                    <li data-ko="NVIDIA Jetson AGX Orin 플랫폼 검증 완료" data-en="Verified on NVIDIA Jetson AGX Orin platform" data-ja="NVIDIA Jetson AGX Orinプラットフォーム検証完了" data-zh="已在NVIDIA Jetson AGX Orin平台验证">NVIDIA Jetson AGX Orin 플랫폼 검증 완료</li>
+                    <li data-ko="클라우드 연결 없이 독립적으로 동작" data-en="Operates independently without cloud connection" data-ja="クラウド接続なしで独立的に動作" data-zh="无需云连接即可独立运行">클라우드 연결 없이 독립적으로 동작</li>
+                </ul>
+            </div>
+
+            <div class="tech-box">
+                <h4 data-ko="프라이버시 보호" data-en="Privacy Protection" data-ja="プライバシー保護" data-zh="隐私保护">프라이버시 보호</h4>
+                <ul>
+                    <li data-ko="모든 데이터 처리는 차량 내부에서 수행" data-en="All data processing performed inside the vehicle" data-ja="全てのデータ処理は車両内部で実行" data-zh="所有数据处理在车辆内部进行">모든 데이터 처리는 차량 내부에서 수행</li>
+                    <li data-ko="얼굴 이미지는 분석 후 즉시 폐기" data-en="Facial images discarded immediately after analysis" data-ja="顔画像は分析後即座に廃棄" data-zh="面部图像分析后立即丢弃">얼굴 이미지는 분석 후 즉시 폐기</li>
+                    <li data-ko="개인정보 미저장, GDPR 준수" data-en="No personal data stored, GDPR compliant" data-ja="個人情報未保存、GDPR準拠" data-zh="不存储个人数据，符合GDPR">개인정보 미저장, GDPR 준수</li>
+                </ul>
+            </div>
+
+            <h2 data-ko="결론" data-en="Conclusion" data-ja="結論" data-zh="结论">결론</h2>
+
+            <p data-ko="FunnyTech21의 i-DMS는 Euro NCAP 2026 Impairment Detection 기준에 대응하는 선도적인 기술 솔루션입니다. 동공, 시선, 안진, HRV 등 다중 생체지표 분석을 통해 기존의 접촉식 음주측정 방식의 한계를 극복하고, 완전히 비접촉 방식으로 운전자의 손상 상태를 탐지합니다." data-en="FunnyTech21's i-DMS is a leading technology solution addressing Euro NCAP 2026 Impairment Detection standards. Through multi-biometric analysis of pupil, gaze, nystagmus, and HRV, it overcomes limitations of traditional contact-based breathalyzer methods, detecting driver impairment in a completely non-contact manner." data-ja="FunnyTech21のi-DMSはEuro NCAP 2026 Impairment Detection基準に対応する先導的な技術ソリューションです。瞳孔、視線、眼振、HRVなど多重生体指標分析を通じて、従来の接触式飲酒検査方式の限界を克服し、完全に非接触方式で運転者の損傷状態を検出します。" data-zh="FunnyTech21的i-DMS是应对Euro NCAP 2026损伤检测标准的领先技术解决方案。通过对瞳孔、视线、眼震、HRV等多重生物特征的分析，克服了传统接触式酒精检测方法的局限性，以完全非接触的方式检测驾驶员的损伤状态。">FunnyTech21의 i-DMS는 Euro NCAP 2026 Impairment Detection 기준에 대응하는 선도적인 기술 솔루션입니다. 동공, 시선, 안진, HRV 등 다중 생체지표 분석을 통해 기존의 접촉식 음주측정 방식의 한계를 극복하고, 완전히 비접촉 방식으로 운전자의 손상 상태를 탐지합니다.</p>
+
+            <p data-ko="Edge Computing 최적화로 차량 내부에서 실시간 처리가 가능하며, 운전자의 프라이버시를 완벽하게 보호합니다. 이를 통해 OEM 및 Tier 1 공급업체들은 Euro NCAP 2026 기준을 효과적으로 충족시킬 수 있습니다." data-en="With Edge Computing optimization, real-time processing is possible inside the vehicle while fully protecting driver privacy. This enables OEMs and Tier 1 suppliers to effectively meet Euro NCAP 2026 standards." data-ja="エッジコンピューティング最適化により車両内部でリアルタイム処理が可能で、運転者のプライバシーを完全に保護します。これによりOEMおよびTier 1サプライヤーはEuro NCAP 2026基準を効果的に充足できます。" data-zh="通过边缘计算优化，可在车辆内部进行实时处理，同时完全保护驾驶员隐私。这使OEM和一级供应商能够有效满足Euro NCAP 2026标准。">Edge Computing 최적화로 차량 내부에서 실시간 처리가 가능하며, 운전자의 프라이버시를 완벽하게 보호합니다. 이를 통해 OEM 및 Tier 1 공급업체들은 Euro NCAP 2026 기준을 효과적으로 충족시킬 수 있습니다.</p>
+
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21">
+            </div>
+            <p class="footer-text">© 2026 FunnyTech21 Co., Ltd. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html" data-ko="홈" data-en="Home">Home</a>
+                <a href="about.html" data-ko="회사 소개" data-en="About">About</a>
+                <a href="index.html#contact" data-ko="문의" data-en="Contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Language functionality
+        function toggleLangDropdown() {
+            document.querySelector('.lang-dropdown').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.lang-selector')) {
+                document.querySelector('.lang-dropdown').classList.remove('active');
+            }
+        });
+
+        const langNames = {
+            ko: '한국어', en: 'English', fr: 'Français', ja: '日本語',
+            zh: '中文', de: 'Deutsch', es: 'Español', vi: 'Tiếng Việt', th: 'ไทย'
+        };
+
+        function changeLanguage(lang) {
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                if (opt.textContent.includes(langNames[lang])) opt.classList.add('active');
+            });
+            document.querySelector('.lang-current').textContent = langNames[lang];
+            document.querySelector('.lang-dropdown').classList.remove('active');
+            localStorage.setItem('funnytech_lang', lang);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('funnytech_lang') || 'ko';
+            changeLanguage(savedLang);
+        });
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered:', registration.scope))
+                    .catch(error => console.log('SW registration failed:', error));
+            });
+        }
+    </script>
+</body>
+</html>
