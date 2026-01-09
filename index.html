@@ -671,6 +671,65 @@
             .meeting-options { flex-direction: column; }
         }
 
+
+        /* Partner Badge Section */
+        .partner-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 40px 24px;
+            border-top: 1px solid var(--border-light);
+        }
+        .partner-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        .partner-badge {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 28px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-light);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .partner-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        .partner-badge img {
+            height: 40px;
+            width: auto;
+        }
+        .partner-badge-text {
+            display: flex;
+            flex-direction: column;
+            border-left: 2px solid #76b900;
+            padding-left: 16px;
+        }
+        .partner-badge-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .partner-badge-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        @media (max-width: 768px) {
+            .partner-container { gap: 30px; }
+            .partner-badge { padding: 12px 20px; }
+            .partner-badge img { height: 32px; }
+            .partner-badge-name { font-size: 0.95rem; }
+        }
+
         /* Footer */
         footer { background: var(--bg-white); border-top: 1px solid var(--border-light); padding: 40px 24px; }
         .footer-container {
@@ -1862,6 +1921,20 @@
             <div class="contact-info-mini">
                 <span>📧 ioplanet@funnytech21.com</span>
                 <span data-ko="📍 인천광역시 중구 인하대병원 개방형실험실" data-en="📍 Inha University Hospital, Incheon, Korea" data-ja="📍 韓国仁川市 仁荷大学病院オープンラボ" data-zh="📍 韩国仁川市 仁荷大学医院开放实验室" data-de="📍 Inha University Hospital, Incheon, Korea" data-es="📍 Hospital Universidad Inha, Incheon, Corea" data-fr="📍 Inha University Hospital, Incheon, Korea" data-vi="📍 Bệnh viện ĐH Inha, Incheon, Hàn Quốc" data-th="📍 โรงพยาบาลม.อินฮา อินชอน เกาหลี">📍 인천광역시 중구 인하대병원 개방형실험실</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Partner Section -->
+    <section class="partner-section">
+        <div class="partner-container">
+            <div class="partner-badge">
+                <img src="imgs/nvidia-logo.svg" alt="NVIDIA">
+                <div class="partner-badge-text">
+                    <span class="partner-badge-title">Official</span>
+                    <span class="partner-badge-name" data-ko="NVIDIA 파트너" data-en="NVIDIA Partner" data-ja="NVIDIAパートナー" data-zh="NVIDIA合作伙伴" data-de="NVIDIA Partner" data-es="Socio de NVIDIA" data-fr="Partenaire NVIDIA" data-vi="Đối tác NVIDIA" data-th="พันธมิตร NVIDIA">NVIDIA Partner</span>
+                </div>
             </div>
         </div>
     </section>
