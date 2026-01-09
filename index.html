@@ -672,32 +672,16 @@
         }
 
 
-        /* Partner Badge Section */
-        .partner-section {
-            background: var(--bg-light);
-            padding: 40px 24px;
-            border-top: 1px solid var(--border-light);
-        }
-        .partner-container {
-            max-width: var(--container-width);
-            margin: 0 auto;
+        /* Footer */
+        .footer-left {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 24px;
         }
-        .nvidia-badge {
-            height: 60px;
+        .footer-partner-badge {
+            height: 45px;
             width: auto;
-            transition: transform 0.2s;
         }
-        .nvidia-badge:hover {
-            transform: scale(1.02);
-        }
-        @media (max-width: 768px) {
-            .nvidia-badge { height: 50px; }
-        }
-
-        /* Footer */
         footer { background: var(--bg-white); border-top: 1px solid var(--border-light); padding: 40px 24px; }
         .footer-container {
             max-width: var(--container-width); margin: 0 auto;
@@ -741,6 +725,8 @@
             .hero-description { font-size: 1rem; }
             .product-grid, .tech-grid, .performance-grid, .app-grid, .video-grid { grid-template-columns: 1fr; }
             .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+            .footer-left { flex-direction: column; gap: 16px; }
+            .footer-partner-badge { height: 40px; }
             .form-row { grid-template-columns: 1fr; }
             .contact-info { flex-direction: column; gap: 16px; }
             .hero-cta { flex-direction: column; gap: 12px; }
@@ -1893,18 +1879,14 @@
     </section>
 
 
-    <!-- Partner Section -->
-    <section class="partner-section">
-        <div class="partner-container">
-            <img src="imgs/nvidia-partner-badge.svg" alt="NVIDIA Elite Partner" class="nvidia-badge">
-        </div>
-    </section>
-
     <footer>
         <div class="footer-container">
-            <div class="footer-logo">
-                <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21">
-                <span data-ko="(주)퍼니테크21" data-en="FunnyTech21 Co., Ltd." data-ja="FunnyTech21株式会社" data-zh="FunnyTech21有限公司" data-de="FunnyTech21 GmbH" data-es="FunnyTech21 S.L." data-fr="FunnyTech21 SARL" data-vi="FunnyTech21 Co., Ltd." data-th="FunnyTech21 Co., Ltd.">(주)퍼니테크21</span>
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21">
+                    <span data-ko="(주)퍼니테크21" data-en="FunnyTech21 Co., Ltd." data-ja="FunnyTech21株式会社" data-zh="FunnyTech21有限公司" data-de="FunnyTech21 GmbH" data-es="FunnyTech21 S.L." data-fr="FunnyTech21 SARL" data-vi="FunnyTech21 Co., Ltd." data-th="FunnyTech21 Co., Ltd.">(주)퍼니테크21</span>
+                </div>
+                <img src="imgs/nvidia-partner-badge.svg" alt="NVIDIA Elite Partner" class="footer-partner-badge">
             </div>
             <div class="footer-links">
                 <a href="#overview" data-ko="제품 소개" data-en="Products" data-ja="製品紹介" data-zh="产品介绍" data-de="Produkte" data-es="Productos" data-fr="Produits" data-vi="Sản phẩm" data-th="ผลิตภัณฑ์">제품 소개</a>

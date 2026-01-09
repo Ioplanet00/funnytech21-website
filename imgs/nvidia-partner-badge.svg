@@ -1,34 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 50">
-  <defs>
-    <linearGradient id="nvGreen" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#8dc63f"/>
-      <stop offset="100%" style="stop-color:#76b900"/>
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Green background square -->
+  <rect x="5" y="5" width="70" height="70" fill="#76B900"/>
   
-  <!-- Background -->
-  <rect width="180" height="50" rx="4" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
-  
-  <!-- Left section - Dark background with NVIDIA logo -->
-  <rect x="1" y="1" width="75" height="48" rx="3" fill="#1a1a1a"/>
-  
-  <!-- NVIDIA Eye Icon (simplified) -->
-  <g transform="translate(12, 10)">
-    <path fill="url(#nvGreen)" d="M25,2 C25,2 18,2 12,6 L12,8 C17,5 22,4 25,4 L25,2 Z"/>
-    <path fill="url(#nvGreen)" d="M25,6 C21,6 16,8 12,11 L12,13 C16,10 20,8 25,8 L25,6 Z"/>
-    <path fill="url(#nvGreen)" d="M25,10 C21,10 17,12 14,14 L14,16 C17,14 21,12 25,12 L25,10 Z"/>
-    <path fill="url(#nvGreen)" d="M25,14 C22,14 19,15 17,16 L17,18 C19,17 22,16 25,16 L25,14 Z"/>
-    <path fill="url(#nvGreen)" d="M8,6 L8,22 L25,22 L25,20 L10,20 L10,8 L8,6 Z"/>
-    <path fill="url(#nvGreen)" d="M27,2 L27,22 L29,22 L29,2 L27,2 Z"/>
+  <!-- NVIDIA Eye Icon (white) -->
+  <g fill="#FFFFFF" transform="translate(10, 12)">
+    <!-- Eye swirl lines -->
+    <path d="M50,8 C50,8 38,8 28,14 L28,18 C36,12 44,10 50,10 L50,8 Z"/>
+    <path d="M50,14 C44,14 36,17 28,22 L28,26 C36,20 43,17 50,17 L50,14 Z"/>
+    <path d="M50,22 C44,22 37,25 30,30 L30,34 C37,28 44,25 50,25 L50,22 Z"/>
+    <path d="M50,30 C45,30 39,32 34,36 L34,40 C39,36 45,33 50,33 L50,30 Z"/>
+    <path d="M50,38 C46,38 42,40 38,43 L38,47 C42,44 46,42 50,42 L50,38 Z"/>
+    <!-- Base shape -->
+    <path d="M18,14 L18,52 L50,52 L50,48 L22,48 L22,18 L18,14 Z"/>
+    <!-- Right bar -->
+    <path d="M54,8 L54,52 L58,52 L58,8 L54,8 Z"/>
   </g>
   
   <!-- NVIDIA Text -->
-  <text x="38" y="40" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#76b900" text-anchor="middle">NVIDIA</text>
-  
-  <!-- Divider line -->
-  <line x1="80" y1="10" x2="80" y2="40" stroke="#76b900" stroke-width="2"/>
-  
-  <!-- Right section - Elite Partner text -->
-  <text x="128" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="normal" fill="#333333" text-anchor="middle">Elite</text>
-  <text x="128" y="38" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#333333" text-anchor="middle">Partner</text>
+  <g fill="#000000" transform="translate(5, 82)">
+    <text font-family="Arial Black, Arial, sans-serif" font-size="22" font-weight="900" letter-spacing="1">NVIDIA</text>
+  </g>
 </svg>
