@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VT16VXN7KD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VT16VXN7KD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-DMS Live Demo | FunnyTech21 - AI Driver Monitoring System</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Try our i-DMS Live Demo - Real-time AI-based driver monitoring using your webcam. Experience drowsiness detection, eye tracking, and fatigue analysis.">
+    <meta name="keywords" content="i-DMS demo, driver monitoring demo, drowsiness detection, eye tracking, PERCLOS, EAR, fatigue detection">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="i-DMS Live Demo | FunnyTech21">
+    <meta property="og:description" content="Try our AI-based driver monitoring system live in your browser">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.funnytech21.com/demo.html">
+
+    <!-- MediaPipe -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-red: #FF2222;
+            --primary-blue: #15539E;
+            --electric-blue: #3B82F6;
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 25, 35, 0.9);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0d1117 50%, #111827 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .logo-text h1 {
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-red), var(--electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
+            color: var(--accent-green);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 25px;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .video-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .live-badge {
+            background: var(--accent-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .live-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .fps-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--electric-blue);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        #webcam {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+        }
+
+        #canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: scaleX(-1);
+        }
+
+        .overlay-info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .overlay-badge {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, var(--primary-red), var(--electric-blue));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 34, 34, 0.3);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 34, 34, 0.4);
+        }
+
+        .start-btn:disabled {
+            background: var(--bg-card);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .panel-title {
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+        }
+
+        .panel-title i {
+            color: var(--electric-blue);
+        }
+
+        /* Status Card */
+        .status-card {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .status-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            transition: all 0.3s;
+        }
+
+        .status-icon.safe {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+            color: var(--accent-green);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .status-icon.warning {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+            color: var(--accent-amber);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .status-icon.danger {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+            color: var(--accent-red);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+            animation: pulse 1s infinite;
+        }
+
+        .status-text {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .status-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .metric-item {
+            background: rgba(10, 10, 15, 0.5);
+            padding: 18px;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-green);
+            font-family: 'Inter', monospace;
+        }
+
+        .metric-value.warning { color: var(--accent-amber); }
+        .metric-value.danger { color: var(--accent-red); }
+
+        .metric-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--electric-blue));
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .progress-fill.warning {
+            background: linear-gradient(90deg, var(--accent-amber), #fbbf24);
+        }
+
+        .progress-fill.danger {
+            background: linear-gradient(90deg, var(--accent-red), #f87171);
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 16px;
+            padding: 20px;
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .alert-box.show {
+            display: flex;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .alert-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            animation: pulse 1s infinite;
+        }
+
+        .alert-text h4 {
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: var(--accent-red);
+        }
+
+        .alert-text p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: var(--electric-blue);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .privacy-note {
+            margin-top: 10px;
+            padding: 15px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .privacy-note i {
+            color: var(--accent-green);
+            margin-right: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .badge {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 12px 16px;
+            }
+
+            .logo-text h1 {
+                font-size: 16px;
+            }
+
+            .video-section, .panel {
+                padding: 16px;
+                border-radius: 14px;
+            }
+
+            .metrics-grid {
+                gap: 10px;
+            }
+
+            .metric-value {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="imgs/funnytech_logo_original.png" alt="FunnyTech21 Logo">
+            <div class="logo-text">
+                <h1>i-DMS Live Demo</h1>
+                <p>AI Driver Monitoring System</p>
+            </div>
+        </a>
+        <div class="header-right">
+            <div class="badge"><i class="fas fa-shield-alt"></i> Euro NCAP 2026 Ready</div>
+            <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="video-section">
+            <div class="video-header">
+                <div class="video-title">
+                    <span class="live-badge">LIVE</span>
+                    <span id="resolution" style="color: var(--text-secondary);">Waiting for camera...</span>
+                </div>
+                <span class="fps-badge" id="fps">-- FPS</span>
+            </div>
+            <div class="video-container">
+                <video id="webcam" autoplay playsinline></video>
+                <canvas id="canvas"></canvas>
+                <div class="overlay-info">
+                    <div class="overlay-badge">
+                        <i class="fas fa-eye" style="color: var(--electric-blue);"></i>
+                        <span id="gazeStatus">--</span>
+                    </div>
+                    <div class="overlay-badge">
+                        <i class="fas fa-user" style="color: var(--accent-green);"></i>
+                        <span id="faceStatus">No Face</span>
+                    </div>
+                </div>
+            </div>
+            <button class="start-btn" id="startBtn" onclick="startCamera()">
+                <i class="fas fa-play"></i> Start Camera & AI Analysis
+            </button>
+        </div>
+
+        <div class="sidebar">
+            <div class="panel">
+                <div class="status-card">
+                    <div class="status-icon safe" id="statusIcon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="status-text" id="statusText">Ready to Start</div>
+                    <div class="status-desc" id="statusDesc">Click the button to begin analysis</div>
+                </div>
+            </div>
+
+            <div class="panel alert-box" id="alertBox">
+                <div class="alert-icon">
+                    <i class="fas fa-exclamation"></i>
+                </div>
+                <div class="alert-text">
+                    <h4 id="alertTitle">Drowsiness Detected!</h4>
+                    <p id="alertDesc">Please take a break</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title"><i class="fas fa-chart-line"></i> Real-time Metrics</div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value" id="earValue">--</div>
+                        <div class="metric-label">EAR Value</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="perclosValue">0%</div>
+                        <div class="metric-label">PERCLOS</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="blinkCount">0</div>
+                        <div class="metric-label">Blink Count</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="yawnCount">0</div>
+                        <div class="metric-label">Yawn Count</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title"><i class="fas fa-tachometer-alt"></i> Drowsiness Level</div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="metric-value" id="drowsinessLevel" style="font-size: 42px;">0%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="drowsinessBar" style="width: 0%"></div>
+                    </div>
+                    <div class="metric-label" style="margin-top: 15px;" id="drowsinessDesc">Alert & Focused</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p><strong>FunnyTech21</strong> | <a href="mailto:info@funnytech21.com">info@funnytech21.com</a> | <a href="index.html">www.funnytech21.com</a></p>
+        <div class="privacy-note">
+            <i class="fas fa-lock"></i>
+            <span>All AI processing runs locally in your browser. No video data is sent to any server.</span>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let faceMesh;
+        let camera;
+        let isRunning = false;
+        let frameCount = 0;
+        let lastTime = performance.now();
+        let blinkCount = 0;
+        let yawnCount = 0;
+        let eyeClosedFrames = 0;
+        let totalFrames = 0;
+        let lastEAR = 0.3;
+        let wasEyeClosed = false;
+        let mouthOpenFrames = 0;
+        let wasMouthOpen = false;
+
+        // EAR threshold
+        const EAR_THRESHOLD = 0.21;
+        const MAR_THRESHOLD = 0.6;
+
+        // Landmark indices for eyes
+        const LEFT_EYE = [33, 160, 158, 133, 153, 144];
+        const RIGHT_EYE = [362, 385, 387, 263, 373, 380];
+        const MOUTH = [13, 14, 78, 308];
+
+        function distance(p1, p2) {
+            return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+        }
+
+        function calculateEAR(landmarks, eyeIndices) {
+            const p1 = landmarks[eyeIndices[0]];
+            const p2 = landmarks[eyeIndices[1]];
+            const p3 = landmarks[eyeIndices[2]];
+            const p4 = landmarks[eyeIndices[3]];
+            const p5 = landmarks[eyeIndices[4]];
+            const p6 = landmarks[eyeIndices[5]];
+
+            const vertical1 = distance(p2, p6);
+            const vertical2 = distance(p3, p5);
+            const horizontal = distance(p1, p4);
+
+            return (vertical1 + vertical2) / (2.0 * horizontal);
+        }
+
+        function calculateMAR(landmarks) {
+            const top = landmarks[MOUTH[0]];
+            const bottom = landmarks[MOUTH[1]];
+            const left = landmarks[MOUTH[2]];
+            const right = landmarks[MOUTH[3]];
+
+            const vertical = distance(top, bottom);
+            const horizontal = distance(left, right);
+
+            return vertical / horizontal;
+        }
+
+        function onResults(results) {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const video = document.getElementById('webcam');
+
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Calculate FPS
+            frameCount++;
+            const now = performance.now();
+            if (now - lastTime >= 1000) {
+                document.getElementById('fps').textContent = frameCount + ' FPS';
+                frameCount = 0;
+                lastTime = now;
+            }
+
+            if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
+                const landmarks = results.multiFaceLandmarks[0];
+
+                // Draw face mesh
+                drawConnectors(ctx, landmarks, FACEMESH_TESSELATION, {color: 'rgba(59, 130, 246, 0.15)', lineWidth: 1});
+                drawConnectors(ctx, landmarks, FACEMESH_RIGHT_EYE, {color: '#10b981', lineWidth: 2});
+                drawConnectors(ctx, landmarks, FACEMESH_LEFT_EYE, {color: '#10b981', lineWidth: 2});
+                drawConnectors(ctx, landmarks, FACEMESH_LIPS, {color: '#3b82f6', lineWidth: 2});
+
+                // Calculate EAR
+                const leftEAR = calculateEAR(landmarks, LEFT_EYE);
+                const rightEAR = calculateEAR(landmarks, RIGHT_EYE);
+                const avgEAR = (leftEAR + rightEAR) / 2;
+                lastEAR = avgEAR;
+
+                // Calculate MAR
+                const mar = calculateMAR(landmarks);
+
+                // Update UI
+                document.getElementById('faceStatus').textContent = 'Face Detected';
+                document.getElementById('earValue').textContent = avgEAR.toFixed(3);
+
+                // Eye closed detection
+                totalFrames++;
+                const isEyeClosed = avgEAR < EAR_THRESHOLD;
+
+                if (isEyeClosed) {
+                    eyeClosedFrames++;
+                }
+
+                // Blink detection
+                if (isEyeClosed && !wasEyeClosed) {
+                    blinkCount++;
+                    document.getElementById('blinkCount').textContent = blinkCount;
+                }
+                wasEyeClosed = isEyeClosed;
+
+                // Yawn detection
+                const isMouthOpen = mar > MAR_THRESHOLD;
+                if (isMouthOpen) {
+                    mouthOpenFrames++;
+                    if (mouthOpenFrames > 20 && !wasMouthOpen) {
+                        yawnCount++;
+                        document.getElementById('yawnCount').textContent = yawnCount;
+                        wasMouthOpen = true;
+                    }
+                } else {
+                    mouthOpenFrames = 0;
+                    wasMouthOpen = false;
+                }
+
+                // PERCLOS calculation
+                const perclos = totalFrames > 0 ? (eyeClosedFrames / totalFrames) * 100 : 0;
+                document.getElementById('perclosValue').textContent = perclos.toFixed(1) + '%';
+
+                // Drowsiness level
+                let drowsinessLevel = 0;
+                if (perclos > 15) drowsinessLevel += perclos * 2;
+                if (avgEAR < EAR_THRESHOLD) drowsinessLevel += 30;
+                if (yawnCount > 2) drowsinessLevel += yawnCount * 5;
+                drowsinessLevel = Math.min(100, drowsinessLevel);
+
+                updateDrowsinessUI(drowsinessLevel, avgEAR, perclos);
+
+                // Gaze direction
+                const nose = landmarks[1];
+                const leftEye = landmarks[33];
+                const rightEye = landmarks[263];
+                const eyeCenter = { x: (leftEye.x + rightEye.x) / 2, y: (leftEye.y + rightEye.y) / 2 };
+                const gazeX = (nose.x - eyeCenter.x) * 5;
+
+                let gazeStatus = 'Forward';
+                if (gazeX < -0.15) gazeStatus = 'Looking Left';
+                else if (gazeX > 0.15) gazeStatus = 'Looking Right';
+                document.getElementById('gazeStatus').textContent = gazeStatus;
+
+            } else {
+                document.getElementById('faceStatus').textContent = 'No Face';
+                document.getElementById('earValue').textContent = '--';
+                document.getElementById('gazeStatus').textContent = '--';
+            }
+        }
+
+        function updateDrowsinessUI(level, ear, perclos) {
+            const levelEl = document.getElementById('drowsinessLevel');
+            const barEl = document.getElementById('drowsinessBar');
+            const descEl = document.getElementById('drowsinessDesc');
+            const statusIcon = document.getElementById('statusIcon');
+            const statusText = document.getElementById('statusText');
+            const statusDesc = document.getElementById('statusDesc');
+            const alertBox = document.getElementById('alertBox');
+            const earValueEl = document.getElementById('earValue');
+            const perclosValueEl = document.getElementById('perclosValue');
+
+            levelEl.textContent = level.toFixed(0) + '%';
+            barEl.style.width = level + '%';
+
+            // Remove all classes
+            levelEl.className = 'metric-value';
+            barEl.className = 'progress-fill';
+            statusIcon.className = 'status-icon';
+            earValueEl.className = 'metric-value';
+            perclosValueEl.className = 'metric-value';
+
+            if (level < 30) {
+                statusIcon.classList.add('safe');
+                statusIcon.innerHTML = '<i class="fas fa-shield-alt"></i>';
+                statusText.textContent = 'Safe Driving';
+                statusDesc.textContent = 'All systems normal';
+                descEl.textContent = 'Alert & Focused';
+                alertBox.classList.remove('show');
+            } else if (level < 60) {
+                levelEl.classList.add('warning');
+                barEl.classList.add('warning');
+                earValueEl.classList.add('warning');
+                perclosValueEl.classList.add('warning');
+                statusIcon.classList.add('warning');
+                statusIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+                statusText.textContent = 'Caution';
+                statusDesc.textContent = 'Signs of fatigue detected';
+                descEl.textContent = 'Mild Drowsiness';
+                alertBox.classList.remove('show');
+            } else {
+                levelEl.classList.add('danger');
+                barEl.classList.add('danger');
+                earValueEl.classList.add('danger');
+                perclosValueEl.classList.add('danger');
+                statusIcon.classList.add('danger');
+                statusIcon.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+                statusText.textContent = 'Warning!';
+                statusDesc.textContent = 'High drowsiness level';
+                descEl.textContent = 'High Drowsiness - Take a Break!';
+                alertBox.classList.add('show');
+                document.getElementById('alertTitle').textContent = 'Drowsiness Alert!';
+                document.getElementById('alertDesc').textContent = 'PERCLOS: ' + perclos.toFixed(1) + '% - Please take a break';
+            }
+        }
+
+        async function startCamera() {
+            const btn = document.getElementById('startBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading AI Model...';
+
+            try {
+                // Initialize FaceMesh
+                faceMesh = new FaceMesh({
+                    locateFile: (file) => {
+                        return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
+                    }
+                });
+
+                faceMesh.setOptions({
+                    maxNumFaces: 1,
+                    refineLandmarks: true,
+                    minDetectionConfidence: 0.5,
+                    minTrackingConfidence: 0.5
+                });
+
+                faceMesh.onResults(onResults);
+
+                // Start camera
+                const video = document.getElementById('webcam');
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { width: 1280, height: 720, facingMode: 'user' }
+                });
+                video.srcObject = stream;
+
+                video.onloadedmetadata = () => {
+                    document.getElementById('resolution').textContent = video.videoWidth + 'x' + video.videoHeight;
+                    btn.innerHTML = '<i class="fas fa-circle" style="color: #ef4444;"></i> AI Analysis Running...';
+
+                    document.getElementById('statusText').textContent = 'Safe Driving';
+                    document.getElementById('statusDesc').textContent = 'All systems normal';
+
+                    // Start processing
+                    async function processFrame() {
+                        if (video.readyState >= 2) {
+                            await faceMesh.send({ image: video });
+                        }
+                        requestAnimationFrame(processFrame);
+                    }
+                    processFrame();
+                };
+
+            } catch (error) {
+                console.error('Error:', error);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Camera Access Denied';
+                alert('Camera access is required for the demo. Please allow camera permission and try again.');
+            }
+        }
+    </script>
+</body>
+</html>
