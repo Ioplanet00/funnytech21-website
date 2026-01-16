@@ -854,7 +854,7 @@
     <div class="container specs-section">
         <div class="section-header">
             <div class="section-tag" data-ko="기술 사양" data-en="Technical Specs" data-ja="技術仕様" data-zh="技术规格" data-de="Technische Spezifikationen" data-es="Especificaciones Técnicas" data-fr="Technical Specs" data-vi="Thông số Kỹ thuật" data-th="ข้อมูลจำเพาะทางเทคนิค">Technical Specs</div>
-            <h2 class="section-title" data-ko="FunnyTech Face ID 시스템" data-en="FunnyTech Face ID System" data-ja="FunnyTech Face ID システム" data-zh="FunnyTech Face ID 系统" data-de="FunnyTech Face ID System" data-es="Sistema FunnyTech Face ID" data-fr="FunnyTech Face ID System" data-vi="Hệ thống FunnyTech Face ID" data-th="ระบบ FunnyTech Face ID">FunnyTech Face ID System</h2>
+            <h2 class="section-title" data-ko="FunnyTech21 Face ID 시스템" data-en="FunnyTech21 Face ID System" data-ja="FunnyTech21 Face ID システム" data-zh="FunnyTech21 Face ID 系统" data-de="FunnyTech21 Face ID System" data-es="Sistema FunnyTech21 Face ID" data-fr="FunnyTech21 Face ID System" data-vi="Hệ thống FunnyTech21 Face ID" data-th="ระบบ FunnyTech21 Face ID">FunnyTech21 Face ID System</h2>
             <p class="section-subtitle" data-ko="기술 사양서" data-en="Technical Specification" data-ja="技術仕様書" data-zh="技术规格书" data-de="Technische Spezifikation" data-es="Especificación Técnica" data-fr="Technical Specification" data-vi="Thông số Kỹ thuật" data-th="ข้อกำหนดทางเทคนิค">Technical Specification</p>
         </div>
 
@@ -1000,6 +1000,11 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>NVIDIA Jetson Thor</td>
+                    <td>TensorRT, CUDA 12.x, Docker</td>
+                    <td class="highlight">60+ FPS (Primary)</td>
+                </tr>
+                <tr>
                     <td>NVIDIA Jetson AGX Orin</td>
                     <td>TensorRT, CUDA 12.x</td>
                     <td class="highlight">30+ FPS</td>
@@ -1019,6 +1024,56 @@
                     <td>ONNX Runtime</td>
                     <td class="highlight">5-10 FPS</td>
                 </tr>
+            </tbody>
+        </table>
+
+        <!-- Camera Support (v1.1.0) -->
+        <h3 class="spec-section-title">Camera Support (v1.1.0)</h3>
+        <table class="specs-table">
+            <thead>
+                <tr>
+                    <th>Camera Type</th>
+                    <th>Model</th>
+                    <th>Specification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>RGB Camera</td>
+                    <td class="highlight">Orbbec Astra</td>
+                    <td>1280×720 @ 30fps, Normal lighting conditions</td>
+                </tr>
+                <tr>
+                    <td>NIR Camera</td>
+                    <td class="highlight">Arducam IMX462</td>
+                    <td>1280×720 @ 30fps, Low-light/IR conditions</td>
+                </tr>
+                <tr>
+                    <td>Camera Switching</td>
+                    <td class="highlight">Hot-swap Supported</td>
+                    <td>Real-time camera switching without restart</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Registration Process (v1.1.0) -->
+        <h3 class="spec-section-title">Registration Process (v1.1.0)</h3>
+        <table class="specs-table">
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>Direction</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Front (정면)</td><td class="highlight">2 sec</td></tr>
+                <tr><td>2</td><td>Right (오른쪽)</td><td class="highlight">2 sec</td></tr>
+                <tr><td>3</td><td>Left (왼쪽)</td><td class="highlight">2 sec</td></tr>
+                <tr><td>4</td><td>Up (위)</td><td class="highlight">2 sec</td></tr>
+                <tr><td>5</td><td>Down (아래)</td><td class="highlight">2 sec</td></tr>
+                <tr><td>6</td><td>Eye Blink (눈 깜빡임)</td><td class="highlight">2 sec</td></tr>
+                <tr><td>7</td><td>Confirmation (확인)</td><td class="highlight">5 sec</td></tr>
             </tbody>
         </table>
 
