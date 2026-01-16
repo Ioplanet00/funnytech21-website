@@ -435,9 +435,100 @@
         .cookie-btn-decline { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); }
         .cookie-btn-decline:hover { background: rgba(255,255,255,0.1); }
         @media (max-width: 768px) { .cookie-content { flex-direction: column; text-align: center; } .cookie-actions { width: 100%; justify-content: center; } }
+
+        /* Update Banner */
+        .update-banner {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            padding: 12px 24px;
+            text-align: center;
+            position: relative;
+            z-index: 100;
+        }
+        .update-banner-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .update-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        .update-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .update-link {
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .update-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        @media (max-width: 768px) {
+            .update-banner-content { flex-direction: column; gap: 10px; }
+            .update-text { font-size: 0.8rem; }
+        }
+
+        /* New Feature Cards */
+        .new-features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .new-feature-item {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.1) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+        .new-feature-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        .new-feature-item h4 {
+            font-size: 1rem;
+            color: var(--text-white);
+            margin-bottom: 8px;
+        }
+        .new-feature-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        @media (max-width: 992px) {
+            .new-features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 576px) {
+            .new-features-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+    <!-- Version Update Banner -->
+    <div class="update-banner">
+        <div class="update-banner-content">
+            <span class="update-badge">🎉 NEW v1.1.0</span>
+            <span class="update-text" data-ko="FT-LiveGuard™ v1.1.0 출시: 아이폰 스타일 7단계 등록, 듀얼 카메라 지원 (RGB + NIR), 24/7 모니터링 모드" data-en="FT-LiveGuard™ v1.1.0 Released: iPhone-style 7-step registration, Dual camera support (RGB + NIR), 24/7 Monitoring mode" data-ja="FT-LiveGuard™ v1.1.0リリース：iPhone式7段階登録、デュアルカメラ対応、24/7監視モード">FT-LiveGuard™ v1.1.0 Released: iPhone-style 7-step registration, Dual camera support (RGB + NIR), 24/7 Monitoring mode</span>
+            <a href="https://github.com/Ioplanet00/face-id" target="_blank" class="update-link">View on GitHub →</a>
+        </div>
+    </div>
+
     <!-- Header -->
     <div class="header">
         <div class="lang-selector" id="langSelector">
@@ -610,66 +701,98 @@
         </div>
     </div>
 
+    <!-- v1.1.0 New Features -->
+    <div class="container" style="padding-bottom: 0;">
+        <div class="section-header">
+            <div class="section-tag" style="background: rgba(16,185,129,0.15); color: #10b981; border-color: rgba(16,185,129,0.3);" data-ko="v1.1.0 신규 기능" data-en="v1.1.0 New Features" data-ja="v1.1.0 新機能">v1.1.0 New Features</div>
+            <h2 class="section-title" data-ko="FT-LiveGuard™ 주요 업데이트" data-en="FT-LiveGuard™ Major Update" data-ja="FT-LiveGuard™ メジャーアップデート">FT-LiveGuard™ Major Update</h2>
+            <p class="section-subtitle" data-ko="아이폰 Face ID 수준의 사용자 경험과 엔터프라이즈급 보안" data-en="iPhone Face ID level user experience with enterprise-grade security" data-ja="iPhone Face IDレベルのユーザー体験とエンタープライズグレードのセキュリティ">iPhone Face ID level user experience with enterprise-grade security</p>
+        </div>
+
+        <div class="new-features-grid">
+            <div class="new-feature-item">
+                <div class="icon">📱</div>
+                <h4 data-ko="7단계 등록" data-en="7-Step Registration" data-ja="7段階登録">7-Step Registration</h4>
+                <p data-ko="정면, 좌우, 상하, 눈깜빡임 - 17초 완료" data-en="Front, Left, Right, Up, Down, Blink - 17sec completion" data-ja="正面、左右、上下、まばたき - 17秒完了">Front, Left, Right, Up, Down, Blink - 17sec completion</p>
+            </div>
+            <div class="new-feature-item">
+                <div class="icon">📷</div>
+                <h4 data-ko="듀얼 카메라" data-en="Dual Camera Support" data-ja="デュアルカメラ">Dual Camera Support</h4>
+                <p data-ko="Orbbec RGB + Arducam NIR 동시 지원" data-en="Orbbec RGB + Arducam NIR simultaneous support" data-ja="Orbbec RGB + Arducam NIR 同時対応">Orbbec RGB + Arducam NIR simultaneous support</p>
+            </div>
+            <div class="new-feature-item">
+                <div class="icon">🔄</div>
+                <h4 data-ko="중복 방지" data-en="Duplicate Prevention" data-ja="重複防止">Duplicate Prevention</h4>
+                <p data-ko="등록 시 기존 얼굴 자동 감지 및 차단" data-en="Auto-detect and block existing faces during registration" data-ja="登録時に既存の顔を自動検出・ブロック">Auto-detect and block existing faces during registration</p>
+            </div>
+            <div class="new-feature-item">
+                <div class="icon">📊</div>
+                <h4 data-ko="24/7 모니터링" data-en="24/7 Monitoring" data-ja="24/7 モニタリング">24/7 Monitoring</h4>
+                <p data-ko="지속적 스트림 및 실시간 얼굴 식별" data-en="Continuous streaming with real-time face identification" data-ja="継続的ストリームとリアルタイム顔識別">Continuous streaming with real-time face identification</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Usage Guide -->
     <div class="container usage-section">
         <div class="section-header">
             <div class="section-tag" data-ko="사용 방법" data-en="How It Works" data-ja="使い方" data-zh="使用方法" data-de="So funktioniert es" data-es="Cómo Funciona" data-fr="How It Works" data-vi="Cách hoạt động" data-th="วิธีการทำงาน">How It Works</div>
-            <h2 class="section-title" data-ko="솔루션 인터페이스" data-en="Solution Interface" data-ja="ソリューションインターフェース" data-zh="解决方案界面" data-de="Lösungsschnittstelle" data-es="Interfaz de Solución" data-fr="Solution Interface" data-vi="Giao diện Giải pháp" data-th="อินเทอร์เฟซโซลูชัน">Solution Interface</h2>
-            <p class="section-subtitle" data-ko="간단한 3단계 프로세스: 등록, 인식, 관리" data-en="Simple 3-step process: Register, Recognize, Manage" data-ja="シンプルな3ステッププロセス：登録、認識、管理" data-zh="简单的三步流程：注册、识别、管理" data-de="Einfacher 3-Schritt-Prozess: Registrieren, Erkennen, Verwalten" data-es="Proceso simple de 3 pasos: Registrar, Reconocer, Gestionar" data-fr="Simple 3-step process: Register, Recognize, Manage" data-vi="Quy trình 3 bước đơn giản: Đăng ký, Nhận dạng, Quản lý" data-th="กระบวนการ 3 ขั้นตอนง่ายๆ: ลงทะเบียน รับรู้ จัดการ">Simple 3-step process: Register, Recognize, Manage</p>
+            <h2 class="section-title" data-ko="FT-LiveGuard™ 인터페이스" data-en="FT-LiveGuard™ Interface" data-ja="FT-LiveGuard™ インターフェース" data-zh="FT-LiveGuard™ 界面" data-de="FT-LiveGuard™ Schnittstelle" data-es="Interfaz FT-LiveGuard™" data-fr="FT-LiveGuard™ Interface" data-vi="Giao diện FT-LiveGuard™" data-th="อินเทอร์เฟซ FT-LiveGuard™">FT-LiveGuard™ Interface</h2>
+            <p class="section-subtitle" data-ko="3가지 모드: 등록, 인식, 24/7 모니터링" data-en="3 Operating Modes: Register, Identify, 24/7 Monitoring" data-ja="3つのモード：登録、認識、24/7監視" data-zh="3种操作模式：注册、识别、24/7监控" data-de="3 Betriebsmodi: Registrieren, Identifizieren, 24/7-Überwachung" data-es="3 Modos de Operación: Registrar, Identificar, Monitoreo 24/7" data-fr="3 Operating Modes: Register, Identify, 24/7 Monitoring" data-vi="3 Chế độ: Đăng ký, Nhận dạng, Giám sát 24/7" data-th="3 โหมดการทำงาน: ลงทะเบียน ระบุตัวตน ตรวจสอบ 24/7">3 Operating Modes: Register, Identify, 24/7 Monitoring</p>
         </div>
 
         <div class="usage-steps">
             <div class="usage-step">
-                <img src="imgs/faceid/01_main_menu.png" alt="Main Menu" class="usage-step-img">
+                <img src="imgs/faceid/v2_01_register_mode.png" alt="Register Mode" class="usage-step-img">
                 <div class="usage-step-content">
                     <div class="usage-step-number">1</div>
-                    <h4>Main Dashboard</h4>
-                    <p>Choose from Register, Recognize, or Manage options for driver authentication.</p>
+                    <h4 data-ko="등록 모드" data-en="Register Mode" data-ja="登録モード">Register Mode</h4>
+                    <p data-ko="새 얼굴 등록 시작. 카메라 선택 및 시스템 상태 확인 가능. 실시간 활동 로그 표시." data-en="Start new face registration. Camera selection and system stats available. Real-time activity log displayed." data-ja="新しい顔の登録を開始。カメラ選択とシステム状態確認可能。リアルタイム活動ログ表示。">Start new face registration. Camera selection and system stats available. Real-time activity log displayed.</p>
                 </div>
             </div>
 
             <div class="usage-step">
-                <img src="imgs/faceid/04_registration.png" alt="Registration" class="usage-step-img">
+                <img src="imgs/faceid/v2_02_7step_registration.png" alt="7-Step Registration" class="usage-step-img">
                 <div class="usage-step-content">
                     <div class="usage-step-number">2</div>
-                    <h4>Face Registration</h4>
-                    <p>Follow 7-step guided process with head tilts for comprehensive face capture.</p>
+                    <h4 data-ko="7단계 등록 프로세스" data-en="7-Step Registration Process" data-ja="7段階登録プロセス">7-Step Registration Process</h4>
+                    <p data-ko="아이폰 Face ID 스타일. 정면→오른쪽→왼쪽→위→아래→눈깜빡임→완료. 총 17초 소요." data-en="iPhone Face ID style. Front→Right→Left→Up→Down→Blink→Done. Total 17 seconds." data-ja="iPhone Face IDスタイル。正面→右→左→上→下→まばたき→完了。合計17秒。">iPhone Face ID style. Front→Right→Left→Up→Down→Blink→Done. Total 17 seconds.</p>
                 </div>
             </div>
 
             <div class="usage-step">
-                <img src="imgs/faceid/02_scan_face.png" alt="Scan Face" class="usage-step-img">
+                <img src="imgs/faceid/v2_03_identify_mode.png" alt="Identify Mode" class="usage-step-img">
                 <div class="usage-step-content">
                     <div class="usage-step-number">3</div>
-                    <h4>Face Scanning</h4>
-                    <p>Look at the camera and tap "Scan Face" for instant recognition.</p>
+                    <h4 data-ko="인식 모드" data-en="Identify Mode" data-ja="認識モード">Identify Mode</h4>
+                    <p data-ko="온디맨드 얼굴 인식. 버튼 클릭 시 카메라 시작 및 자동 캡처. 신뢰도 점수 및 사용자 정보 표시." data-en="On-demand face recognition. Camera starts on button click and auto-captures. Shows confidence score and user info." data-ja="オンデマンド顔認識。ボタンクリックでカメラ起動・自動キャプチャ。信頼度スコアとユーザー情報表示。">On-demand face recognition. Camera starts on button click and auto-captures. Shows confidence score and user info.</p>
                 </div>
             </div>
 
             <div class="usage-step">
-                <img src="imgs/faceid/06_security_check.png" alt="Security Check" class="usage-step-img">
+                <img src="imgs/faceid/v2_04_monitoring_mode.png" alt="24/7 Monitoring" class="usage-step-img">
                 <div class="usage-step-content">
                     <div class="usage-step-number">4</div>
-                    <h4>Liveness Challenge</h4>
-                    <p>Presents challenges to users to prevent deepfake, print, and video attacks.</p>
+                    <h4 data-ko="24/7 모니터링 모드" data-en="24/7 Monitoring Mode" data-ja="24/7 監視モード">24/7 Monitoring Mode</h4>
+                    <p data-ko="지속적 비디오 스트리밍 및 자동 얼굴 감지/식별. 보안 모니터링 스테이션에 최적화." data-en="Continuous video streaming with automatic face detection/identification. Optimized for security monitoring stations." data-ja="継続的ビデオストリーミングと自動顔検出・識別。セキュリティ監視ステーションに最適化。">Continuous video streaming with automatic face detection/identification. Optimized for security monitoring stations.</p>
                 </div>
             </div>
 
             <div class="usage-step">
-                <img src="imgs/faceid/03_unknown.png" alt="Unknown Face" class="usage-step-img">
+                <img src="imgs/faceid/04_registration.png" alt="Multi-Angle Capture" class="usage-step-img">
                 <div class="usage-step-content">
                     <div class="usage-step-number">5</div>
-                    <h4>Unknown Detection</h4>
-                    <p>Unregistered faces are flagged as "Unknown" with red indicator.</p>
+                    <h4 data-ko="다각도 얼굴 캡처" data-en="Multi-Angle Face Capture" data-ja="多角度顔キャプチャ">Multi-Angle Face Capture</h4>
+                    <p data-ko="6개 방향에서 임베딩 수집. 어떤 각도에서도 정확한 인식 보장." data-en="Embeddings collected from 6 directions. Ensures accurate recognition from any angle." data-ja="6方向からエンベディング収集。どの角度からでも正確な認識を保証。">Embeddings collected from 6 directions. Ensures accurate recognition from any angle.</p>
                 </div>
             </div>
 
             <div class="usage-step">
-                <img src="imgs/faceid/05_recognized.png" alt="Recognized" class="usage-step-img">
+                <img src="imgs/faceid/05_recognized.png" alt="Recognition Result" class="usage-step-img">
                 <div class="usage-step-content">
                     <div class="usage-step-number">6</div>
-                    <h4>Recognition Success</h4>
-                    <p>Registered users are identified with name and confidence score.</p>
+                    <h4 data-ko="인식 결과" data-en="Recognition Result" data-ja="認識結果">Recognition Result</h4>
+                    <p data-ko="등록된 사용자 확인 시 이름, 부서, 신뢰도 점수 표시. 모든 이벤트 활동 로그에 기록." data-en="Shows name, department, and confidence score for verified users. All events recorded in activity log." data-ja="確認されたユーザーの名前、部署、信頼度スコアを表示。すべてのイベントを活動ログに記録。">Shows name, department, and confidence score for verified users. All events recorded in activity log.</p>
                 </div>
             </div>
         </div>
