@@ -897,7 +897,7 @@
             </tbody>
         </table>
 
-        <!-- Performance Metrics -->
+        <!-- Performance Metrics (Benchmark on NVIDIA Jetson Thor) -->
         <h3 class="spec-section-title">Performance Metrics</h3>
         <table class="specs-table">
             <thead>
@@ -908,12 +908,16 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Processing Speed</td>
-                    <td class="highlight" colspan="2">30+ FPS (full pipeline)</td>
+                    <td>Processing Speed (GPU)</td>
+                    <td class="highlight" colspan="2">37+ FPS (full pipeline)</td>
                 </tr>
                 <tr>
-                    <td>Face Detection Accuracy</td>
-                    <td class="highlight" colspan="2">99.2% @ FAR 1e-6</td>
+                    <td>Face Detection Time</td>
+                    <td class="highlight" colspan="2">~29ms @ 1280×720</td>
+                </tr>
+                <tr>
+                    <td>Database Search</td>
+                    <td class="highlight" colspan="2">0.03ms per query</td>
                 </tr>
                 <tr>
                     <td>Recognition Accuracy</td>
@@ -928,8 +932,8 @@
                     <td class="highlight" colspan="2">Up to 4K (3840×2160)</td>
                 </tr>
                 <tr>
-                    <td>Latency</td>
-                    <td class="highlight" colspan="2">< 50ms (detection to recognition)</td>
+                    <td>End-to-End Latency</td>
+                    <td class="highlight" colspan="2">~27ms (detection to recognition)</td>
                 </tr>
             </tbody>
         </table>
